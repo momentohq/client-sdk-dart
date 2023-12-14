@@ -3,15 +3,15 @@ import 'transport/grpc_configuration.dart';
 import 'transport/transport_strategy.dart';
 
 /// Prebuilt configurations for Momento Topics clients
-sealed class TopicClientConfigurations {}
+abstract interface class TopicClientConfigurations {}
 
 /// Provides prebuilt configurations for the `TopicClient` on mobile platforms
-sealed class Mobile extends TopicClientConfigurations {
+class Mobile extends TopicClientConfigurations {
   static TopicClientConfiguration defaultConfig() {
     return latest();
   }
 
   static TopicClientConfiguration latest() {
-    return TopicClientConfiguration(StaticTransportStrategy(StaticGrpcConfiguration(Duration(seconds: 15))));;
+    return TopicClientConfiguration(StaticTransportStrategy(StaticGrpcConfiguration(Duration(seconds: 15))));
   }
 }
