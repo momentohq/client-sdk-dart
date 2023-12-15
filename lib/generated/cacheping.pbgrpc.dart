@@ -29,10 +29,10 @@ class PingClient extends $grpc.Client {
   PingClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
-      : super(channel, options: options,
-        interceptors: interceptors);
+      : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$4.PingResponse_> ping($4.PingRequest_ request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$4.PingResponse_> ping($4.PingRequest_ request,
+      {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$ping, request, options: options);
   }
 }
@@ -51,9 +51,11 @@ abstract class PingServiceBase extends $grpc.Service {
         ($4.PingResponse_ value) => value.writeToBuffer()));
   }
 
-  $async.Future<$4.PingResponse_> ping_Pre($grpc.ServiceCall call, $async.Future<$4.PingRequest_> request) async {
+  $async.Future<$4.PingResponse_> ping_Pre(
+      $grpc.ServiceCall call, $async.Future<$4.PingRequest_> request) async {
     return ping(call, await request);
   }
 
-  $async.Future<$4.PingResponse_> ping($grpc.ServiceCall call, $4.PingRequest_ request);
+  $async.Future<$4.PingResponse_> ping(
+      $grpc.ServiceCall call, $4.PingRequest_ request);
 }

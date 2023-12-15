@@ -18,8 +18,22 @@ const Item_$json = {
   '1': '_Item',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-    {'1': 'vector', '3': 2, '4': 1, '5': 11, '6': '.vectorindex._Vector', '10': 'vector'},
-    {'1': 'metadata', '3': 3, '4': 3, '5': 11, '6': '.vectorindex._Metadata', '10': 'metadata'},
+    {
+      '1': 'vector',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._Vector',
+      '10': 'vector'
+    },
+    {
+      '1': 'metadata',
+      '3': 3,
+      '4': 3,
+      '5': 11,
+      '6': '.vectorindex._Metadata',
+      '10': 'metadata'
+    },
   ],
 };
 
@@ -34,14 +48,22 @@ const UpsertItemBatchRequest_$json = {
   '1': '_UpsertItemBatchRequest',
   '2': [
     {'1': 'index_name', '3': 1, '4': 1, '5': 9, '10': 'indexName'},
-    {'1': 'items', '3': 2, '4': 3, '5': 11, '6': '.vectorindex._Item', '10': 'items'},
+    {
+      '1': 'items',
+      '3': 2,
+      '4': 3,
+      '5': 11,
+      '6': '.vectorindex._Item',
+      '10': 'items'
+    },
   ],
 };
 
 /// Descriptor for `_UpsertItemBatchRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List upsertItemBatchRequest_Descriptor = $convert.base64Decode(
-    'ChdfVXBzZXJ0SXRlbUJhdGNoUmVxdWVzdBIdCgppbmRleF9uYW1lGAEgASgJUglpbmRleE5hbW'
-    'USKAoFaXRlbXMYAiADKAsyEi52ZWN0b3JpbmRleC5fSXRlbVIFaXRlbXM=');
+final $typed_data.Uint8List upsertItemBatchRequest_Descriptor =
+    $convert.base64Decode(
+        'ChdfVXBzZXJ0SXRlbUJhdGNoUmVxdWVzdBIdCgppbmRleF9uYW1lGAEgASgJUglpbmRleE5hbW'
+        'USKAoFaXRlbXMYAiADKAsyEi52ZWN0b3JpbmRleC5fSXRlbVIFaXRlbXM=');
 
 @$core.Deprecated('Use upsertItemBatchResponse_Descriptor instead')
 const UpsertItemBatchResponse_$json = {
@@ -52,9 +74,10 @@ const UpsertItemBatchResponse_$json = {
 };
 
 /// Descriptor for `_UpsertItemBatchResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List upsertItemBatchResponse_Descriptor = $convert.base64Decode(
-    'ChhfVXBzZXJ0SXRlbUJhdGNoUmVzcG9uc2USIwoNZXJyb3JfaW5kaWNlcxgBIAMoDVIMZXJyb3'
-    'JJbmRpY2Vz');
+final $typed_data.Uint8List upsertItemBatchResponse_Descriptor =
+    $convert.base64Decode(
+        'ChhfVXBzZXJ0SXRlbUJhdGNoUmVzcG9uc2USIwoNZXJyb3JfaW5kaWNlcxgBIAMoDVIMZXJyb3'
+        'JJbmRpY2Vz');
 
 @$core.Deprecated('Use deleteItemBatchRequest_Descriptor instead')
 const DeleteItemBatchRequest_$json = {
@@ -66,9 +89,10 @@ const DeleteItemBatchRequest_$json = {
 };
 
 /// Descriptor for `_DeleteItemBatchRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deleteItemBatchRequest_Descriptor = $convert.base64Decode(
-    'ChdfRGVsZXRlSXRlbUJhdGNoUmVxdWVzdBIdCgppbmRleF9uYW1lGAEgASgJUglpbmRleE5hbW'
-    'USEAoDaWRzGAIgAygJUgNpZHM=');
+final $typed_data.Uint8List deleteItemBatchRequest_Descriptor =
+    $convert.base64Decode(
+        'ChdfRGVsZXRlSXRlbUJhdGNoUmVxdWVzdBIdCgppbmRleF9uYW1lGAEgASgJUglpbmRleE5hbW'
+        'USEAoDaWRzGAIgAygJUgNpZHM=');
 
 @$core.Deprecated('Use deleteItemBatchResponse_Descriptor instead')
 const DeleteItemBatchResponse_$json = {
@@ -76,8 +100,8 @@ const DeleteItemBatchResponse_$json = {
 };
 
 /// Descriptor for `_DeleteItemBatchResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deleteItemBatchResponse_Descriptor = $convert.base64Decode(
-    'ChhfRGVsZXRlSXRlbUJhdGNoUmVzcG9uc2U=');
+final $typed_data.Uint8List deleteItemBatchResponse_Descriptor =
+    $convert.base64Decode('ChhfRGVsZXRlSXRlbUJhdGNoUmVzcG9uc2U=');
 
 @$core.Deprecated('Use vector_Descriptor instead')
 const Vector_$json = {
@@ -88,8 +112,8 @@ const Vector_$json = {
 };
 
 /// Descriptor for `_Vector`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List vector_Descriptor = $convert.base64Decode(
-    'CgdfVmVjdG9yEhoKCGVsZW1lbnRzGAEgAygCUghlbGVtZW50cw==');
+final $typed_data.Uint8List vector_Descriptor = $convert
+    .base64Decode('CgdfVmVjdG9yEhoKCGVsZW1lbnRzGAEgAygCUghlbGVtZW50cw==');
 
 @$core.Deprecated('Use metadata_Descriptor instead')
 const Metadata_$json = {
@@ -97,10 +121,32 @@ const Metadata_$json = {
   '2': [
     {'1': 'field', '3': 1, '4': 1, '5': 9, '10': 'field'},
     {'1': 'string_value', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'stringValue'},
-    {'1': 'integer_value', '3': 3, '4': 1, '5': 3, '9': 0, '10': 'integerValue'},
+    {
+      '1': 'integer_value',
+      '3': 3,
+      '4': 1,
+      '5': 3,
+      '9': 0,
+      '10': 'integerValue'
+    },
     {'1': 'double_value', '3': 4, '4': 1, '5': 1, '9': 0, '10': 'doubleValue'},
-    {'1': 'boolean_value', '3': 5, '4': 1, '5': 8, '9': 0, '10': 'booleanValue'},
-    {'1': 'list_of_strings_value', '3': 6, '4': 1, '5': 11, '6': '.vectorindex._Metadata._ListOfStrings', '9': 0, '10': 'listOfStringsValue'},
+    {
+      '1': 'boolean_value',
+      '3': 5,
+      '4': 1,
+      '5': 8,
+      '9': 0,
+      '10': 'booleanValue'
+    },
+    {
+      '1': 'list_of_strings_value',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._Metadata._ListOfStrings',
+      '9': 0,
+      '10': 'listOfStringsValue'
+    },
   ],
   '3': [Metadata___ListOfStrings$json],
   '8': [
@@ -129,8 +175,24 @@ final $typed_data.Uint8List metadata_Descriptor = $convert.base64Decode(
 const MetadataRequest_$json = {
   '1': '_MetadataRequest',
   '2': [
-    {'1': 'some', '3': 2, '4': 1, '5': 11, '6': '.vectorindex._MetadataRequest.Some', '9': 0, '10': 'some'},
-    {'1': 'all', '3': 3, '4': 1, '5': 11, '6': '.vectorindex._MetadataRequest.All', '9': 0, '10': 'all'},
+    {
+      '1': 'some',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._MetadataRequest.Some',
+      '9': 0,
+      '10': 'some'
+    },
+    {
+      '1': 'all',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._MetadataRequest.All',
+      '9': 0,
+      '10': 'all'
+    },
   ],
   '3': [MetadataRequest__Some$json, MetadataRequest__All$json],
   '8': [
@@ -164,8 +226,8 @@ const NoScoreThreshold_$json = {
 };
 
 /// Descriptor for `_NoScoreThreshold`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List noScoreThreshold_Descriptor = $convert.base64Decode(
-    'ChFfTm9TY29yZVRocmVzaG9sZA==');
+final $typed_data.Uint8List noScoreThreshold_Descriptor =
+    $convert.base64Decode('ChFfTm9TY29yZVRocmVzaG9sZA==');
 
 @$core.Deprecated('Use searchRequest_Descriptor instead')
 const SearchRequest_$json = {
@@ -173,10 +235,39 @@ const SearchRequest_$json = {
   '2': [
     {'1': 'index_name', '3': 1, '4': 1, '5': 9, '10': 'indexName'},
     {'1': 'top_k', '3': 2, '4': 1, '5': 13, '10': 'topK'},
-    {'1': 'query_vector', '3': 3, '4': 1, '5': 11, '6': '.vectorindex._Vector', '10': 'queryVector'},
-    {'1': 'metadata_fields', '3': 4, '4': 1, '5': 11, '6': '.vectorindex._MetadataRequest', '10': 'metadataFields'},
-    {'1': 'score_threshold', '3': 5, '4': 1, '5': 2, '9': 0, '10': 'scoreThreshold'},
-    {'1': 'no_score_threshold', '3': 6, '4': 1, '5': 11, '6': '.vectorindex._NoScoreThreshold', '9': 0, '10': 'noScoreThreshold'},
+    {
+      '1': 'query_vector',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._Vector',
+      '10': 'queryVector'
+    },
+    {
+      '1': 'metadata_fields',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._MetadataRequest',
+      '10': 'metadataFields'
+    },
+    {
+      '1': 'score_threshold',
+      '3': 5,
+      '4': 1,
+      '5': 2,
+      '9': 0,
+      '10': 'scoreThreshold'
+    },
+    {
+      '1': 'no_score_threshold',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._NoScoreThreshold',
+      '9': 0,
+      '10': 'noScoreThreshold'
+    },
   ],
   '8': [
     {'1': 'threshold'},
@@ -198,10 +289,39 @@ const SearchAndFetchVectorsRequest_$json = {
   '2': [
     {'1': 'index_name', '3': 1, '4': 1, '5': 9, '10': 'indexName'},
     {'1': 'top_k', '3': 2, '4': 1, '5': 13, '10': 'topK'},
-    {'1': 'query_vector', '3': 3, '4': 1, '5': 11, '6': '.vectorindex._Vector', '10': 'queryVector'},
-    {'1': 'metadata_fields', '3': 4, '4': 1, '5': 11, '6': '.vectorindex._MetadataRequest', '10': 'metadataFields'},
-    {'1': 'score_threshold', '3': 5, '4': 1, '5': 2, '9': 0, '10': 'scoreThreshold'},
-    {'1': 'no_score_threshold', '3': 6, '4': 1, '5': 11, '6': '.vectorindex._NoScoreThreshold', '9': 0, '10': 'noScoreThreshold'},
+    {
+      '1': 'query_vector',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._Vector',
+      '10': 'queryVector'
+    },
+    {
+      '1': 'metadata_fields',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._MetadataRequest',
+      '10': 'metadataFields'
+    },
+    {
+      '1': 'score_threshold',
+      '3': 5,
+      '4': 1,
+      '5': 2,
+      '9': 0,
+      '10': 'scoreThreshold'
+    },
+    {
+      '1': 'no_score_threshold',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._NoScoreThreshold',
+      '9': 0,
+      '10': 'noScoreThreshold'
+    },
   ],
   '8': [
     {'1': 'threshold'},
@@ -224,7 +344,14 @@ const SearchHit_$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     {'1': 'score', '3': 2, '4': 1, '5': 2, '10': 'score'},
-    {'1': 'metadata', '3': 3, '4': 3, '5': 11, '6': '.vectorindex._Metadata', '10': 'metadata'},
+    {
+      '1': 'metadata',
+      '3': 3,
+      '4': 3,
+      '5': 11,
+      '6': '.vectorindex._Metadata',
+      '10': 'metadata'
+    },
   ],
 };
 
@@ -239,8 +366,22 @@ const SearchAndFetchVectorsHit_$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     {'1': 'score', '3': 2, '4': 1, '5': 2, '10': 'score'},
-    {'1': 'metadata', '3': 3, '4': 3, '5': 11, '6': '.vectorindex._Metadata', '10': 'metadata'},
-    {'1': 'vector', '3': 4, '4': 1, '5': 11, '6': '.vectorindex._Vector', '10': 'vector'},
+    {
+      '1': 'metadata',
+      '3': 3,
+      '4': 3,
+      '5': 11,
+      '6': '.vectorindex._Metadata',
+      '10': 'metadata'
+    },
+    {
+      '1': 'vector',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._Vector',
+      '10': 'vector'
+    },
   ],
 };
 
@@ -254,7 +395,14 @@ final $typed_data.Uint8List searchAndFetchVectorsHit_Descriptor = $convert.base6
 const SearchResponse_$json = {
   '1': '_SearchResponse',
   '2': [
-    {'1': 'hits', '3': 1, '4': 3, '5': 11, '6': '.vectorindex._SearchHit', '10': 'hits'},
+    {
+      '1': 'hits',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.vectorindex._SearchHit',
+      '10': 'hits'
+    },
   ],
 };
 
@@ -267,14 +415,22 @@ final $typed_data.Uint8List searchResponse_Descriptor = $convert.base64Decode(
 const SearchAndFetchVectorsResponse_$json = {
   '1': '_SearchAndFetchVectorsResponse',
   '2': [
-    {'1': 'hits', '3': 1, '4': 3, '5': 11, '6': '.vectorindex._SearchAndFetchVectorsHit', '10': 'hits'},
+    {
+      '1': 'hits',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.vectorindex._SearchAndFetchVectorsHit',
+      '10': 'hits'
+    },
   ],
 };
 
 /// Descriptor for `_SearchAndFetchVectorsResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List searchAndFetchVectorsResponse_Descriptor = $convert.base64Decode(
-    'Ch5fU2VhcmNoQW5kRmV0Y2hWZWN0b3JzUmVzcG9uc2USOgoEaGl0cxgBIAMoCzImLnZlY3Rvcm'
-    'luZGV4Ll9TZWFyY2hBbmRGZXRjaFZlY3RvcnNIaXRSBGhpdHM=');
+final $typed_data.Uint8List searchAndFetchVectorsResponse_Descriptor =
+    $convert.base64Decode(
+        'Ch5fU2VhcmNoQW5kRmV0Y2hWZWN0b3JzUmVzcG9uc2USOgoEaGl0cxgBIAMoCzImLnZlY3Rvcm'
+        'luZGV4Ll9TZWFyY2hBbmRGZXRjaFZlY3RvcnNIaXRSBGhpdHM=');
 
 @$core.Deprecated('Use getItemMetadataBatchRequest_Descriptor instead')
 const GetItemMetadataBatchRequest_$json = {
@@ -282,22 +438,46 @@ const GetItemMetadataBatchRequest_$json = {
   '2': [
     {'1': 'index_name', '3': 1, '4': 1, '5': 9, '10': 'indexName'},
     {'1': 'ids', '3': 2, '4': 3, '5': 9, '10': 'ids'},
-    {'1': 'metadata_fields', '3': 3, '4': 1, '5': 11, '6': '.vectorindex._MetadataRequest', '10': 'metadataFields'},
+    {
+      '1': 'metadata_fields',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._MetadataRequest',
+      '10': 'metadataFields'
+    },
   ],
 };
 
 /// Descriptor for `_GetItemMetadataBatchRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getItemMetadataBatchRequest_Descriptor = $convert.base64Decode(
-    'ChxfR2V0SXRlbU1ldGFkYXRhQmF0Y2hSZXF1ZXN0Eh0KCmluZGV4X25hbWUYASABKAlSCWluZG'
-    'V4TmFtZRIQCgNpZHMYAiADKAlSA2lkcxJGCg9tZXRhZGF0YV9maWVsZHMYAyABKAsyHS52ZWN0'
-    'b3JpbmRleC5fTWV0YWRhdGFSZXF1ZXN0Ug5tZXRhZGF0YUZpZWxkcw==');
+final $typed_data.Uint8List getItemMetadataBatchRequest_Descriptor =
+    $convert.base64Decode(
+        'ChxfR2V0SXRlbU1ldGFkYXRhQmF0Y2hSZXF1ZXN0Eh0KCmluZGV4X25hbWUYASABKAlSCWluZG'
+        'V4TmFtZRIQCgNpZHMYAiADKAlSA2lkcxJGCg9tZXRhZGF0YV9maWVsZHMYAyABKAsyHS52ZWN0'
+        'b3JpbmRleC5fTWV0YWRhdGFSZXF1ZXN0Ug5tZXRhZGF0YUZpZWxkcw==');
 
 @$core.Deprecated('Use itemMetadataResponse_Descriptor instead')
 const ItemMetadataResponse_$json = {
   '1': '_ItemMetadataResponse',
   '2': [
-    {'1': 'miss', '3': 1, '4': 1, '5': 11, '6': '.vectorindex._ItemMetadataResponse._Miss', '9': 0, '10': 'miss'},
-    {'1': 'hit', '3': 2, '4': 1, '5': 11, '6': '.vectorindex._ItemMetadataResponse._Hit', '9': 0, '10': 'hit'},
+    {
+      '1': 'miss',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._ItemMetadataResponse._Miss',
+      '9': 0,
+      '10': 'miss'
+    },
+    {
+      '1': 'hit',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._ItemMetadataResponse._Hit',
+      '9': 0,
+      '10': 'hit'
+    },
   ],
   '3': [ItemMetadataResponse___Miss$json, ItemMetadataResponse___Hit$json],
   '8': [
@@ -315,7 +495,14 @@ const ItemMetadataResponse___Hit$json = {
   '1': '_Hit',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-    {'1': 'metadata', '3': 2, '4': 3, '5': 11, '6': '.vectorindex._Metadata', '10': 'metadata'},
+    {
+      '1': 'metadata',
+      '3': 2,
+      '4': 3,
+      '5': 11,
+      '6': '.vectorindex._Metadata',
+      '10': 'metadata'
+    },
   ],
 };
 
@@ -331,15 +518,23 @@ final $typed_data.Uint8List itemMetadataResponse_Descriptor = $convert.base64Dec
 const GetItemMetadataBatchResponse_$json = {
   '1': '_GetItemMetadataBatchResponse',
   '2': [
-    {'1': 'item_metadata_response', '3': 1, '4': 3, '5': 11, '6': '.vectorindex._ItemMetadataResponse', '10': 'itemMetadataResponse'},
+    {
+      '1': 'item_metadata_response',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.vectorindex._ItemMetadataResponse',
+      '10': 'itemMetadataResponse'
+    },
   ],
 };
 
 /// Descriptor for `_GetItemMetadataBatchResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getItemMetadataBatchResponse_Descriptor = $convert.base64Decode(
-    'Ch1fR2V0SXRlbU1ldGFkYXRhQmF0Y2hSZXNwb25zZRJYChZpdGVtX21ldGFkYXRhX3Jlc3Bvbn'
-    'NlGAEgAygLMiIudmVjdG9yaW5kZXguX0l0ZW1NZXRhZGF0YVJlc3BvbnNlUhRpdGVtTWV0YWRh'
-    'dGFSZXNwb25zZQ==');
+final $typed_data.Uint8List getItemMetadataBatchResponse_Descriptor =
+    $convert.base64Decode(
+        'Ch1fR2V0SXRlbU1ldGFkYXRhQmF0Y2hSZXNwb25zZRJYChZpdGVtX21ldGFkYXRhX3Jlc3Bvbn'
+        'NlGAEgAygLMiIudmVjdG9yaW5kZXguX0l0ZW1NZXRhZGF0YVJlc3BvbnNlUhRpdGVtTWV0YWRh'
+        'dGFSZXNwb25zZQ==');
 
 @$core.Deprecated('Use getItemBatchRequest_Descriptor instead')
 const GetItemBatchRequest_$json = {
@@ -347,7 +542,14 @@ const GetItemBatchRequest_$json = {
   '2': [
     {'1': 'index_name', '3': 1, '4': 1, '5': 9, '10': 'indexName'},
     {'1': 'ids', '3': 2, '4': 3, '5': 9, '10': 'ids'},
-    {'1': 'metadata_fields', '3': 3, '4': 1, '5': 11, '6': '.vectorindex._MetadataRequest', '10': 'metadataFields'},
+    {
+      '1': 'metadata_fields',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._MetadataRequest',
+      '10': 'metadataFields'
+    },
   ],
 };
 
@@ -361,8 +563,24 @@ final $typed_data.Uint8List getItemBatchRequest_Descriptor = $convert.base64Deco
 const ItemResponse_$json = {
   '1': '_ItemResponse',
   '2': [
-    {'1': 'miss', '3': 1, '4': 1, '5': 11, '6': '.vectorindex._ItemResponse._Miss', '9': 0, '10': 'miss'},
-    {'1': 'hit', '3': 2, '4': 1, '5': 11, '6': '.vectorindex._ItemResponse._Hit', '9': 0, '10': 'hit'},
+    {
+      '1': 'miss',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._ItemResponse._Miss',
+      '9': 0,
+      '10': 'miss'
+    },
+    {
+      '1': 'hit',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._ItemResponse._Hit',
+      '9': 0,
+      '10': 'hit'
+    },
   ],
   '3': [ItemResponse___Miss$json, ItemResponse___Hit$json],
   '8': [
@@ -380,8 +598,22 @@ const ItemResponse___Hit$json = {
   '1': '_Hit',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-    {'1': 'vector', '3': 2, '4': 1, '5': 11, '6': '.vectorindex._Vector', '10': 'vector'},
-    {'1': 'metadata', '3': 3, '4': 3, '5': 11, '6': '.vectorindex._Metadata', '10': 'metadata'},
+    {
+      '1': 'vector',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.vectorindex._Vector',
+      '10': 'vector'
+    },
+    {
+      '1': 'metadata',
+      '3': 3,
+      '4': 3,
+      '5': 11,
+      '6': '.vectorindex._Metadata',
+      '10': 'metadata'
+    },
   ],
 };
 
@@ -397,7 +629,14 @@ final $typed_data.Uint8List itemResponse_Descriptor = $convert.base64Decode(
 const GetItemBatchResponse_$json = {
   '1': '_GetItemBatchResponse',
   '2': [
-    {'1': 'item_response', '3': 1, '4': 3, '5': 11, '6': '.vectorindex._ItemResponse', '10': 'itemResponse'},
+    {
+      '1': 'item_response',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.vectorindex._ItemResponse',
+      '10': 'itemResponse'
+    },
   ],
 };
 
@@ -405,4 +644,3 @@ const GetItemBatchResponse_$json = {
 final $typed_data.Uint8List getItemBatchResponse_Descriptor = $convert.base64Decode(
     'ChVfR2V0SXRlbUJhdGNoUmVzcG9uc2USPwoNaXRlbV9yZXNwb25zZRgBIAMoCzIaLnZlY3Rvcm'
     'luZGV4Ll9JdGVtUmVzcG9uc2VSDGl0ZW1SZXNwb25zZQ==');
-

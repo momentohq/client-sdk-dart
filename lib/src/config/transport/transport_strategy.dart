@@ -26,5 +26,4 @@ class StaticTransportStrategy implements TransportStrategy {
   TransportStrategy withGrpcConfig(GrpcConfiguration grpcConfig) {
     return StaticTransportStrategy(grpcConfig);
   }
-
 }

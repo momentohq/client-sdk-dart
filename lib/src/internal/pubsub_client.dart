@@ -7,7 +7,8 @@ import '../messages/values.dart';
 import '../messages/responses/topics/topic_publish.dart';
 
 abstract class AbstractPubsubClient {
-  Future<TopicPublishResponse> publish(String cacheName, String topicName, Value value);
+  Future<TopicPublishResponse> publish(
+      String cacheName, String topicName, Value value);
 }
 
 class ClientPubsub implements AbstractPubsubClient {
@@ -18,7 +19,8 @@ class ClientPubsub implements AbstractPubsubClient {
     _client = PubsubClient(_channel);
   }
   @override
-  Future<TopicPublishResponse> publish(String cacheName, String topicName, Value value) async {
+  Future<TopicPublishResponse> publish(
+      String cacheName, String topicName, Value value) async {
     var request = PublishRequest_();
     request.cacheName = cacheName;
     request.topic = topicName;

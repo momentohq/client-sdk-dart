@@ -17,9 +17,23 @@ import 'dart:typed_data' as $typed_data;
 const GenerateDisposableTokenRequest_$json = {
   '1': '_GenerateDisposableTokenRequest',
   '2': [
-    {'1': 'expires', '3': 1, '4': 1, '5': 11, '6': '.token._GenerateDisposableTokenRequest.Expires', '10': 'expires'},
+    {
+      '1': 'expires',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.token._GenerateDisposableTokenRequest.Expires',
+      '10': 'expires'
+    },
     {'1': 'auth_token', '3': 2, '4': 1, '5': 9, '10': 'authToken'},
-    {'1': 'permissions', '3': 3, '4': 1, '5': 11, '6': '.permission_messages.Permissions', '10': 'permissions'},
+    {
+      '1': 'permissions',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.permission_messages.Permissions',
+      '10': 'permissions'
+    },
     {'1': 'token_id', '3': 4, '4': 1, '5': 9, '10': 'tokenId'},
   ],
   '3': [GenerateDisposableTokenRequest__Expires$json],
@@ -29,7 +43,13 @@ const GenerateDisposableTokenRequest_$json = {
 const GenerateDisposableTokenRequest__Expires$json = {
   '1': 'Expires',
   '2': [
-    {'1': 'valid_for_seconds', '3': 1, '4': 1, '5': 13, '10': 'validForSeconds'},
+    {
+      '1': 'valid_for_seconds',
+      '3': 1,
+      '4': 1,
+      '5': 13,
+      '10': 'validForSeconds'
+    },
   ],
 };
 
@@ -53,8 +73,8 @@ const GenerateDisposableTokenResponse_$json = {
 };
 
 /// Descriptor for `_GenerateDisposableTokenResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List generateDisposableTokenResponse_Descriptor = $convert.base64Decode(
-    'CiBfR2VuZXJhdGVEaXNwb3NhYmxlVG9rZW5SZXNwb25zZRIXCgdhcGlfa2V5GAEgASgJUgZhcG'
-    'lLZXkSGgoIZW5kcG9pbnQYAiABKAlSCGVuZHBvaW50Eh8KC3ZhbGlkX3VudGlsGAMgASgEUgp2'
-    'YWxpZFVudGls');
-
+final $typed_data.Uint8List generateDisposableTokenResponse_Descriptor =
+    $convert.base64Decode(
+        'CiBfR2VuZXJhdGVEaXNwb3NhYmxlVG9rZW5SZXNwb25zZRIXCgdhcGlfa2V5GAEgASgJUgZhcG'
+        'lLZXkSGgoIZW5kcG9pbnQYAiABKAlSCGVuZHBvaW50Eh8KC3ZhbGlkX3VudGlsGAMgASgEUgp2'
+        'YWxpZFVudGls');

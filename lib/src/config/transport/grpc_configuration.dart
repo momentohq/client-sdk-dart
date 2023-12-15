@@ -1,5 +1,5 @@
 abstract interface class GrpcConfiguration {
-  /// Duration of time the client is willing to wait for an RPC to 
+  /// Duration of time the client is willing to wait for an RPC to
   /// complete before it is terminated with a DeadlineExceeded error
   late Duration deadline;
 

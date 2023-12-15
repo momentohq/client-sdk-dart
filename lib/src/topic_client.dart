@@ -5,19 +5,22 @@ import 'messages/values.dart';
 import 'messages/responses/topics/topic_publish.dart';
 
 abstract class ITopicClient {
-  Future<TopicPublishResponse> publish(String cacheName, String topicName, Value value);
+  Future<TopicPublishResponse> publish(
+      String cacheName, String topicName, Value value);
 }
 
 class TopicClient implements ITopicClient {
   final ClientPubsub _pubsubClient;
   final Logger _logger = Logger('MomentoTopicClient');
 
-  TopicClient(CredentialProvider credentialProvider) : _pubsubClient = ClientPubsub(credentialProvider) {
+  TopicClient(CredentialProvider credentialProvider)
+      : _pubsubClient = ClientPubsub(credentialProvider) {
     _logger.finest("initializing topic client");
   }
 
   @override
-  Future<TopicPublishResponse> publish(String cacheName, String topicName, Value value) {
+  Future<TopicPublishResponse> publish(
+      String cacheName, String topicName, Value value) {
     return _pubsubClient.publish(cacheName, topicName, value);
   }
 }

@@ -16,11 +16,14 @@ abstract class AbstractExceptionResponseBase {
 
 class SdkException extends AbstractExceptionResponseBase implements Exception {
   final String _messageWrapper;
-  SdkException(String message, Exception? innerException, String messageWrapper) : _messageWrapper = messageWrapper, super(message, innerException);
+  SdkException(String message, Exception? innerException, String messageWrapper)
+      : _messageWrapper = messageWrapper,
+        super(message, innerException);
 
   String get messageWrapper => _messageWrapper;
 }
 
 class UnknownException extends SdkException {
-  UnknownException(String message, Exception? innerException) : super(message, innerException, "Unknown error has occurred");
+  UnknownException(String message, Exception? innerException)
+      : super(message, innerException, "Unknown error has occurred");
 }

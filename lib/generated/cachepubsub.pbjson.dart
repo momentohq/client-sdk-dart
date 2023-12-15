@@ -19,8 +19,8 @@ const Empty_$json = {
 };
 
 /// Descriptor for `_Empty`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List empty_Descriptor = $convert.base64Decode(
-    'CgZfRW1wdHk=');
+final $typed_data.Uint8List empty_Descriptor =
+    $convert.base64Decode('CgZfRW1wdHk=');
 
 @$core.Deprecated('Use publishRequest_Descriptor instead')
 const PublishRequest_$json = {
@@ -28,7 +28,14 @@ const PublishRequest_$json = {
   '2': [
     {'1': 'cache_name', '3': 1, '4': 1, '5': 9, '10': 'cacheName'},
     {'1': 'topic', '3': 2, '4': 1, '5': 9, '10': 'topic'},
-    {'1': 'value', '3': 3, '4': 1, '5': 11, '6': '.cache_client.pubsub._TopicValue', '10': 'value'},
+    {
+      '1': 'value',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client.pubsub._TopicValue',
+      '10': 'value'
+    },
   ],
   '7': {},
 };
@@ -45,7 +52,13 @@ const SubscriptionRequest_$json = {
   '2': [
     {'1': 'cache_name', '3': 1, '4': 1, '5': 9, '10': 'cacheName'},
     {'1': 'topic', '3': 2, '4': 1, '5': 9, '10': 'topic'},
-    {'1': 'resume_at_topic_sequence_number', '3': 3, '4': 1, '5': 4, '10': 'resumeAtTopicSequenceNumber'},
+    {
+      '1': 'resume_at_topic_sequence_number',
+      '3': 3,
+      '4': 1,
+      '5': 4,
+      '10': 'resumeAtTopicSequenceNumber'
+    },
   ],
   '7': {},
 };
@@ -60,9 +73,33 @@ final $typed_data.Uint8List subscriptionRequest_Descriptor = $convert.base64Deco
 const SubscriptionItem_$json = {
   '1': '_SubscriptionItem',
   '2': [
-    {'1': 'item', '3': 1, '4': 1, '5': 11, '6': '.cache_client.pubsub._TopicItem', '9': 0, '10': 'item'},
-    {'1': 'discontinuity', '3': 2, '4': 1, '5': 11, '6': '.cache_client.pubsub._Discontinuity', '9': 0, '10': 'discontinuity'},
-    {'1': 'heartbeat', '3': 3, '4': 1, '5': 11, '6': '.cache_client.pubsub._Heartbeat', '9': 0, '10': 'heartbeat'},
+    {
+      '1': 'item',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client.pubsub._TopicItem',
+      '9': 0,
+      '10': 'item'
+    },
+    {
+      '1': 'discontinuity',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client.pubsub._Discontinuity',
+      '9': 0,
+      '10': 'discontinuity'
+    },
+    {
+      '1': 'heartbeat',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client.pubsub._Heartbeat',
+      '9': 0,
+      '10': 'heartbeat'
+    },
   ],
   '8': [
     {'1': 'kind'},
@@ -81,8 +118,21 @@ final $typed_data.Uint8List subscriptionItem_Descriptor = $convert.base64Decode(
 const TopicItem_$json = {
   '1': '_TopicItem',
   '2': [
-    {'1': 'topic_sequence_number', '3': 1, '4': 1, '5': 4, '10': 'topicSequenceNumber'},
-    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.cache_client.pubsub._TopicValue', '10': 'value'},
+    {
+      '1': 'topic_sequence_number',
+      '3': 1,
+      '4': 1,
+      '5': 4,
+      '10': 'topicSequenceNumber'
+    },
+    {
+      '1': 'value',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client.pubsub._TopicValue',
+      '10': 'value'
+    },
     {'1': 'publisher_id', '3': 3, '4': 1, '5': 9, '10': 'publisherId'},
   ],
 };
@@ -114,8 +164,20 @@ final $typed_data.Uint8List topicValue_Descriptor = $convert.base64Decode(
 const Discontinuity_$json = {
   '1': '_Discontinuity',
   '2': [
-    {'1': 'last_topic_sequence', '3': 1, '4': 1, '5': 4, '10': 'lastTopicSequence'},
-    {'1': 'new_topic_sequence', '3': 2, '4': 1, '5': 4, '10': 'newTopicSequence'},
+    {
+      '1': 'last_topic_sequence',
+      '3': 1,
+      '4': 1,
+      '5': 4,
+      '10': 'lastTopicSequence'
+    },
+    {
+      '1': 'new_topic_sequence',
+      '3': 2,
+      '4': 1,
+      '5': 4,
+      '10': 'newTopicSequence'
+    },
   ],
 };
 
@@ -130,6 +192,5 @@ const Heartbeat_$json = {
 };
 
 /// Descriptor for `_Heartbeat`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List heartbeat_Descriptor = $convert.base64Decode(
-    'CgpfSGVhcnRiZWF0');
-
+final $typed_data.Uint8List heartbeat_Descriptor =
+    $convert.base64Decode('CgpfSGVhcnRiZWF0');
