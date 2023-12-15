@@ -19,6 +19,11 @@ and the Flutter guide for
 4. `brew info dart` to determine where the dart sdk is installed
 5. followed [these](https://fluttermaster.com/config-dart-sdk-inside-intellij-idea-on-macos/) instructions on how to setup sdk inside of intellij
 
+In VSCode, there's an extension for Dart and Flutter files.
+To install dependencies using CLI: `dart pub get`
+Running tests: `dart test`
+Linting and formatting: `dart format` and `dart fix`
+
 TODO: Put a short description of the package here that helps potential users
 know whether this package might be useful for them.
 
@@ -38,6 +43,17 @@ to `/example` folder.
 
 ```dart
 const like = 'sample';
+```
+
+## Logging
+
+We use the [Dart logging package](https://github.com/dart-lang/logging) to create internal Loggers for producing Momento-related logs. The default logger does not do anything with the logs, so you must configure the logging level and handler at the beginning of your program:
+
+```
+Logger.root.level = Level.ALL; // defaults to Level.INFO
+Logger.root.onRecord.listen((record) {
+  print('${record.level.name}: ${record.time}: ${record.message}');
+});
 ```
 
 ## Additional information

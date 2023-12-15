@@ -5,5 +5,5 @@ sealed class TopicPublishResponse {}
 class TopicPublishSuccess implements TopicPublishResponse { }
 
 class TopicPublishError extends ErrorResponseBase implements TopicPublishResponse {
-  TopicPublishError(super.error);
+  TopicPublishError(super.exception);
 }

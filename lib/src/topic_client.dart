@@ -1,46 +1,22 @@
-// TODO: Put public facing types in this file.
-
-import 'dart:typed_data';
-
-import '../generated/cachepubsub.pb.dart';
-import 'package:grpc/grpc.dart';
-
-sealed class Value {}
-class StringValue  implements Value {
-  String _value;
-  StringValue(String v) : _value = v;
-  String get value => _value;
-}
-
-class BinaryValue implements Value {
-  Uint8List _value;
-  BinaryValue(Uint8List v) : _value = v;
-  Uint8List get value => _value;
-}
+import 'package:client_sdk_dart/src/auth/credential_provider.dart';
+import 'package:logging/logging.dart';
+import 'internal/pubsub_client.dart';
+import 'messages/Values.dart';
+import 'messages/responses/topics/topic_publish.dart';
 
 abstract class ITopicClient {
-  void publish(String cacheName, String topicName, Value value);
+  Future<TopicPublishResponse> publish(String cacheName, String topicName, Value value);
 }
 
 class TopicClient implements ITopicClient {
-  ClientChannel _channel;
+  ClientPubsub _pubsubClient;
+  CredentialProvider _credentialProvider;
+  final Logger _logger = Logger('MomentoTopicClient');
 
-  TopicClient() {
-    _channel = ClientChannel(host)
-  }
+  TopicClient(this._credentialProvider) : _pubsubClient = ClientPubsub(_credentialProvider);
+
   @override
-  void publish() {
-    // TODO: implement publish
-  }
-
-  void close() {
-
+  Future<TopicPublishResponse> publish(String cacheName, String topicName, Value value) {
+    return this._pubsubClient.publish(cacheName, topicName, value);
   }
 }
-
-/// Checks if you are awesome. Spoiler: you are.
-class Awesome {
-  bool get isAwesome => true;
-}
-
-PubsubApi api = PubsubApi();

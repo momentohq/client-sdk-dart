@@ -3,6 +3,6 @@
 /// More dartdocs go here.
 library;
 
-export 'src/client_sdk_dart_base.dart';
+export 'src/topic_client.dart';
 
 // TODO: Export any libraries intended for clients of this package.
