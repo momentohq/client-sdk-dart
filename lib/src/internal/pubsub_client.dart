@@ -1,12 +1,9 @@
-import 'dart:typed_data';
-
-import 'package:client_sdk_dart/generated/cachepubsub.pb.dart';
 import 'package:client_sdk_dart/generated/cachepubsub.pbgrpc.dart';
 import 'package:client_sdk_dart/src/auth/credential_provider.dart';
 import 'package:client_sdk_dart/src/errors/errors.dart';
 import 'package:grpc/grpc.dart';
 
-import '../messages/Values.dart';
+import '../messages/values.dart';
 import '../messages/responses/topics/topic_publish.dart';
 
 abstract class AbstractPubsubClient {
@@ -16,10 +13,8 @@ abstract class AbstractPubsubClient {
 class ClientPubsub implements AbstractPubsubClient {
   late ClientChannel _channel;
   late PubsubClient _client;
-  late CredentialProvider _credentialProvider;
   ClientPubsub(CredentialProvider credentialProvider) {
     _channel = ClientChannel(credentialProvider.cacheEndpoint);
-    _credentialProvider = credentialProvider;
     _client = PubsubClient(_channel);
   }
   @override
