@@ -12,6 +12,7 @@ class Mobile extends TopicClientConfigurations {
   }
 
   static TopicClientConfiguration latest() {
-    return TopicClientConfiguration(StaticTransportStrategy(StaticGrpcConfiguration(Duration(seconds: 15))));
+    return TopicClientConfiguration(StaticTransportStrategy(
+        StaticGrpcConfiguration(Duration(seconds: 15))));
   }
 }

@@ -54,15 +54,31 @@ const SuperUserPermissions$json = {
 };
 
 /// Descriptor for `SuperUserPermissions`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List superUserPermissionsDescriptor = $convert.base64Decode(
-    'ChRTdXBlclVzZXJQZXJtaXNzaW9ucxINCglTdXBlclVzZXIQAA==');
+final $typed_data.Uint8List superUserPermissionsDescriptor = $convert
+    .base64Decode('ChRTdXBlclVzZXJQZXJtaXNzaW9ucxINCglTdXBlclVzZXIQAA==');
 
 @$core.Deprecated('Use permissionsDescriptor instead')
 const Permissions$json = {
   '1': 'Permissions',
   '2': [
-    {'1': 'super_user', '3': 1, '4': 1, '5': 14, '6': '.permission_messages.SuperUserPermissions', '9': 0, '10': 'superUser'},
-    {'1': 'explicit', '3': 2, '4': 1, '5': 11, '6': '.permission_messages.ExplicitPermissions', '9': 0, '10': 'explicit'},
+    {
+      '1': 'super_user',
+      '3': 1,
+      '4': 1,
+      '5': 14,
+      '6': '.permission_messages.SuperUserPermissions',
+      '9': 0,
+      '10': 'superUser'
+    },
+    {
+      '1': 'explicit',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.permission_messages.ExplicitPermissions',
+      '9': 0,
+      '10': 'explicit'
+    },
   ],
   '8': [
     {'1': 'kind'},
@@ -80,7 +96,14 @@ final $typed_data.Uint8List permissionsDescriptor = $convert.base64Decode(
 const ExplicitPermissions$json = {
   '1': 'ExplicitPermissions',
   '2': [
-    {'1': 'permissions', '3': 1, '4': 3, '5': 11, '6': '.permission_messages.PermissionsType', '10': 'permissions'},
+    {
+      '1': 'permissions',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.permission_messages.PermissionsType',
+      '10': 'permissions'
+    },
   ],
 };
 
@@ -93,10 +116,33 @@ final $typed_data.Uint8List explicitPermissionsDescriptor = $convert.base64Decod
 const PermissionsType$json = {
   '1': 'PermissionsType',
   '2': [
-    {'1': 'cache_permissions', '3': 1, '4': 1, '5': 11, '6': '.permission_messages.PermissionsType.CachePermissions', '9': 0, '10': 'cachePermissions'},
-    {'1': 'topic_permissions', '3': 2, '4': 1, '5': 11, '6': '.permission_messages.PermissionsType.TopicPermissions', '9': 0, '10': 'topicPermissions'},
+    {
+      '1': 'cache_permissions',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.permission_messages.PermissionsType.CachePermissions',
+      '9': 0,
+      '10': 'cachePermissions'
+    },
+    {
+      '1': 'topic_permissions',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.permission_messages.PermissionsType.TopicPermissions',
+      '9': 0,
+      '10': 'topicPermissions'
+    },
   ],
-  '3': [PermissionsType_All$json, PermissionsType_CacheSelector$json, PermissionsType_CacheItemSelector$json, PermissionsType_CachePermissions$json, PermissionsType_TopicSelector$json, PermissionsType_TopicPermissions$json],
+  '3': [
+    PermissionsType_All$json,
+    PermissionsType_CacheSelector$json,
+    PermissionsType_CacheItemSelector$json,
+    PermissionsType_CachePermissions$json,
+    PermissionsType_TopicSelector$json,
+    PermissionsType_TopicPermissions$json
+  ],
   '8': [
     {'1': 'kind'},
   ],
@@ -134,11 +180,50 @@ const PermissionsType_CacheItemSelector$json = {
 const PermissionsType_CachePermissions$json = {
   '1': 'CachePermissions',
   '2': [
-    {'1': 'role', '3': 1, '4': 1, '5': 14, '6': '.permission_messages.CacheRole', '10': 'role'},
-    {'1': 'all_caches', '3': 2, '4': 1, '5': 11, '6': '.permission_messages.PermissionsType.All', '9': 0, '10': 'allCaches'},
-    {'1': 'cache_selector', '3': 3, '4': 1, '5': 11, '6': '.permission_messages.PermissionsType.CacheSelector', '9': 0, '10': 'cacheSelector'},
-    {'1': 'all_items', '3': 4, '4': 1, '5': 11, '6': '.permission_messages.PermissionsType.All', '9': 1, '10': 'allItems'},
-    {'1': 'item_selector', '3': 5, '4': 1, '5': 11, '6': '.permission_messages.PermissionsType.CacheItemSelector', '9': 1, '10': 'itemSelector'},
+    {
+      '1': 'role',
+      '3': 1,
+      '4': 1,
+      '5': 14,
+      '6': '.permission_messages.CacheRole',
+      '10': 'role'
+    },
+    {
+      '1': 'all_caches',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.permission_messages.PermissionsType.All',
+      '9': 0,
+      '10': 'allCaches'
+    },
+    {
+      '1': 'cache_selector',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.permission_messages.PermissionsType.CacheSelector',
+      '9': 0,
+      '10': 'cacheSelector'
+    },
+    {
+      '1': 'all_items',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.permission_messages.PermissionsType.All',
+      '9': 1,
+      '10': 'allItems'
+    },
+    {
+      '1': 'item_selector',
+      '3': 5,
+      '4': 1,
+      '5': 11,
+      '6': '.permission_messages.PermissionsType.CacheItemSelector',
+      '9': 1,
+      '10': 'itemSelector'
+    },
   ],
   '8': [
     {'1': 'cache'},
@@ -151,7 +236,14 @@ const PermissionsType_TopicSelector$json = {
   '1': 'TopicSelector',
   '2': [
     {'1': 'topic_name', '3': 1, '4': 1, '5': 9, '9': 0, '10': 'topicName'},
-    {'1': 'topic_name_prefix', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'topicNamePrefix'},
+    {
+      '1': 'topic_name_prefix',
+      '3': 2,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'topicNamePrefix'
+    },
   ],
   '8': [
     {'1': 'kind'},
@@ -162,11 +254,50 @@ const PermissionsType_TopicSelector$json = {
 const PermissionsType_TopicPermissions$json = {
   '1': 'TopicPermissions',
   '2': [
-    {'1': 'role', '3': 1, '4': 1, '5': 14, '6': '.permission_messages.TopicRole', '10': 'role'},
-    {'1': 'all_caches', '3': 2, '4': 1, '5': 11, '6': '.permission_messages.PermissionsType.All', '9': 0, '10': 'allCaches'},
-    {'1': 'cache_selector', '3': 3, '4': 1, '5': 11, '6': '.permission_messages.PermissionsType.CacheSelector', '9': 0, '10': 'cacheSelector'},
-    {'1': 'all_topics', '3': 4, '4': 1, '5': 11, '6': '.permission_messages.PermissionsType.All', '9': 1, '10': 'allTopics'},
-    {'1': 'topic_selector', '3': 5, '4': 1, '5': 11, '6': '.permission_messages.PermissionsType.TopicSelector', '9': 1, '10': 'topicSelector'},
+    {
+      '1': 'role',
+      '3': 1,
+      '4': 1,
+      '5': 14,
+      '6': '.permission_messages.TopicRole',
+      '10': 'role'
+    },
+    {
+      '1': 'all_caches',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.permission_messages.PermissionsType.All',
+      '9': 0,
+      '10': 'allCaches'
+    },
+    {
+      '1': 'cache_selector',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.permission_messages.PermissionsType.CacheSelector',
+      '9': 0,
+      '10': 'cacheSelector'
+    },
+    {
+      '1': 'all_topics',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.permission_messages.PermissionsType.All',
+      '9': 1,
+      '10': 'allTopics'
+    },
+    {
+      '1': 'topic_selector',
+      '3': 5,
+      '4': 1,
+      '5': 11,
+      '6': '.permission_messages.PermissionsType.TopicSelector',
+      '9': 1,
+      '10': 'topicSelector'
+    },
   ],
   '8': [
     {'1': 'cache'},
@@ -201,4 +332,3 @@ final $typed_data.Uint8List permissionsTypeDescriptor = $convert.base64Decode(
     'WwoOdG9waWNfc2VsZWN0b3IYBSABKAsyMi5wZXJtaXNzaW9uX21lc3NhZ2VzLlBlcm1pc3Npb2'
     '5zVHlwZS5Ub3BpY1NlbGVjdG9ySAFSDXRvcGljU2VsZWN0b3JCBwoFY2FjaGVCBwoFdG9waWNC'
     'BgoEa2luZA==');
-

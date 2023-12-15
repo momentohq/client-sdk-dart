@@ -19,8 +19,8 @@ const PingRequest_$json = {
 };
 
 /// Descriptor for `_PingRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List pingRequest_Descriptor = $convert.base64Decode(
-    'CgxfUGluZ1JlcXVlc3Q=');
+final $typed_data.Uint8List pingRequest_Descriptor =
+    $convert.base64Decode('CgxfUGluZ1JlcXVlc3Q=');
 
 @$core.Deprecated('Use pingResponse_Descriptor instead')
 const PingResponse_$json = {
@@ -28,6 +28,5 @@ const PingResponse_$json = {
 };
 
 /// Descriptor for `_PingResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List pingResponse_Descriptor = $convert.base64Decode(
-    'Cg1fUGluZ1Jlc3BvbnNl');
-
+final $typed_data.Uint8List pingResponse_Descriptor =
+    $convert.base64Decode('Cg1fUGluZ1Jlc3BvbnNl');

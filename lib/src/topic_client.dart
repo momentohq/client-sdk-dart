@@ -1,22 +1,26 @@
 import 'package:client_sdk_dart/src/auth/credential_provider.dart';
 import 'package:logging/logging.dart';
 import 'internal/pubsub_client.dart';
-import 'messages/Values.dart';
+import 'messages/values.dart';
 import 'messages/responses/topics/topic_publish.dart';
 
 abstract class ITopicClient {
-  Future<TopicPublishResponse> publish(String cacheName, String topicName, Value value);
+  Future<TopicPublishResponse> publish(
+      String cacheName, String topicName, Value value);
 }
 
 class TopicClient implements ITopicClient {
-  ClientPubsub _pubsubClient;
-  CredentialProvider _credentialProvider;
+  final ClientPubsub _pubsubClient;
   final Logger _logger = Logger('MomentoTopicClient');
 
-  TopicClient(this._credentialProvider) : _pubsubClient = ClientPubsub(_credentialProvider);
+  TopicClient(CredentialProvider credentialProvider)
+      : _pubsubClient = ClientPubsub(credentialProvider) {
+    _logger.finest("initializing topic client");
+  }
 
   @override
-  Future<TopicPublishResponse> publish(String cacheName, String topicName, Value value) {
-    return this._pubsubClient.publish(cacheName, topicName, value);
+  Future<TopicPublishResponse> publish(
+      String cacheName, String topicName, Value value) {
+    return _pubsubClient.publish(cacheName, topicName, value);
   }
 }

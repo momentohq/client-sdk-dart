@@ -22,7 +22,7 @@ and the Flutter guide for
 In VSCode, there's an extension for Dart and Flutter files.
 To install dependencies using CLI: `dart pub get`
 Running tests: `dart test`
-Linting and formatting: `dart format` and `dart fix`
+Linting and formatting: `dart format .` and `dart fix`
 
 TODO: Put a short description of the package here that helps potential users
 know whether this package might be useful for them.

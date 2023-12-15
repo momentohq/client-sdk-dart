@@ -21,34 +21,44 @@ export 'auth.pb.dart';
 
 @$pb.GrpcServiceName('auth.Auth')
 class AuthClient extends $grpc.Client {
-  static final _$login = $grpc.ClientMethod<$3.LoginRequest_, $3.LoginResponse_>(
-      '/auth.Auth/Login',
-      ($3.LoginRequest_ value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $3.LoginResponse_.fromBuffer(value));
-  static final _$generateApiToken = $grpc.ClientMethod<$3.GenerateApiTokenRequest_, $3.GenerateApiTokenResponse_>(
+  static final _$login =
+      $grpc.ClientMethod<$3.LoginRequest_, $3.LoginResponse_>(
+          '/auth.Auth/Login',
+          ($3.LoginRequest_ value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $3.LoginResponse_.fromBuffer(value));
+  static final _$generateApiToken = $grpc.ClientMethod<
+          $3.GenerateApiTokenRequest_, $3.GenerateApiTokenResponse_>(
       '/auth.Auth/GenerateApiToken',
       ($3.GenerateApiTokenRequest_ value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $3.GenerateApiTokenResponse_.fromBuffer(value));
-  static final _$refreshApiToken = $grpc.ClientMethod<$3.RefreshApiTokenRequest_, $3.RefreshApiTokenResponse_>(
+      ($core.List<$core.int> value) =>
+          $3.GenerateApiTokenResponse_.fromBuffer(value));
+  static final _$refreshApiToken = $grpc.ClientMethod<
+          $3.RefreshApiTokenRequest_, $3.RefreshApiTokenResponse_>(
       '/auth.Auth/RefreshApiToken',
       ($3.RefreshApiTokenRequest_ value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $3.RefreshApiTokenResponse_.fromBuffer(value));
+      ($core.List<$core.int> value) =>
+          $3.RefreshApiTokenResponse_.fromBuffer(value));
 
   AuthClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
-      : super(channel, options: options,
-        interceptors: interceptors);
+      : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseStream<$3.LoginResponse_> login($3.LoginRequest_ request, {$grpc.CallOptions? options}) {
-    return $createStreamingCall(_$login, $async.Stream.fromIterable([request]), options: options);
+  $grpc.ResponseStream<$3.LoginResponse_> login($3.LoginRequest_ request,
+      {$grpc.CallOptions? options}) {
+    return $createStreamingCall(_$login, $async.Stream.fromIterable([request]),
+        options: options);
   }
 
-  $grpc.ResponseFuture<$3.GenerateApiTokenResponse_> generateApiToken($3.GenerateApiTokenRequest_ request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$3.GenerateApiTokenResponse_> generateApiToken(
+      $3.GenerateApiTokenRequest_ request,
+      {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$generateApiToken, request, options: options);
   }
 
-  $grpc.ResponseFuture<$3.RefreshApiTokenResponse_> refreshApiToken($3.RefreshApiTokenRequest_ request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$3.RefreshApiTokenResponse_> refreshApiToken(
+      $3.RefreshApiTokenRequest_ request,
+      {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$refreshApiToken, request, options: options);
   }
 }
@@ -65,35 +75,47 @@ abstract class AuthServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $3.LoginRequest_.fromBuffer(value),
         ($3.LoginResponse_ value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$3.GenerateApiTokenRequest_, $3.GenerateApiTokenResponse_>(
+    $addMethod($grpc.ServiceMethod<$3.GenerateApiTokenRequest_,
+            $3.GenerateApiTokenResponse_>(
         'GenerateApiToken',
         generateApiToken_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $3.GenerateApiTokenRequest_.fromBuffer(value),
+        ($core.List<$core.int> value) =>
+            $3.GenerateApiTokenRequest_.fromBuffer(value),
         ($3.GenerateApiTokenResponse_ value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$3.RefreshApiTokenRequest_, $3.RefreshApiTokenResponse_>(
+    $addMethod($grpc.ServiceMethod<$3.RefreshApiTokenRequest_,
+            $3.RefreshApiTokenResponse_>(
         'RefreshApiToken',
         refreshApiToken_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $3.RefreshApiTokenRequest_.fromBuffer(value),
+        ($core.List<$core.int> value) =>
+            $3.RefreshApiTokenRequest_.fromBuffer(value),
         ($3.RefreshApiTokenResponse_ value) => value.writeToBuffer()));
   }
 
-  $async.Stream<$3.LoginResponse_> login_Pre($grpc.ServiceCall call, $async.Future<$3.LoginRequest_> request) async* {
+  $async.Stream<$3.LoginResponse_> login_Pre(
+      $grpc.ServiceCall call, $async.Future<$3.LoginRequest_> request) async* {
     yield* login(call, await request);
   }
 
-  $async.Future<$3.GenerateApiTokenResponse_> generateApiToken_Pre($grpc.ServiceCall call, $async.Future<$3.GenerateApiTokenRequest_> request) async {
+  $async.Future<$3.GenerateApiTokenResponse_> generateApiToken_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$3.GenerateApiTokenRequest_> request) async {
     return generateApiToken(call, await request);
   }
 
-  $async.Future<$3.RefreshApiTokenResponse_> refreshApiToken_Pre($grpc.ServiceCall call, $async.Future<$3.RefreshApiTokenRequest_> request) async {
+  $async.Future<$3.RefreshApiTokenResponse_> refreshApiToken_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$3.RefreshApiTokenRequest_> request) async {
     return refreshApiToken(call, await request);
   }
 
-  $async.Stream<$3.LoginResponse_> login($grpc.ServiceCall call, $3.LoginRequest_ request);
-  $async.Future<$3.GenerateApiTokenResponse_> generateApiToken($grpc.ServiceCall call, $3.GenerateApiTokenRequest_ request);
-  $async.Future<$3.RefreshApiTokenResponse_> refreshApiToken($grpc.ServiceCall call, $3.RefreshApiTokenRequest_ request);
+  $async.Stream<$3.LoginResponse_> login(
+      $grpc.ServiceCall call, $3.LoginRequest_ request);
+  $async.Future<$3.GenerateApiTokenResponse_> generateApiToken(
+      $grpc.ServiceCall call, $3.GenerateApiTokenRequest_ request);
+  $async.Future<$3.RefreshApiTokenResponse_> refreshApiToken(
+      $grpc.ServiceCall call, $3.RefreshApiTokenRequest_ request);
 }

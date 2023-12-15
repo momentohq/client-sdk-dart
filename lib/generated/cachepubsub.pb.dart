@@ -17,23 +17,29 @@ import 'package:protobuf/protobuf.dart' as $pb;
 class Empty_ extends $pb.GeneratedMessage {
   factory Empty_() => create();
   Empty_._() : super();
-  factory Empty_.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Empty_.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory Empty_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory Empty_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : '_Empty', package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client.pubsub'), createEmptyInstance: create)
-    ..hasRequiredFields = false
-  ;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_Empty',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'cache_client.pubsub'),
+      createEmptyInstance: create)
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   Empty_ clone() => Empty_()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  Empty_ copyWith(void Function(Empty_) updates) => super.copyWith((message) => updates(message as Empty_)) as Empty_;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  Empty_ copyWith(void Function(Empty_) updates) =>
+      super.copyWith((message) => updates(message as Empty_)) as Empty_;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -42,7 +48,8 @@ class Empty_ extends $pb.GeneratedMessage {
   Empty_ createEmptyInstance() => create();
   static $pb.PbList<Empty_> createRepeated() => $pb.PbList<Empty_>();
   @$core.pragma('dart2js:noInline')
-  static Empty_ getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Empty_>(create);
+  static Empty_ getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Empty_>(create);
   static Empty_? _defaultInstance;
 }
 
@@ -66,42 +73,55 @@ class PublishRequest_ extends $pb.GeneratedMessage {
     return $result;
   }
   PublishRequest_._() : super();
-  factory PublishRequest_.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory PublishRequest_.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory PublishRequest_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory PublishRequest_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : '_PublishRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client.pubsub'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_PublishRequest',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'cache_client.pubsub'),
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'cacheName')
     ..aOS(2, _omitFieldNames ? '' : 'topic')
-    ..aOM<TopicValue_>(3, _omitFieldNames ? '' : 'value', subBuilder: TopicValue_.create)
-    ..hasRequiredFields = false
-  ;
+    ..aOM<TopicValue_>(3, _omitFieldNames ? '' : 'value',
+        subBuilder: TopicValue_.create)
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   PublishRequest_ clone() => PublishRequest_()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  PublishRequest_ copyWith(void Function(PublishRequest_) updates) => super.copyWith((message) => updates(message as PublishRequest_)) as PublishRequest_;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  PublishRequest_ copyWith(void Function(PublishRequest_) updates) =>
+      super.copyWith((message) => updates(message as PublishRequest_))
+          as PublishRequest_;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static PublishRequest_ create() => PublishRequest_._();
   PublishRequest_ createEmptyInstance() => create();
-  static $pb.PbList<PublishRequest_> createRepeated() => $pb.PbList<PublishRequest_>();
+  static $pb.PbList<PublishRequest_> createRepeated() =>
+      $pb.PbList<PublishRequest_>();
   @$core.pragma('dart2js:noInline')
-  static PublishRequest_ getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PublishRequest_>(create);
+  static PublishRequest_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PublishRequest_>(create);
   static PublishRequest_? _defaultInstance;
 
   /// Cache namespace for the topic to which you want to send the value.
   @$pb.TagNumber(1)
   $core.String get cacheName => $_getSZ(0);
   @$pb.TagNumber(1)
-  set cacheName($core.String v) { $_setString(0, v); }
+  set cacheName($core.String v) {
+    $_setString(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasCacheName() => $_has(0);
   @$pb.TagNumber(1)
@@ -111,7 +131,10 @@ class PublishRequest_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get topic => $_getSZ(1);
   @$pb.TagNumber(2)
-  set topic($core.String v) { $_setString(1, v); }
+  set topic($core.String v) {
+    $_setString(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasTopic() => $_has(1);
   @$pb.TagNumber(2)
@@ -122,7 +145,10 @@ class PublishRequest_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   TopicValue_ get value => $_getN(2);
   @$pb.TagNumber(3)
-  set value(TopicValue_ v) { setField(3, v); }
+  set value(TopicValue_ v) {
+    setField(3, v);
+  }
+
   @$pb.TagNumber(3)
   $core.bool hasValue() => $_has(2);
   @$pb.TagNumber(3)
@@ -151,42 +177,57 @@ class SubscriptionRequest_ extends $pb.GeneratedMessage {
     return $result;
   }
   SubscriptionRequest_._() : super();
-  factory SubscriptionRequest_.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SubscriptionRequest_.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory SubscriptionRequest_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory SubscriptionRequest_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : '_SubscriptionRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client.pubsub'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_SubscriptionRequest',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'cache_client.pubsub'),
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'cacheName')
     ..aOS(2, _omitFieldNames ? '' : 'topic')
-    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'resumeAtTopicSequenceNumber', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..hasRequiredFields = false
-  ;
+    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'resumeAtTopicSequenceNumber',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  SubscriptionRequest_ clone() => SubscriptionRequest_()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  SubscriptionRequest_ copyWith(void Function(SubscriptionRequest_) updates) => super.copyWith((message) => updates(message as SubscriptionRequest_)) as SubscriptionRequest_;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  SubscriptionRequest_ clone() =>
+      SubscriptionRequest_()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  SubscriptionRequest_ copyWith(void Function(SubscriptionRequest_) updates) =>
+      super.copyWith((message) => updates(message as SubscriptionRequest_))
+          as SubscriptionRequest_;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static SubscriptionRequest_ create() => SubscriptionRequest_._();
   SubscriptionRequest_ createEmptyInstance() => create();
-  static $pb.PbList<SubscriptionRequest_> createRepeated() => $pb.PbList<SubscriptionRequest_>();
+  static $pb.PbList<SubscriptionRequest_> createRepeated() =>
+      $pb.PbList<SubscriptionRequest_>();
   @$core.pragma('dart2js:noInline')
-  static SubscriptionRequest_ getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SubscriptionRequest_>(create);
+  static SubscriptionRequest_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SubscriptionRequest_>(create);
   static SubscriptionRequest_? _defaultInstance;
 
   /// Cache namespace for the topic to which you want to subscribe.
   @$pb.TagNumber(1)
   $core.String get cacheName => $_getSZ(0);
   @$pb.TagNumber(1)
-  set cacheName($core.String v) { $_setString(0, v); }
+  set cacheName($core.String v) {
+    $_setString(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasCacheName() => $_has(0);
   @$pb.TagNumber(1)
@@ -196,7 +237,10 @@ class SubscriptionRequest_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get topic => $_getSZ(1);
   @$pb.TagNumber(2)
-  set topic($core.String v) { $_setString(1, v); }
+  set topic($core.String v) {
+    $_setString(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasTopic() => $_has(1);
   @$pb.TagNumber(2)
@@ -211,19 +255,17 @@ class SubscriptionRequest_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $fixnum.Int64 get resumeAtTopicSequenceNumber => $_getI64(2);
   @$pb.TagNumber(3)
-  set resumeAtTopicSequenceNumber($fixnum.Int64 v) { $_setInt64(2, v); }
+  set resumeAtTopicSequenceNumber($fixnum.Int64 v) {
+    $_setInt64(2, v);
+  }
+
   @$pb.TagNumber(3)
   $core.bool hasResumeAtTopicSequenceNumber() => $_has(2);
   @$pb.TagNumber(3)
   void clearResumeAtTopicSequenceNumber() => clearField(3);
 }
 
-enum SubscriptionItem__Kind {
-  item, 
-  discontinuity, 
-  heartbeat, 
-  notSet
-}
+enum SubscriptionItem__Kind { item, discontinuity, heartbeat, notSet }
 
 /// Possible message kinds from a topic. They can be items when they're from you, or
 /// other kinds when we have something we think you might need to know about the
@@ -247,52 +289,69 @@ class SubscriptionItem_ extends $pb.GeneratedMessage {
     return $result;
   }
   SubscriptionItem_._() : super();
-  factory SubscriptionItem_.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SubscriptionItem_.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory SubscriptionItem_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory SubscriptionItem_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static const $core.Map<$core.int, SubscriptionItem__Kind> _SubscriptionItem__KindByTag = {
-    1 : SubscriptionItem__Kind.item,
-    2 : SubscriptionItem__Kind.discontinuity,
-    3 : SubscriptionItem__Kind.heartbeat,
-    0 : SubscriptionItem__Kind.notSet
+  static const $core.Map<$core.int, SubscriptionItem__Kind>
+      _SubscriptionItem__KindByTag = {
+    1: SubscriptionItem__Kind.item,
+    2: SubscriptionItem__Kind.discontinuity,
+    3: SubscriptionItem__Kind.heartbeat,
+    0: SubscriptionItem__Kind.notSet
   };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : '_SubscriptionItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client.pubsub'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_SubscriptionItem',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'cache_client.pubsub'),
+      createEmptyInstance: create)
     ..oo(0, [1, 2, 3])
-    ..aOM<TopicItem_>(1, _omitFieldNames ? '' : 'item', subBuilder: TopicItem_.create)
-    ..aOM<Discontinuity_>(2, _omitFieldNames ? '' : 'discontinuity', subBuilder: Discontinuity_.create)
-    ..aOM<Heartbeat_>(3, _omitFieldNames ? '' : 'heartbeat', subBuilder: Heartbeat_.create)
-    ..hasRequiredFields = false
-  ;
+    ..aOM<TopicItem_>(1, _omitFieldNames ? '' : 'item',
+        subBuilder: TopicItem_.create)
+    ..aOM<Discontinuity_>(2, _omitFieldNames ? '' : 'discontinuity',
+        subBuilder: Discontinuity_.create)
+    ..aOM<Heartbeat_>(3, _omitFieldNames ? '' : 'heartbeat',
+        subBuilder: Heartbeat_.create)
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   SubscriptionItem_ clone() => SubscriptionItem_()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  SubscriptionItem_ copyWith(void Function(SubscriptionItem_) updates) => super.copyWith((message) => updates(message as SubscriptionItem_)) as SubscriptionItem_;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  SubscriptionItem_ copyWith(void Function(SubscriptionItem_) updates) =>
+      super.copyWith((message) => updates(message as SubscriptionItem_))
+          as SubscriptionItem_;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static SubscriptionItem_ create() => SubscriptionItem_._();
   SubscriptionItem_ createEmptyInstance() => create();
-  static $pb.PbList<SubscriptionItem_> createRepeated() => $pb.PbList<SubscriptionItem_>();
+  static $pb.PbList<SubscriptionItem_> createRepeated() =>
+      $pb.PbList<SubscriptionItem_>();
   @$core.pragma('dart2js:noInline')
-  static SubscriptionItem_ getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SubscriptionItem_>(create);
+  static SubscriptionItem_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SubscriptionItem_>(create);
   static SubscriptionItem_? _defaultInstance;
 
-  SubscriptionItem__Kind whichKind() => _SubscriptionItem__KindByTag[$_whichOneof(0)]!;
+  SubscriptionItem__Kind whichKind() =>
+      _SubscriptionItem__KindByTag[$_whichOneof(0)]!;
   void clearKind() => clearField($_whichOneof(0));
 
   /// The subscription has yielded an item you previously published.
   @$pb.TagNumber(1)
   TopicItem_ get item => $_getN(0);
   @$pb.TagNumber(1)
-  set item(TopicItem_ v) { setField(1, v); }
+  set item(TopicItem_ v) {
+    setField(1, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasItem() => $_has(0);
   @$pb.TagNumber(1)
@@ -308,7 +367,10 @@ class SubscriptionItem_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   Discontinuity_ get discontinuity => $_getN(1);
   @$pb.TagNumber(2)
-  set discontinuity(Discontinuity_ v) { setField(2, v); }
+  set discontinuity(Discontinuity_ v) {
+    setField(2, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasDiscontinuity() => $_has(1);
   @$pb.TagNumber(2)
@@ -320,7 +382,10 @@ class SubscriptionItem_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   Heartbeat_ get heartbeat => $_getN(2);
   @$pb.TagNumber(3)
-  set heartbeat(Heartbeat_ v) { setField(3, v); }
+  set heartbeat(Heartbeat_ v) {
+    setField(3, v);
+  }
+
   @$pb.TagNumber(3)
   $core.bool hasHeartbeat() => $_has(2);
   @$pb.TagNumber(3)
@@ -349,26 +414,35 @@ class TopicItem_ extends $pb.GeneratedMessage {
     return $result;
   }
   TopicItem_._() : super();
-  factory TopicItem_.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory TopicItem_.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory TopicItem_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory TopicItem_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : '_TopicItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client.pubsub'), createEmptyInstance: create)
-    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'topicSequenceNumber', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOM<TopicValue_>(2, _omitFieldNames ? '' : 'value', subBuilder: TopicValue_.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_TopicItem',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'cache_client.pubsub'),
+      createEmptyInstance: create)
+    ..a<$fixnum.Int64>(
+        1, _omitFieldNames ? '' : 'topicSequenceNumber', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<TopicValue_>(2, _omitFieldNames ? '' : 'value',
+        subBuilder: TopicValue_.create)
     ..aOS(3, _omitFieldNames ? '' : 'publisherId')
-    ..hasRequiredFields = false
-  ;
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   TopicItem_ clone() => TopicItem_()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  TopicItem_ copyWith(void Function(TopicItem_) updates) => super.copyWith((message) => updates(message as TopicItem_)) as TopicItem_;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  TopicItem_ copyWith(void Function(TopicItem_) updates) =>
+      super.copyWith((message) => updates(message as TopicItem_)) as TopicItem_;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -377,7 +451,8 @@ class TopicItem_ extends $pb.GeneratedMessage {
   TopicItem_ createEmptyInstance() => create();
   static $pb.PbList<TopicItem_> createRepeated() => $pb.PbList<TopicItem_>();
   @$core.pragma('dart2js:noInline')
-  static TopicItem_ getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TopicItem_>(create);
+  static TopicItem_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<TopicItem_>(create);
   static TopicItem_? _defaultInstance;
 
   /// Topic sequence numbers are **best-effort** and **informational**.
@@ -391,7 +466,10 @@ class TopicItem_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $fixnum.Int64 get topicSequenceNumber => $_getI64(0);
   @$pb.TagNumber(1)
-  set topicSequenceNumber($fixnum.Int64 v) { $_setInt64(0, v); }
+  set topicSequenceNumber($fixnum.Int64 v) {
+    $_setInt64(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasTopicSequenceNumber() => $_has(0);
   @$pb.TagNumber(1)
@@ -401,7 +479,10 @@ class TopicItem_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   TopicValue_ get value => $_getN(1);
   @$pb.TagNumber(2)
-  set value(TopicValue_ v) { setField(2, v); }
+  set value(TopicValue_ v) {
+    setField(2, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasValue() => $_has(1);
   @$pb.TagNumber(2)
@@ -413,18 +494,17 @@ class TopicItem_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.String get publisherId => $_getSZ(2);
   @$pb.TagNumber(3)
-  set publisherId($core.String v) { $_setString(2, v); }
+  set publisherId($core.String v) {
+    $_setString(2, v);
+  }
+
   @$pb.TagNumber(3)
   $core.bool hasPublisherId() => $_has(2);
   @$pb.TagNumber(3)
   void clearPublisherId() => clearField(3);
 }
 
-enum TopicValue__Kind {
-  text, 
-  binary, 
-  notSet
-}
+enum TopicValue__Kind { text, binary, notSet }
 
 /// A value in a topic - published, duplicated and received in a subscription.
 class TopicValue_ extends $pb.GeneratedMessage {
@@ -442,31 +522,39 @@ class TopicValue_ extends $pb.GeneratedMessage {
     return $result;
   }
   TopicValue_._() : super();
-  factory TopicValue_.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory TopicValue_.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory TopicValue_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory TopicValue_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
   static const $core.Map<$core.int, TopicValue__Kind> _TopicValue__KindByTag = {
-    1 : TopicValue__Kind.text,
-    2 : TopicValue__Kind.binary,
-    0 : TopicValue__Kind.notSet
+    1: TopicValue__Kind.text,
+    2: TopicValue__Kind.binary,
+    0: TopicValue__Kind.notSet
   };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : '_TopicValue', package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client.pubsub'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_TopicValue',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'cache_client.pubsub'),
+      createEmptyInstance: create)
     ..oo(0, [1, 2])
     ..aOS(1, _omitFieldNames ? '' : 'text')
-    ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'binary', $pb.PbFieldType.OY)
-    ..hasRequiredFields = false
-  ;
+    ..a<$core.List<$core.int>>(
+        2, _omitFieldNames ? '' : 'binary', $pb.PbFieldType.OY)
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   TopicValue_ clone() => TopicValue_()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  TopicValue_ copyWith(void Function(TopicValue_) updates) => super.copyWith((message) => updates(message as TopicValue_)) as TopicValue_;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  TopicValue_ copyWith(void Function(TopicValue_) updates) =>
+      super.copyWith((message) => updates(message as TopicValue_))
+          as TopicValue_;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -475,7 +563,8 @@ class TopicValue_ extends $pb.GeneratedMessage {
   TopicValue_ createEmptyInstance() => create();
   static $pb.PbList<TopicValue_> createRepeated() => $pb.PbList<TopicValue_>();
   @$core.pragma('dart2js:noInline')
-  static TopicValue_ getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TopicValue_>(create);
+  static TopicValue_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<TopicValue_>(create);
   static TopicValue_? _defaultInstance;
 
   TopicValue__Kind whichKind() => _TopicValue__KindByTag[$_whichOneof(0)]!;
@@ -484,7 +573,10 @@ class TopicValue_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get text => $_getSZ(0);
   @$pb.TagNumber(1)
-  set text($core.String v) { $_setString(0, v); }
+  set text($core.String v) {
+    $_setString(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasText() => $_has(0);
   @$pb.TagNumber(1)
@@ -493,7 +585,10 @@ class TopicValue_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.List<$core.int> get binary => $_getN(1);
   @$pb.TagNumber(2)
-  set binary($core.List<$core.int> v) { $_setBytes(1, v); }
+  set binary($core.List<$core.int> v) {
+    $_setBytes(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasBinary() => $_has(1);
   @$pb.TagNumber(2)
@@ -518,41 +613,57 @@ class Discontinuity_ extends $pb.GeneratedMessage {
     return $result;
   }
   Discontinuity_._() : super();
-  factory Discontinuity_.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Discontinuity_.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory Discontinuity_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory Discontinuity_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : '_Discontinuity', package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client.pubsub'), createEmptyInstance: create)
-    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'lastTopicSequence', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'newTopicSequence', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..hasRequiredFields = false
-  ;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_Discontinuity',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'cache_client.pubsub'),
+      createEmptyInstance: create)
+    ..a<$fixnum.Int64>(
+        1, _omitFieldNames ? '' : 'lastTopicSequence', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(
+        2, _omitFieldNames ? '' : 'newTopicSequence', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   Discontinuity_ clone() => Discontinuity_()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  Discontinuity_ copyWith(void Function(Discontinuity_) updates) => super.copyWith((message) => updates(message as Discontinuity_)) as Discontinuity_;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  Discontinuity_ copyWith(void Function(Discontinuity_) updates) =>
+      super.copyWith((message) => updates(message as Discontinuity_))
+          as Discontinuity_;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static Discontinuity_ create() => Discontinuity_._();
   Discontinuity_ createEmptyInstance() => create();
-  static $pb.PbList<Discontinuity_> createRepeated() => $pb.PbList<Discontinuity_>();
+  static $pb.PbList<Discontinuity_> createRepeated() =>
+      $pb.PbList<Discontinuity_>();
   @$core.pragma('dart2js:noInline')
-  static Discontinuity_ getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Discontinuity_>(create);
+  static Discontinuity_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<Discontinuity_>(create);
   static Discontinuity_? _defaultInstance;
 
   /// The last topic value sequence number known to have been attempted (if known, 0 otherwise).
   @$pb.TagNumber(1)
   $fixnum.Int64 get lastTopicSequence => $_getI64(0);
   @$pb.TagNumber(1)
-  set lastTopicSequence($fixnum.Int64 v) { $_setInt64(0, v); }
+  set lastTopicSequence($fixnum.Int64 v) {
+    $_setInt64(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasLastTopicSequence() => $_has(0);
   @$pb.TagNumber(1)
@@ -562,7 +673,10 @@ class Discontinuity_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $fixnum.Int64 get newTopicSequence => $_getI64(1);
   @$pb.TagNumber(2)
-  set newTopicSequence($fixnum.Int64 v) { $_setInt64(1, v); }
+  set newTopicSequence($fixnum.Int64 v) {
+    $_setInt64(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasNewTopicSequence() => $_has(1);
   @$pb.TagNumber(2)
@@ -579,23 +693,29 @@ class Discontinuity_ extends $pb.GeneratedMessage {
 class Heartbeat_ extends $pb.GeneratedMessage {
   factory Heartbeat_() => create();
   Heartbeat_._() : super();
-  factory Heartbeat_.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Heartbeat_.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory Heartbeat_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory Heartbeat_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : '_Heartbeat', package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client.pubsub'), createEmptyInstance: create)
-    ..hasRequiredFields = false
-  ;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_Heartbeat',
+      package:
+          const $pb.PackageName(_omitMessageNames ? '' : 'cache_client.pubsub'),
+      createEmptyInstance: create)
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   Heartbeat_ clone() => Heartbeat_()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  Heartbeat_ copyWith(void Function(Heartbeat_) updates) => super.copyWith((message) => updates(message as Heartbeat_)) as Heartbeat_;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  Heartbeat_ copyWith(void Function(Heartbeat_) updates) =>
+      super.copyWith((message) => updates(message as Heartbeat_)) as Heartbeat_;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -604,10 +724,11 @@ class Heartbeat_ extends $pb.GeneratedMessage {
   Heartbeat_ createEmptyInstance() => create();
   static $pb.PbList<Heartbeat_> createRepeated() => $pb.PbList<Heartbeat_>();
   @$core.pragma('dart2js:noInline')
-  static Heartbeat_ getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Heartbeat_>(create);
+  static Heartbeat_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<Heartbeat_>(create);
   static Heartbeat_? _defaultInstance;
 }
 
-
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
-const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');
+const _omitMessageNames =
+    $core.bool.fromEnvironment('protobuf.omit_message_names');

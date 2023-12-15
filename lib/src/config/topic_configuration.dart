@@ -11,27 +11,29 @@ abstract interface class TopicConfiguration {
   /// Copy constructor for overriding TransportStrategy
   TopicConfiguration withTransportStrategy(TransportStrategy transportStrategy);
 
-  /// Convenience copy constructor that updates the client-side 
+  /// Convenience copy constructor that updates the client-side
   /// timeout setting in the transport strategy
   TopicConfiguration withDeadline(Duration deadline);
 }
 
 /// Configuration options for Momento TopicClient.
-/// The easiest way to get a `TopicClientConfiguration` object is 
+/// The easiest way to get a `TopicClientConfiguration` object is
 /// to use one of the prebuilt TopicClientConfigurations classes.
 class TopicClientConfiguration implements TopicConfiguration {
   @override
   late TransportStrategy transportStrategy;
 
   TopicClientConfiguration(this.transportStrategy);
-  
+
   @override
-  TopicConfiguration withTransportStrategy(TransportStrategy transportStrategy) {
+  TopicConfiguration withTransportStrategy(
+      TransportStrategy transportStrategy) {
     return TopicClientConfiguration(transportStrategy);
   }
-  
+
   @override
   TopicConfiguration withDeadline(Duration deadline) {
-    return TopicClientConfiguration(StaticTransportStrategy(StaticGrpcConfiguration(deadline)));
+    return TopicClientConfiguration(
+        StaticTransportStrategy(StaticGrpcConfiguration(deadline)));
   }
 }

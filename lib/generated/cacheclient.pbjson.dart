@@ -41,14 +41,21 @@ const GetRequest_$json = {
 };
 
 /// Descriptor for `_GetRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getRequest_Descriptor = $convert.base64Decode(
-    'CgtfR2V0UmVxdWVzdBIbCgljYWNoZV9rZXkYASABKAxSCGNhY2hlS2V5');
+final $typed_data.Uint8List getRequest_Descriptor = $convert
+    .base64Decode('CgtfR2V0UmVxdWVzdBIbCgljYWNoZV9rZXkYASABKAxSCGNhY2hlS2V5');
 
 @$core.Deprecated('Use getResponse_Descriptor instead')
 const GetResponse_$json = {
   '1': '_GetResponse',
   '2': [
-    {'1': 'result', '3': 1, '4': 1, '5': 14, '6': '.cache_client.ECacheResult', '10': 'result'},
+    {
+      '1': 'result',
+      '3': 1,
+      '4': 1,
+      '5': 14,
+      '6': '.cache_client.ECacheResult',
+      '10': 'result'
+    },
     {'1': 'cache_body', '3': 2, '4': 1, '5': 12, '10': 'cacheBody'},
     {'1': 'message', '3': 3, '4': 1, '5': 9, '10': 'message'},
   ],
@@ -78,8 +85,8 @@ const DeleteResponse_$json = {
 };
 
 /// Descriptor for `_DeleteResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deleteResponse_Descriptor = $convert.base64Decode(
-    'Cg9fRGVsZXRlUmVzcG9uc2U=');
+final $typed_data.Uint8List deleteResponse_Descriptor =
+    $convert.base64Decode('Cg9fRGVsZXRlUmVzcG9uc2U=');
 
 @$core.Deprecated('Use setRequest_Descriptor instead')
 const SetRequest_$json = {
@@ -101,7 +108,14 @@ final $typed_data.Uint8List setRequest_Descriptor = $convert.base64Decode(
 const SetResponse_$json = {
   '1': '_SetResponse',
   '2': [
-    {'1': 'result', '3': 1, '4': 1, '5': 14, '6': '.cache_client.ECacheResult', '10': 'result'},
+    {
+      '1': 'result',
+      '3': 1,
+      '4': 1,
+      '5': 14,
+      '6': '.cache_client.ECacheResult',
+      '10': 'result'
+    },
     {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
   ],
 };
@@ -131,10 +145,29 @@ final $typed_data.Uint8List setIfNotExistsRequest_Descriptor = $convert.base64De
 const SetIfNotExistsResponse_$json = {
   '1': '_SetIfNotExistsResponse',
   '2': [
-    {'1': 'stored', '3': 1, '4': 1, '5': 11, '6': '.cache_client._SetIfNotExistsResponse._Stored', '9': 0, '10': 'stored'},
-    {'1': 'not_stored', '3': 2, '4': 1, '5': 11, '6': '.cache_client._SetIfNotExistsResponse._NotStored', '9': 0, '10': 'notStored'},
+    {
+      '1': 'stored',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SetIfNotExistsResponse._Stored',
+      '9': 0,
+      '10': 'stored'
+    },
+    {
+      '1': 'not_stored',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SetIfNotExistsResponse._NotStored',
+      '9': 0,
+      '10': 'notStored'
+    },
   ],
-  '3': [SetIfNotExistsResponse___Stored$json, SetIfNotExistsResponse___NotStored$json],
+  '3': [
+    SetIfNotExistsResponse___Stored$json,
+    SetIfNotExistsResponse___NotStored$json
+  ],
   '8': [
     {'1': 'result'},
   ],
@@ -178,8 +211,9 @@ const KeysExistResponse_$json = {
 };
 
 /// Descriptor for `_KeysExistResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List keysExistResponse_Descriptor = $convert.base64Decode(
-    'ChJfS2V5c0V4aXN0UmVzcG9uc2USFgoGZXhpc3RzGAEgAygIUgZleGlzdHM=');
+final $typed_data.Uint8List keysExistResponse_Descriptor =
+    $convert.base64Decode(
+        'ChJfS2V5c0V4aXN0UmVzcG9uc2USFgoGZXhpc3RzGAEgAygIUgZleGlzdHM=');
 
 @$core.Deprecated('Use incrementRequest_Descriptor instead')
 const IncrementRequest_$json = {
@@ -206,17 +240,38 @@ const IncrementResponse_$json = {
 };
 
 /// Descriptor for `_IncrementResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List incrementResponse_Descriptor = $convert.base64Decode(
-    'ChJfSW5jcmVtZW50UmVzcG9uc2USFAoFdmFsdWUYASABKANSBXZhbHVl');
+final $typed_data.Uint8List incrementResponse_Descriptor = $convert
+    .base64Decode('ChJfSW5jcmVtZW50UmVzcG9uc2USFAoFdmFsdWUYASABKANSBXZhbHVl');
 
 @$core.Deprecated('Use updateTtlRequest_Descriptor instead')
 const UpdateTtlRequest_$json = {
   '1': '_UpdateTtlRequest',
   '2': [
     {'1': 'cache_key', '3': 1, '4': 1, '5': 12, '10': 'cacheKey'},
-    {'1': 'increase_to_milliseconds', '3': 2, '4': 1, '5': 4, '9': 0, '10': 'increaseToMilliseconds'},
-    {'1': 'decrease_to_milliseconds', '3': 3, '4': 1, '5': 4, '9': 0, '10': 'decreaseToMilliseconds'},
-    {'1': 'overwrite_to_milliseconds', '3': 4, '4': 1, '5': 4, '9': 0, '10': 'overwriteToMilliseconds'},
+    {
+      '1': 'increase_to_milliseconds',
+      '3': 2,
+      '4': 1,
+      '5': 4,
+      '9': 0,
+      '10': 'increaseToMilliseconds'
+    },
+    {
+      '1': 'decrease_to_milliseconds',
+      '3': 3,
+      '4': 1,
+      '5': 4,
+      '9': 0,
+      '10': 'decreaseToMilliseconds'
+    },
+    {
+      '1': 'overwrite_to_milliseconds',
+      '3': 4,
+      '4': 1,
+      '5': 4,
+      '9': 0,
+      '10': 'overwriteToMilliseconds'
+    },
   ],
   '8': [
     {'1': 'update_ttl'},
@@ -235,11 +290,39 @@ final $typed_data.Uint8List updateTtlRequest_Descriptor = $convert.base64Decode(
 const UpdateTtlResponse_$json = {
   '1': '_UpdateTtlResponse',
   '2': [
-    {'1': 'set', '3': 1, '4': 1, '5': 11, '6': '.cache_client._UpdateTtlResponse._Set', '9': 0, '10': 'set'},
-    {'1': 'not_set', '3': 2, '4': 1, '5': 11, '6': '.cache_client._UpdateTtlResponse._NotSet', '9': 0, '10': 'notSet'},
-    {'1': 'missing', '3': 3, '4': 1, '5': 11, '6': '.cache_client._UpdateTtlResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'set',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._UpdateTtlResponse._Set',
+      '9': 0,
+      '10': 'set'
+    },
+    {
+      '1': 'not_set',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._UpdateTtlResponse._NotSet',
+      '9': 0,
+      '10': 'notSet'
+    },
+    {
+      '1': 'missing',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._UpdateTtlResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
-  '3': [UpdateTtlResponse___Set$json, UpdateTtlResponse___NotSet$json, UpdateTtlResponse___Missing$json],
+  '3': [
+    UpdateTtlResponse___Set$json,
+    UpdateTtlResponse___NotSet$json,
+    UpdateTtlResponse___Missing$json
+  ],
   '8': [
     {'1': 'result'},
   ],
@@ -277,15 +360,32 @@ const ItemGetTtlRequest_$json = {
 };
 
 /// Descriptor for `_ItemGetTtlRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List itemGetTtlRequest_Descriptor = $convert.base64Decode(
-    'ChJfSXRlbUdldFR0bFJlcXVlc3QSGwoJY2FjaGVfa2V5GAEgASgMUghjYWNoZUtleQ==');
+final $typed_data.Uint8List itemGetTtlRequest_Descriptor =
+    $convert.base64Decode(
+        'ChJfSXRlbUdldFR0bFJlcXVlc3QSGwoJY2FjaGVfa2V5GAEgASgMUghjYWNoZUtleQ==');
 
 @$core.Deprecated('Use itemGetTtlResponse_Descriptor instead')
 const ItemGetTtlResponse_$json = {
   '1': '_ItemGetTtlResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._ItemGetTtlResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._ItemGetTtlResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ItemGetTtlResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ItemGetTtlResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
   '3': [ItemGetTtlResponse___Found$json, ItemGetTtlResponse___Missing$json],
   '8': [
@@ -297,7 +397,13 @@ const ItemGetTtlResponse_$json = {
 const ItemGetTtlResponse___Found$json = {
   '1': '_Found',
   '2': [
-    {'1': 'remaining_ttl_millis', '3': 1, '4': 1, '5': 4, '10': 'remainingTtlMillis'},
+    {
+      '1': 'remaining_ttl_millis',
+      '3': 1,
+      '4': 1,
+      '5': 4,
+      '10': 'remainingTtlMillis'
+    },
   ],
 };
 
@@ -323,15 +429,32 @@ const ItemGetTypeRequest_$json = {
 };
 
 /// Descriptor for `_ItemGetTypeRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List itemGetTypeRequest_Descriptor = $convert.base64Decode(
-    'ChNfSXRlbUdldFR5cGVSZXF1ZXN0EhsKCWNhY2hlX2tleRgBIAEoDFIIY2FjaGVLZXk=');
+final $typed_data.Uint8List itemGetTypeRequest_Descriptor =
+    $convert.base64Decode(
+        'ChNfSXRlbUdldFR5cGVSZXF1ZXN0EhsKCWNhY2hlX2tleRgBIAEoDFIIY2FjaGVLZXk=');
 
 @$core.Deprecated('Use itemGetTypeResponse_Descriptor instead')
 const ItemGetTypeResponse_$json = {
   '1': '_ItemGetTypeResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._ItemGetTypeResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._ItemGetTypeResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ItemGetTypeResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ItemGetTypeResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
   '3': [ItemGetTypeResponse___Found$json, ItemGetTypeResponse___Missing$json],
   '4': [ItemGetTypeResponse__ItemType$json],
@@ -344,7 +467,14 @@ const ItemGetTypeResponse_$json = {
 const ItemGetTypeResponse___Found$json = {
   '1': '_Found',
   '2': [
-    {'1': 'item_type', '3': 1, '4': 1, '5': 14, '6': '.cache_client._ItemGetTypeResponse.ItemType', '10': 'itemType'},
+    {
+      '1': 'item_type',
+      '3': 1,
+      '4': 1,
+      '5': 14,
+      '6': '.cache_client._ItemGetTypeResponse.ItemType',
+      '10': 'itemType'
+    },
   ],
 };
 
@@ -393,10 +523,30 @@ final $typed_data.Uint8List dictionaryGetRequest_Descriptor = $convert.base64Dec
 const DictionaryGetResponse_$json = {
   '1': '_DictionaryGetResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._DictionaryGetResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._DictionaryGetResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._DictionaryGetResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._DictionaryGetResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
-  '3': [DictionaryGetResponse___DictionaryGetResponsePart$json, DictionaryGetResponse___Found$json, DictionaryGetResponse___Missing$json],
+  '3': [
+    DictionaryGetResponse___DictionaryGetResponsePart$json,
+    DictionaryGetResponse___Found$json,
+    DictionaryGetResponse___Missing$json
+  ],
   '8': [
     {'1': 'dictionary'},
   ],
@@ -406,7 +556,14 @@ const DictionaryGetResponse_$json = {
 const DictionaryGetResponse___DictionaryGetResponsePart$json = {
   '1': '_DictionaryGetResponsePart',
   '2': [
-    {'1': 'result', '3': 1, '4': 1, '5': 14, '6': '.cache_client.ECacheResult', '10': 'result'},
+    {
+      '1': 'result',
+      '3': 1,
+      '4': 1,
+      '5': 14,
+      '6': '.cache_client.ECacheResult',
+      '10': 'result'
+    },
     {'1': 'cache_body', '3': 2, '4': 1, '5': 12, '10': 'cacheBody'},
   ],
 };
@@ -415,7 +572,14 @@ const DictionaryGetResponse___DictionaryGetResponsePart$json = {
 const DictionaryGetResponse___Found$json = {
   '1': '_Found',
   '2': [
-    {'1': 'items', '3': 1, '4': 3, '5': 11, '6': '.cache_client._DictionaryGetResponse._DictionaryGetResponsePart', '10': 'items'},
+    {
+      '1': 'items',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.cache_client._DictionaryGetResponse._DictionaryGetResponsePart',
+      '10': 'items'
+    },
   ],
 };
 
@@ -444,9 +608,10 @@ const DictionaryFetchRequest_$json = {
 };
 
 /// Descriptor for `_DictionaryFetchRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List dictionaryFetchRequest_Descriptor = $convert.base64Decode(
-    'ChdfRGljdGlvbmFyeUZldGNoUmVxdWVzdBInCg9kaWN0aW9uYXJ5X25hbWUYASABKAxSDmRpY3'
-    'Rpb25hcnlOYW1l');
+final $typed_data.Uint8List dictionaryFetchRequest_Descriptor =
+    $convert.base64Decode(
+        'ChdfRGljdGlvbmFyeUZldGNoUmVxdWVzdBInCg9kaWN0aW9uYXJ5X25hbWUYASABKAxSDmRpY3'
+        'Rpb25hcnlOYW1l');
 
 @$core.Deprecated('Use dictionaryFieldValuePair_Descriptor instead')
 const DictionaryFieldValuePair_$json = {
@@ -458,18 +623,38 @@ const DictionaryFieldValuePair_$json = {
 };
 
 /// Descriptor for `_DictionaryFieldValuePair`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List dictionaryFieldValuePair_Descriptor = $convert.base64Decode(
-    'ChlfRGljdGlvbmFyeUZpZWxkVmFsdWVQYWlyEhQKBWZpZWxkGAEgASgMUgVmaWVsZBIUCgV2YW'
-    'x1ZRgCIAEoDFIFdmFsdWU=');
+final $typed_data.Uint8List dictionaryFieldValuePair_Descriptor =
+    $convert.base64Decode(
+        'ChlfRGljdGlvbmFyeUZpZWxkVmFsdWVQYWlyEhQKBWZpZWxkGAEgASgMUgVmaWVsZBIUCgV2YW'
+        'x1ZRgCIAEoDFIFdmFsdWU=');
 
 @$core.Deprecated('Use dictionaryFetchResponse_Descriptor instead')
 const DictionaryFetchResponse_$json = {
   '1': '_DictionaryFetchResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._DictionaryFetchResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._DictionaryFetchResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._DictionaryFetchResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._DictionaryFetchResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
-  '3': [DictionaryFetchResponse___Found$json, DictionaryFetchResponse___Missing$json],
+  '3': [
+    DictionaryFetchResponse___Found$json,
+    DictionaryFetchResponse___Missing$json
+  ],
   '8': [
     {'1': 'dictionary'},
   ],
@@ -479,7 +664,14 @@ const DictionaryFetchResponse_$json = {
 const DictionaryFetchResponse___Found$json = {
   '1': '_Found',
   '2': [
-    {'1': 'items', '3': 1, '4': 3, '5': 11, '6': '.cache_client._DictionaryFieldValuePair', '10': 'items'},
+    {
+      '1': 'items',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.cache_client._DictionaryFieldValuePair',
+      '10': 'items'
+    },
   ],
 };
 
@@ -501,7 +693,14 @@ const DictionarySetRequest_$json = {
   '1': '_DictionarySetRequest',
   '2': [
     {'1': 'dictionary_name', '3': 1, '4': 1, '5': 12, '10': 'dictionaryName'},
-    {'1': 'items', '3': 2, '4': 3, '5': 11, '6': '.cache_client._DictionaryFieldValuePair', '10': 'items'},
+    {
+      '1': 'items',
+      '3': 2,
+      '4': 3,
+      '5': 11,
+      '6': '.cache_client._DictionaryFieldValuePair',
+      '10': 'items'
+    },
     {'1': 'ttl_milliseconds', '3': 3, '4': 1, '5': 4, '10': 'ttlMilliseconds'},
     {'1': 'refresh_ttl', '3': 4, '4': 1, '5': 8, '10': 'refreshTtl'},
   ],
@@ -520,8 +719,8 @@ const DictionarySetResponse_$json = {
 };
 
 /// Descriptor for `_DictionarySetResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List dictionarySetResponse_Descriptor = $convert.base64Decode(
-    'ChZfRGljdGlvbmFyeVNldFJlc3BvbnNl');
+final $typed_data.Uint8List dictionarySetResponse_Descriptor =
+    $convert.base64Decode('ChZfRGljdGlvbmFyeVNldFJlc3BvbnNl');
 
 @$core.Deprecated('Use dictionaryIncrementRequest_Descriptor instead')
 const DictionaryIncrementRequest_$json = {
@@ -551,16 +750,33 @@ const DictionaryIncrementResponse_$json = {
 };
 
 /// Descriptor for `_DictionaryIncrementResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List dictionaryIncrementResponse_Descriptor = $convert.base64Decode(
-    'ChxfRGljdGlvbmFyeUluY3JlbWVudFJlc3BvbnNlEhQKBXZhbHVlGAEgASgDUgV2YWx1ZQ==');
+final $typed_data.Uint8List dictionaryIncrementResponse_Descriptor =
+    $convert.base64Decode(
+        'ChxfRGljdGlvbmFyeUluY3JlbWVudFJlc3BvbnNlEhQKBXZhbHVlGAEgASgDUgV2YWx1ZQ==');
 
 @$core.Deprecated('Use dictionaryDeleteRequest_Descriptor instead')
 const DictionaryDeleteRequest_$json = {
   '1': '_DictionaryDeleteRequest',
   '2': [
     {'1': 'dictionary_name', '3': 1, '4': 1, '5': 12, '10': 'dictionaryName'},
-    {'1': 'some', '3': 2, '4': 1, '5': 11, '6': '.cache_client._DictionaryDeleteRequest.Some', '9': 0, '10': 'some'},
-    {'1': 'all', '3': 3, '4': 1, '5': 11, '6': '.cache_client._DictionaryDeleteRequest.All', '9': 0, '10': 'all'},
+    {
+      '1': 'some',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._DictionaryDeleteRequest.Some',
+      '9': 0,
+      '10': 'some'
+    },
+    {
+      '1': 'all',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._DictionaryDeleteRequest.All',
+      '9': 0,
+      '10': 'all'
+    },
   ],
   '3': [DictionaryDeleteRequest__Some$json, DictionaryDeleteRequest__All$json],
   '8': [
@@ -595,8 +811,8 @@ const DictionaryDeleteResponse_$json = {
 };
 
 /// Descriptor for `_DictionaryDeleteResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List dictionaryDeleteResponse_Descriptor = $convert.base64Decode(
-    'ChlfRGljdGlvbmFyeURlbGV0ZVJlc3BvbnNl');
+final $typed_data.Uint8List dictionaryDeleteResponse_Descriptor =
+    $convert.base64Decode('ChlfRGljdGlvbmFyeURlbGV0ZVJlc3BvbnNl');
 
 @$core.Deprecated('Use dictionaryLengthRequest_Descriptor instead')
 const DictionaryLengthRequest_$json = {
@@ -607,18 +823,38 @@ const DictionaryLengthRequest_$json = {
 };
 
 /// Descriptor for `_DictionaryLengthRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List dictionaryLengthRequest_Descriptor = $convert.base64Decode(
-    'ChhfRGljdGlvbmFyeUxlbmd0aFJlcXVlc3QSJwoPZGljdGlvbmFyeV9uYW1lGAEgASgMUg5kaW'
-    'N0aW9uYXJ5TmFtZQ==');
+final $typed_data.Uint8List dictionaryLengthRequest_Descriptor =
+    $convert.base64Decode(
+        'ChhfRGljdGlvbmFyeUxlbmd0aFJlcXVlc3QSJwoPZGljdGlvbmFyeV9uYW1lGAEgASgMUg5kaW'
+        'N0aW9uYXJ5TmFtZQ==');
 
 @$core.Deprecated('Use dictionaryLengthResponse_Descriptor instead')
 const DictionaryLengthResponse_$json = {
   '1': '_DictionaryLengthResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._DictionaryLengthResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._DictionaryLengthResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._DictionaryLengthResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._DictionaryLengthResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
-  '3': [DictionaryLengthResponse___Found$json, DictionaryLengthResponse___Missing$json],
+  '3': [
+    DictionaryLengthResponse___Found$json,
+    DictionaryLengthResponse___Missing$json
+  ],
   '8': [
     {'1': 'dictionary'},
   ],
@@ -661,8 +897,24 @@ final $typed_data.Uint8List setFetchRequest_Descriptor = $convert.base64Decode(
 const SetFetchResponse_$json = {
   '1': '_SetFetchResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._SetFetchResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._SetFetchResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SetFetchResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SetFetchResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
   '3': [SetFetchResponse___Found$json, SetFetchResponse___Missing$json],
   '8': [
@@ -713,18 +965,37 @@ const SetUnionResponse_$json = {
 };
 
 /// Descriptor for `_SetUnionResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List setUnionResponse_Descriptor = $convert.base64Decode(
-    'ChFfU2V0VW5pb25SZXNwb25zZQ==');
+final $typed_data.Uint8List setUnionResponse_Descriptor =
+    $convert.base64Decode('ChFfU2V0VW5pb25SZXNwb25zZQ==');
 
 @$core.Deprecated('Use setDifferenceRequest_Descriptor instead')
 const SetDifferenceRequest_$json = {
   '1': '_SetDifferenceRequest',
   '2': [
     {'1': 'set_name', '3': 1, '4': 1, '5': 12, '10': 'setName'},
-    {'1': 'minuend', '3': 2, '4': 1, '5': 11, '6': '.cache_client._SetDifferenceRequest._Minuend', '9': 0, '10': 'minuend'},
-    {'1': 'subtrahend', '3': 3, '4': 1, '5': 11, '6': '.cache_client._SetDifferenceRequest._Subtrahend', '9': 0, '10': 'subtrahend'},
+    {
+      '1': 'minuend',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SetDifferenceRequest._Minuend',
+      '9': 0,
+      '10': 'minuend'
+    },
+    {
+      '1': 'subtrahend',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SetDifferenceRequest._Subtrahend',
+      '9': 0,
+      '10': 'subtrahend'
+    },
   ],
-  '3': [SetDifferenceRequest___Minuend$json, SetDifferenceRequest___Subtrahend$json],
+  '3': [
+    SetDifferenceRequest___Minuend$json,
+    SetDifferenceRequest___Subtrahend$json
+  ],
   '8': [
     {'1': 'difference'},
   ],
@@ -742,10 +1013,29 @@ const SetDifferenceRequest___Minuend$json = {
 const SetDifferenceRequest___Subtrahend$json = {
   '1': '_Subtrahend',
   '2': [
-    {'1': 'set', '3': 1, '4': 1, '5': 11, '6': '.cache_client._SetDifferenceRequest._Subtrahend._Set', '9': 0, '10': 'set'},
-    {'1': 'identity', '3': 2, '4': 1, '5': 11, '6': '.cache_client._SetDifferenceRequest._Subtrahend._Identity', '9': 0, '10': 'identity'},
+    {
+      '1': 'set',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SetDifferenceRequest._Subtrahend._Set',
+      '9': 0,
+      '10': 'set'
+    },
+    {
+      '1': 'identity',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SetDifferenceRequest._Subtrahend._Identity',
+      '9': 0,
+      '10': 'identity'
+    },
   ],
-  '3': [SetDifferenceRequest___Subtrahend__Set$json, SetDifferenceRequest___Subtrahend__Identity$json],
+  '3': [
+    SetDifferenceRequest___Subtrahend__Set$json,
+    SetDifferenceRequest___Subtrahend__Identity$json
+  ],
   '8': [
     {'1': 'subtrahend_set'},
   ],
@@ -781,10 +1071,29 @@ final $typed_data.Uint8List setDifferenceRequest_Descriptor = $convert.base64Dec
 const SetDifferenceResponse_$json = {
   '1': '_SetDifferenceResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._SetDifferenceResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._SetDifferenceResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SetDifferenceResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SetDifferenceResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
-  '3': [SetDifferenceResponse___Found$json, SetDifferenceResponse___Missing$json],
+  '3': [
+    SetDifferenceResponse___Found$json,
+    SetDifferenceResponse___Missing$json
+  ],
   '8': [
     {'1': 'set'},
   ],
@@ -825,8 +1134,24 @@ final $typed_data.Uint8List setContainsRequest_Descriptor = $convert.base64Decod
 const SetContainsResponse_$json = {
   '1': '_SetContainsResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._SetContainsResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._SetContainsResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SetContainsResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SetContainsResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
   '3': [SetContainsResponse___Found$json, SetContainsResponse___Missing$json],
   '8': [
@@ -870,8 +1195,24 @@ final $typed_data.Uint8List setLengthRequest_Descriptor = $convert.base64Decode(
 const SetLengthResponse_$json = {
   '1': '_SetLengthResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._SetLengthResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._SetLengthResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SetLengthResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SetLengthResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
   '3': [SetLengthResponse___Found$json, SetLengthResponse___Missing$json],
   '8': [
@@ -917,8 +1258,24 @@ final $typed_data.Uint8List setPopRequest_Descriptor = $convert.base64Decode(
 const SetPopResponse_$json = {
   '1': '_SetPopResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._SetPopResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._SetPopResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SetPopResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SetPopResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
   '3': [SetPopResponse___Found$json, SetPopResponse___Missing$json],
   '8': [
@@ -954,7 +1311,13 @@ const ListConcatenateFrontRequest_$json = {
     {'1': 'values', '3': 2, '4': 3, '5': 12, '10': 'values'},
     {'1': 'ttl_milliseconds', '3': 3, '4': 1, '5': 4, '10': 'ttlMilliseconds'},
     {'1': 'refresh_ttl', '3': 4, '4': 1, '5': 8, '10': 'refreshTtl'},
-    {'1': 'truncate_back_to_size', '3': 5, '4': 1, '5': 13, '10': 'truncateBackToSize'},
+    {
+      '1': 'truncate_back_to_size',
+      '3': 5,
+      '4': 1,
+      '5': 13,
+      '10': 'truncateBackToSize'
+    },
   ],
 };
 
@@ -974,9 +1337,10 @@ const ListConcatenateFrontResponse_$json = {
 };
 
 /// Descriptor for `_ListConcatenateFrontResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listConcatenateFrontResponse_Descriptor = $convert.base64Decode(
-    'Ch1fTGlzdENvbmNhdGVuYXRlRnJvbnRSZXNwb25zZRIfCgtsaXN0X2xlbmd0aBgBIAEoDVIKbG'
-    'lzdExlbmd0aA==');
+final $typed_data.Uint8List listConcatenateFrontResponse_Descriptor =
+    $convert.base64Decode(
+        'Ch1fTGlzdENvbmNhdGVuYXRlRnJvbnRSZXNwb25zZRIfCgtsaXN0X2xlbmd0aBgBIAEoDVIKbG'
+        'lzdExlbmd0aA==');
 
 @$core.Deprecated('Use listConcatenateBackRequest_Descriptor instead')
 const ListConcatenateBackRequest_$json = {
@@ -986,7 +1350,13 @@ const ListConcatenateBackRequest_$json = {
     {'1': 'values', '3': 2, '4': 3, '5': 12, '10': 'values'},
     {'1': 'ttl_milliseconds', '3': 3, '4': 1, '5': 4, '10': 'ttlMilliseconds'},
     {'1': 'refresh_ttl', '3': 4, '4': 1, '5': 8, '10': 'refreshTtl'},
-    {'1': 'truncate_front_to_size', '3': 5, '4': 1, '5': 13, '10': 'truncateFrontToSize'},
+    {
+      '1': 'truncate_front_to_size',
+      '3': 5,
+      '4': 1,
+      '5': 13,
+      '10': 'truncateFrontToSize'
+    },
   ],
 };
 
@@ -1006,9 +1376,10 @@ const ListConcatenateBackResponse_$json = {
 };
 
 /// Descriptor for `_ListConcatenateBackResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listConcatenateBackResponse_Descriptor = $convert.base64Decode(
-    'ChxfTGlzdENvbmNhdGVuYXRlQmFja1Jlc3BvbnNlEh8KC2xpc3RfbGVuZ3RoGAEgASgNUgpsaX'
-    'N0TGVuZ3Ro');
+final $typed_data.Uint8List listConcatenateBackResponse_Descriptor =
+    $convert.base64Decode(
+        'ChxfTGlzdENvbmNhdGVuYXRlQmFja1Jlc3BvbnNlEh8KC2xpc3RfbGVuZ3RoGAEgASgNUgpsaX'
+        'N0TGVuZ3Ro');
 
 @$core.Deprecated('Use listPushFrontRequest_Descriptor instead')
 const ListPushFrontRequest_$json = {
@@ -1018,7 +1389,13 @@ const ListPushFrontRequest_$json = {
     {'1': 'value', '3': 2, '4': 1, '5': 12, '10': 'value'},
     {'1': 'ttl_milliseconds', '3': 3, '4': 1, '5': 4, '10': 'ttlMilliseconds'},
     {'1': 'refresh_ttl', '3': 4, '4': 1, '5': 8, '10': 'refreshTtl'},
-    {'1': 'truncate_back_to_size', '3': 5, '4': 1, '5': 13, '10': 'truncateBackToSize'},
+    {
+      '1': 'truncate_back_to_size',
+      '3': 5,
+      '4': 1,
+      '5': 13,
+      '10': 'truncateBackToSize'
+    },
   ],
 };
 
@@ -1038,9 +1415,10 @@ const ListPushFrontResponse_$json = {
 };
 
 /// Descriptor for `_ListPushFrontResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listPushFrontResponse_Descriptor = $convert.base64Decode(
-    'ChZfTGlzdFB1c2hGcm9udFJlc3BvbnNlEh8KC2xpc3RfbGVuZ3RoGAEgASgNUgpsaXN0TGVuZ3'
-    'Ro');
+final $typed_data.Uint8List listPushFrontResponse_Descriptor =
+    $convert.base64Decode(
+        'ChZfTGlzdFB1c2hGcm9udFJlc3BvbnNlEh8KC2xpc3RfbGVuZ3RoGAEgASgNUgpsaXN0TGVuZ3'
+        'Ro');
 
 @$core.Deprecated('Use listPushBackRequest_Descriptor instead')
 const ListPushBackRequest_$json = {
@@ -1050,7 +1428,13 @@ const ListPushBackRequest_$json = {
     {'1': 'value', '3': 2, '4': 1, '5': 12, '10': 'value'},
     {'1': 'ttl_milliseconds', '3': 3, '4': 1, '5': 4, '10': 'ttlMilliseconds'},
     {'1': 'refresh_ttl', '3': 4, '4': 1, '5': 8, '10': 'refreshTtl'},
-    {'1': 'truncate_front_to_size', '3': 5, '4': 1, '5': 13, '10': 'truncateFrontToSize'},
+    {
+      '1': 'truncate_front_to_size',
+      '3': 5,
+      '4': 1,
+      '5': 13,
+      '10': 'truncateFrontToSize'
+    },
   ],
 };
 
@@ -1083,15 +1467,32 @@ const ListPopFrontRequest_$json = {
 };
 
 /// Descriptor for `_ListPopFrontRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listPopFrontRequest_Descriptor = $convert.base64Decode(
-    'ChRfTGlzdFBvcEZyb250UmVxdWVzdBIbCglsaXN0X25hbWUYASABKAxSCGxpc3ROYW1l');
+final $typed_data.Uint8List listPopFrontRequest_Descriptor =
+    $convert.base64Decode(
+        'ChRfTGlzdFBvcEZyb250UmVxdWVzdBIbCglsaXN0X25hbWUYASABKAxSCGxpc3ROYW1l');
 
 @$core.Deprecated('Use listPopFrontResponse_Descriptor instead')
 const ListPopFrontResponse_$json = {
   '1': '_ListPopFrontResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._ListPopFrontResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._ListPopFrontResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ListPopFrontResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ListPopFrontResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
   '3': [ListPopFrontResponse___Found$json, ListPopFrontResponse___Missing$json],
   '8': [
@@ -1130,15 +1531,32 @@ const ListPopBackRequest_$json = {
 };
 
 /// Descriptor for `_ListPopBackRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listPopBackRequest_Descriptor = $convert.base64Decode(
-    'ChNfTGlzdFBvcEJhY2tSZXF1ZXN0EhsKCWxpc3RfbmFtZRgBIAEoDFIIbGlzdE5hbWU=');
+final $typed_data.Uint8List listPopBackRequest_Descriptor =
+    $convert.base64Decode(
+        'ChNfTGlzdFBvcEJhY2tSZXF1ZXN0EhsKCWxpc3RfbmFtZRgBIAEoDFIIbGlzdE5hbWU=');
 
 @$core.Deprecated('Use listPopBackResponse_Descriptor instead')
 const ListPopBackResponse_$json = {
   '1': '_ListPopBackResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._ListPopBackResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._ListPopBackResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ListPopBackResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ListPopBackResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
   '3': [ListPopBackResponse___Found$json, ListPopBackResponse___Missing$json],
   '8': [
@@ -1187,8 +1605,24 @@ const ListEraseRequest_$json = {
   '1': '_ListEraseRequest',
   '2': [
     {'1': 'list_name', '3': 1, '4': 1, '5': 12, '10': 'listName'},
-    {'1': 'some', '3': 2, '4': 1, '5': 11, '6': '.cache_client._ListEraseRequest._ListRanges', '9': 0, '10': 'some'},
-    {'1': 'all', '3': 3, '4': 1, '5': 11, '6': '.cache_client._ListEraseRequest._All', '9': 0, '10': 'all'},
+    {
+      '1': 'some',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ListEraseRequest._ListRanges',
+      '9': 0,
+      '10': 'some'
+    },
+    {
+      '1': 'all',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ListEraseRequest._All',
+      '9': 0,
+      '10': 'all'
+    },
   ],
   '3': [ListEraseRequest___All$json, ListEraseRequest___ListRanges$json],
   '8': [
@@ -1205,7 +1639,14 @@ const ListEraseRequest___All$json = {
 const ListEraseRequest___ListRanges$json = {
   '1': '_ListRanges',
   '2': [
-    {'1': 'ranges', '3': 1, '4': 3, '5': 11, '6': '.cache_client._ListRange', '10': 'ranges'},
+    {
+      '1': 'ranges',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.cache_client._ListRange',
+      '10': 'ranges'
+    },
   ],
 };
 
@@ -1221,8 +1662,24 @@ final $typed_data.Uint8List listEraseRequest_Descriptor = $convert.base64Decode(
 const ListEraseResponse_$json = {
   '1': '_ListEraseResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._ListEraseResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._ListEraseResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ListEraseResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ListEraseResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
   '3': [ListEraseResponse___Found$json, ListEraseResponse___Missing$json],
   '8': [
@@ -1255,7 +1712,14 @@ const ListRemoveRequest_$json = {
   '1': '_ListRemoveRequest',
   '2': [
     {'1': 'list_name', '3': 1, '4': 1, '5': 12, '10': 'listName'},
-    {'1': 'all_elements_with_value', '3': 2, '4': 1, '5': 12, '9': 0, '10': 'allElementsWithValue'},
+    {
+      '1': 'all_elements_with_value',
+      '3': 2,
+      '4': 1,
+      '5': 12,
+      '9': 0,
+      '10': 'allElementsWithValue'
+    },
   ],
   '8': [
     {'1': 'remove'},
@@ -1272,8 +1736,24 @@ final $typed_data.Uint8List listRemoveRequest_Descriptor = $convert.base64Decode
 const ListRemoveResponse_$json = {
   '1': '_ListRemoveResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._ListRemoveResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._ListRemoveResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ListRemoveResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ListRemoveResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
   '3': [ListRemoveResponse___Found$json, ListRemoveResponse___Missing$json],
   '8': [
@@ -1307,18 +1787,48 @@ const Unbounded_$json = {
 };
 
 /// Descriptor for `_Unbounded`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List unbounded_Descriptor = $convert.base64Decode(
-    'CgpfVW5ib3VuZGVk');
+final $typed_data.Uint8List unbounded_Descriptor =
+    $convert.base64Decode('CgpfVW5ib3VuZGVk');
 
 @$core.Deprecated('Use listFetchRequest_Descriptor instead')
 const ListFetchRequest_$json = {
   '1': '_ListFetchRequest',
   '2': [
     {'1': 'list_name', '3': 1, '4': 1, '5': 12, '10': 'listName'},
-    {'1': 'unbounded_start', '3': 2, '4': 1, '5': 11, '6': '.cache_client._Unbounded', '9': 0, '10': 'unboundedStart'},
-    {'1': 'inclusive_start', '3': 3, '4': 1, '5': 17, '9': 0, '10': 'inclusiveStart'},
-    {'1': 'unbounded_end', '3': 4, '4': 1, '5': 11, '6': '.cache_client._Unbounded', '9': 1, '10': 'unboundedEnd'},
-    {'1': 'exclusive_end', '3': 5, '4': 1, '5': 17, '9': 1, '10': 'exclusiveEnd'},
+    {
+      '1': 'unbounded_start',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._Unbounded',
+      '9': 0,
+      '10': 'unboundedStart'
+    },
+    {
+      '1': 'inclusive_start',
+      '3': 3,
+      '4': 1,
+      '5': 17,
+      '9': 0,
+      '10': 'inclusiveStart'
+    },
+    {
+      '1': 'unbounded_end',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._Unbounded',
+      '9': 1,
+      '10': 'unboundedEnd'
+    },
+    {
+      '1': 'exclusive_end',
+      '3': 5,
+      '4': 1,
+      '5': 17,
+      '9': 1,
+      '10': 'exclusiveEnd'
+    },
   ],
   '8': [
     {'1': 'start_index'},
@@ -1340,10 +1850,40 @@ const ListRetainRequest_$json = {
   '1': '_ListRetainRequest',
   '2': [
     {'1': 'list_name', '3': 1, '4': 1, '5': 12, '10': 'listName'},
-    {'1': 'unbounded_start', '3': 2, '4': 1, '5': 11, '6': '.cache_client._Unbounded', '9': 0, '10': 'unboundedStart'},
-    {'1': 'inclusive_start', '3': 3, '4': 1, '5': 17, '9': 0, '10': 'inclusiveStart'},
-    {'1': 'unbounded_end', '3': 4, '4': 1, '5': 11, '6': '.cache_client._Unbounded', '9': 1, '10': 'unboundedEnd'},
-    {'1': 'exclusive_end', '3': 5, '4': 1, '5': 17, '9': 1, '10': 'exclusiveEnd'},
+    {
+      '1': 'unbounded_start',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._Unbounded',
+      '9': 0,
+      '10': 'unboundedStart'
+    },
+    {
+      '1': 'inclusive_start',
+      '3': 3,
+      '4': 1,
+      '5': 17,
+      '9': 0,
+      '10': 'inclusiveStart'
+    },
+    {
+      '1': 'unbounded_end',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._Unbounded',
+      '9': 1,
+      '10': 'unboundedEnd'
+    },
+    {
+      '1': 'exclusive_end',
+      '3': 5,
+      '4': 1,
+      '5': 17,
+      '9': 1,
+      '10': 'exclusiveEnd'
+    },
     {'1': 'ttl_milliseconds', '3': 6, '4': 1, '5': 4, '10': 'ttlMilliseconds'},
     {'1': 'refresh_ttl', '3': 7, '4': 1, '5': 8, '10': 'refreshTtl'},
   ],
@@ -1367,8 +1907,24 @@ final $typed_data.Uint8List listRetainRequest_Descriptor = $convert.base64Decode
 const ListRetainResponse_$json = {
   '1': '_ListRetainResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._ListRetainResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._ListRetainResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ListRetainResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ListRetainResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
   '3': [ListRetainResponse___Found$json, ListRetainResponse___Missing$json],
   '8': [
@@ -1400,8 +1956,24 @@ final $typed_data.Uint8List listRetainResponse_Descriptor = $convert.base64Decod
 const ListFetchResponse_$json = {
   '1': '_ListFetchResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._ListFetchResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._ListFetchResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ListFetchResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ListFetchResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
   '3': [ListFetchResponse___Found$json, ListFetchResponse___Missing$json],
   '8': [
@@ -1438,15 +2010,32 @@ const ListLengthRequest_$json = {
 };
 
 /// Descriptor for `_ListLengthRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listLengthRequest_Descriptor = $convert.base64Decode(
-    'ChJfTGlzdExlbmd0aFJlcXVlc3QSGwoJbGlzdF9uYW1lGAEgASgMUghsaXN0TmFtZQ==');
+final $typed_data.Uint8List listLengthRequest_Descriptor =
+    $convert.base64Decode(
+        'ChJfTGlzdExlbmd0aFJlcXVlc3QSGwoJbGlzdF9uYW1lGAEgASgMUghsaXN0TmFtZQ==');
 
 @$core.Deprecated('Use listLengthResponse_Descriptor instead')
 const ListLengthResponse_$json = {
   '1': '_ListLengthResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._ListLengthResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._ListLengthResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ListLengthResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._ListLengthResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
   '3': [ListLengthResponse___Found$json, ListLengthResponse___Missing$json],
   '8': [
@@ -1493,7 +2082,14 @@ const SortedSetPutRequest_$json = {
   '1': '_SortedSetPutRequest',
   '2': [
     {'1': 'set_name', '3': 1, '4': 1, '5': 12, '10': 'setName'},
-    {'1': 'elements', '3': 2, '4': 3, '5': 11, '6': '.cache_client._SortedSetElement', '10': 'elements'},
+    {
+      '1': 'elements',
+      '3': 2,
+      '4': 3,
+      '5': 11,
+      '6': '.cache_client._SortedSetElement',
+      '10': 'elements'
+    },
     {'1': 'ttl_milliseconds', '3': 3, '4': 1, '5': 4, '10': 'ttlMilliseconds'},
     {'1': 'refresh_ttl', '3': 4, '4': 1, '5': 8, '10': 'refreshTtl'},
   ],
@@ -1512,20 +2108,46 @@ const SortedSetPutResponse_$json = {
 };
 
 /// Descriptor for `_SortedSetPutResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List sortedSetPutResponse_Descriptor = $convert.base64Decode(
-    'ChVfU29ydGVkU2V0UHV0UmVzcG9uc2U=');
+final $typed_data.Uint8List sortedSetPutResponse_Descriptor =
+    $convert.base64Decode('ChVfU29ydGVkU2V0UHV0UmVzcG9uc2U=');
 
 @$core.Deprecated('Use sortedSetFetchRequest_Descriptor instead')
 const SortedSetFetchRequest_$json = {
   '1': '_SortedSetFetchRequest',
   '2': [
     {'1': 'set_name', '3': 1, '4': 1, '5': 12, '10': 'setName'},
-    {'1': 'order', '3': 2, '4': 1, '5': 14, '6': '.cache_client._SortedSetFetchRequest.Order', '10': 'order'},
+    {
+      '1': 'order',
+      '3': 2,
+      '4': 1,
+      '5': 14,
+      '6': '.cache_client._SortedSetFetchRequest.Order',
+      '10': 'order'
+    },
     {'1': 'with_scores', '3': 3, '4': 1, '5': 8, '10': 'withScores'},
-    {'1': 'by_index', '3': 4, '4': 1, '5': 11, '6': '.cache_client._SortedSetFetchRequest._ByIndex', '9': 0, '10': 'byIndex'},
-    {'1': 'by_score', '3': 5, '4': 1, '5': 11, '6': '.cache_client._SortedSetFetchRequest._ByScore', '9': 0, '10': 'byScore'},
+    {
+      '1': 'by_index',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetFetchRequest._ByIndex',
+      '9': 0,
+      '10': 'byIndex'
+    },
+    {
+      '1': 'by_score',
+      '3': 5,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetFetchRequest._ByScore',
+      '9': 0,
+      '10': 'byScore'
+    },
   ],
-  '3': [SortedSetFetchRequest___ByIndex$json, SortedSetFetchRequest___ByScore$json],
+  '3': [
+    SortedSetFetchRequest___ByIndex$json,
+    SortedSetFetchRequest___ByScore$json
+  ],
   '4': [SortedSetFetchRequest__Order$json],
   '8': [
     {'1': 'range'},
@@ -1536,10 +2158,40 @@ const SortedSetFetchRequest_$json = {
 const SortedSetFetchRequest___ByIndex$json = {
   '1': '_ByIndex',
   '2': [
-    {'1': 'unbounded_start', '3': 1, '4': 1, '5': 11, '6': '.cache_client._Unbounded', '9': 0, '10': 'unboundedStart'},
-    {'1': 'inclusive_start_index', '3': 2, '4': 1, '5': 17, '9': 0, '10': 'inclusiveStartIndex'},
-    {'1': 'unbounded_end', '3': 3, '4': 1, '5': 11, '6': '.cache_client._Unbounded', '9': 1, '10': 'unboundedEnd'},
-    {'1': 'exclusive_end_index', '3': 4, '4': 1, '5': 17, '9': 1, '10': 'exclusiveEndIndex'},
+    {
+      '1': 'unbounded_start',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._Unbounded',
+      '9': 0,
+      '10': 'unboundedStart'
+    },
+    {
+      '1': 'inclusive_start_index',
+      '3': 2,
+      '4': 1,
+      '5': 17,
+      '9': 0,
+      '10': 'inclusiveStartIndex'
+    },
+    {
+      '1': 'unbounded_end',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._Unbounded',
+      '9': 1,
+      '10': 'unboundedEnd'
+    },
+    {
+      '1': 'exclusive_end_index',
+      '3': 4,
+      '4': 1,
+      '5': 17,
+      '9': 1,
+      '10': 'exclusiveEndIndex'
+    },
   ],
   '8': [
     {'1': 'start'},
@@ -1551,10 +2203,42 @@ const SortedSetFetchRequest___ByIndex$json = {
 const SortedSetFetchRequest___ByScore$json = {
   '1': '_ByScore',
   '2': [
-    {'1': 'unbounded_min', '3': 1, '4': 1, '5': 11, '6': '.cache_client._Unbounded', '9': 0, '10': 'unboundedMin'},
-    {'1': 'min_score', '3': 2, '4': 1, '5': 11, '6': '.cache_client._SortedSetFetchRequest._ByScore._Score', '9': 0, '10': 'minScore'},
-    {'1': 'unbounded_max', '3': 3, '4': 1, '5': 11, '6': '.cache_client._Unbounded', '9': 1, '10': 'unboundedMax'},
-    {'1': 'max_score', '3': 4, '4': 1, '5': 11, '6': '.cache_client._SortedSetFetchRequest._ByScore._Score', '9': 1, '10': 'maxScore'},
+    {
+      '1': 'unbounded_min',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._Unbounded',
+      '9': 0,
+      '10': 'unboundedMin'
+    },
+    {
+      '1': 'min_score',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetFetchRequest._ByScore._Score',
+      '9': 0,
+      '10': 'minScore'
+    },
+    {
+      '1': 'unbounded_max',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._Unbounded',
+      '9': 1,
+      '10': 'unboundedMax'
+    },
+    {
+      '1': 'max_score',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetFetchRequest._ByScore._Score',
+      '9': 1,
+      '10': 'maxScore'
+    },
     {'1': 'offset', '3': 5, '4': 1, '5': 13, '10': 'offset'},
     {'1': 'count', '3': 6, '4': 1, '5': 17, '10': 'count'},
   ],
@@ -1609,10 +2293,29 @@ final $typed_data.Uint8List sortedSetFetchRequest_Descriptor = $convert.base64De
 const SortedSetFetchResponse_$json = {
   '1': '_SortedSetFetchResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._SortedSetFetchResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._SortedSetFetchResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetFetchResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetFetchResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
-  '3': [SortedSetFetchResponse___Found$json, SortedSetFetchResponse___Missing$json],
+  '3': [
+    SortedSetFetchResponse___Found$json,
+    SortedSetFetchResponse___Missing$json
+  ],
   '8': [
     {'1': 'sorted_set'},
   ],
@@ -1622,10 +2325,29 @@ const SortedSetFetchResponse_$json = {
 const SortedSetFetchResponse___Found$json = {
   '1': '_Found',
   '2': [
-    {'1': 'values_with_scores', '3': 1, '4': 1, '5': 11, '6': '.cache_client._SortedSetFetchResponse._Found._ValuesWithScores', '9': 0, '10': 'valuesWithScores'},
-    {'1': 'values', '3': 2, '4': 1, '5': 11, '6': '.cache_client._SortedSetFetchResponse._Found._Values', '9': 0, '10': 'values'},
+    {
+      '1': 'values_with_scores',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetFetchResponse._Found._ValuesWithScores',
+      '9': 0,
+      '10': 'valuesWithScores'
+    },
+    {
+      '1': 'values',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetFetchResponse._Found._Values',
+      '9': 0,
+      '10': 'values'
+    },
   ],
-  '3': [SortedSetFetchResponse___Found__ValuesWithScores$json, SortedSetFetchResponse___Found__Values$json],
+  '3': [
+    SortedSetFetchResponse___Found__ValuesWithScores$json,
+    SortedSetFetchResponse___Found__Values$json
+  ],
   '8': [
     {'1': 'elements'},
   ],
@@ -1635,7 +2357,14 @@ const SortedSetFetchResponse___Found$json = {
 const SortedSetFetchResponse___Found__ValuesWithScores$json = {
   '1': '_ValuesWithScores',
   '2': [
-    {'1': 'elements', '3': 1, '4': 3, '5': 11, '6': '.cache_client._SortedSetElement', '10': 'elements'},
+    {
+      '1': 'elements',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.cache_client._SortedSetElement',
+      '10': 'elements'
+    },
   ],
 };
 
@@ -1675,18 +2404,39 @@ const SortedSetGetScoreRequest_$json = {
 };
 
 /// Descriptor for `_SortedSetGetScoreRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List sortedSetGetScoreRequest_Descriptor = $convert.base64Decode(
-    'ChlfU29ydGVkU2V0R2V0U2NvcmVSZXF1ZXN0EhkKCHNldF9uYW1lGAEgASgMUgdzZXROYW1lEh'
-    'YKBnZhbHVlcxgCIAMoDFIGdmFsdWVz');
+final $typed_data.Uint8List sortedSetGetScoreRequest_Descriptor =
+    $convert.base64Decode(
+        'ChlfU29ydGVkU2V0R2V0U2NvcmVSZXF1ZXN0EhkKCHNldF9uYW1lGAEgASgMUgdzZXROYW1lEh'
+        'YKBnZhbHVlcxgCIAMoDFIGdmFsdWVz');
 
 @$core.Deprecated('Use sortedSetGetScoreResponse_Descriptor instead')
 const SortedSetGetScoreResponse_$json = {
   '1': '_SortedSetGetScoreResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._SortedSetGetScoreResponse._SortedSetFound', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._SortedSetGetScoreResponse._SortedSetMissing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetGetScoreResponse._SortedSetFound',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetGetScoreResponse._SortedSetMissing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
-  '3': [SortedSetGetScoreResponse___SortedSetGetScoreResponsePart$json, SortedSetGetScoreResponse___SortedSetFound$json, SortedSetGetScoreResponse___SortedSetMissing$json],
+  '3': [
+    SortedSetGetScoreResponse___SortedSetGetScoreResponsePart$json,
+    SortedSetGetScoreResponse___SortedSetFound$json,
+    SortedSetGetScoreResponse___SortedSetMissing$json
+  ],
   '8': [
     {'1': 'sorted_set'},
   ],
@@ -1696,7 +2446,14 @@ const SortedSetGetScoreResponse_$json = {
 const SortedSetGetScoreResponse___SortedSetGetScoreResponsePart$json = {
   '1': '_SortedSetGetScoreResponsePart',
   '2': [
-    {'1': 'result', '3': 1, '4': 1, '5': 14, '6': '.cache_client.ECacheResult', '10': 'result'},
+    {
+      '1': 'result',
+      '3': 1,
+      '4': 1,
+      '5': 14,
+      '6': '.cache_client.ECacheResult',
+      '10': 'result'
+    },
     {'1': 'score', '3': 2, '4': 1, '5': 1, '10': 'score'},
   ],
 };
@@ -1705,7 +2462,15 @@ const SortedSetGetScoreResponse___SortedSetGetScoreResponsePart$json = {
 const SortedSetGetScoreResponse___SortedSetFound$json = {
   '1': '_SortedSetFound',
   '2': [
-    {'1': 'elements', '3': 1, '4': 3, '5': 11, '6': '.cache_client._SortedSetGetScoreResponse._SortedSetGetScoreResponsePart', '10': 'elements'},
+    {
+      '1': 'elements',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6':
+          '.cache_client._SortedSetGetScoreResponse._SortedSetGetScoreResponsePart',
+      '10': 'elements'
+    },
   ],
 };
 
@@ -1731,8 +2496,24 @@ const SortedSetRemoveRequest_$json = {
   '1': '_SortedSetRemoveRequest',
   '2': [
     {'1': 'set_name', '3': 1, '4': 1, '5': 12, '10': 'setName'},
-    {'1': 'all', '3': 2, '4': 1, '5': 11, '6': '.cache_client._SortedSetRemoveRequest._All', '9': 0, '10': 'all'},
-    {'1': 'some', '3': 3, '4': 1, '5': 11, '6': '.cache_client._SortedSetRemoveRequest._Some', '9': 0, '10': 'some'},
+    {
+      '1': 'all',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetRemoveRequest._All',
+      '9': 0,
+      '10': 'all'
+    },
+    {
+      '1': 'some',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetRemoveRequest._Some',
+      '9': 0,
+      '10': 'some'
+    },
   ],
   '3': [SortedSetRemoveRequest___All$json, SortedSetRemoveRequest___Some$json],
   '8': [
@@ -1767,8 +2548,8 @@ const SortedSetRemoveResponse_$json = {
 };
 
 /// Descriptor for `_SortedSetRemoveResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List sortedSetRemoveResponse_Descriptor = $convert.base64Decode(
-    'ChhfU29ydGVkU2V0UmVtb3ZlUmVzcG9uc2U=');
+final $typed_data.Uint8List sortedSetRemoveResponse_Descriptor =
+    $convert.base64Decode('ChhfU29ydGVkU2V0UmVtb3ZlUmVzcG9uc2U=');
 
 @$core.Deprecated('Use sortedSetIncrementRequest_Descriptor instead')
 const SortedSetIncrementRequest_$json = {
@@ -1798,8 +2579,9 @@ const SortedSetIncrementResponse_$json = {
 };
 
 /// Descriptor for `_SortedSetIncrementResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List sortedSetIncrementResponse_Descriptor = $convert.base64Decode(
-    'ChtfU29ydGVkU2V0SW5jcmVtZW50UmVzcG9uc2USFAoFc2NvcmUYASABKAFSBXNjb3Jl');
+final $typed_data.Uint8List sortedSetIncrementResponse_Descriptor =
+    $convert.base64Decode(
+        'ChtfU29ydGVkU2V0SW5jcmVtZW50UmVzcG9uc2USFAoFc2NvcmUYASABKAFSBXNjb3Jl');
 
 @$core.Deprecated('Use sortedSetGetRankRequest_Descriptor instead')
 const SortedSetGetRankRequest_$json = {
@@ -1807,7 +2589,14 @@ const SortedSetGetRankRequest_$json = {
   '2': [
     {'1': 'set_name', '3': 1, '4': 1, '5': 12, '10': 'setName'},
     {'1': 'value', '3': 2, '4': 1, '5': 12, '10': 'value'},
-    {'1': 'order', '3': 3, '4': 1, '5': 14, '6': '.cache_client._SortedSetGetRankRequest.Order', '10': 'order'},
+    {
+      '1': 'order',
+      '3': 3,
+      '4': 1,
+      '5': 14,
+      '6': '.cache_client._SortedSetGetRankRequest.Order',
+      '10': 'order'
+    },
   ],
   '4': [SortedSetGetRankRequest__Order$json],
 };
@@ -1832,10 +2621,29 @@ final $typed_data.Uint8List sortedSetGetRankRequest_Descriptor = $convert.base64
 const SortedSetGetRankResponse_$json = {
   '1': '_SortedSetGetRankResponse',
   '2': [
-    {'1': 'element_rank', '3': 1, '4': 1, '5': 11, '6': '.cache_client._SortedSetGetRankResponse._RankResponsePart', '9': 0, '10': 'elementRank'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._SortedSetGetRankResponse._SortedSetMissing', '9': 0, '10': 'missing'},
+    {
+      '1': 'element_rank',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetGetRankResponse._RankResponsePart',
+      '9': 0,
+      '10': 'elementRank'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetGetRankResponse._SortedSetMissing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
-  '3': [SortedSetGetRankResponse___RankResponsePart$json, SortedSetGetRankResponse___SortedSetMissing$json],
+  '3': [
+    SortedSetGetRankResponse___RankResponsePart$json,
+    SortedSetGetRankResponse___SortedSetMissing$json
+  ],
   '8': [
     {'1': 'rank'},
   ],
@@ -1845,7 +2653,14 @@ const SortedSetGetRankResponse_$json = {
 const SortedSetGetRankResponse___RankResponsePart$json = {
   '1': '_RankResponsePart',
   '2': [
-    {'1': 'result', '3': 1, '4': 1, '5': 14, '6': '.cache_client.ECacheResult', '10': 'result'},
+    {
+      '1': 'result',
+      '3': 1,
+      '4': 1,
+      '5': 14,
+      '6': '.cache_client.ECacheResult',
+      '10': 'result'
+    },
     {'1': 'rank', '3': 2, '4': 1, '5': 4, '10': 'rank'},
   ],
 };
@@ -1873,17 +2688,37 @@ const SortedSetLengthRequest_$json = {
 };
 
 /// Descriptor for `_SortedSetLengthRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List sortedSetLengthRequest_Descriptor = $convert.base64Decode(
-    'ChdfU29ydGVkU2V0TGVuZ3RoUmVxdWVzdBIZCghzZXRfbmFtZRgBIAEoDFIHc2V0TmFtZQ==');
+final $typed_data.Uint8List sortedSetLengthRequest_Descriptor =
+    $convert.base64Decode(
+        'ChdfU29ydGVkU2V0TGVuZ3RoUmVxdWVzdBIZCghzZXRfbmFtZRgBIAEoDFIHc2V0TmFtZQ==');
 
 @$core.Deprecated('Use sortedSetLengthResponse_Descriptor instead')
 const SortedSetLengthResponse_$json = {
   '1': '_SortedSetLengthResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._SortedSetLengthResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._SortedSetLengthResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetLengthResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetLengthResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
-  '3': [SortedSetLengthResponse___Found$json, SortedSetLengthResponse___Missing$json],
+  '3': [
+    SortedSetLengthResponse___Found$json,
+    SortedSetLengthResponse___Missing$json
+  ],
   '8': [
     {'1': 'sorted_set'},
   ],
@@ -1915,12 +2750,56 @@ const SortedSetLengthByScoreRequest_$json = {
   '1': '_SortedSetLengthByScoreRequest',
   '2': [
     {'1': 'set_name', '3': 1, '4': 1, '5': 12, '10': 'setName'},
-    {'1': 'inclusive_min', '3': 2, '4': 1, '5': 1, '9': 0, '10': 'inclusiveMin'},
-    {'1': 'exclusive_min', '3': 3, '4': 1, '5': 1, '9': 0, '10': 'exclusiveMin'},
-    {'1': 'unbounded_min', '3': 4, '4': 1, '5': 11, '6': '.cache_client._Unbounded', '9': 0, '10': 'unboundedMin'},
-    {'1': 'inclusive_max', '3': 5, '4': 1, '5': 1, '9': 1, '10': 'inclusiveMax'},
-    {'1': 'exclusive_max', '3': 6, '4': 1, '5': 1, '9': 1, '10': 'exclusiveMax'},
-    {'1': 'unbounded_max', '3': 7, '4': 1, '5': 11, '6': '.cache_client._Unbounded', '9': 1, '10': 'unboundedMax'},
+    {
+      '1': 'inclusive_min',
+      '3': 2,
+      '4': 1,
+      '5': 1,
+      '9': 0,
+      '10': 'inclusiveMin'
+    },
+    {
+      '1': 'exclusive_min',
+      '3': 3,
+      '4': 1,
+      '5': 1,
+      '9': 0,
+      '10': 'exclusiveMin'
+    },
+    {
+      '1': 'unbounded_min',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._Unbounded',
+      '9': 0,
+      '10': 'unboundedMin'
+    },
+    {
+      '1': 'inclusive_max',
+      '3': 5,
+      '4': 1,
+      '5': 1,
+      '9': 1,
+      '10': 'inclusiveMax'
+    },
+    {
+      '1': 'exclusive_max',
+      '3': 6,
+      '4': 1,
+      '5': 1,
+      '9': 1,
+      '10': 'exclusiveMax'
+    },
+    {
+      '1': 'unbounded_max',
+      '3': 7,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._Unbounded',
+      '9': 1,
+      '10': 'unboundedMax'
+    },
   ],
   '8': [
     {'1': 'min'},
@@ -1942,10 +2821,29 @@ final $typed_data.Uint8List sortedSetLengthByScoreRequest_Descriptor = $convert.
 const SortedSetLengthByScoreResponse_$json = {
   '1': '_SortedSetLengthByScoreResponse',
   '2': [
-    {'1': 'found', '3': 1, '4': 1, '5': 11, '6': '.cache_client._SortedSetLengthByScoreResponse._Found', '9': 0, '10': 'found'},
-    {'1': 'missing', '3': 2, '4': 1, '5': 11, '6': '.cache_client._SortedSetLengthByScoreResponse._Missing', '9': 0, '10': 'missing'},
+    {
+      '1': 'found',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetLengthByScoreResponse._Found',
+      '9': 0,
+      '10': 'found'
+    },
+    {
+      '1': 'missing',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.cache_client._SortedSetLengthByScoreResponse._Missing',
+      '9': 0,
+      '10': 'missing'
+    },
   ],
-  '3': [SortedSetLengthByScoreResponse___Found$json, SortedSetLengthByScoreResponse___Missing$json],
+  '3': [
+    SortedSetLengthByScoreResponse___Found$json,
+    SortedSetLengthByScoreResponse___Missing$json
+  ],
   '8': [
     {'1': 'sorted_set'},
   ],
@@ -1971,4 +2869,3 @@ final $typed_data.Uint8List sortedSetLengthByScoreResponse_Descriptor = $convert
     'ElIKB21pc3NpbmcYAiABKAsyNi5jYWNoZV9jbGllbnQuX1NvcnRlZFNldExlbmd0aEJ5U2Nvcm'
     'VSZXNwb25zZS5fTWlzc2luZ0gAUgdtaXNzaW5nGiAKBl9Gb3VuZBIWCgZsZW5ndGgYASABKA1S'
     'Bmxlbmd0aBoKCghfTWlzc2luZ0IMCgpzb3J0ZWRfc2V0');
-
