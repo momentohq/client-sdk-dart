@@ -38,16 +38,10 @@ class _ParsedApiKey {
   _ParsedApiKey(this.apiKey, this.controlEndpoint, this.cacheEndpoint);
 }
 
-class _Base64DecodedV1Token {
-  String apiKey;
-  String endpoint;
-  _Base64DecodedV1Token(this.apiKey, this.endpoint);
-}
-
 abstract class CredentialProvider {
-  String _apiKey;
-  String _controlEndpoint;
-  String _cacheEndpoint;
+  final String _apiKey;
+  final String _controlEndpoint;
+  final String _cacheEndpoint;
   CredentialProvider(this._apiKey, this._controlEndpoint, this._cacheEndpoint);
   String get apiKey => _apiKey;
   String get controlEndpoint => _controlEndpoint;
@@ -110,16 +104,13 @@ class StringMomentoTokenProvider implements CredentialProvider {
   }
 
   @override
-  // TODO: implement apiKey
-  String get apiKey => throw UnimplementedError();
+  String get apiKey => _apiKey;
 
   @override
-  // TODO: implement cacheEndpoint
-  String get cacheEndpoint => throw UnimplementedError();
+  String get cacheEndpoint => _cacheEndpoint;
 
   @override
-  // TODO: implement controlEndpoint
-  String get controlEndpoint => throw UnimplementedError();
+  String get controlEndpoint => _controlEndpoint;
 
 }
 
