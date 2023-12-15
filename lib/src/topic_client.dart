@@ -28,7 +28,8 @@ class TopicClient implements ITopicClient {
   }
 
   @override
-  Future<TopicSubscribeResponse> subscribe(String cacheName, String topicName) async {
+  Future<TopicSubscribeResponse> subscribe(
+      String cacheName, String topicName) async {
     return await _pubsubClient.subscribe(cacheName, topicName);
   }
 }

@@ -12,21 +12,23 @@ class TopicSubscription implements TopicSubscribeResponse {
 
   TopicSubscription(this._stream);
 
-  Stream<TopicSubscriptionItemResponse?> get stream => _stream.map(_processResult).where((item) => item != null);
+  Stream<TopicSubscriptionItemResponse?> get stream =>
+      _stream.map(_processResult).where((item) => item != null);
 
   TopicSubscriptionItemResponse? _processResult(SubscriptionItem_ item) {
-      final logger = Logger("TopicSubscribeResponse");
-      switch (item.runtimeType) {
+    final logger = Logger("TopicSubscribeResponse");
+    switch (item.runtimeType) {
       case TopicItem_:
-          return createTopicItemResponse(item as TopicItem_);
+        return createTopicItemResponse(item as TopicItem_);
       case Heartbeat_:
-          logger.info("topic client received a heartbeat");
+        logger.info("topic client received a heartbeat");
       case Discontinuity_:
-          logger.info("topic client received a discontinuity");
+        logger.info("topic client received a discontinuity");
       default:
-          logger.shout("topic client received unknown subscription item: ", item.runtimeType);
-      }
-      return null;
+        logger.shout("topic client received unknown subscription item: ",
+            item.runtimeType);
+    }
+    return null;
   }
 }
 

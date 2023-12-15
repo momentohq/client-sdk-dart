@@ -22,12 +22,13 @@ class TopicSubscriptionItemError extends ErrorResponseBase
 }
 
 TopicSubscriptionItemResponse createTopicItemResponse(TopicItem_ item) {
-    switch (item.value.whichKind()) {
+  switch (item.value.whichKind()) {
     case TopicValue__Kind.text:
-        return TopicSubscriptionItemText(item.value.text);
+      return TopicSubscriptionItemText(item.value.text);
     case TopicValue__Kind.binary:
-        return TopicSubscriptionItemBinary(item.value.binary);
+      return TopicSubscriptionItemBinary(item.value.binary);
     default:
-        return TopicSubscriptionItemError(UnknownException("unknown TopicItemResponse value: $item.value", null, null));
-    }
+      return TopicSubscriptionItemError(UnknownException(
+          "unknown TopicItemResponse value: $item.value", null, null));
+  }
 }

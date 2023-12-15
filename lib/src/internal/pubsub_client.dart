@@ -55,7 +55,8 @@ class ClientPubsub implements AbstractPubsubClient {
   }
 
   @override
-  Future<TopicSubscribeResponse> subscribe(String cacheName, String topicName) async {
+  Future<TopicSubscribeResponse> subscribe(
+      String cacheName, String topicName) async {
     var request = SubscriptionRequest_();
     request.cacheName = cacheName;
     request.topic = topicName;
@@ -67,7 +68,7 @@ class ClientPubsub implements AbstractPubsubClient {
         return TopicSubscribeError(e);
       }
       return TopicSubscribeError(
-        UnknownException("Unexpected error: $e", null, null));
+          UnknownException("Unexpected error: $e", null, null));
     }
   }
 }
