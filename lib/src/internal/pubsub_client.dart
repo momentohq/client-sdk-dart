@@ -32,7 +32,8 @@ class ClientPubsub implements AbstractPubsubClient {
       if (e is SdkException) {
         return TopicPublishError(e);
       }
-      return TopicPublishError(UnknownException("Unexpected error: $e", null));
+      return TopicPublishError(
+          UnknownException("Unexpected error: $e", null, null));
     }
   }
 
