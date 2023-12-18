@@ -14,10 +14,16 @@ abstract class AbstractPubsubClient {
 class ClientPubsub implements AbstractPubsubClient {
   late ClientChannel _channel;
   late PubsubClient _client;
+
   ClientPubsub(CredentialProvider credentialProvider) {
     _channel = ClientChannel(credentialProvider.cacheEndpoint);
-    _client = PubsubClient(_channel);
+    _client = PubsubClient(_channel,
+        options: CallOptions(metadata: {
+          'authorization': credentialProvider.apiKey,
+          'agent': 'dart:0.1.0'
+        }));
   }
+
   @override
   Future<TopicPublishResponse> publish(
       String cacheName, String topicName, Value value) async {
