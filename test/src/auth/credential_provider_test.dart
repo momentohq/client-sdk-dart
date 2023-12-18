@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:client_sdk_dart/src/auth/credential_provider.dart';
 import 'package:test/test.dart';
 import 'dart:convert';
