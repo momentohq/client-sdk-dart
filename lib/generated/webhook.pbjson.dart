@@ -31,9 +31,23 @@ final $typed_data.Uint8List webhookId_Descriptor = $convert.base64Decode(
 const Webhook_$json = {
   '1': '_Webhook',
   '2': [
-    {'1': 'webhook_id', '3': 1, '4': 1, '5': 11, '6': '.webhook._WebhookId', '10': 'webhookId'},
+    {
+      '1': 'webhook_id',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.webhook._WebhookId',
+      '10': 'webhookId'
+    },
     {'1': 'topic_name', '3': 2, '4': 1, '5': 9, '10': 'topicName'},
-    {'1': 'destination', '3': 3, '4': 1, '5': 11, '6': '.webhook._WebhookDestination', '10': 'destination'},
+    {
+      '1': 'destination',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.webhook._WebhookDestination',
+      '10': 'destination'
+    },
   ],
 };
 
@@ -47,7 +61,14 @@ final $typed_data.Uint8List webhook_Descriptor = $convert.base64Decode(
 const PutWebhookRequest_$json = {
   '1': '_PutWebhookRequest',
   '2': [
-    {'1': 'webhook', '3': 1, '4': 1, '5': 11, '6': '.webhook._Webhook', '10': 'webhook'},
+    {
+      '1': 'webhook',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.webhook._Webhook',
+      '10': 'webhook'
+    },
   ],
 };
 
@@ -73,7 +94,14 @@ final $typed_data.Uint8List putWebhookResponse_Descriptor = $convert.base64Decod
 const DeleteWebhookRequest_$json = {
   '1': '_DeleteWebhookRequest',
   '2': [
-    {'1': 'webhook_id', '3': 1, '4': 1, '5': 11, '6': '.webhook._WebhookId', '10': 'webhookId'},
+    {
+      '1': 'webhook_id',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.webhook._WebhookId',
+      '10': 'webhookId'
+    },
   ],
 };
 
@@ -88,8 +116,8 @@ const DeleteWebhookResponse_$json = {
 };
 
 /// Descriptor for `_DeleteWebhookResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deleteWebhookResponse_Descriptor = $convert.base64Decode(
-    'ChZfRGVsZXRlV2ViaG9va1Jlc3BvbnNl');
+final $typed_data.Uint8List deleteWebhookResponse_Descriptor =
+    $convert.base64Decode('ChZfRGVsZXRlV2ViaG9va1Jlc3BvbnNl');
 
 @$core.Deprecated('Use listWebhookRequest_Descriptor instead')
 const ListWebhookRequest_$json = {
@@ -107,7 +135,14 @@ final $typed_data.Uint8List listWebhookRequest_Descriptor = $convert.base64Decod
 const ListWebhooksResponse_$json = {
   '1': '_ListWebhooksResponse',
   '2': [
-    {'1': 'webhook', '3': 1, '4': 3, '5': 11, '6': '.webhook._Webhook', '10': 'webhook'},
+    {
+      '1': 'webhook',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.webhook._Webhook',
+      '10': 'webhook'
+    },
   ],
 };
 
@@ -126,9 +161,10 @@ const GetWebhookSecretRequest_$json = {
 };
 
 /// Descriptor for `_GetWebhookSecretRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getWebhookSecretRequest_Descriptor = $convert.base64Decode(
-    'ChhfR2V0V2ViaG9va1NlY3JldFJlcXVlc3QSHQoKY2FjaGVfbmFtZRgBIAEoCVIJY2FjaGVOYW'
-    '1lEiEKDHdlYmhvb2tfbmFtZRgCIAEoCVILd2ViaG9va05hbWU=');
+final $typed_data.Uint8List getWebhookSecretRequest_Descriptor =
+    $convert.base64Decode(
+        'ChhfR2V0V2ViaG9va1NlY3JldFJlcXVlc3QSHQoKY2FjaGVfbmFtZRgBIAEoCVIJY2FjaGVOYW'
+        '1lEiEKDHdlYmhvb2tfbmFtZRgCIAEoCVILd2ViaG9va05hbWU=');
 
 @$core.Deprecated('Use getWebhookSecretResponse_Descriptor instead')
 const GetWebhookSecretResponse_$json = {
@@ -166,14 +202,22 @@ final $typed_data.Uint8List webhookDestination_Descriptor = $convert.base64Decod
 const RotateWebhookSecretRequest_$json = {
   '1': '_RotateWebhookSecretRequest',
   '2': [
-    {'1': 'webhook_id', '3': 1, '4': 1, '5': 11, '6': '.webhook._WebhookId', '10': 'webhookId'},
+    {
+      '1': 'webhook_id',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.webhook._WebhookId',
+      '10': 'webhookId'
+    },
   ],
 };
 
 /// Descriptor for `_RotateWebhookSecretRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List rotateWebhookSecretRequest_Descriptor = $convert.base64Decode(
-    'ChtfUm90YXRlV2ViaG9va1NlY3JldFJlcXVlc3QSMgoKd2ViaG9va19pZBgBIAEoCzITLndlYm'
-    'hvb2suX1dlYmhvb2tJZFIJd2ViaG9va0lk');
+final $typed_data.Uint8List rotateWebhookSecretRequest_Descriptor =
+    $convert.base64Decode(
+        'ChtfUm90YXRlV2ViaG9va1NlY3JldFJlcXVlc3QSMgoKd2ViaG9va19pZBgBIAEoCzITLndlYm'
+        'hvb2suX1dlYmhvb2tJZFIJd2ViaG9va0lk');
 
 @$core.Deprecated('Use rotateWebhookSecretResponse_Descriptor instead')
 const RotateWebhookSecretResponse_$json = {
@@ -184,7 +228,7 @@ const RotateWebhookSecretResponse_$json = {
 };
 
 /// Descriptor for `_RotateWebhookSecretResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List rotateWebhookSecretResponse_Descriptor = $convert.base64Decode(
-    'ChxfUm90YXRlV2ViaG9va1NlY3JldFJlc3BvbnNlEiMKDXNlY3JldF9zdHJpbmcYASABKAlSDH'
-    'NlY3JldFN0cmluZw==');
-
+final $typed_data.Uint8List rotateWebhookSecretResponse_Descriptor =
+    $convert.base64Decode(
+        'ChxfUm90YXRlV2ViaG9va1NlY3JldFJlc3BvbnNlEiMKDXNlY3JldF9zdHJpbmcYASABKAlSDH'
+        'NlY3JldFN0cmluZw==');

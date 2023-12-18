@@ -21,19 +21,24 @@ export 'token.pb.dart';
 
 @$pb.GrpcServiceName('token.Token')
 class TokenClient extends $grpc.Client {
-  static final _$generateDisposableToken = $grpc.ClientMethod<$6.GenerateDisposableTokenRequest_, $6.GenerateDisposableTokenResponse_>(
+  static final _$generateDisposableToken = $grpc.ClientMethod<
+          $6.GenerateDisposableTokenRequest_,
+          $6.GenerateDisposableTokenResponse_>(
       '/token.Token/GenerateDisposableToken',
       ($6.GenerateDisposableTokenRequest_ value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $6.GenerateDisposableTokenResponse_.fromBuffer(value));
+      ($core.List<$core.int> value) =>
+          $6.GenerateDisposableTokenResponse_.fromBuffer(value));
 
   TokenClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
-      : super(channel, options: options,
-        interceptors: interceptors);
+      : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$6.GenerateDisposableTokenResponse_> generateDisposableToken($6.GenerateDisposableTokenRequest_ request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$generateDisposableToken, request, options: options);
+  $grpc.ResponseFuture<$6.GenerateDisposableTokenResponse_>
+      generateDisposableToken($6.GenerateDisposableTokenRequest_ request,
+          {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$generateDisposableToken, request,
+        options: options);
   }
 }
 
@@ -42,18 +47,23 @@ abstract class TokenServiceBase extends $grpc.Service {
   $core.String get $name => 'token.Token';
 
   TokenServiceBase() {
-    $addMethod($grpc.ServiceMethod<$6.GenerateDisposableTokenRequest_, $6.GenerateDisposableTokenResponse_>(
+    $addMethod($grpc.ServiceMethod<$6.GenerateDisposableTokenRequest_,
+            $6.GenerateDisposableTokenResponse_>(
         'GenerateDisposableToken',
         generateDisposableToken_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $6.GenerateDisposableTokenRequest_.fromBuffer(value),
+        ($core.List<$core.int> value) =>
+            $6.GenerateDisposableTokenRequest_.fromBuffer(value),
         ($6.GenerateDisposableTokenResponse_ value) => value.writeToBuffer()));
   }
 
-  $async.Future<$6.GenerateDisposableTokenResponse_> generateDisposableToken_Pre($grpc.ServiceCall call, $async.Future<$6.GenerateDisposableTokenRequest_> request) async {
+  $async.Future<$6.GenerateDisposableTokenResponse_>
+      generateDisposableToken_Pre($grpc.ServiceCall call,
+          $async.Future<$6.GenerateDisposableTokenRequest_> request) async {
     return generateDisposableToken(call, await request);
   }
 
-  $async.Future<$6.GenerateDisposableTokenResponse_> generateDisposableToken($grpc.ServiceCall call, $6.GenerateDisposableTokenRequest_ request);
+  $async.Future<$6.GenerateDisposableTokenResponse_> generateDisposableToken(
+      $grpc.ServiceCall call, $6.GenerateDisposableTokenRequest_ request);
 }

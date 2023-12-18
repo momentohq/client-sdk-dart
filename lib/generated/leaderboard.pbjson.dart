@@ -23,8 +23,8 @@ const Order_$json = {
 };
 
 /// Descriptor for `_Order`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List order_Descriptor = $convert.base64Decode(
-    'CgZfT3JkZXISDQoJQVNDRU5ESU5HEAASDgoKREVTQ0VORElORxAB');
+final $typed_data.Uint8List order_Descriptor = $convert
+    .base64Decode('CgZfT3JkZXISDQoJQVNDRU5ESU5HEAASDgoKREVTQ0VORElORxAB');
 
 @$core.Deprecated('Use element_Descriptor instead')
 const Element_$json = {
@@ -74,17 +74,47 @@ const Unbounded_$json = {
 };
 
 /// Descriptor for `_Unbounded`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List unbounded_Descriptor = $convert.base64Decode(
-    'CgpfVW5ib3VuZGVk');
+final $typed_data.Uint8List unbounded_Descriptor =
+    $convert.base64Decode('CgpfVW5ib3VuZGVk');
 
 @$core.Deprecated('Use scoreRange_Descriptor instead')
 const ScoreRange_$json = {
   '1': '_ScoreRange',
   '2': [
-    {'1': 'unbounded_min', '3': 1, '4': 1, '5': 11, '6': '.leaderboard._Unbounded', '9': 0, '10': 'unboundedMin'},
-    {'1': 'min_inclusive', '3': 2, '4': 1, '5': 2, '9': 0, '10': 'minInclusive'},
-    {'1': 'unbounded_max', '3': 3, '4': 1, '5': 11, '6': '.leaderboard._Unbounded', '9': 1, '10': 'unboundedMax'},
-    {'1': 'max_exclusive', '3': 4, '4': 1, '5': 2, '9': 1, '10': 'maxExclusive'},
+    {
+      '1': 'unbounded_min',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.leaderboard._Unbounded',
+      '9': 0,
+      '10': 'unboundedMin'
+    },
+    {
+      '1': 'min_inclusive',
+      '3': 2,
+      '4': 1,
+      '5': 2,
+      '9': 0,
+      '10': 'minInclusive'
+    },
+    {
+      '1': 'unbounded_max',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.leaderboard._Unbounded',
+      '9': 1,
+      '10': 'unboundedMax'
+    },
+    {
+      '1': 'max_exclusive',
+      '3': 4,
+      '4': 1,
+      '5': 2,
+      '9': 1,
+      '10': 'maxExclusive'
+    },
   ],
   '8': [
     {'1': 'min'},
@@ -106,8 +136,8 @@ const Empty_$json = {
 };
 
 /// Descriptor for `_Empty`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List empty_Descriptor = $convert.base64Decode(
-    'CgZfRW1wdHk=');
+final $typed_data.Uint8List empty_Descriptor =
+    $convert.base64Decode('CgZfRW1wdHk=');
 
 @$core.Deprecated('Use deleteLeaderboardRequest_Descriptor instead')
 const DeleteLeaderboardRequest_$json = {
@@ -119,9 +149,10 @@ const DeleteLeaderboardRequest_$json = {
 };
 
 /// Descriptor for `_DeleteLeaderboardRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deleteLeaderboardRequest_Descriptor = $convert.base64Decode(
-    'ChlfRGVsZXRlTGVhZGVyYm9hcmRSZXF1ZXN0Eh0KCmNhY2hlX25hbWUYASABKAlSCWNhY2hlTm'
-    'FtZRIgCgtsZWFkZXJib2FyZBgCIAEoCVILbGVhZGVyYm9hcmQ=');
+final $typed_data.Uint8List deleteLeaderboardRequest_Descriptor =
+    $convert.base64Decode(
+        'ChlfRGVsZXRlTGVhZGVyYm9hcmRSZXF1ZXN0Eh0KCmNhY2hlX25hbWUYASABKAlSCWNhY2hlTm'
+        'FtZRIgCgtsZWFkZXJib2FyZBgCIAEoCVILbGVhZGVyYm9hcmQ=');
 
 @$core.Deprecated('Use getLeaderboardLengthRequest_Descriptor instead')
 const GetLeaderboardLengthRequest_$json = {
@@ -133,9 +164,10 @@ const GetLeaderboardLengthRequest_$json = {
 };
 
 /// Descriptor for `_GetLeaderboardLengthRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getLeaderboardLengthRequest_Descriptor = $convert.base64Decode(
-    'ChxfR2V0TGVhZGVyYm9hcmRMZW5ndGhSZXF1ZXN0Eh0KCmNhY2hlX25hbWUYASABKAlSCWNhY2'
-    'hlTmFtZRIgCgtsZWFkZXJib2FyZBgCIAEoCVILbGVhZGVyYm9hcmQ=');
+final $typed_data.Uint8List getLeaderboardLengthRequest_Descriptor =
+    $convert.base64Decode(
+        'ChxfR2V0TGVhZGVyYm9hcmRMZW5ndGhSZXF1ZXN0Eh0KCmNhY2hlX25hbWUYASABKAlSCWNhY2'
+        'hlTmFtZRIgCgtsZWFkZXJib2FyZBgCIAEoCVILbGVhZGVyYm9hcmQ=');
 
 @$core.Deprecated('Use getLeaderboardLengthResponse_Descriptor instead')
 const GetLeaderboardLengthResponse_$json = {
@@ -146,8 +178,9 @@ const GetLeaderboardLengthResponse_$json = {
 };
 
 /// Descriptor for `_GetLeaderboardLengthResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getLeaderboardLengthResponse_Descriptor = $convert.base64Decode(
-    'Ch1fR2V0TGVhZGVyYm9hcmRMZW5ndGhSZXNwb25zZRIUCgVjb3VudBgBIAEoDVIFY291bnQ=');
+final $typed_data.Uint8List getLeaderboardLengthResponse_Descriptor =
+    $convert.base64Decode(
+        'Ch1fR2V0TGVhZGVyYm9hcmRMZW5ndGhSZXNwb25zZRIUCgVjb3VudBgBIAEoDVIFY291bnQ=');
 
 @$core.Deprecated('Use upsertElementsRequest_Descriptor instead')
 const UpsertElementsRequest_$json = {
@@ -155,7 +188,14 @@ const UpsertElementsRequest_$json = {
   '2': [
     {'1': 'cache_name', '3': 1, '4': 1, '5': 9, '10': 'cacheName'},
     {'1': 'leaderboard', '3': 2, '4': 1, '5': 9, '10': 'leaderboard'},
-    {'1': 'elements', '3': 3, '4': 3, '5': 11, '6': '.leaderboard._Element', '10': 'elements'},
+    {
+      '1': 'elements',
+      '3': 3,
+      '4': 3,
+      '5': 11,
+      '6': '.leaderboard._Element',
+      '10': 'elements'
+    },
   ],
 };
 
@@ -171,8 +211,22 @@ const GetByRankRequest_$json = {
   '2': [
     {'1': 'cache_name', '3': 1, '4': 1, '5': 9, '10': 'cacheName'},
     {'1': 'leaderboard', '3': 2, '4': 1, '5': 9, '10': 'leaderboard'},
-    {'1': 'rank_range', '3': 3, '4': 1, '5': 11, '6': '.leaderboard._RankRange', '10': 'rankRange'},
-    {'1': 'order', '3': 4, '4': 1, '5': 14, '6': '.leaderboard._Order', '10': 'order'},
+    {
+      '1': 'rank_range',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.leaderboard._RankRange',
+      '10': 'rankRange'
+    },
+    {
+      '1': 'order',
+      '3': 4,
+      '4': 1,
+      '5': 14,
+      '6': '.leaderboard._Order',
+      '10': 'order'
+    },
   ],
 };
 
@@ -187,7 +241,14 @@ final $typed_data.Uint8List getByRankRequest_Descriptor = $convert.base64Decode(
 const GetByRankResponse_$json = {
   '1': '_GetByRankResponse',
   '2': [
-    {'1': 'elements', '3': 1, '4': 3, '5': 11, '6': '.leaderboard._RankedElement', '10': 'elements'},
+    {
+      '1': 'elements',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.leaderboard._RankedElement',
+      '10': 'elements'
+    },
   ],
 };
 
@@ -203,7 +264,14 @@ const GetRankRequest_$json = {
     {'1': 'cache_name', '3': 1, '4': 1, '5': 9, '10': 'cacheName'},
     {'1': 'leaderboard', '3': 2, '4': 1, '5': 9, '10': 'leaderboard'},
     {'1': 'ids', '3': 3, '4': 3, '5': 13, '10': 'ids'},
-    {'1': 'order', '3': 4, '4': 1, '5': 14, '6': '.leaderboard._Order', '10': 'order'},
+    {
+      '1': 'order',
+      '3': 4,
+      '4': 1,
+      '5': 14,
+      '6': '.leaderboard._Order',
+      '10': 'order'
+    },
   ],
 };
 
@@ -217,7 +285,14 @@ final $typed_data.Uint8List getRankRequest_Descriptor = $convert.base64Decode(
 const GetRankResponse_$json = {
   '1': '_GetRankResponse',
   '2': [
-    {'1': 'elements', '3': 1, '4': 3, '5': 11, '6': '.leaderboard._RankedElement', '10': 'elements'},
+    {
+      '1': 'elements',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.leaderboard._RankedElement',
+      '10': 'elements'
+    },
   ],
 };
 
@@ -247,10 +322,24 @@ const GetByScoreRequest_$json = {
   '2': [
     {'1': 'cache_name', '3': 1, '4': 1, '5': 9, '10': 'cacheName'},
     {'1': 'leaderboard', '3': 2, '4': 1, '5': 9, '10': 'leaderboard'},
-    {'1': 'score_range', '3': 3, '4': 1, '5': 11, '6': '.leaderboard._ScoreRange', '10': 'scoreRange'},
+    {
+      '1': 'score_range',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.leaderboard._ScoreRange',
+      '10': 'scoreRange'
+    },
     {'1': 'offset', '3': 4, '4': 1, '5': 13, '10': 'offset'},
     {'1': 'limit_elements', '3': 5, '4': 1, '5': 13, '10': 'limitElements'},
-    {'1': 'order', '3': 6, '4': 1, '5': 14, '6': '.leaderboard._Order', '10': 'order'},
+    {
+      '1': 'order',
+      '3': 6,
+      '4': 1,
+      '5': 14,
+      '6': '.leaderboard._Order',
+      '10': 'order'
+    },
   ],
 };
 
@@ -266,7 +355,14 @@ final $typed_data.Uint8List getByScoreRequest_Descriptor = $convert.base64Decode
 const GetByScoreResponse_$json = {
   '1': '_GetByScoreResponse',
   '2': [
-    {'1': 'elements', '3': 1, '4': 3, '5': 11, '6': '.leaderboard._RankedElement', '10': 'elements'},
+    {
+      '1': 'elements',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.leaderboard._RankedElement',
+      '10': 'elements'
+    },
   ],
 };
 
@@ -274,4 +370,3 @@ const GetByScoreResponse_$json = {
 final $typed_data.Uint8List getByScoreResponse_Descriptor = $convert.base64Decode(
     'ChNfR2V0QnlTY29yZVJlc3BvbnNlEjcKCGVsZW1lbnRzGAEgAygLMhsubGVhZGVyYm9hcmQuX1'
     'JhbmtlZEVsZW1lbnRSCGVsZW1lbnRz');
-

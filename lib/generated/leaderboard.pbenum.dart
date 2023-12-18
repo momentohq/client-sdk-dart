@@ -14,19 +14,21 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 class Order_ extends $pb.ProtobufEnum {
-  static const Order_ ASCENDING = Order_._(0, _omitEnumNames ? '' : 'ASCENDING');
-  static const Order_ DESCENDING = Order_._(1, _omitEnumNames ? '' : 'DESCENDING');
+  static const Order_ ASCENDING =
+      Order_._(0, _omitEnumNames ? '' : 'ASCENDING');
+  static const Order_ DESCENDING =
+      Order_._(1, _omitEnumNames ? '' : 'DESCENDING');
 
-  static const $core.List<Order_> values = <Order_> [
+  static const $core.List<Order_> values = <Order_>[
     ASCENDING,
     DESCENDING,
   ];
 
-  static final $core.Map<$core.int, Order_> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static final $core.Map<$core.int, Order_> _byValue =
+      $pb.ProtobufEnum.initByValue(values);
   static Order_? valueOf($core.int value) => _byValue[value];
 
   const Order_._($core.int v, $core.String n) : super(v, n);
 }
-
 
 const _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

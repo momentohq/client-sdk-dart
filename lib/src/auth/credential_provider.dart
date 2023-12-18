@@ -11,7 +11,7 @@ enum CredentialProviderError {
 
 extension CredentialProviderErrorNames on CredentialProviderError {
   String get name {
-    switch(this) {
+    switch (this) {
       case CredentialProviderError.emptyApiKey:
         return "API key is an empty string";
       case CredentialProviderError.emptyAuthEnvironmentVariable:
@@ -56,7 +56,7 @@ abstract class CredentialProvider {
   }
 
   static _ParsedApiKey _parseApiKey(String apiKey) {
-    if(isBase64(apiKey)) {
+    if (isBase64(apiKey)) {
       return CredentialProvider._parseV1Token(apiKey);
     }
     return CredentialProvider._parseJwtToken(apiKey);
@@ -79,7 +79,8 @@ abstract class CredentialProvider {
       throw "invalid jwt missing required claim 'api_key'";
     }
     final endpoints = _Endpoints(decoded["endpoint"]);
-    return _ParsedApiKey(decoded["api_key"], endpoints.controlEndpoint, endpoints.cacheEndpoint);
+    return _ParsedApiKey(
+        decoded["api_key"], endpoints.controlEndpoint, endpoints.cacheEndpoint);
   }
 }
 
@@ -93,7 +94,8 @@ class StringMomentoTokenProvider implements CredentialProvider {
   @override
   String _controlEndpoint = "";
 
-  StringMomentoTokenProvider(String apiKey, {String? controlEndpoint, String? cacheEndpoint}) {
+  StringMomentoTokenProvider(String apiKey,
+      {String? controlEndpoint, String? cacheEndpoint}) {
     if (apiKey.isEmpty) {
       throw CredentialProviderError.emptyApiKey.name;
     }
@@ -111,9 +113,11 @@ class StringMomentoTokenProvider implements CredentialProvider {
 
   @override
   String get controlEndpoint => _controlEndpoint;
-
 }
 
 class EnvMomentoTokenProvider extends StringMomentoTokenProvider {
-  EnvMomentoTokenProvider(String envVarName, {String? controlEndpoint, String? cacheEndpoint}) : super(Platform.environment[envVarName] ?? '', controlEndpoint: controlEndpoint, cacheEndpoint: cacheEndpoint);
+  EnvMomentoTokenProvider(String envVarName,
+      {String? controlEndpoint, String? cacheEndpoint})
+      : super(Platform.environment[envVarName] ?? '',
+            controlEndpoint: controlEndpoint, cacheEndpoint: cacheEndpoint);
 }
