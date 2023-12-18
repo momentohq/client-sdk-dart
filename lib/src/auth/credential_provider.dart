@@ -22,6 +22,19 @@ extension CredentialProviderErrorNames on CredentialProviderError {
   }
 }
 
+class Base64DecodedV1Token {
+  String apiKey = "";
+  String endpoint = "";
+  Base64DecodedV1Token(this.apiKey, this.endpoint);
+  Base64DecodedV1Token.fromJson(Map<String, dynamic> json)
+      : apiKey = json['api_key'] as String,
+        endpoint = json['endpoint'] as String;
+  Map toJson() => {
+    'api_key': apiKey,
+    'endpoint': endpoint
+  };
+}
+
 class _Endpoints {
   String cacheEndpoint = "";
   String controlEndpoint = "";
@@ -64,23 +77,24 @@ abstract class CredentialProvider {
 
   static _ParsedApiKey _parseJwtToken(String jwt) {
     Map<String, dynamic> claims = JwtDecoder.decode(jwt);
-    if (!claims["c"] || !claims["cp"]) {
+    if (!claims.containsKey("c") || !claims.containsKey("cp")) {
       throw "failed to parse jwt token";
     }
     return _ParsedApiKey(jwt, claims["cp"], claims["c"]);
   }
 
   static _ParsedApiKey _parseV1Token(String apiKey) {
-    final decoded = json.decode(utf8.decode(base64Decode(apiKey)));
-    if (!decoded["endpoint"]) {
+    final decodedJson = json.decode(utf8.decode(base64Decode(apiKey)));
+    final decoded = Base64DecodedV1Token.fromJson(decodedJson);
+    if (decoded.endpoint.isEmpty) {
       throw "invalid jwt missing required claim 'endpoint'";
     }
-    if (!decoded["api_key"]) {
+    if (decoded.apiKey.isEmpty) {
       throw "invalid jwt missing required claim 'api_key'";
     }
-    final endpoints = _Endpoints(decoded["endpoint"]);
+    final endpoints = _Endpoints(decoded.endpoint);
     return _ParsedApiKey(
-        decoded["api_key"], endpoints.controlEndpoint, endpoints.cacheEndpoint);
+        decoded.apiKey, endpoints.controlEndpoint, endpoints.cacheEndpoint);
   }
 }
 
