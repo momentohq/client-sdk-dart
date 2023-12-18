@@ -1,7 +1,7 @@
 sealed class Value {}
 
 class StringValue implements Value {
-  String _value;
+  final String _value;
   StringValue(String v) : _value = v;
   String get value => _value;
 }
