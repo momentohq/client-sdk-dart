@@ -29,10 +29,7 @@ class Base64DecodedV1Token {
   Base64DecodedV1Token.fromJson(Map<String, dynamic> json)
       : apiKey = json['api_key'] as String,
         endpoint = json['endpoint'] as String;
-  Map toJson() => {
-    'api_key': apiKey,
-    'endpoint': endpoint
-  };
+  Map toJson() => {'api_key': apiKey, 'endpoint': endpoint};
 }
 
 class _Endpoints {
