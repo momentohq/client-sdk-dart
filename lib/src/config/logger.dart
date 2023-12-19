@@ -7,6 +7,7 @@ enum LogLevel {
   warn,
   error,
   fatal,
+  off,
 }
 
 Level determineLoggerLevel(LogLevel logLevel) {
@@ -23,5 +24,7 @@ Level determineLoggerLevel(LogLevel logLevel) {
       return Level.SEVERE;
     case LogLevel.fatal:
       return Level.SHOUT;
+    case LogLevel.off:
+      return Level.OFF;
   }
 }

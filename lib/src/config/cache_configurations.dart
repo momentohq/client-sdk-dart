@@ -13,7 +13,7 @@ class Mobile extends CacheClientConfigurations {
     return latest();
   }
 
-  static CacheClientConfiguration latest({logLevel = LogLevel.info}) {
+  static CacheClientConfiguration latest({LogLevel logLevel = LogLevel.info}) {
     return CacheClientConfiguration(
         StaticTransportStrategy(StaticGrpcConfiguration(Duration(seconds: 15))),
         logLevel);
