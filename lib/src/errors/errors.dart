@@ -257,3 +257,8 @@ class FailedPreconditionException extends SdkException {
             "System is not in a state required for the operation's execution; please contact Momento.",
             transportDetails);
 }
+
+class IllegalArgumentError extends Error {
+  String message;
+  IllegalArgumentError(this.message) : super();
+}
