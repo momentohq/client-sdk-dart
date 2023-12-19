@@ -65,28 +65,36 @@ abstract class CredentialProvider {
   String get controlEndpoint => _controlEndpoint;
   String get cacheEndpoint => _cacheEndpoint;
 
-  static CredentialProvider fromEnvironmentVariable(String envVarName, {String? baseEndpointOverride, EndpointOverrides? endpointOverrides}) {
+  static CredentialProvider fromEnvironmentVariable(String envVarName,
+      {String? baseEndpointOverride, EndpointOverrides? endpointOverrides}) {
     if (endpointOverrides != null && baseEndpointOverride != null) {
-      throw IllegalArgumentError("either pass in 'baseEndpointOverride' or 'endpointOverrides', cannot pass in both");
+      throw IllegalArgumentError(
+          "either pass in 'baseEndpointOverride' or 'endpointOverrides', cannot pass in both");
     }
     if (endpointOverrides != null) {
-      return EnvMomentoTokenProvider.withEndpointOverrides(envVarName, endpointOverrides);
+      return EnvMomentoTokenProvider.withEndpointOverrides(
+          envVarName, endpointOverrides);
     }
     if (baseEndpointOverride != null && baseEndpointOverride.isNotEmpty) {
-      return EnvMomentoTokenProvider.withBaseEndpointOverride(envVarName, baseEndpointOverride);
+      return EnvMomentoTokenProvider.withBaseEndpointOverride(
+          envVarName, baseEndpointOverride);
     }
     return EnvMomentoTokenProvider(envVarName);
   }
 
-  static CredentialProvider fromString(String apiKey, {String? baseEndpointOverride, EndpointOverrides? endpointOverrides}) {
+  static CredentialProvider fromString(String apiKey,
+      {String? baseEndpointOverride, EndpointOverrides? endpointOverrides}) {
     if (endpointOverrides != null && baseEndpointOverride != null) {
-      throw IllegalArgumentError("either pass in 'baseEndpointOverride' or 'endpointOverrides', cannot pass in both");
+      throw IllegalArgumentError(
+          "either pass in 'baseEndpointOverride' or 'endpointOverrides', cannot pass in both");
     }
     if (endpointOverrides != null) {
-      return StringMomentoTokenProvider.withEndpointOverrides(apiKey, endpointOverrides);
+      return StringMomentoTokenProvider.withEndpointOverrides(
+          apiKey, endpointOverrides);
     }
     if (baseEndpointOverride != null && baseEndpointOverride.isNotEmpty) {
-      return StringMomentoTokenProvider.withBaseEndpointOverride(apiKey, baseEndpointOverride);
+      return StringMomentoTokenProvider.withBaseEndpointOverride(
+          apiKey, baseEndpointOverride);
     }
     return StringMomentoTokenProvider(apiKey);
   }
@@ -107,10 +115,12 @@ abstract class CredentialProvider {
     final decodedJson = json.decode(utf8.decode(base64Decode(apiKey)));
     final decoded = Base64DecodedV1Token.fromJson(decodedJson);
     if (decoded.endpoint.isEmpty) {
-      throw IllegalArgumentError("invalid jwt missing required claim 'endpoint'");
+      throw IllegalArgumentError(
+          "invalid jwt missing required claim 'endpoint'");
     }
     if (decoded.apiKey.isEmpty) {
-      throw IllegalArgumentError("invalid jwt missing required claim 'api_key'");
+      throw IllegalArgumentError(
+          "invalid jwt missing required claim 'api_key'");
     }
     final endpoints = _Endpoints(decoded.endpoint);
     return _ParsedApiKey(
@@ -134,14 +144,16 @@ class StringMomentoTokenProvider implements CredentialProvider {
     }
     final parsedApiKey = CredentialProvider._parseApiKey(apiKey);
     _apiKey = parsedApiKey.apiKey;
-    if (parsedApiKey.controlEndpoint == null || parsedApiKey.cacheEndpoint == null) {
+    if (parsedApiKey.controlEndpoint == null ||
+        parsedApiKey.cacheEndpoint == null) {
       throw IllegalArgumentError("failed to parse jwt token");
     }
     _cacheEndpoint = parsedApiKey.cacheEndpoint!;
     _controlEndpoint = parsedApiKey.controlEndpoint!;
   }
 
-  StringMomentoTokenProvider.withBaseEndpointOverride(String apiKey, String baseEndpoint) {
+  StringMomentoTokenProvider.withBaseEndpointOverride(
+      String apiKey, String baseEndpoint) {
     if (apiKey.isEmpty) {
       throw CredentialProviderError.emptyApiKey.name;
     }
@@ -152,7 +164,8 @@ class StringMomentoTokenProvider implements CredentialProvider {
     _controlEndpoint = endpoints.controlEndpoint;
   }
 
-  StringMomentoTokenProvider.withEndpointOverrides(String apiKey, EndpointOverrides overrides) {
+  StringMomentoTokenProvider.withEndpointOverrides(
+      String apiKey, EndpointOverrides overrides) {
     if (apiKey.isEmpty) {
       throw CredentialProviderError.emptyApiKey.name;
     }
@@ -175,8 +188,12 @@ class StringMomentoTokenProvider implements CredentialProvider {
 class EnvMomentoTokenProvider extends StringMomentoTokenProvider {
   EnvMomentoTokenProvider(String envVarName)
       : super(Platform.environment[envVarName] ?? '');
-  EnvMomentoTokenProvider.withBaseEndpointOverride(String envVarName, String baseEndpoint)
-      : super.withBaseEndpointOverride(Platform.environment[envVarName] ?? '', baseEndpoint);
-  EnvMomentoTokenProvider.withEndpointOverrides(String envVarName, EndpointOverrides overrides)
-      : super.withEndpointOverrides(Platform.environment[envVarName] ?? '', overrides);
+  EnvMomentoTokenProvider.withBaseEndpointOverride(
+      String envVarName, String baseEndpoint)
+      : super.withBaseEndpointOverride(
+            Platform.environment[envVarName] ?? '', baseEndpoint);
+  EnvMomentoTokenProvider.withEndpointOverrides(
+      String envVarName, EndpointOverrides overrides)
+      : super.withEndpointOverrides(
+            Platform.environment[envVarName] ?? '', overrides);
 }

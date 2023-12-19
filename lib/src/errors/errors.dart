@@ -260,5 +260,5 @@ class FailedPreconditionException extends SdkException {
 
 class IllegalArgumentError extends Error {
   String message;
-  IllegalArgumentError(this.message): super();
+  IllegalArgumentError(this.message) : super();
 }

@@ -40,39 +40,54 @@ void main() {
       });
 
       test('parses a token with base endpoint override', () {
-        var authProvider =
-        CredentialProvider.fromString(base64EncodedFakeV1AuthToken, baseEndpointOverride: "test.com");
+        var authProvider = CredentialProvider.fromString(
+            base64EncodedFakeV1AuthToken,
+            baseEndpointOverride: "test.com");
         expect(authProvider.apiKey, equals(fakeTestV1ApiKey));
-        expect(authProvider.controlEndpoint,
-            equals('control.test.com'));
-        expect(authProvider.cacheEndpoint,
-            equals('cache.test.com'));
+        expect(authProvider.controlEndpoint, equals('control.test.com'));
+        expect(authProvider.cacheEndpoint, equals('cache.test.com'));
       });
       test('parses a token with endpoint overrides', () {
-        var authProvider =
-        CredentialProvider.fromString(base64EncodedFakeV1AuthToken, endpointOverrides: EndpointOverrides("this.is.a.cache.endpoint", "this.is.a.control.endpoint"));
+        var authProvider = CredentialProvider.fromString(
+            base64EncodedFakeV1AuthToken,
+            endpointOverrides: EndpointOverrides(
+                "this.is.a.cache.endpoint", "this.is.a.control.endpoint"));
         expect(authProvider.apiKey, equals(fakeTestV1ApiKey));
-        expect(authProvider.controlEndpoint,
-            equals('this.is.a.control.endpoint'));
-        expect(authProvider.cacheEndpoint,
-            equals('this.is.a.cache.endpoint'));
+        expect(
+            authProvider.controlEndpoint, equals('this.is.a.control.endpoint'));
+        expect(authProvider.cacheEndpoint, equals('this.is.a.cache.endpoint'));
       });
       test('parses a session token with base endpoint override', () {
-        var authProvider =
-        CredentialProvider.fromString(fakeSessionToken, endpointOverrides: EndpointOverrides("this.is.a.cache.endpoint", "this.is.a.control.endpoint"));
+        var authProvider = CredentialProvider.fromString(fakeSessionToken,
+            endpointOverrides: EndpointOverrides(
+                "this.is.a.cache.endpoint", "this.is.a.control.endpoint"));
         expect(authProvider.apiKey, equals(fakeSessionToken));
-        expect(authProvider.controlEndpoint,
-            equals('this.is.a.control.endpoint'));
-        expect(authProvider.cacheEndpoint,
-            equals('this.is.a.cache.endpoint'));
+        expect(
+            authProvider.controlEndpoint, equals('this.is.a.control.endpoint'));
+        expect(authProvider.cacheEndpoint, equals('this.is.a.cache.endpoint'));
       });
-      test('fromString should not allow passing in both endpointOverrides and baseEndpointOverride', () {
-        expect(() => CredentialProvider.fromString(base64EncodedFakeV1AuthToken, baseEndpointOverride: "baseendpoint.com", endpointOverrides: EndpointOverrides("this.is.a.cache.endpoint", "this.is.a.control.endpoint")), throwsA(TypeMatcher<IllegalArgumentError>()));
+      test(
+          'fromString should not allow passing in both endpointOverrides and baseEndpointOverride',
+          () {
+        expect(
+            () => CredentialProvider.fromString(base64EncodedFakeV1AuthToken,
+                baseEndpointOverride: "baseendpoint.com",
+                endpointOverrides: EndpointOverrides(
+                    "this.is.a.cache.endpoint", "this.is.a.control.endpoint")),
+            throwsA(TypeMatcher<IllegalArgumentError>()));
       });
     });
     group('fromEnvironmentVariable', () {
-      test('fromEnvironmentVariable should not allow passing in both endpointOverrides and baseEndpointOverride', () {
-        expect(() => CredentialProvider.fromEnvironmentVariable(base64EncodedFakeV1AuthToken, baseEndpointOverride: "baseendpoint.com", endpointOverrides: EndpointOverrides("this.is.a.cache.endpoint", "this.is.a.control.endpoint")), throwsA(TypeMatcher<IllegalArgumentError>()));
+      test(
+          'fromEnvironmentVariable should not allow passing in both endpointOverrides and baseEndpointOverride',
+          () {
+        expect(
+            () => CredentialProvider.fromEnvironmentVariable(
+                base64EncodedFakeV1AuthToken,
+                baseEndpointOverride: "baseendpoint.com",
+                endpointOverrides: EndpointOverrides(
+                    "this.is.a.cache.endpoint", "this.is.a.control.endpoint")),
+            throwsA(TypeMatcher<IllegalArgumentError>()));
       });
     });
   });
