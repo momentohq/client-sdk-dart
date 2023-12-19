@@ -1,5 +1,6 @@
 import 'package:client_sdk_dart/src/auth/credential_provider.dart';
 import 'package:logging/logging.dart';
+import 'config/topic_configuration.dart';
 import 'internal/pubsub_client.dart';
 import 'messages/responses/topics/topic_subscribe.dart';
 import 'messages/values.dart';
@@ -16,8 +17,9 @@ class TopicClient implements ITopicClient {
   final ClientPubsub _pubsubClient;
   final Logger _logger = Logger('MomentoTopicClient');
 
-  TopicClient(CredentialProvider credentialProvider)
-      : _pubsubClient = ClientPubsub(credentialProvider) {
+  TopicClient(
+      CredentialProvider credentialProvider, TopicConfiguration configuration)
+      : _pubsubClient = ClientPubsub(credentialProvider, configuration) {
     _logger.finest("initializing topic client");
   }
 

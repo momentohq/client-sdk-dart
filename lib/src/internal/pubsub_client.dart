@@ -4,6 +4,7 @@ import 'package:client_sdk_dart/src/errors/errors.dart';
 import 'package:client_sdk_dart/src/messages/responses/topics/topic_subscribe.dart';
 import 'package:grpc/grpc.dart';
 
+import '../config/topic_configuration.dart';
 import '../messages/values.dart';
 import '../messages/responses/topics/topic_publish.dart';
 
@@ -17,14 +18,17 @@ abstract class AbstractPubsubClient {
 class ClientPubsub implements AbstractPubsubClient {
   late ClientChannel _channel;
   late PubsubClient _client;
+  late TopicConfiguration _configuration;
 
-  ClientPubsub(CredentialProvider credentialProvider) {
+  ClientPubsub(
+      CredentialProvider credentialProvider, TopicConfiguration configuration) {
     _channel = ClientChannel(credentialProvider.cacheEndpoint);
     _client = PubsubClient(_channel,
         options: CallOptions(metadata: {
           'authorization': credentialProvider.apiKey,
           'agent': 'dart:0.1.0'
         }));
+    _configuration = configuration;
   }
 
   TopicValue_ _valueToTopicValue(Value v) {
@@ -47,7 +51,9 @@ class ClientPubsub implements AbstractPubsubClient {
     request.topic = topicName;
     request.value = _valueToTopicValue(value);
     try {
-      await _client.publish(request);
+      await _client.publish(request,
+          options: CallOptions(
+              timeout: _configuration.transportStrategy.grpcConfig.deadline));
       return TopicPublishSuccess();
     } catch (e) {
       if (e is SdkException) {
