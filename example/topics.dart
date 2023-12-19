@@ -37,8 +37,6 @@ void main() async {
             print("String value: ${msg.value}");
           case TopicSubscriptionItemError():
             print("Error receiving message: ${msg.errorCode}");
-          case null:
-            print("Received null message");
         }
       }
     case TopicSubscribeError():

@@ -12,8 +12,8 @@ class TopicSubscription implements TopicSubscribeResponse {
 
   TopicSubscription(this._stream);
 
-  Stream<TopicSubscriptionItemResponse?> get stream =>
-      _stream.map(_processResult).where((item) => item != null);
+  Stream<TopicSubscriptionItemResponse> get stream =>
+      _stream.map(_processResult).where((item) => item != null).cast();
 
   TopicSubscriptionItemResponse? _processResult(SubscriptionItem_ item) {
     final logger = Logger("TopicSubscribeResponse");
