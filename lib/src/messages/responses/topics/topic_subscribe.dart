@@ -21,9 +21,9 @@ class TopicSubscription implements TopicSubscribeResponse {
       case SubscriptionItem__Kind.item:
         return createTopicItemResponse(item.item);
       case SubscriptionItem__Kind.heartbeat:
-        logger.info("topic client received a heartbeat");
+        logger.fine("topic client received a heartbeat");
       case SubscriptionItem__Kind.discontinuity:
-        logger.info("topic client received a discontinuity");
+        logger.fine("topic client received a discontinuity");
       default:
         logger.shout(
             "topic client received unknown subscription item: ${item.whichKind()}");
