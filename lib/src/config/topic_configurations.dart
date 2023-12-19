@@ -1,3 +1,4 @@
+import 'logger.dart';
 import 'topic_configuration.dart';
 import 'transport/grpc_configuration.dart';
 import 'transport/transport_strategy.dart';
@@ -11,8 +12,8 @@ class Mobile extends TopicClientConfigurations {
     return latest();
   }
 
-  static TopicClientConfiguration latest() {
+  static TopicClientConfiguration latest({LogLevel logLevel = LogLevel.info}) {
     return TopicClientConfiguration(StaticTransportStrategy(
-        StaticGrpcConfiguration(Duration(seconds: 15))));
+        StaticGrpcConfiguration(Duration(seconds: 15))), logLevel);
   }
 }

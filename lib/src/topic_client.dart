@@ -1,4 +1,5 @@
 import 'package:client_sdk_dart/src/auth/credential_provider.dart';
+import 'package:client_sdk_dart/src/config/logger.dart';
 import 'package:logging/logging.dart';
 import 'config/topic_configuration.dart';
 import 'internal/pubsub_client.dart';
@@ -20,6 +21,7 @@ class TopicClient implements ITopicClient {
   TopicClient(
       CredentialProvider credentialProvider, TopicConfiguration configuration)
       : _pubsubClient = ClientPubsub(credentialProvider, configuration) {
+    _logger.level = determineLoggerLevel(configuration.logLevel);
     _logger.finest("initializing topic client");
   }
 
