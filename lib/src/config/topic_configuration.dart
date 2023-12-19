@@ -14,11 +14,13 @@ abstract interface class TopicConfiguration {
   TopicConfiguration(this.transportStrategy, this.logLevel);
 
   /// Copy constructor for overriding TransportStrategy
-  TopicConfiguration withTransportStrategy(TransportStrategy transportStrategy);
+  TopicConfiguration withTransportStrategy(TransportStrategy transportStrategy,
+      {LogLevel logLevel = LogLevel.info});
 
   /// Convenience copy constructor that updates the client-side
   /// timeout setting in the transport strategy
-  TopicConfiguration withDeadline(Duration deadline);
+  TopicConfiguration withDeadline(Duration deadline,
+      {LogLevel logLevel = LogLevel.info});
 }
 
 /// Configuration options for Momento TopicClient.
@@ -34,13 +36,14 @@ class TopicClientConfiguration implements TopicConfiguration {
   TopicClientConfiguration(this.transportStrategy, this.logLevel);
 
   @override
-  TopicConfiguration withTransportStrategy(
-      TransportStrategy transportStrategy, {LogLevel logLevel = LogLevel.info}) {
+  TopicConfiguration withTransportStrategy(TransportStrategy transportStrategy,
+      {LogLevel logLevel = LogLevel.info}) {
     return TopicClientConfiguration(transportStrategy, logLevel);
   }
 
   @override
-  TopicConfiguration withDeadline(Duration deadline, {LogLevel logLevel = LogLevel.info}) {
+  TopicConfiguration withDeadline(Duration deadline,
+      {LogLevel logLevel = LogLevel.info}) {
     return TopicClientConfiguration(
         StaticTransportStrategy(StaticGrpcConfiguration(deadline)), logLevel);
   }

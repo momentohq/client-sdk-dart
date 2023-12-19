@@ -13,7 +13,8 @@ class Mobile extends TopicClientConfigurations {
   }
 
   static TopicClientConfiguration latest({LogLevel logLevel = LogLevel.info}) {
-    return TopicClientConfiguration(StaticTransportStrategy(
-        StaticGrpcConfiguration(Duration(seconds: 15))), logLevel);
+    return TopicClientConfiguration(
+        StaticTransportStrategy(StaticGrpcConfiguration(Duration(seconds: 15))),
+        logLevel);
   }
 }
