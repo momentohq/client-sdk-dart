@@ -25,7 +25,8 @@ class TopicSubscription implements TopicSubscribeResponse {
       case SubscriptionItem__Kind.discontinuity:
         logger.info("topic client received a discontinuity");
       default:
-        logger.shout("topic client received unknown subscription item: ${item.whichKind()}");
+        logger.shout(
+            "topic client received unknown subscription item: ${item.whichKind()}");
     }
     return null;
   }
