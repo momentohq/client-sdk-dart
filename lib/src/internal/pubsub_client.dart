@@ -20,7 +20,8 @@ class ClientPubsub implements AbstractPubsubClient {
   late PubsubClient _client;
   late TopicConfiguration _configuration;
 
-  ClientPubsub(CredentialProvider credentialProvider, TopicConfiguration configuration) {
+  ClientPubsub(
+      CredentialProvider credentialProvider, TopicConfiguration configuration) {
     _channel = ClientChannel(credentialProvider.cacheEndpoint);
     _client = PubsubClient(_channel,
         options: CallOptions(metadata: {
