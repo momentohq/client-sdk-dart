@@ -29,6 +29,6 @@ TopicSubscriptionItemResponse createTopicItemResponse(TopicItem_ item) {
       return TopicSubscriptionItemBinary(item.value.binary);
     default:
       return TopicSubscriptionItemError(UnknownException(
-          "unknown TopicItemResponse value: $item.value", null, null));
+          "unknown TopicItemResponse value: ${item.value}", null, null));
   }
 }

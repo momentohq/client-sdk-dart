@@ -17,16 +17,15 @@ class TopicSubscription implements TopicSubscribeResponse {
 
   TopicSubscriptionItemResponse? _processResult(SubscriptionItem_ item) {
     final logger = Logger("TopicSubscribeResponse");
-    switch (item.runtimeType) {
-      case TopicItem_:
-        return createTopicItemResponse(item as TopicItem_);
-      case Heartbeat_:
+    switch (item.whichKind()) {
+      case SubscriptionItem__Kind.item:
+        return createTopicItemResponse(item.item);
+      case SubscriptionItem__Kind.heartbeat:
         logger.info("topic client received a heartbeat");
-      case Discontinuity_:
+      case SubscriptionItem__Kind.discontinuity:
         logger.info("topic client received a discontinuity");
       default:
-        logger.shout("topic client received unknown subscription item: ",
-            item.runtimeType);
+        logger.shout("topic client received unknown subscription item: ${item.whichKind()}");
     }
     return null;
   }
