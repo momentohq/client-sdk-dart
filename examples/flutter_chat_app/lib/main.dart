@@ -1,6 +1,5 @@
+import 'package:client_sdk_dart/client_sdk_dart.dart';
 import 'package:flutter/material.dart';
-import 'package:client_sdk_dart/src/auth/credential_provider.dart';
-import 'package:client_sdk_dart/src/config/topic_configurations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -58,8 +57,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String momentoApiKey = "your-api-key";
+  late TopicClient topicClient = TopicClient(CredentialProvider.fromString(momentoApiKey), Mobile.latest());
 
-  void _incrementCounter() {
+  Future<void> _incrementCounter() async {
+    final result = await topicClient.publish("cache", "topic", StringValue("Hello"));
+    switch (result) {
+      case TopicPublishSuccess():
+        print("Success");
+      case TopicPublishError():
+        print("Error: ${result.message}");
+    }
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below

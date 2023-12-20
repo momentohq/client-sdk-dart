@@ -1,12 +1,6 @@
 import 'dart:io';
 
 import 'package:client_sdk_dart/client_sdk_dart.dart';
-import 'package:client_sdk_dart/src/auth/credential_provider.dart';
-import 'package:client_sdk_dart/src/config/topic_configurations.dart';
-import 'package:client_sdk_dart/src/messages/responses/topics/topic_publish.dart';
-import 'package:client_sdk_dart/src/messages/responses/topics/topic_subscribe.dart';
-import 'package:client_sdk_dart/src/messages/responses/topics/topic_subscription_item.dart';
-import 'package:client_sdk_dart/src/messages/values.dart';
 import 'package:logging/logging.dart';
 
 void main() async {
