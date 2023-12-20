@@ -4,5 +4,6 @@
 library;
 
 export 'src/topic_client.dart';
+export 'src/config/logger.dart' show LogLevel;
 
 // TODO: Export any libraries intended for clients of this package.
