@@ -11,7 +11,7 @@ import 'messages/values.dart';
 abstract class ICacheClient {
   Future<GetResponse> get(String cacheName, Value value);
 
-  Future<SetResponse> subscribe(String cacheName, Value key, Value value,
+  Future<SetResponse> set(String cacheName, Value key, Value value,
       {int? ttlSeconds});
 }
 
@@ -33,7 +33,7 @@ class CacheClient implements ICacheClient {
   }
 
   @override
-  Future<SetResponse> subscribe(String cacheName, Value key, Value value,
+  Future<SetResponse> set(String cacheName, Value key, Value value,
       {int? ttlSeconds}) {
     return _dataClient.set(cacheName, key, value, ttlSeconds: ttlSeconds);
   }

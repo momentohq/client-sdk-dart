@@ -28,8 +28,8 @@ class DataClient implements AbstractDataClient {
     _client = ScsClient(_channel,
         options: CallOptions(metadata: {
           'authorization': credentialProvider.apiKey,
-          'agent': 'dart:0.1.0'
-        }));
+          'agent': 'dart:0.1.0',
+        }, timeout: _configuration.transportStrategy.grpcConfig.deadline));
     _configuration = configuration;
     _defaultTtl = defaultTtl;
   }
@@ -40,11 +40,9 @@ class DataClient implements AbstractDataClient {
     request.cacheKey = key.toBinary();
     try {
       var resp = await _client.get(request,
-          options: CallOptions(
-              timeout: _configuration.transportStrategy.grpcConfig.deadline,
-              metadata: {
-                'cacheName': cacheName,
-              }));
+          options: CallOptions(metadata: {
+            'cacheName': cacheName,
+          }));
 
       switch (resp.result) {
         case ECacheResult.Miss:
@@ -75,11 +73,9 @@ class DataClient implements AbstractDataClient {
         : _defaultTtl.inMilliseconds) as Int64;
     try {
       await _client.set(request,
-          options: CallOptions(
-              timeout: _configuration.transportStrategy.grpcConfig.deadline,
-              metadata: {
-                'cacheName': cacheName,
-              }));
+          options: CallOptions(metadata: {
+            'cacheName': cacheName,
+          }));
       return SetSuccess();
     } catch (e) {
       if (e is SdkException) {
