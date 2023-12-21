@@ -4,6 +4,7 @@
 library;
 
 export 'src/topic_client.dart';
+export 'src/cache_client.dart';
 export 'src/auth/credential_provider.dart';
 export 'src/config/topic_configurations.dart';
 export 'src/messages/values.dart';

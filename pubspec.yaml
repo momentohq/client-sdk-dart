@@ -8,6 +8,7 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
+  fixnum: ^1.1.0
   grpc: ^3.2.4
   jwt_decoder: ^2.0.1
   logging: ^1.2.0
