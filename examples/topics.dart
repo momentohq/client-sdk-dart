@@ -21,7 +21,7 @@ void main() async {
       print("Publish error: ${result.errorCode} ${result.message}");
   }
 
-  var sub = await topicClient.subscribe("cache", "topic");
+  var sub = topicClient.subscribe("cache", "topic");
   switch (sub) {
     case TopicSubscription():
       print("Successful subscription!");
