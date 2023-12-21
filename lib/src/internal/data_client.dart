@@ -20,10 +20,10 @@ class DataClient implements AbstractDataClient {
   late ClientChannel _channel;
   late ScsClient _client;
   late CacheConfiguration _configuration;
-  late Duration _defaultTtlSeconds;
+  late Duration _defaultTtl;
 
   DataClient(CredentialProvider credentialProvider,
-      CacheConfiguration configuration, Duration defaultTtlSeconds) {
+      CacheConfiguration configuration, Duration defaultTtl) {
     _channel = ClientChannel(credentialProvider.cacheEndpoint);
     _client = ScsClient(_channel,
         options: CallOptions(metadata: {
@@ -31,7 +31,7 @@ class DataClient implements AbstractDataClient {
           'agent': 'dart:0.1.0'
         }));
     _configuration = configuration;
-    _defaultTtlSeconds = defaultTtlSeconds;
+    _defaultTtl = defaultTtl;
   }
 
   @override
@@ -72,7 +72,7 @@ class DataClient implements AbstractDataClient {
     request.cacheBody = value.toBinary();
     request.ttlMilliseconds = (ttlSeconds != null
         ? ttlSeconds * 1000
-        : _defaultTtlSeconds.inMilliseconds) as Int64;
+        : _defaultTtl.inMilliseconds) as Int64;
     try {
       await _client.set(request,
           options: CallOptions(
