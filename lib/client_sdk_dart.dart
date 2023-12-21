@@ -10,5 +10,6 @@ export 'src/messages/values.dart';
 export 'src/messages/responses/topics/topic_publish.dart';
 export 'src/messages/responses/topics/topic_subscribe.dart';
 export 'src/messages/responses/topics/topic_subscription_item.dart';
+export 'src/config/logger.dart' show LogLevel;
 
 // TODO: Export any libraries intended for clients of this package.

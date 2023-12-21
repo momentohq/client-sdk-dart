@@ -47,13 +47,20 @@ const like = 'sample';
 
 ## Logging
 
-We use the [Dart logging package](https://github.com/dart-lang/logging) to create internal Loggers for producing Momento-related logs. The default logger does not do anything with the logs, so you must configure the logging level and handler at the beginning of your program:
+There is a `LogLevel` enum that contains the following log levels:
 
-```
-Logger.root.level = Level.ALL; // defaults to Level.INFO
-Logger.root.onRecord.listen((record) {
-  print('${record.level.name}: ${record.time}: ${record.message}');
-});
+* `LogLevel.trace`
+* `LogLevel.debug`
+* `LogLevel.info`
+* `LogLevel.warn`
+* `LogLevel.error`
+* `LogLevel.fatal`
+* `LogLevel.off`
+
+This enum can be used to configure the logging level of the Momento package. By default, the logging level is set to `LogLevel.info`. To change the logging level, pass the desired level to the `Configuration` constructor:
+
+```dart
+var config = Mobile.latest(logLevel: LogLevel.debug);
 ```
 
 ## Additional information
