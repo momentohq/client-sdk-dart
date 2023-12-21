@@ -65,8 +65,7 @@ class ClientPubsub implements AbstractPubsubClient {
   }
 
   @override
-  TopicSubscribeResponse subscribe(
-      String cacheName, String topicName) {
+  TopicSubscribeResponse subscribe(String cacheName, String topicName) {
     var request = SubscriptionRequest_();
     request.cacheName = cacheName;
     request.topic = topicName;

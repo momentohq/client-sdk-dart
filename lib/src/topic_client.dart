@@ -32,8 +32,7 @@ class TopicClient implements ITopicClient {
   }
 
   @override
-  TopicSubscribeResponse subscribe(
-      String cacheName, String topicName) {
-    return  _pubsubClient.subscribe(cacheName, topicName);
+  TopicSubscribeResponse subscribe(String cacheName, String topicName) {
+    return _pubsubClient.subscribe(cacheName, topicName);
   }
 }
