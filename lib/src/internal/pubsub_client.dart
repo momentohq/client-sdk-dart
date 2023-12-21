@@ -12,7 +12,7 @@ abstract class AbstractPubsubClient {
   Future<TopicPublishResponse> publish(
       String cacheName, String topicName, Value value);
 
-  Future<TopicSubscribeResponse> subscribe(String cacheName, String topicName);
+  TopicSubscribeResponse subscribe(String cacheName, String topicName);
 }
 
 class ClientPubsub implements AbstractPubsubClient {
@@ -65,8 +65,7 @@ class ClientPubsub implements AbstractPubsubClient {
   }
 
   @override
-  Future<TopicSubscribeResponse> subscribe(
-      String cacheName, String topicName) async {
+  TopicSubscribeResponse subscribe(String cacheName, String topicName) {
     var request = SubscriptionRequest_();
     request.cacheName = cacheName;
     request.topic = topicName;
