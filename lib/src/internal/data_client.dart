@@ -13,7 +13,7 @@ abstract class AbstractDataClient {
   Future<GetResponse> get(String cacheName, Value key);
 
   Future<SetResponse> set(String cacheName, Value key, Value value,
-      {int? ttlSeconds});
+      {Duration? ttl});
 }
 
 class DataClient implements AbstractDataClient {
@@ -64,12 +64,12 @@ class DataClient implements AbstractDataClient {
 
   @override
   Future<SetResponse> set(String cacheName, Value key, Value value,
-      {int? ttlSeconds}) async {
+      {Duration? ttl}) async {
     var request = SetRequest_();
     request.cacheKey = key.toBinary();
     request.cacheBody = value.toBinary();
-    request.ttlMilliseconds = (ttlSeconds != null
-        ? ttlSeconds * 1000
+    request.ttlMilliseconds = (ttl != null
+        ? ttl.inMilliseconds
         : _defaultTtl.inMilliseconds) as Int64;
     try {
       await _client.set(request,

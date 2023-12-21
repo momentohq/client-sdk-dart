@@ -12,7 +12,7 @@ abstract class ICacheClient {
   Future<GetResponse> get(String cacheName, Value value);
 
   Future<SetResponse> set(String cacheName, Value key, Value value,
-      {int? ttlSeconds});
+      {Duration? ttl});
 }
 
 class CacheClient implements ICacheClient {
@@ -34,7 +34,7 @@ class CacheClient implements ICacheClient {
 
   @override
   Future<SetResponse> set(String cacheName, Value key, Value value,
-      {int? ttlSeconds}) {
-    return _dataClient.set(cacheName, key, value, ttlSeconds: ttlSeconds);
+      {Duration? ttl}) {
+    return _dataClient.set(cacheName, key, value, ttl: ttl);
   }
 }
