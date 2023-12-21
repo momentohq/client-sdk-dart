@@ -22,7 +22,7 @@ class DataClient implements AbstractDataClient {
   late CacheConfiguration _configuration;
   late Duration _defaultTtlSeconds;
 
-  ClientPubsub(CredentialProvider credentialProvider,
+  DataClient(CredentialProvider credentialProvider,
       CacheConfiguration configuration, Duration defaultTtlSeconds) {
     _channel = ClientChannel(credentialProvider.cacheEndpoint);
     _client = ScsClient(_channel,
@@ -74,7 +74,7 @@ class DataClient implements AbstractDataClient {
         ? ttlSeconds * 1000
         : _defaultTtlSeconds.inMilliseconds) as Int64;
     try {
-      var resp = await _client.set(request,
+      await _client.set(request,
           options: CallOptions(
               timeout: _configuration.transportStrategy.grpcConfig.deadline,
               metadata: {
