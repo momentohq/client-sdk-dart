@@ -10,7 +10,7 @@ abstract class ITopicClient {
   Future<TopicPublishResponse> publish(
       String cacheName, String topicName, Value value);
 
-  Future<TopicSubscribeResponse> subscribe(String cacheName, String topicName);
+  TopicSubscribeResponse subscribe(String cacheName, String topicName);
 }
 
 class TopicClient implements ITopicClient {
@@ -30,8 +30,8 @@ class TopicClient implements ITopicClient {
   }
 
   @override
-  Future<TopicSubscribeResponse> subscribe(
-      String cacheName, String topicName) async {
-    return await _pubsubClient.subscribe(cacheName, topicName);
+  TopicSubscribeResponse subscribe(
+      String cacheName, String topicName) {
+    return  _pubsubClient.subscribe(cacheName, topicName);
   }
 }
