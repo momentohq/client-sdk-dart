@@ -2,6 +2,7 @@ import 'package:client_sdk_dart/generated/cachepubsub.pbgrpc.dart';
 import 'package:client_sdk_dart/src/auth/credential_provider.dart';
 import 'package:client_sdk_dart/src/errors/errors.dart';
 import 'package:client_sdk_dart/src/messages/responses/topics/topic_subscribe.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
 
 import '../config/topic_configuration.dart';
@@ -65,14 +66,19 @@ class ClientPubsub implements AbstractPubsubClient {
   }
 
   @override
-  TopicSubscribeResponse subscribe(String cacheName, String topicName) {
+  TopicSubscribeResponse subscribe(String cacheName, String topicName,
+      {Int64? resumeAtTopicSequenceNumber}) {
     var request = SubscriptionRequest_();
     request.cacheName = cacheName;
     request.topic = topicName;
+    request.resumeAtTopicSequenceNumber =
+        resumeAtTopicSequenceNumber ?? Int64(0);
     try {
       var stream = _client.subscribe(request);
-      return TopicSubscription(stream);
+      return TopicSubscription(stream, request.resumeAtTopicSequenceNumber,
+          this, cacheName, topicName);
     } catch (e) {
+      print("Error in pubsubclient.subscribe: $e");
       if (e is SdkException) {
         return TopicSubscribeError(e);
       }

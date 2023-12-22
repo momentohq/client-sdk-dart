@@ -25,15 +25,21 @@ void main() async {
   switch (sub) {
     case TopicSubscription():
       print("Successful subscription!");
-      await for (final msg in sub.stream) {
-        switch (msg) {
-          case TopicSubscriptionItemBinary():
-            print("Binary value: ${msg.value}");
-          case TopicSubscriptionItemText():
-            print("String value: ${msg.value}");
-          case TopicSubscriptionItemError():
-            print("Error receiving message: ${msg.errorCode}");
+      try {
+        await for (final msg in sub.stream) {
+          print('received: ${msg.runtimeType}');
+          switch (msg) {
+            case TopicSubscriptionItemBinary():
+              print("Binary value: ${msg.value}");
+            case TopicSubscriptionItemText():
+              print("String value: ${msg.value}");
+            case TopicSubscriptionItemError():
+              print("Error receiving message: ${msg.errorCode}");
+          }
         }
+      } catch (e) {
+        print("Runtime type: ${e.runtimeType}");
+        print("Error with await for loop: $e");
       }
     case TopicSubscribeError():
       print("Subscribe error: ${sub.errorCode} ${sub.message}");

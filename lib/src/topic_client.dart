@@ -21,7 +21,7 @@ class TopicClient implements ITopicClient {
   TopicClient(
       CredentialProvider credentialProvider, TopicConfiguration configuration)
       : _pubsubClient = ClientPubsub(credentialProvider, configuration) {
-    _logger.level = determineLoggerLevel(configuration.logLevel);
+    // _logger.level = determineLoggerLevel(configuration.logLevel);
     _logger.finest("initializing topic client");
   }
 
