@@ -1,5 +1,5 @@
 import 'package:client_sdk_dart/src/auth/credential_provider.dart';
-import 'package:client_sdk_dart/src/config/logger.dart';
+// import 'package:client_sdk_dart/src/config/logger.dart';
 import 'package:logging/logging.dart';
 import 'config/topic_configuration.dart';
 import 'internal/pubsub_client.dart';
@@ -12,6 +12,8 @@ abstract class ITopicClient {
       String cacheName, String topicName, Value value);
 
   TopicSubscribeResponse subscribe(String cacheName, String topicName);
+
+  void close();
 }
 
 class TopicClient implements ITopicClient {
@@ -21,7 +23,7 @@ class TopicClient implements ITopicClient {
   TopicClient(
       CredentialProvider credentialProvider, TopicConfiguration configuration)
       : _pubsubClient = ClientPubsub(credentialProvider, configuration) {
-    _logger.level = determineLoggerLevel(configuration.logLevel);
+    // _logger.level = determineLoggerLevel(configuration.logLevel);
     _logger.finest("initializing topic client");
   }
 
@@ -34,5 +36,10 @@ class TopicClient implements ITopicClient {
   @override
   TopicSubscribeResponse subscribe(String cacheName, String topicName) {
     return _pubsubClient.subscribe(cacheName, topicName);
+  }
+
+  @override
+  void close() {
+    _pubsubClient.close();
   }
 }

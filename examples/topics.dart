@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:client_sdk_dart/client_sdk_dart.dart';
@@ -13,32 +14,63 @@ void main() async {
       CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
       Mobile.latest());
 
-  var result = await topicClient.publish("cache", "topic", StringValue("hi"));
-  switch (result) {
-    case TopicPublishSuccess():
-      print("Successful publish!");
-    case TopicPublishError():
-      print("Publish error: ${result.errorCode} ${result.message}");
-  }
+  // start publishing messages in 2 seconds
+  Timer(const Duration(seconds: 2), () async {
+    // publish 10 messages spaced 1 second apart
+    for (final _ in Iterable.generate(10)) {
+      var result =
+          await topicClient.publish("cache", "topic", StringValue("hi"));
+      switch (result) {
+        case TopicPublishSuccess():
+          print("Successful publish!");
+        case TopicPublishError():
+          print("Publish error: ${result.errorCode} ${result.message}");
+      }
+      sleep(Duration(seconds: 1));
+    }
+  });
 
   var sub = topicClient.subscribe("cache", "topic");
   switch (sub) {
     case TopicSubscription():
       print("Successful subscription!");
-      await for (final msg in sub.stream) {
-        switch (msg) {
-          case TopicSubscriptionItemBinary():
-            print("Binary value: ${msg.value}");
-          case TopicSubscriptionItemText():
-            print("String value: ${msg.value}");
-          case TopicSubscriptionItemError():
-            print("Error receiving message: ${msg.errorCode}");
+
+      // cancel subscription 10 seconds from now
+      Timer(const Duration(seconds: 10), () {
+        print("Cancelling subscription!");
+        sub.unsubscribe();
+      });
+
+      try {
+        await for (final msg in sub.stream) {
+          switch (msg) {
+            case TopicSubscriptionItemBinary():
+              print("Binary value: ${msg.value}");
+            case TopicSubscriptionItemText():
+              print("String value: ${msg.value}");
+            case TopicSubscriptionItemError():
+              print("Error receiving message: ${msg.errorCode}");
+          }
         }
+      } catch (e) {
+        print("Runtime type: ${e.runtimeType}");
+        print("Error with await for loop: $e");
       }
     case TopicSubscribeError():
       print("Subscribe error: ${sub.errorCode} ${sub.message}");
   }
 
+  // unsubscribing should not affect the topic client's ability
+  // to subscribe to another topic afterwards
+  var sub2 = topicClient.subscribe("cache", "topic");
+  switch (sub2) {
+    case TopicSubscription():
+      print("Successful 2nd subscription!");
+    case TopicSubscribeError():
+      print("Subscribe error: ${sub2.errorCode} ${sub2.message}");
+  }
+
+  topicClient.close();
   print("End of Momento topics example");
   exit(0);
 }
