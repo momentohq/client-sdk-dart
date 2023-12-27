@@ -1,6 +1,7 @@
 import 'package:client_sdk_dart/generated/cachepubsub.pbgrpc.dart';
 import 'package:client_sdk_dart/src/auth/credential_provider.dart';
 import 'package:client_sdk_dart/src/errors/errors.dart';
+import 'package:client_sdk_dart/src/internal/topics_grpc_manager.dart';
 import 'package:client_sdk_dart/src/messages/responses/topics/topic_subscribe.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
@@ -14,22 +15,16 @@ abstract class AbstractPubsubClient {
       String cacheName, String topicName, Value value);
 
   TopicSubscribeResponse subscribe(String cacheName, String topicName);
+
+  void close();
 }
 
 class ClientPubsub implements AbstractPubsubClient {
-  late ClientChannel _channel;
-  late PubsubClient _client;
-  late TopicConfiguration _configuration;
+  final TopicConfiguration _configuration;
+  late final TopicGrpcManager _grpcManager;
 
-  ClientPubsub(
-      CredentialProvider credentialProvider, TopicConfiguration configuration) {
-    _channel = ClientChannel(credentialProvider.cacheEndpoint);
-    _client = PubsubClient(_channel,
-        options: CallOptions(metadata: {
-          'authorization': credentialProvider.apiKey,
-          'agent': 'dart:0.1.0'
-        }));
-    _configuration = configuration;
+  ClientPubsub(CredentialProvider credentialProvider, this._configuration) {
+    _grpcManager = TopicGrpcManager(credentialProvider);
   }
 
   TopicValue_ _valueToTopicValue(Value v) {
@@ -52,7 +47,7 @@ class ClientPubsub implements AbstractPubsubClient {
     request.topic = topicName;
     request.value = _valueToTopicValue(value);
     try {
-      await _client.publish(request,
+      await _grpcManager.client.publish(request,
           options: CallOptions(
               timeout: _configuration.transportStrategy.grpcConfig.deadline));
       return TopicPublishSuccess();
@@ -74,7 +69,7 @@ class ClientPubsub implements AbstractPubsubClient {
     request.resumeAtTopicSequenceNumber =
         resumeAtTopicSequenceNumber ?? Int64(0);
     try {
-      var stream = _client.subscribe(request);
+      var stream = _grpcManager.client.subscribe(request);
       return TopicSubscription(stream, request.resumeAtTopicSequenceNumber,
           this, cacheName, topicName);
     } catch (e) {
@@ -85,5 +80,10 @@ class ClientPubsub implements AbstractPubsubClient {
       return TopicSubscribeError(
           UnknownException("Unexpected error: $e", null, null));
     }
+  }
+
+  @override
+  void close() {
+    _grpcManager.close();
   }
 }
