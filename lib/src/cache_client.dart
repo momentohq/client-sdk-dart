@@ -2,6 +2,7 @@ import 'package:client_sdk_dart/client_sdk_dart.dart';
 import 'package:client_sdk_dart/src/config/cache_configuration.dart';
 import 'package:client_sdk_dart/src/internal/control_client.dart';
 import 'package:client_sdk_dart/src/internal/data_client.dart';
+import 'package:client_sdk_dart/src/messages/responses/cache/data/scalar/delete_response.dart';
 import 'package:client_sdk_dart/src/messages/responses/cache/data/scalar/get_response.dart';
 import 'package:client_sdk_dart/src/messages/responses/cache/data/scalar/set_response.dart';
 import 'package:logging/logging.dart';
@@ -18,6 +19,8 @@ abstract class ICacheClient {
 
   Future<SetResponse> set(String cacheName, Value key, Value value,
       {Duration? ttl});
+
+  Future<DeleteResponse> delete(String cacheName, Value key);
 }
 
 class CacheClient implements ICacheClient {
@@ -59,6 +62,13 @@ class CacheClient implements ICacheClient {
   @override
   Future<SetResponse> set(String cacheName, Value key, Value value,
       {Duration? ttl}) {
+    // TODO: add validators
     return _dataClient.set(cacheName, key, value, ttl: ttl);
+  }
+
+  @override
+  Future<DeleteResponse> delete(String cacheName, Value key) {
+    // TODO: add validators
+    return _dataClient.delete(cacheName, key);
   }
 }

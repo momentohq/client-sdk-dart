@@ -1,6 +1,7 @@
 import 'package:client_sdk_dart/generated/cacheclient.pbgrpc.dart';
 import 'package:client_sdk_dart/src/config/cache_configuration.dart';
 import 'package:client_sdk_dart/src/errors/errors.dart';
+import 'package:client_sdk_dart/src/messages/responses/cache/data/scalar/delete_response.dart';
 import 'package:client_sdk_dart/src/messages/responses/cache/data/scalar/get_response.dart';
 import 'package:client_sdk_dart/src/messages/responses/cache/data/scalar/set_response.dart';
 import 'package:fixnum/fixnum.dart';
@@ -14,6 +15,8 @@ abstract class AbstractDataClient {
 
   Future<SetResponse> set(String cacheName, Value key, Value value,
       {Duration? ttl});
+
+  Future<DeleteResponse> delete(String cacheName, Value key);
 }
 
 class DataClient implements AbstractDataClient {
@@ -80,6 +83,26 @@ class DataClient implements AbstractDataClient {
         return SetError(e);
       } else {
         return SetError(UnknownException("Unexpected error: $e", null, null));
+      }
+    }
+  }
+
+  @override
+  Future<DeleteResponse> delete(String cacheName, Value key) async {
+    var request = DeleteRequest_();
+    request.cacheKey = key.toBinary();
+    try {
+      await _client.delete(request,
+          options: CallOptions(metadata: {
+            'cacheName': cacheName,
+          }));
+      return DeleteSuccess();
+    } catch (e) {
+      if (e is SdkException) {
+        return DeleteError(e);
+      } else {
+        return DeleteError(
+            UnknownException("Unexpected error: $e", null, null));
       }
     }
   }
