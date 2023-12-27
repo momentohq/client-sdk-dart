@@ -60,6 +60,16 @@ void main() async {
       print("Subscribe error: ${sub.errorCode} ${sub.message}");
   }
 
+  // unsubscribing should not affect the topic client's ability
+  // to subscribe to another topic afterwards
+  var sub2 = topicClient.subscribe("cache", "topic");
+  switch (sub2) {
+    case TopicSubscription():
+      print("Successful 2nd subscription!");
+    case TopicSubscribeError():
+      print("Subscribe error: ${sub2.errorCode} ${sub2.message}");
+  }
+
   topicClient.close();
   print("End of Momento topics example");
   exit(0);

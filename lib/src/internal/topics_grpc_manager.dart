@@ -1,7 +1,5 @@
 import 'package:client_sdk_dart/client_sdk_dart.dart';
 import 'package:client_sdk_dart/generated/cachepubsub.pbgrpc.dart';
-import 'package:client_sdk_dart/src/config/topic_configuration.dart';
-import 'package:client_sdk_dart/src/errors/errors.dart';
 import 'package:grpc/grpc.dart';
 import 'package:logging/logging.dart';
 
