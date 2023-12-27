@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:client_sdk_dart/src/messages/responses/responses_base.dart';
 
 /// Sealed class for a get cache item request.
-/// 
+///
 /// Pattern matching can be used to operate on the appropriate subtype.
 /// ```dart
 /// switch (response) {
@@ -21,7 +21,7 @@ sealed class GetResponse {}
 class GetMiss implements GetResponse {}
 
 /// Indicates that an error occurred during the get cache item request.
-/// 
+///
 /// The response object includes the following fields you can use to determine how you want to handle the error:
 /// - `errorCode`: a unique Momento error code indicating the type of error that occurred
 /// - `message`: a human-readable description of the error

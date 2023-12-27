@@ -42,7 +42,7 @@ class DataClient implements AbstractDataClient {
     try {
       var resp = await _client.get(request,
           options: CallOptions(metadata: {
-            'cacheName': cacheName,
+            'cache': cacheName,
           }));
 
       switch (resp.result) {
@@ -75,7 +75,7 @@ class DataClient implements AbstractDataClient {
     try {
       await _client.set(request,
           options: CallOptions(metadata: {
-            'cacheName': cacheName,
+            'cache': cacheName,
           }));
       return SetSuccess();
     } catch (e) {
@@ -94,7 +94,7 @@ class DataClient implements AbstractDataClient {
     try {
       await _client.delete(request,
           options: CallOptions(metadata: {
-            'cacheName': cacheName,
+            'cache': cacheName,
           }));
       return DeleteSuccess();
     } catch (e) {
