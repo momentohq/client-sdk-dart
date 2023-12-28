@@ -8,7 +8,7 @@ import 'cache_configuration.dart';
 abstract interface class CacheClientConfigurations {}
 
 /// Provides prebuilt configurations for the `CacheClient` on mobile platforms
-class Mobile extends CacheClientConfigurations {
+class MobileCacheConfiguration extends CacheClientConfigurations {
   static CacheClientConfiguration defaultConfig() {
     return latest();
   }

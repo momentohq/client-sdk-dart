@@ -12,7 +12,7 @@ void main() async {
 
   var topicClient = TopicClient(
       CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
-      Mobile.latest());
+      MobileTopicConfiguration.latest());
 
   // start publishing messages in 2 seconds
   Timer(const Duration(seconds: 2), () async {
