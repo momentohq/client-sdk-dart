@@ -5,7 +5,7 @@ import 'package:client_sdk_dart/client_sdk_dart.dart';
 void main() async {
   var topicClient = TopicClient(
       CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
-      Mobile.latest());
+      MobileTopicConfiguration.latest());
 
   var subscription = topicClient.subscribe("cache", "topic");
   var messageStream = switch (subscription) {

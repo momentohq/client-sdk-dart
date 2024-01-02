@@ -4,7 +4,7 @@ import 'package:client_sdk_dart/client_sdk_dart.dart';
 void main() async {
   var topicClient = TopicClient(
       CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
-      Mobile.latest());
+      MobileTopicConfiguration.latest());
 
   // publish 10 messages spaced 1 second apart
   for (final i in Iterable.generate(10)) {
