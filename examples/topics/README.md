@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - [Installed Dart](https://dart.dev/get-dart)
-- Momento API key, which you can generate from the [Momento Web Console](https://console.gomomento.com/)
+- Momento API key, which you can generate from the [Momento Web Console](https://console.gomomento.com/api-keys)
 
 ## Basic Example
 
