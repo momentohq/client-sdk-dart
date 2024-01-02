@@ -40,3 +40,5 @@ jobs:
       # want to change this to 'flutter test'.
       - name: Run tests
         run: dart test
+        env:
+          TEST_API_KEY: ${{ secrets.ALPHA_TEST_AUTH_TOKEN }}
