@@ -9,7 +9,11 @@ class TopicGrpcManager {
   final _logger = Logger('MomentoTopicClient');
 
   TopicGrpcManager(CredentialProvider credentialProvider) {
-    _channel = ClientChannel(credentialProvider.cacheEndpoint);
+    _channel = ClientChannel(credentialProvider.cacheEndpoint,
+        options: ChannelOptions(
+            keepAlive: ClientKeepAliveOptions(
+                pingInterval: Duration(seconds: 10),
+                timeout: Duration(seconds: 5))));
     _client = PubsubClient(_channel,
         options: CallOptions(metadata: {
           'authorization': credentialProvider.apiKey,
