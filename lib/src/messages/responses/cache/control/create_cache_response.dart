@@ -7,7 +7,7 @@ import 'package:client_sdk_dart/src/messages/responses/responses_base.dart';
 ///   switch (response) {
 ///   case CreateCacheSuccess():
 ///      // handle success
-///   case CreateCacheAlreadyExists():
+///   case AlreadyExists():
 ///      // handle already exists
 ///   case CreateCacheError():
 ///      // handle error
@@ -19,7 +19,7 @@ sealed class CreateCacheResponse {}
 class CreateCacheSuccess implements CreateCacheResponse {}
 
 /// Indicates that the cache already exists, so there was nothing to do.
-class CreateCacheAlreadyExists implements CreateCacheResponse {}
+class AlreadyExists implements CreateCacheResponse {}
 
 /// Indicates that an error occurred during the create cache request.
 ///

@@ -32,7 +32,7 @@ void main() {
         case CreateCacheSuccess():
           expect(createResp.runtimeType, CreateCacheSuccess,
               reason: "create cache should succeed");
-        case CreateCacheAlreadyExists():
+        case AlreadyExists():
           fail('Expected Success but got AlreadyExists');
         case CreateCacheError():
           fail(
