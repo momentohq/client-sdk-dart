@@ -19,19 +19,17 @@ abstract class AbstractDataClient {
 class DataClient implements AbstractDataClient {
   late ClientChannel _channel;
   late ScsClient _client;
-  late CacheConfiguration _configuration;
-  late Duration _defaultTtl;
+  final CacheConfiguration _configuration;
+  final Duration _defaultTtl;
 
-  DataClient(CredentialProvider credentialProvider,
-      CacheConfiguration configuration, Duration defaultTtl) {
+  DataClient(CredentialProvider credentialProvider, this._configuration,
+      this._defaultTtl) {
     _channel = ClientChannel(credentialProvider.cacheEndpoint);
     _client = ScsClient(_channel,
         options: CallOptions(metadata: {
           'authorization': credentialProvider.apiKey,
           'agent': 'dart:0.1.0',
         }, timeout: _configuration.transportStrategy.grpcConfig.deadline));
-    _configuration = configuration;
-    _defaultTtl = defaultTtl;
   }
 
   @override

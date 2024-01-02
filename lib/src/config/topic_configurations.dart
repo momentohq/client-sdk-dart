@@ -7,7 +7,7 @@ import 'transport/transport_strategy.dart';
 abstract interface class TopicClientConfigurations {}
 
 /// Provides prebuilt configurations for the `TopicClient` on mobile platforms
-class Mobile extends TopicClientConfigurations {
+class MobileTopicConfiguration extends TopicClientConfigurations {
   static TopicClientConfiguration defaultConfig() {
     return latest();
   }
