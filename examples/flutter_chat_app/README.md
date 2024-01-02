@@ -4,7 +4,7 @@
 
 - [Installed Dart](https://dart.dev/get-dart)
 - [Installed Flutter](https://docs.flutter.dev/get-started/install)
-- Momento API key, which you can generate from the [Momento Web Console](https://console.gomomento.com/)
+- Momento API key, which you can generate from the [Momento Web Console](https://console.gomomento.com/api-keys)
 
 ## Running the Flutter Demo App
 
