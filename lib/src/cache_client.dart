@@ -44,19 +44,30 @@ class CacheClient implements ICacheClient {
 
   @override
   Future<CreateCacheResponse> createCache(String cacheName) {
-    // TODO: add validators
+    try {
+      validateCacheName(cacheName);
+    } catch (e) {
+      if (e is SdkException) {
+        return Future.error(CreateCacheError(e));
+      }
+    }
     return _controlClient.createCache(cacheName);
   }
 
   @override
   Future<DeleteCacheResponse> deleteCache(String cacheName) {
-    // TODO: add validators
+    try {
+      validateCacheName(cacheName);
+    } catch (e) {
+      if (e is SdkException) {
+        return Future.error(DeleteCacheError(e));
+      }
+    }
     return _controlClient.deleteCache(cacheName);
   }
 
   @override
   Future<ListCachesResponse> listCaches() {
-    // TODO: add validators
     return _controlClient.listCaches();
   }
 
@@ -79,7 +90,7 @@ class CacheClient implements ICacheClient {
       validateCacheName(cacheName);
     } catch (e) {
       if (e is SdkException) {
-        return Future.error(GetError(e));
+        return Future.error(SetError(e));
       }
     }
     return _dataClient.set(cacheName, key, value, ttl: ttl);
@@ -91,7 +102,7 @@ class CacheClient implements ICacheClient {
       validateCacheName(cacheName);
     } catch (e) {
       if (e is SdkException) {
-        return Future.error(GetError(e));
+        return Future.error(DeleteError(e));
       }
     }
     return _dataClient.delete(cacheName, key);
