@@ -1,6 +1,6 @@
-import 'package:client_sdk_dart/generated/cachepubsub.pb.dart';
-import 'package:client_sdk_dart/src/errors/errors.dart';
-import 'package:client_sdk_dart/src/messages/responses/responses_base.dart';
+import 'package:momento/generated/cachepubsub.pb.dart';
+import 'package:momento/src/errors/errors.dart';
+import 'package:momento/src/messages/responses/responses_base.dart';
 
 sealed class TopicSubscriptionItemResponse {}
 

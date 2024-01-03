@@ -1,4 +1,4 @@
-import 'package:client_sdk_dart/src/config/logger.dart';
+import 'package:momento/src/config/logger.dart';
 
 import 'transport/grpc_configuration.dart';
 import 'transport/transport_strategy.dart';

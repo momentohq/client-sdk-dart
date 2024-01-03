@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:client_sdk_dart/client_sdk_dart.dart';
+import 'package:momento/momento.dart';
 import 'package:logging/logging.dart';
 
 void main() async {

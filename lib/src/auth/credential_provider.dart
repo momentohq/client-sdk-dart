@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:client_sdk_dart/src/errors/errors.dart';
+import 'package:momento/src/errors/errors.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:string_validator/string_validator.dart';
 

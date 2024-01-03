@@ -1,4 +1,4 @@
-import 'package:client_sdk_dart/src/auth/credential_provider.dart';
+import 'package:momento/src/auth/credential_provider.dart';
 // import 'package:client_sdk_dart/src/config/logger.dart';
 import 'package:logging/logging.dart';
 import 'config/topic_configuration.dart';

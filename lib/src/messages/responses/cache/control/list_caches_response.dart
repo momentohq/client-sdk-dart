@@ -1,5 +1,5 @@
-import 'package:client_sdk_dart/generated/controlclient.pb.dart';
-import 'package:client_sdk_dart/src/messages/responses/responses_base.dart';
+import 'package:momento/generated/controlclient.pb.dart';
+import 'package:momento/src/messages/responses/responses_base.dart';
 
 /// Represents information about a listed cache, such as its name.
 /// May include additional information in the future.

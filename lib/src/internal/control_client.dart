@@ -1,7 +1,7 @@
-import 'package:client_sdk_dart/client_sdk_dart.dart';
-import 'package:client_sdk_dart/generated/controlclient.pbgrpc.dart';
-import 'package:client_sdk_dart/src/config/cache_configuration.dart';
-import 'package:client_sdk_dart/src/errors/errors.dart';
+import 'package:momento/momento.dart';
+import 'package:momento/generated/controlclient.pbgrpc.dart';
+import 'package:momento/src/config/cache_configuration.dart';
+import 'package:momento/src/errors/errors.dart';
 import 'package:grpc/grpc.dart';
 
 abstract class AbstractControlClient {

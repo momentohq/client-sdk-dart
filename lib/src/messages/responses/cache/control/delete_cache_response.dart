@@ -1,4 +1,4 @@
-import 'package:client_sdk_dart/src/messages/responses/responses_base.dart';
+import 'package:momento/src/messages/responses/responses_base.dart';
 
 /// Sealed class for a delete cache response.
 ///

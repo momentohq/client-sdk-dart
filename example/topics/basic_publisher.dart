@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:client_sdk_dart/client_sdk_dart.dart';
+import 'package:momento/momento.dart';
 
 void main() async {
   var topicClient = TopicClient(

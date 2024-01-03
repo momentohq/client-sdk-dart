@@ -1,4 +1,4 @@
-import 'package:client_sdk_dart/client_sdk_dart.dart';
+import 'package:momento/momento.dart';
 import 'package:uuid/uuid.dart';
 
 final apiKeyEnvVarName = "TEST_API_KEY";
