@@ -52,8 +52,8 @@ class ClientPubsub implements AbstractPubsubClient {
               timeout: _configuration.transportStrategy.grpcConfig.deadline));
       return TopicPublishSuccess();
     } catch (e) {
-      if (e is SdkException) {
-        return TopicPublishError(e);
+      if (e is GrpcError) {
+        return TopicPublishError(grpcStatusToSdkException(e));
       }
       return TopicPublishError(
           UnknownException("Unexpected error: $e", null, null));
@@ -73,9 +73,8 @@ class ClientPubsub implements AbstractPubsubClient {
       return TopicSubscription(stream, request.resumeAtTopicSequenceNumber,
           this, cacheName, topicName);
     } catch (e) {
-      print("Error in pubsubclient.subscribe: $e");
-      if (e is SdkException) {
-        return TopicSubscribeError(e);
+      if (e is GrpcError) {
+        return TopicSubscribeError(grpcStatusToSdkException(e));
       }
       return TopicSubscribeError(
           UnknownException("Unexpected error: $e", null, null));

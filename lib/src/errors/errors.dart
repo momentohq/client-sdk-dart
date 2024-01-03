@@ -53,14 +53,14 @@ class MomentoErrorTransportDetails {
 }
 
 class MomentoGrpcErrorDetails {
-  final Code _code;
-  final String _details;
+  final int _code;
+  final Object? _details;
   final GrpcMetadata? _metadata;
 
   MomentoGrpcErrorDetails(this._code, this._details, this._metadata);
 
-  Code get code => _code;
-  String get details => _details;
+  int get code => _code;
+  Object? get details => _details;
   GrpcMetadata? get metadata => _metadata;
 }
 
@@ -261,4 +261,45 @@ class FailedPreconditionException extends SdkException {
 class IllegalArgumentError extends Error {
   String message;
   IllegalArgumentError(this.message) : super();
+}
+
+SdkException grpcStatusToSdkException(GrpcError grpcError) {
+  final message = "${grpcError.message}";
+  final transportDetails = MomentoErrorTransportDetails(
+      MomentoGrpcErrorDetails(grpcError.code, grpcError.rawResponse, null));
+  switch (grpcError.code) {
+    case StatusCode.aborted:
+      return InternalServerException(message, grpcError, transportDetails);
+    case StatusCode.alreadyExists:
+      return AlreadyExistsException(message, grpcError, transportDetails);
+    case StatusCode.cancelled:
+      return CancelledException(message, grpcError, transportDetails);
+    case StatusCode.dataLoss:
+      return InternalServerException(message, grpcError, transportDetails);
+    case StatusCode.deadlineExceeded:
+      return TimeoutException(message, grpcError, transportDetails);
+    case StatusCode.failedPrecondition:
+      return FailedPreconditionException(message, grpcError, transportDetails);
+    case StatusCode.internal:
+      return InternalServerException(message, grpcError, transportDetails);
+    case StatusCode.invalidArgument:
+      return InvalidArgumentException(message, grpcError, transportDetails);
+    case StatusCode.notFound:
+      return NotFoundException(message, grpcError, transportDetails);
+    case StatusCode.outOfRange:
+      return BadRequestException(message, grpcError, transportDetails);
+    case StatusCode.permissionDenied:
+      return PermissionException(message, grpcError, transportDetails);
+    case StatusCode.resourceExhausted:
+      return ClientResourceExhaustedException(
+          message, grpcError, transportDetails);
+    case StatusCode.unauthenticated:
+      return AuthenticationException(message, grpcError, transportDetails);
+    case StatusCode.unimplemented:
+      return BadRequestException(message, grpcError, transportDetails);
+    case StatusCode.unknown:
+      return UnknownException(message, grpcError, transportDetails);
+    default:
+      return UnknownException(message, grpcError, transportDetails);
+  }
 }

@@ -1,10 +1,11 @@
 import 'package:momento/momento.dart';
 import 'package:momento/src/config/cache_configuration.dart';
+import 'package:momento/src/errors/errors.dart';
 import 'package:momento/src/internal/control_client.dart';
 import 'package:momento/src/internal/data_client.dart';
-import 'package:momento/src/messages/responses/cache/data/scalar/get_response.dart';
-import 'package:momento/src/messages/responses/cache/data/scalar/set_response.dart';
 import 'package:logging/logging.dart';
+import 'package:momento/src/internal/utils/validators.dart';
+
 // import 'config/logger.dart';
 
 abstract class ICacheClient {
@@ -14,10 +15,12 @@ abstract class ICacheClient {
 
   Future<ListCachesResponse> listCaches();
 
-  Future<GetResponse> get(String cacheName, Value value);
+  Future<GetResponse> get(String cacheName, Value key);
 
   Future<SetResponse> set(String cacheName, Value key, Value value,
       {Duration? ttl});
+
+  Future<DeleteResponse> delete(String cacheName, Value key);
 }
 
 class CacheClient implements ICacheClient {
@@ -29,36 +32,89 @@ class CacheClient implements ICacheClient {
       CacheConfiguration configuration, Duration defaultTtl) {
     _dataClient = DataClient(credentialProvider, configuration, defaultTtl);
     _controlClient = ControlClient(credentialProvider, configuration);
+    // TODO: fix logging level issue
     // _logger.level = determineLoggerLevel(configuration.logLevel);
     _logger.finest("initializing cache client");
   }
 
   @override
   Future<CreateCacheResponse> createCache(String cacheName) {
-    // TODO: add validators
+    try {
+      validateCacheName(cacheName);
+    } catch (e) {
+      if (e is SdkException) {
+        return Future.value(CreateCacheError(e));
+      } else {
+        return Future.value(CreateCacheError(
+            UnknownException("Unexpected error: $e", null, null)));
+      }
+    }
     return _controlClient.createCache(cacheName);
   }
 
   @override
   Future<DeleteCacheResponse> deleteCache(String cacheName) {
-    // TODO: add validators
+    try {
+      validateCacheName(cacheName);
+    } catch (e) {
+      if (e is SdkException) {
+        return Future.value(DeleteCacheError(e));
+      } else {
+        return Future.value(DeleteCacheError(
+            UnknownException("Unexpected error: $e", null, null)));
+      }
+    }
     return _controlClient.deleteCache(cacheName);
   }
 
   @override
   Future<ListCachesResponse> listCaches() {
-    // TODO: add validators
     return _controlClient.listCaches();
   }
 
   @override
-  Future<GetResponse> get(String cacheName, Value value) {
-    return _dataClient.get(cacheName, value);
+  Future<GetResponse> get(String cacheName, Value key) {
+    try {
+      validateCacheName(cacheName);
+    } catch (e) {
+      if (e is SdkException) {
+        return Future.value(GetError(e));
+      } else {
+        return Future.value(
+            GetError(UnknownException("Unexpected error: $e", null, null)));
+      }
+    }
+    return _dataClient.get(cacheName, key);
   }
 
   @override
   Future<SetResponse> set(String cacheName, Value key, Value value,
       {Duration? ttl}) {
+    try {
+      validateCacheName(cacheName);
+    } catch (e) {
+      if (e is SdkException) {
+        return Future.value(SetError(e));
+      } else {
+        return Future.value(
+            SetError(UnknownException("Unexpected error: $e", null, null)));
+      }
+    }
     return _dataClient.set(cacheName, key, value, ttl: ttl);
+  }
+
+  @override
+  Future<DeleteResponse> delete(String cacheName, Value key) {
+    try {
+      validateCacheName(cacheName);
+    } catch (e) {
+      if (e is SdkException) {
+        return Future.value(DeleteError(e));
+      } else {
+        return Future.value(
+            DeleteError(UnknownException("Unexpected error: $e", null, null)));
+      }
+    }
+    return _dataClient.delete(cacheName, key);
   }
 }
