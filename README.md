@@ -24,27 +24,6 @@ To install dependencies using CLI: `dart pub get`
 Running tests: `dart test`
 Linting and formatting: `dart format .` and `dart fix`
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
-```
-
 ## Logging
 
 There is a `LogLevel` enum that contains the following log levels:
@@ -62,9 +41,3 @@ This enum can be used to configure the logging level of the Momento package. By 
 ```dart
 var config = Mobile.latest(logLevel: LogLevel.debug);
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
