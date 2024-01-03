@@ -1,14 +1,10 @@
-import 'package:client_sdk_dart/generated/cacheclient.pbgrpc.dart';
-import 'package:client_sdk_dart/src/config/cache_configuration.dart';
-import 'package:client_sdk_dart/src/errors/errors.dart';
-import 'package:client_sdk_dart/src/messages/responses/cache/data/scalar/delete_response.dart';
-import 'package:client_sdk_dart/src/messages/responses/cache/data/scalar/get_response.dart';
-import 'package:client_sdk_dart/src/messages/responses/cache/data/scalar/set_response.dart';
+import 'package:momento/generated/cacheclient.pbgrpc.dart';
+import 'package:momento/momento.dart';
+import 'package:momento/src/config/cache_configuration.dart';
+import 'package:momento/src/errors/errors.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
 
-import '../auth/credential_provider.dart';
-import '../messages/values.dart';
 
 abstract class AbstractDataClient {
   Future<GetResponse> get(String cacheName, Value key);

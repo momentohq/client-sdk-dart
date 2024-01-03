@@ -1,5 +1,5 @@
-import 'package:client_sdk_dart/client_sdk_dart.dart';
-import 'package:client_sdk_dart/generated/cachepubsub.pbgrpc.dart';
+import 'package:momento/momento.dart';
+import 'package:momento/generated/cachepubsub.pbgrpc.dart';
 import 'package:grpc/grpc.dart';
 import 'package:logging/logging.dart';
 

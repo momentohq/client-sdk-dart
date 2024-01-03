@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:client_sdk_dart/client_sdk_dart.dart';
-import 'package:client_sdk_dart/src/errors/errors.dart';
+import 'package:momento/momento.dart';
+import 'package:momento/src/errors/errors.dart';
 import 'package:test/test.dart';
 
 import 'test_utils.dart';

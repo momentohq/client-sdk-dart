@@ -1,7 +1,7 @@
-import 'package:client_sdk_dart/src/config/transport/grpc_configuration.dart';
-import 'package:client_sdk_dart/src/config/transport/transport_strategy.dart';
+import 'package:momento/src/config/transport/grpc_configuration.dart';
+import 'package:momento/src/config/transport/transport_strategy.dart';
 
-import '../../client_sdk_dart.dart';
+import '../../momento.dart';
 import 'cache_configuration.dart';
 
 /// Prebuilt configurations for Momento Cache clients
