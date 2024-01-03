@@ -23,8 +23,8 @@ Future<TestSetup> setUpIntegrationTests() async {
   return TestSetup(integrationTestCacheName, cacheClient);
 }
 
-void cleanUpIntegrationTests(TestSetup testSetup) {
-  testSetup.cacheClient.deleteCache(testSetup.cacheName);
+Future<void> cleanUpIntegrationTests(TestSetup testSetup) async {
+  await testSetup.cacheClient.deleteCache(testSetup.cacheName);
 }
 
 String generateStringWithUuid(String prefix) {

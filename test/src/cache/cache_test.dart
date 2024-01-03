@@ -18,7 +18,7 @@ void main() {
   });
 
   tearDownAll(() async {
-    cleanUpIntegrationTests(testSetup);
+    await cleanUpIntegrationTests(testSetup);
   });
 
   group('control plane operations', () {
