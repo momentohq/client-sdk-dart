@@ -100,4 +100,103 @@ void main() {
       }
     });
   });
+
+  group('scalar get, set, delete', () {
+
+    test('arguments are validated', () async {
+      final key = StringValue("key");
+      final value = StringValue("value");
+
+      final getResp = await cacheClient.get("   ", key);
+      switch (getResp) {
+        case GetHit():
+          fail('Expected Error but got Hit');
+        case GetMiss():
+          fail('Expected Error but got Miss');
+        case GetError():
+          expect(getResp.errorCode, MomentoErrorCode.invalidArgumentError,
+              reason: "get should not accept empty cache name");
+      }
+
+      final setResp = await cacheClient.set("   ", key, value);
+      switch (setResp) {
+        case SetSuccess():
+          fail('Expected Error but got Success');
+        case SetError():
+          expect(setResp.errorCode, MomentoErrorCode.invalidArgumentError,
+              reason: "set should not accept empty cache name");
+      }
+
+      final deleteResp = await cacheClient.delete("   ", key);
+      switch (deleteResp) {
+        case DeleteSuccess():
+          fail('Expected Error but got Success');
+        case DeleteError():
+          expect(deleteResp.errorCode, MomentoErrorCode.invalidArgumentError,
+              reason: "delete cache should not accept empty cache name");
+      }
+    });
+
+    test('cache items can be set, get, and deleted', () async {
+      final key = StringValue("key");
+      final value = StringValue("value");
+
+      // expect first get to miss
+      final getResp1 = await cacheClient.get(integrationTestCacheName, key);
+      switch (getResp1) {
+        case GetHit():
+          fail('Expected Miss but got Hit');
+        case GetMiss():
+          expect(getResp1.runtimeType, GetMiss,
+              reason: "get should miss on empty cache");
+        case GetError():
+          fail('Expected Miss but got Error: ${getResp1.errorCode} ${getResp1.message}');
+      }
+
+      // expect set with ttl to succeed
+      final setResp = await cacheClient.set(integrationTestCacheName, key, value, ttl: Duration(seconds: 60));
+      switch (setResp) {
+        case SetSuccess():
+          expect(setResp.runtimeType, SetSuccess,
+              reason: "set should succeed");
+        case SetError():
+          fail('Expected Success but got Error: ${setResp.errorCode} ${setResp.message}');
+      }
+
+      // expect second get to hit
+      final getResp2 = await cacheClient.get(integrationTestCacheName, key);
+      switch (getResp2) {
+        case GetHit():
+          expect(getResp2.runtimeType, GetHit,
+              reason: "get should hit on value set in cache");
+          
+        case GetMiss():
+          fail('Expected Hit but got Miss');
+        case GetError():
+          fail('Expected Hit but got Error: ${getResp2.errorCode} ${getResp2.message}');
+      }
+
+      // expect delete to succeed
+      final deleteResp = await cacheClient.delete(integrationTestCacheName, key);
+      switch (deleteResp) {
+        case DeleteSuccess():
+          expect(deleteResp.runtimeType, DeleteSuccess,
+              reason: "delete should succeed");
+        case DeleteError():
+          fail('Expected Success but got Error: ${deleteResp.errorCode} ${deleteResp.message}');
+      }
+
+      // expect third get to miss
+      final getResp3 = await cacheClient.get(integrationTestCacheName, key);
+      switch (getResp3) {
+        case GetHit():
+          fail('Expected Miss but got Hit');
+        case GetMiss():
+          expect(getResp3.runtimeType, GetMiss,
+              reason: "get should miss on empty cache");
+        case GetError():
+          fail('Expected Miss but got Error: ${getResp3.errorCode} ${getResp3.message}');
+      }
+    });
+  });
 }

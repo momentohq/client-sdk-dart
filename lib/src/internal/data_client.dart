@@ -69,9 +69,9 @@ class DataClient implements AbstractDataClient {
     var request = SetRequest_();
     request.cacheKey = key.toBinary();
     request.cacheBody = value.toBinary();
-    request.ttlMilliseconds = (ttl != null
+    request.ttlMilliseconds = Int64(ttl != null
         ? ttl.inMilliseconds
-        : _defaultTtl.inMilliseconds) as Int64;
+        : _defaultTtl.inMilliseconds);
     try {
       await _client.set(request,
           options: CallOptions(metadata: {
