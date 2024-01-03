@@ -1,9 +1,9 @@
-import 'package:client_sdk_dart/client_sdk_dart.dart';
-import 'package:client_sdk_dart/src/config/cache_configuration.dart';
-import 'package:client_sdk_dart/src/internal/control_client.dart';
-import 'package:client_sdk_dart/src/internal/data_client.dart';
-import 'package:client_sdk_dart/src/messages/responses/cache/data/scalar/get_response.dart';
-import 'package:client_sdk_dart/src/messages/responses/cache/data/scalar/set_response.dart';
+import 'package:momento/momento.dart';
+import 'package:momento/src/config/cache_configuration.dart';
+import 'package:momento/src/internal/control_client.dart';
+import 'package:momento/src/internal/data_client.dart';
+import 'package:momento/src/messages/responses/cache/data/scalar/get_response.dart';
+import 'package:momento/src/messages/responses/cache/data/scalar/set_response.dart';
 import 'package:logging/logging.dart';
 // import 'config/logger.dart';
 

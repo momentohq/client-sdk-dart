@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:client_sdk_dart/client_sdk_dart.dart';
+import 'package:client_sdk_dart/momento.dart';
 import 'package:flutter/material.dart';
 
 void main() {

@@ -1,8 +1,8 @@
-import 'package:client_sdk_dart/generated/cachepubsub.pbgrpc.dart';
-import 'package:client_sdk_dart/src/auth/credential_provider.dart';
-import 'package:client_sdk_dart/src/errors/errors.dart';
-import 'package:client_sdk_dart/src/internal/topics_grpc_manager.dart';
-import 'package:client_sdk_dart/src/messages/responses/topics/topic_subscribe.dart';
+import 'package:momento/generated/cachepubsub.pbgrpc.dart';
+import 'package:momento/src/auth/credential_provider.dart';
+import 'package:momento/src/errors/errors.dart';
+import 'package:momento/src/internal/topics_grpc_manager.dart';
+import 'package:momento/src/messages/responses/topics/topic_subscribe.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
 

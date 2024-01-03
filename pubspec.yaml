@@ -1,7 +1,7 @@
-name: client_sdk_dart
-description: A starting point for Dart libraries or applications.
+name: momento
+description: Dart client for interacting with Momento
 version: 0.0.1
-# repository: https://github.com/my_org/my_repo
+repository: https://github.com/momentohq/client-sdk-dart
 
 environment:
   sdk: ^3.2.3

@@ -1,8 +1,8 @@
-import 'package:client_sdk_dart/generated/cacheclient.pbgrpc.dart';
-import 'package:client_sdk_dart/src/config/cache_configuration.dart';
-import 'package:client_sdk_dart/src/errors/errors.dart';
-import 'package:client_sdk_dart/src/messages/responses/cache/data/scalar/get_response.dart';
-import 'package:client_sdk_dart/src/messages/responses/cache/data/scalar/set_response.dart';
+import 'package:momento/generated/cacheclient.pbgrpc.dart';
+import 'package:momento/src/config/cache_configuration.dart';
+import 'package:momento/src/errors/errors.dart';
+import 'package:momento/src/messages/responses/cache/data/scalar/get_response.dart';
+import 'package:momento/src/messages/responses/cache/data/scalar/set_response.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
 

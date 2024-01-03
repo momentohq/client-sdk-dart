@@ -1,5 +1,5 @@
-import 'package:client_sdk_dart/src/auth/credential_provider.dart';
-import 'package:client_sdk_dart/src/errors/errors.dart';
+import 'package:momento/src/auth/credential_provider.dart';
+import 'package:momento/src/errors/errors.dart';
 import 'package:test/test.dart';
 import 'dart:convert';
 
