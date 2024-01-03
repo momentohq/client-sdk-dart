@@ -1,7 +1,7 @@
 /// Support for doing something awesome.
 ///
 /// More dartdocs go here.
-library;
+library momento;
 
 export 'src/topic_client.dart';
 export 'src/cache_client.dart';
