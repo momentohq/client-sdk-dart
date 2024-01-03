@@ -1,0 +1,35 @@
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+name: release-please
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+    name: Release Please
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        with:
+          token: ${{ secrets.MOMENTO_MACHINE_USER_GITHUB_TOKEN }}
+          release-type: dart
+          package-name: momento
+          default-branch: main
+          changelog-types: '[{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Bug Fixes","hidden":false},{"type":"chore","section":"Miscellaneous","hidden":false}]'
+  publish:
+    runs-on: ubuntu-latest
+    name: Publish to pub.dev
+    permissions:
+      id-token: write # Required for authentication using OIDC
+    needs: [release-please]
+    if: needs.release-please.outputs.release_created == 'true'
+    steps:
+      - uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
