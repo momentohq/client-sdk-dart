@@ -1,6 +1,5 @@
 import 'package:momento/src/auth/credential_provider.dart';
-// import 'package:client_sdk_dart/src/config/logger.dart';
-import 'package:logging/logging.dart';
+import 'package:momento/src/config/logger.dart';
 import 'config/topic_configuration.dart';
 import 'internal/pubsub_client.dart';
 import 'messages/responses/topics/topic_subscribe.dart';
@@ -18,14 +17,13 @@ abstract class ITopicClient {
 
 class TopicClient implements ITopicClient {
   final ClientPubsub _pubsubClient;
-  final Logger _logger = Logger('MomentoTopicClient');
+  final MomentoLogger _logger = MomentoLogger('MomentoTopicClient');
 
   TopicClient(
       CredentialProvider credentialProvider, TopicConfiguration configuration)
       : _pubsubClient = ClientPubsub(credentialProvider, configuration) {
-    // TODO: fix logging level issue
-    // _logger.level = determineLoggerLevel(configuration.logLevel);
-    _logger.finest("initializing topic client");
+    _logger.setLevel(configuration.logLevel);
+    _logger.trace("initializing topic client");
   }
 
   @override
