@@ -39,8 +39,8 @@ class ControlClient implements AbstractControlClient {
     } catch (e) {
       if (e is GrpcError && e.code == StatusCode.alreadyExists) {
         return AlreadyExists();
-      } else if (e is SdkException) {
-        return CreateCacheError(e);
+      } else if (e is GrpcError) {
+        return CreateCacheError(grpcStatusToSdkException(e));
       } else {
         return CreateCacheError(
             UnknownException("Unexpected error: $e", null, null));
@@ -59,8 +59,8 @@ class ControlClient implements AbstractControlClient {
           }));
       return DeleteCacheSuccess();
     } catch (e) {
-      if (e is SdkException) {
-        return DeleteCacheError(e);
+      if (e is GrpcError) {
+        return DeleteCacheError(grpcStatusToSdkException(e));
       } else {
         return DeleteCacheError(
             UnknownException("Unexpected error: $e", null, null));
@@ -75,8 +75,8 @@ class ControlClient implements AbstractControlClient {
       final resp = await _client.listCaches(request);
       return ListCachesSuccess(resp.cache);
     } catch (e) {
-      if (e is SdkException) {
-        return ListCachesError(e);
+      if (e is GrpcError) {
+        return ListCachesError(grpcStatusToSdkException(e));
       } else {
         return ListCachesError(
             UnknownException("Unexpected error: $e", null, null));

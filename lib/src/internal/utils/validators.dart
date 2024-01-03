@@ -1,7 +1,7 @@
 import 'package:client_sdk_dart/src/errors/errors.dart';
 
 void _validateString(String str, String errorMessage) {
-  if (str.isEmpty) {
+  if (str.trim().isEmpty) {
     throw InvalidArgumentException(errorMessage, null, null);
   }
 }

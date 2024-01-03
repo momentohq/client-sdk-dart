@@ -55,8 +55,8 @@ class DataClient implements AbstractDataClient {
               "unknown cache get error ${resp.result}", null, null));
       }
     } catch (e) {
-      if (e is SdkException) {
-        return GetError(e);
+      if (e is GrpcError) {
+        return GetError(grpcStatusToSdkException(e));
       } else {
         return GetError(UnknownException("Unexpected error: $e", null, null));
       }
@@ -79,8 +79,8 @@ class DataClient implements AbstractDataClient {
           }));
       return SetSuccess();
     } catch (e) {
-      if (e is SdkException) {
-        return SetError(e);
+      if (e is GrpcError) {
+        return SetError(grpcStatusToSdkException(e));
       } else {
         return SetError(UnknownException("Unexpected error: $e", null, null));
       }
@@ -98,8 +98,8 @@ class DataClient implements AbstractDataClient {
           }));
       return DeleteSuccess();
     } catch (e) {
-      if (e is SdkException) {
-        return DeleteError(e);
+      if (e is GrpcError) {
+        return DeleteError(grpcStatusToSdkException(e));
       } else {
         return DeleteError(
             UnknownException("Unexpected error: $e", null, null));

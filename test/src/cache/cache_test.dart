@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:client_sdk_dart/client_sdk_dart.dart';
+import 'package:client_sdk_dart/src/errors/errors.dart';
 import 'package:test/test.dart';
 
 import 'test_utils.dart';
@@ -21,8 +22,26 @@ void main() {
   });
 
   group('control plane operations', () {
-    test('arguments are validated', () {
-      // TODO: after validators are added
+    test('arguments are validated', () async {
+      final createResp = await cacheClient.createCache("   ");
+      switch (createResp) {
+        case CreateCacheSuccess():
+          fail('Expected Error but got Success');
+        case AlreadyExists():
+          fail('Expected Error but got AlreadyExists');
+        case CreateCacheError():
+          expect(createResp.errorCode, MomentoErrorCode.invalidArgumentError,
+              reason: "create cache should not accept empty cache name");
+      }
+
+      final deleteResp = await cacheClient.deleteCache("   ");
+      switch (deleteResp) {
+        case DeleteCacheSuccess():
+          fail('Expected Error but got Success');
+        case DeleteCacheError():
+          expect(deleteResp.errorCode, MomentoErrorCode.invalidArgumentError,
+              reason: "delete cache should not accept empty cache name");
+      }
     });
 
     test('caches can be created, listed, and deleted', () async {

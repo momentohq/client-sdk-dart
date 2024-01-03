@@ -4,14 +4,9 @@ import 'package:client_sdk_dart/src/internal/control_client.dart';
 import 'package:client_sdk_dart/src/errors/errors.dart';
 import 'package:client_sdk_dart/src/internal/data_client.dart';
 import 'package:client_sdk_dart/src/internal/utils/validators.dart';
-import 'package:client_sdk_dart/src/messages/responses/cache/data/scalar/delete_response.dart';
-import 'package:client_sdk_dart/src/messages/responses/cache/data/scalar/get_response.dart';
-import 'package:client_sdk_dart/src/messages/responses/cache/data/scalar/set_response.dart';
 import 'package:logging/logging.dart';
 
-import 'auth/credential_provider.dart';
 // import 'config/logger.dart';
-import 'messages/values.dart';
 
 abstract class ICacheClient {
   Future<CreateCacheResponse> createCache(String cacheName);
@@ -48,7 +43,10 @@ class CacheClient implements ICacheClient {
       validateCacheName(cacheName);
     } catch (e) {
       if (e is SdkException) {
-        return Future.error(CreateCacheError(e));
+        return Future.value(CreateCacheError(e));
+      } else {
+        return Future.value(CreateCacheError(
+            UnknownException("Unexpected error: $e", null, null)));
       }
     }
     return _controlClient.createCache(cacheName);
@@ -60,7 +58,10 @@ class CacheClient implements ICacheClient {
       validateCacheName(cacheName);
     } catch (e) {
       if (e is SdkException) {
-        return Future.error(DeleteCacheError(e));
+        return Future.value(DeleteCacheError(e));
+      } else {
+        return Future.value(DeleteCacheError(
+            UnknownException("Unexpected error: $e", null, null)));
       }
     }
     return _controlClient.deleteCache(cacheName);
@@ -77,7 +78,10 @@ class CacheClient implements ICacheClient {
       validateCacheName(cacheName);
     } catch (e) {
       if (e is SdkException) {
-        return Future.error(GetError(e));
+        return Future.value(GetError(e));
+      } else {
+        return Future.value(GetError(
+            UnknownException("Unexpected error: $e", null, null)));
       }
     }
     return _dataClient.get(cacheName, key);
@@ -90,7 +94,10 @@ class CacheClient implements ICacheClient {
       validateCacheName(cacheName);
     } catch (e) {
       if (e is SdkException) {
-        return Future.error(SetError(e));
+        return Future.value(SetError(e));
+      } else {
+        return Future.value(SetError(
+            UnknownException("Unexpected error: $e", null, null)));
       }
     }
     return _dataClient.set(cacheName, key, value, ttl: ttl);
@@ -102,7 +109,10 @@ class CacheClient implements ICacheClient {
       validateCacheName(cacheName);
     } catch (e) {
       if (e is SdkException) {
-        return Future.error(DeleteError(e));
+        return Future.value(DeleteError(e));
+      } else {
+        return Future.value(DeleteError(
+            UnknownException("Unexpected error: $e", null, null)));
       }
     }
     return _dataClient.delete(cacheName, key);
