@@ -3,8 +3,9 @@ import 'package:momento/src/config/cache_configuration.dart';
 import 'package:momento/src/errors/errors.dart';
 import 'package:momento/src/internal/control_client.dart';
 import 'package:momento/src/internal/data_client.dart';
-import 'package:logging/logging.dart';
 import 'package:momento/src/internal/utils/validators.dart';
+
+import 'config/logger.dart';
 
 // import 'config/logger.dart';
 
@@ -26,15 +27,14 @@ abstract class ICacheClient {
 class CacheClient implements ICacheClient {
   late final DataClient _dataClient;
   late final ControlClient _controlClient;
-  final Logger _logger = Logger('MomentoCacheClient');
+  final MomentoLogger _logger = MomentoLogger('MomentoCacheClient');
 
   CacheClient(CredentialProvider credentialProvider,
       CacheConfiguration configuration, Duration defaultTtl) {
     _dataClient = DataClient(credentialProvider, configuration, defaultTtl);
     _controlClient = ControlClient(credentialProvider, configuration);
-    // TODO: fix logging level issue
-    // _logger.level = determineLoggerLevel(configuration.logLevel);
-    _logger.finest("initializing cache client");
+    _logger.setLevel(configuration.logLevel);
+    _logger.trace("initializing cache client");
   }
 
   @override
