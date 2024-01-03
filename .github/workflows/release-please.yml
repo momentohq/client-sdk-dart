@@ -25,11 +25,9 @@ jobs:
           default-branch: main
           changelog-types: '[{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Bug Fixes","hidden":false},{"type":"chore","section":"Miscellaneous","hidden":false}]'
   publish:
-    runs-on: ubuntu-latest
     name: Publish to pub.dev
     permissions:
       id-token: write # Required for authentication using OIDC
     needs: [release-please]
     if: needs.release-please.outputs.release_created == 'true'
-    steps:
-      - uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
