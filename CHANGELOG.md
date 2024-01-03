@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.3](https://github.com/momentohq/client-sdk-dart/compare/v0.0.2...v0.0.3) (2024-01-03)
+
+
+### Miscellaneous
+
+* release 0.0.3 ([eae5b12](https://github.com/momentohq/client-sdk-dart/commit/eae5b12794d156ff793d7dec2caf9f9859115da8))
+
 ## 0.0.2 (2024-01-03)
 
 
