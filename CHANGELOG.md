@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/momentohq/client-sdk-dart/compare/v0.0.3...v0.0.4) (2024-01-03)
+
+
+### Miscellaneous
+
+* release please action only creates/manages pr ([#53](https://github.com/momentohq/client-sdk-dart/issues/53)) ([0cfdfc1](https://github.com/momentohq/client-sdk-dart/commit/0cfdfc121079421cb8f546897d2362edfc833533))
+
 ## [0.0.3](https://github.com/momentohq/client-sdk-dart/compare/v0.0.2...v0.0.3) (2024-01-03)
 
 
