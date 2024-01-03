@@ -5,7 +5,6 @@ import 'package:momento/src/errors/errors.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
 
-
 abstract class AbstractDataClient {
   Future<GetResponse> get(String cacheName, Value key);
 
@@ -65,9 +64,8 @@ class DataClient implements AbstractDataClient {
     var request = SetRequest_();
     request.cacheKey = key.toBinary();
     request.cacheBody = value.toBinary();
-    request.ttlMilliseconds = Int64(ttl != null
-        ? ttl.inMilliseconds
-        : _defaultTtl.inMilliseconds);
+    request.ttlMilliseconds =
+        Int64(ttl != null ? ttl.inMilliseconds : _defaultTtl.inMilliseconds);
     try {
       await _client.set(request,
           options: CallOptions(metadata: {

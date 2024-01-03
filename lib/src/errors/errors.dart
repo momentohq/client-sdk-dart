@@ -265,8 +265,8 @@ class IllegalArgumentError extends Error {
 
 SdkException grpcStatusToSdkException(GrpcError grpcError) {
   final message = "${grpcError.message}";
-  final transportDetails = MomentoErrorTransportDetails(MomentoGrpcErrorDetails(
-      grpcError.code, grpcError.rawResponse, null));
+  final transportDetails = MomentoErrorTransportDetails(
+      MomentoGrpcErrorDetails(grpcError.code, grpcError.rawResponse, null));
   switch (grpcError.code) {
     case StatusCode.aborted:
       return InternalServerException(message, grpcError, transportDetails);

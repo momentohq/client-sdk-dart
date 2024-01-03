@@ -1,4 +1,4 @@
-import 'package:client_sdk_dart/src/errors/errors.dart';
+import 'package:momento/src/errors/errors.dart';
 
 void _validateString(String str, String errorMessage) {
   if (str.trim().isEmpty) {

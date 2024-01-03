@@ -102,7 +102,6 @@ void main() {
   });
 
   group('scalar get, set, delete', () {
-
     test('arguments are validated', () async {
       final key = StringValue("key");
       final value = StringValue("value");
@@ -150,17 +149,20 @@ void main() {
           expect(getResp1.runtimeType, GetMiss,
               reason: "get should miss on empty cache");
         case GetError():
-          fail('Expected Miss but got Error: ${getResp1.errorCode} ${getResp1.message}');
+          fail(
+              'Expected Miss but got Error: ${getResp1.errorCode} ${getResp1.message}');
       }
 
       // expect set with ttl to succeed
-      final setResp = await cacheClient.set(integrationTestCacheName, key, value, ttl: Duration(seconds: 60));
+      final setResp = await cacheClient.set(
+          integrationTestCacheName, key, value,
+          ttl: Duration(seconds: 60));
       switch (setResp) {
         case SetSuccess():
-          expect(setResp.runtimeType, SetSuccess,
-              reason: "set should succeed");
+          expect(setResp.runtimeType, SetSuccess, reason: "set should succeed");
         case SetError():
-          fail('Expected Success but got Error: ${setResp.errorCode} ${setResp.message}');
+          fail(
+              'Expected Success but got Error: ${setResp.errorCode} ${setResp.message}');
       }
 
       // expect second get to hit
@@ -169,21 +171,24 @@ void main() {
         case GetHit():
           expect(getResp2.runtimeType, GetHit,
               reason: "get should hit on value set in cache");
-          
+
         case GetMiss():
           fail('Expected Hit but got Miss');
         case GetError():
-          fail('Expected Hit but got Error: ${getResp2.errorCode} ${getResp2.message}');
+          fail(
+              'Expected Hit but got Error: ${getResp2.errorCode} ${getResp2.message}');
       }
 
       // expect delete to succeed
-      final deleteResp = await cacheClient.delete(integrationTestCacheName, key);
+      final deleteResp =
+          await cacheClient.delete(integrationTestCacheName, key);
       switch (deleteResp) {
         case DeleteSuccess():
           expect(deleteResp.runtimeType, DeleteSuccess,
               reason: "delete should succeed");
         case DeleteError():
-          fail('Expected Success but got Error: ${deleteResp.errorCode} ${deleteResp.message}');
+          fail(
+              'Expected Success but got Error: ${deleteResp.errorCode} ${deleteResp.message}');
       }
 
       // expect third get to miss
@@ -195,7 +200,8 @@ void main() {
           expect(getResp3.runtimeType, GetMiss,
               reason: "get should miss on empty cache");
         case GetError():
-          fail('Expected Miss but got Error: ${getResp3.errorCode} ${getResp3.message}');
+          fail(
+              'Expected Miss but got Error: ${getResp3.errorCode} ${getResp3.message}');
       }
     });
   });

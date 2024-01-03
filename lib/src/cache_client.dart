@@ -80,8 +80,8 @@ class CacheClient implements ICacheClient {
       if (e is SdkException) {
         return Future.value(GetError(e));
       } else {
-        return Future.value(GetError(
-            UnknownException("Unexpected error: $e", null, null)));
+        return Future.value(
+            GetError(UnknownException("Unexpected error: $e", null, null)));
       }
     }
     return _dataClient.get(cacheName, key);
@@ -96,8 +96,8 @@ class CacheClient implements ICacheClient {
       if (e is SdkException) {
         return Future.value(SetError(e));
       } else {
-        return Future.value(SetError(
-            UnknownException("Unexpected error: $e", null, null)));
+        return Future.value(
+            SetError(UnknownException("Unexpected error: $e", null, null)));
       }
     }
     return _dataClient.set(cacheName, key, value, ttl: ttl);
@@ -111,8 +111,8 @@ class CacheClient implements ICacheClient {
       if (e is SdkException) {
         return Future.value(DeleteError(e));
       } else {
-        return Future.value(DeleteError(
-            UnknownException("Unexpected error: $e", null, null)));
+        return Future.value(
+            DeleteError(UnknownException("Unexpected error: $e", null, null)));
       }
     }
     return _dataClient.delete(cacheName, key);
