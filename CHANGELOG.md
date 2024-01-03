@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.5](https://github.com/momentohq/client-sdk-dart/compare/v0.0.4...v0.0.5) (2024-01-03)
+
+
+### Bug Fixes
+
+* allow heirarchal loggers to have their own log levels ([#56](https://github.com/momentohq/client-sdk-dart/issues/56)) ([19082cb](https://github.com/momentohq/client-sdk-dart/commit/19082cbced2b480c1ddb264df0741baf2c631072))
+
 ## [0.0.4](https://github.com/momentohq/client-sdk-dart/compare/v0.0.3...v0.0.4) (2024-01-03)
 
 
