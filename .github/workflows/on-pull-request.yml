@@ -1,13 +1,6 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-name: Dart
+name: Pull Request
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -42,3 +35,19 @@ jobs:
         run: dart test
         env:
           TEST_API_KEY: ${{ secrets.ALPHA_TEST_AUTH_TOKEN }}
+  
+  readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Verify README generation
+        uses: momentohq/standards-and-practices/github-actions/oss-readme-template@gh-actions-v2
+        with:
+          project_status: official
+          project_stability: alpha
+          project_type: sdk
+          sdk_language: Dart
+          template_file: ./README.template.md
+          output_file: ./README.md
+          dev_docs_slug: dart
