@@ -11,7 +11,7 @@ To get started with Momento you will need a Momento API key. You can get one fro
 
 ## Packages
 
-The Momento Dart SDK is available here: https://pub.dev/packages/momento 
+The Momento Dart SDK is available on [pub.dev](https://pub.dev/packages/momento) 
 
 To install in your Dart program, use: 
 
