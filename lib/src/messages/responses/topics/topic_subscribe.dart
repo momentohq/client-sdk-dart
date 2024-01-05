@@ -22,13 +22,16 @@ class TopicSubscription implements TopicSubscribeResponse {
 
   TopicSubscription(this._stream, this.lastSequenceNumber, this._client,
       this.cacheName, this.topicName) {
-        _broadcastStream = _stream.asBroadcastStream();
-      }
-  
+    _broadcastStream = _stream.asBroadcastStream();
+  }
+
   Future<void> init() async {
     await for (final firstItem in _broadcastStream) {
       if (firstItem.whichKind() != SubscriptionItem__Kind.heartbeat) {
-        throw InternalServerException("Expected heartbeat message for topic $topicName on cache $cacheName, got ${firstItem.whichKind()}", null, null);
+        throw InternalServerException(
+            "Expected heartbeat message for topic $topicName on cache $cacheName, got ${firstItem.whichKind()}",
+            null,
+            null);
       }
       break;
     }
@@ -53,7 +56,8 @@ class TopicSubscription implements TopicSubscribeResponse {
           logger.fine("Subscription was cancelled, not reconnecting");
           await _stream.cancel();
           retry = false;
-        } else if (e is ClientResourceExhaustedException || (e is GrpcError && e.codeName == "RESOURCE_EXHAUSTED")) {
+        } else if (e is ClientResourceExhaustedException ||
+            (e is GrpcError && e.codeName == "RESOURCE_EXHAUSTED")) {
           logger.fine("Subscription limit reached, not reconnecting");
           await _stream.cancel();
           retry = false;
