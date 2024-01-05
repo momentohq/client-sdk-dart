@@ -4,19 +4,8 @@ import 'package:momento/src/errors/errors.dart';
 import 'package:momento/src/internal/control_client.dart';
 import 'package:momento/src/internal/data_client.dart';
 import 'package:momento/src/internal/utils/validators.dart';
-import 'package:momento/src/utils/collection_ttl.dart';
 
 import 'config/logger.dart';
-import 'messages/responses/cache/data/list/list_concatenate_back.dart';
-import 'messages/responses/cache/data/list/list_concatenate_front.dart';
-import 'messages/responses/cache/data/list/list_fetch.dart';
-import 'messages/responses/cache/data/list/list_length.dart';
-import 'messages/responses/cache/data/list/list_pop_back.dart';
-import 'messages/responses/cache/data/list/list_pop_front.dart';
-import 'messages/responses/cache/data/list/list_push_back.dart';
-import 'messages/responses/cache/data/list/list_push_front.dart';
-import 'messages/responses/cache/data/list/list_remove_value.dart';
-import 'messages/responses/cache/data/list/list_retain.dart';
 
 abstract class ICacheClient {
   // Control plane RPCs

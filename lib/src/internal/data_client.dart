@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:momento/generated/cacheclient.pbgrpc.dart';
 import 'package:momento/momento.dart';
@@ -7,18 +6,6 @@ import 'package:momento/src/config/cache_configuration.dart';
 import 'package:momento/src/errors/errors.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
-import 'package:momento/src/messages/responses/cache/data/list/list_push_back.dart';
-import 'package:momento/src/messages/responses/cache/data/list/list_push_front.dart';
-import 'package:momento/src/utils/collection_ttl.dart';
-
-import '../messages/responses/cache/data/list/list_concatenate_back.dart';
-import '../messages/responses/cache/data/list/list_concatenate_front.dart';
-import '../messages/responses/cache/data/list/list_fetch.dart';
-import '../messages/responses/cache/data/list/list_length.dart';
-import '../messages/responses/cache/data/list/list_pop_back.dart';
-import '../messages/responses/cache/data/list/list_pop_front.dart';
-import '../messages/responses/cache/data/list/list_remove_value.dart';
-import '../messages/responses/cache/data/list/list_retain.dart';
 
 abstract class AbstractDataClient {
   // Unary RPCs
@@ -155,10 +142,10 @@ class DataClient implements AbstractDataClient {
       request.listName = utf8.encode(listName);
       request.truncateFrontToSize = truncateFrontToSize ?? 0;
       request.values.addAll(values.map((e) => e.toBinary()));
-      CollectionTtl _ttl = ttl ?? CollectionTtl.fromCacheTtl();
+      CollectionTtl actualTtl = ttl ?? CollectionTtl.fromCacheTtl();
       request.ttlMilliseconds =
-          Int64(_ttl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
-      request.refreshTtl = _ttl.refreshTtl();
+          Int64(actualTtl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
+      request.refreshTtl = actualTtl.refreshTtl();
       var response = await _client.listConcatenateBack(request,
           options: CallOptions(metadata: {
             'cache': cacheName,
@@ -183,10 +170,10 @@ class DataClient implements AbstractDataClient {
       request.listName = utf8.encode(listName);
       request.truncateBackToSize = truncateBackToSize ?? 0;
       request.values.addAll(values.map((e) => e.toBinary()));
-      CollectionTtl _ttl = ttl ?? CollectionTtl.fromCacheTtl();
+      CollectionTtl actualTtl = ttl ?? CollectionTtl.fromCacheTtl();
       request.ttlMilliseconds =
-          Int64(_ttl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
-      request.refreshTtl = _ttl.refreshTtl();
+          Int64(actualTtl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
+      request.refreshTtl = actualTtl.refreshTtl();
       var response = await _client.listConcatenateFront(request,
           options: CallOptions(metadata: {
             'cache': cacheName,
@@ -338,10 +325,10 @@ class DataClient implements AbstractDataClient {
       request.listName = utf8.encode(listName);
       request.truncateFrontToSize = truncateFrontToSize ?? 0;
       request.value.addAll(value.toBinary());
-      CollectionTtl _ttl = ttl ?? CollectionTtl.fromCacheTtl();
+      CollectionTtl actualTtl = ttl ?? CollectionTtl.fromCacheTtl();
       request.ttlMilliseconds =
-          Int64(_ttl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
-      request.refreshTtl = _ttl.refreshTtl();
+          Int64(actualTtl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
+      request.refreshTtl = actualTtl.refreshTtl();
       var response = await _client.listPushBack(request,
           options: CallOptions(metadata: {
             'cache': cacheName,
@@ -366,10 +353,10 @@ class DataClient implements AbstractDataClient {
       request.listName = utf8.encode(listName);
       request.truncateBackToSize = truncateBackToSize ?? 0;
       request.value.addAll(value.toBinary());
-      CollectionTtl _ttl = ttl ?? CollectionTtl.fromCacheTtl();
+      CollectionTtl actualTtl = ttl ?? CollectionTtl.fromCacheTtl();
       request.ttlMilliseconds =
-          Int64(_ttl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
-      request.refreshTtl = _ttl.refreshTtl();
+          Int64(actualTtl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
+      request.refreshTtl = actualTtl.refreshTtl();
       var response = await _client.listPushFront(request,
           options: CallOptions(metadata: {
             'cache': cacheName,
@@ -423,10 +410,10 @@ class DataClient implements AbstractDataClient {
       } else {
         request.unboundedEnd = Unbounded_();
       }
-      CollectionTtl _ttl = ttl ?? CollectionTtl.fromCacheTtl();
+      CollectionTtl actualTtl = ttl ?? CollectionTtl.fromCacheTtl();
       request.ttlMilliseconds =
-          Int64(_ttl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
-      request.refreshTtl = _ttl.refreshTtl();
+          Int64(actualTtl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
+      request.refreshTtl = actualTtl.refreshTtl();
       _client.listRetain(request,
           options: CallOptions(metadata: {
             'cache': cacheName,
