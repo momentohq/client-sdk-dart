@@ -520,6 +520,42 @@ void main() {
                                     "listRetain should not accept empty cache name");
                         }
                       }),
-                    })
+                    }),
+            group('listFetch', () {
+              test('it should miss when a list doesnt exist', () async {
+                final nonExistentListName =
+                    generateStringWithUuid("non-existent-list");
+                final fetchResp1 = await cacheClient.listFetch(
+                    integrationTestCacheName, nonExistentListName);
+                switch (fetchResp1) {
+                  case ListFetchHit():
+                    fail('Expected Miss but got Success');
+                  case ListFetchMiss():
+                    // this is expected
+                    return;
+                  case ListFetchError():
+                    fail('Expected Miss but got Error');
+                }
+              });
+              test('it should add items to a list, and return the when fetched',
+                  () async {
+                final listName = generateStringWithUuid("list-name");
+                final listValue = StringValue("string value");
+                await cacheClient.listPushFront(
+                    integrationTestCacheName, listName, listValue);
+                final fetchResp1 = await cacheClient.listFetch(
+                    integrationTestCacheName, listName);
+                switch (fetchResp1) {
+                  case ListFetchHit():
+                    expect(fetchResp1.values.toList(), [listValue],
+                        reason:
+                            "list should contain the value that was pushed");
+                  case ListFetchMiss():
+                    fail('Expected Hit but got Miss');
+                  case ListFetchError():
+                    fail('Expected Hit but got Error');
+                }
+              });
+            }),
           });
 }
