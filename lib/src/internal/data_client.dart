@@ -5,13 +5,21 @@ import 'package:momento/src/errors/errors.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
 
+import '../messages/responses/cache/data/list/list_concatenate_back.dart';
+
 abstract class AbstractDataClient {
+  // Unary RPCs
   Future<GetResponse> get(String cacheName, Value key);
 
   Future<SetResponse> set(String cacheName, Value key, Value value,
       {Duration? ttl});
 
   Future<DeleteResponse> delete(String cacheName, Value key);
+
+  // List Collection RPCs
+  Future<ListConcatenateBackResponse> listConcatenateBack(
+      String cacheName, Value listName, List<Value> values,
+      {Duration? ttl, int? truncateFrontToSize});
 }
 
 class DataClient implements AbstractDataClient {
