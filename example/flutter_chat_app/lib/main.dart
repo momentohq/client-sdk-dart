@@ -35,7 +35,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   static const String _momentoApiKey = "your-api-key-here";
   TopicClient _topicClient = TopicClient(
-      CredentialProvider.fromString(_momentoApiKey), MobileTopicConfiguration.latest());
+      CredentialProvider.fromString(_momentoApiKey),
+      MobileTopicConfiguration.latest());
 
   List<String> _messages = ["Welcome to Momento Topics!"];
   final TextEditingController _textInputController = TextEditingController();
