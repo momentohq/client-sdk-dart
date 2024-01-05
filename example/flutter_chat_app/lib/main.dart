@@ -33,7 +33,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  static const String _momentoApiKey = String.fromEnvironment('MOMENTO_API_KEY', defaultValue: '');
+  static const String _momentoApiKey =
+      String.fromEnvironment('MOMENTO_API_KEY', defaultValue: '');
   TopicClient _topicClient = TopicClient(
       CredentialProvider.fromString(_momentoApiKey),
       MobileTopicConfiguration.latest());
