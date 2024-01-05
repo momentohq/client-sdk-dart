@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:client_sdk_dart/momento.dart';
+import 'package:momento/momento.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -35,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   static const String _momentoApiKey = "your-api-key-here";
   TopicClient _topicClient = TopicClient(
-      CredentialProvider.fromString(_momentoApiKey), Mobile.latest());
+      CredentialProvider.fromString(_momentoApiKey), MobileTopicConfiguration.latest());
 
   List<String> _messages = ["Welcome to Momento Topics!"];
   final TextEditingController _textInputController = TextEditingController();
@@ -45,8 +45,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    establishSubscription();
+    return;
+  }
 
-    final subscribeResult = _topicClient.subscribe("cache", "topic");
+  Future<void> establishSubscription() async {
+    final subscribeResult = await _topicClient.subscribe("cache", "topic");
     switch (subscribeResult) {
       case TopicSubscription():
         print("Successful subscription");

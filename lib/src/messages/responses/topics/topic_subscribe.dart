@@ -83,7 +83,8 @@ class TopicSubscription implements TopicSubscribeResponse {
       lastSequenceNumber = result.lastSequenceNumber;
     } else if (result is TopicSubscribeError) {
       logger.fine("Error reconnecting: ${result.message}");
-      if (result.errorCode == MomentoErrorCode.limitExceededError || result.errorCode == MomentoErrorCode.cancelledError) {
+      if (result.errorCode == MomentoErrorCode.limitExceededError ||
+          result.errorCode == MomentoErrorCode.cancelledError) {
         return false;
       }
     }

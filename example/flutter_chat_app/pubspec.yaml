@@ -18,7 +18,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  client_sdk_dart:
+  momento:
     path: ../../../client-sdk-dart
 
 
