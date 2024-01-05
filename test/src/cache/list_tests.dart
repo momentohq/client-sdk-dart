@@ -362,51 +362,53 @@ void main() {
                 }
               });
               test('it should fetch listed items using start and end indices',
-                      () async {
-                    final listName = generateStringWithUuid("list-name");
-                    final listValue1 = StringValue("string value 1");
-                    final listValue2 = StringValue("string value 2");
-                    await cacheClient.listConcatenateFront(
-                        integrationTestCacheName, listName, [listValue1, listValue2]);
-                    final fetchResp1 = await cacheClient.listFetch(
-                        integrationTestCacheName, listName);
-                    switch (fetchResp1) {
-                      case ListFetchHit():
-                        expect(fetchResp1.values, [listValue1.toUtf8(), listValue2.toUtf8()],
-                            reason:
+                  () async {
+                final listName = generateStringWithUuid("list-name");
+                final listValue1 = StringValue("string value 1");
+                final listValue2 = StringValue("string value 2");
+                await cacheClient.listConcatenateFront(integrationTestCacheName,
+                    listName, [listValue1, listValue2]);
+                final fetchResp1 = await cacheClient.listFetch(
+                    integrationTestCacheName, listName);
+                switch (fetchResp1) {
+                  case ListFetchHit():
+                    expect(fetchResp1.values,
+                        [listValue1.toUtf8(), listValue2.toUtf8()],
+                        reason:
                             "list should contain the value that was pushed");
-                      case ListFetchMiss():
-                        fail('Expected Hit but got Miss');
-                      case ListFetchError():
-                        fail('Expected Hit but got Error');
-                    }
+                  case ListFetchMiss():
+                    fail('Expected Hit but got Miss');
+                  case ListFetchError():
+                    fail('Expected Hit but got Error');
+                }
 
-                    final fetchResp2 = await cacheClient.listFetch(
-                        integrationTestCacheName, listName, startIndex: 1);
-                    switch (fetchResp2) {
-                      case ListFetchHit():
-                        expect(fetchResp2.values, [listValue2.toUtf8()],
-                            reason:
+                final fetchResp2 = await cacheClient.listFetch(
+                    integrationTestCacheName, listName,
+                    startIndex: 1);
+                switch (fetchResp2) {
+                  case ListFetchHit():
+                    expect(fetchResp2.values, [listValue2.toUtf8()],
+                        reason:
                             "list should contain the value that was pushed starting at index 1");
-                      case ListFetchMiss():
-                        fail('Expected Hit but got Miss');
-                      case ListFetchError():
-                        fail('Expected Hit but got Error');
-                    }
+                  case ListFetchMiss():
+                    fail('Expected Hit but got Miss');
+                  case ListFetchError():
+                    fail('Expected Hit but got Error');
+                }
 
-                    final fetchResp3 = await cacheClient.listFetch(
-                        integrationTestCacheName, listName, endIndex: 1);
-                    switch (fetchResp3) {
-                      case ListFetchHit():
-                        expect(fetchResp3.values, [listValue2.toUtf8()],
-                            reason:
+                final fetchResp3 = await cacheClient
+                    .listFetch(integrationTestCacheName, listName, endIndex: 1);
+                switch (fetchResp3) {
+                  case ListFetchHit():
+                    expect(fetchResp3.values, [listValue2.toUtf8()],
+                        reason:
                             "list should contain the value that was pushed up until index 1");
-                      case ListFetchMiss():
-                        fail('Expected Hit but got Miss');
-                      case ListFetchError():
-                        fail('Expected Hit but got Error');
-                    }
-                  });
+                  case ListFetchMiss():
+                    fail('Expected Hit but got Miss');
+                  case ListFetchError():
+                    fail('Expected Hit but got Error');
+                }
+              });
             }),
           });
 }
