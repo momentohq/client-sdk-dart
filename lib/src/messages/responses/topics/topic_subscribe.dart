@@ -68,18 +68,26 @@ class TopicSubscription implements TopicSubscribeResponse {
 
       if (retry) {
         logger.fine("retry is still true");
-        await _stream.cancel();
-        var result = await _client.subscribe(cacheName, topicName,
-            resumeAtTopicSequenceNumber: lastSequenceNumber);
-        if (result is TopicSubscription) {
-          _stream = result._stream;
-          _broadcastStream = result._broadcastStream;
-          lastSequenceNumber = result.lastSequenceNumber;
-        } else if (result is TopicSubscribeError) {
-          logger.fine("Error reconnecting: ${result.message}");
-        }
+        retry = await attemptReconnect();
       }
     }
+  }
+
+  Future<bool> attemptReconnect() async {
+    await _stream.cancel();
+    var result = await _client.subscribe(cacheName, topicName,
+        resumeAtTopicSequenceNumber: lastSequenceNumber);
+    if (result is TopicSubscription) {
+      _stream = result._stream;
+      _broadcastStream = result._broadcastStream;
+      lastSequenceNumber = result.lastSequenceNumber;
+    } else if (result is TopicSubscribeError) {
+      logger.fine("Error reconnecting: ${result.message}");
+      if (result.errorCode == MomentoErrorCode.limitExceededError || result.errorCode == MomentoErrorCode.cancelledError) {
+        return false;
+      }
+    }
+    return true;
   }
 
   TopicSubscriptionItemResponse? _processResult(SubscriptionItem_ item) {
