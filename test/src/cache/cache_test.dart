@@ -541,8 +541,8 @@ void main() {
                   () async {
                 final listName = generateStringWithUuid("list-name");
                 final listValue = StringValue("string value");
-                await cacheClient.listPushFront(
-                    integrationTestCacheName, listName, listValue);
+                await cacheClient.listConcatenateFront(
+                    integrationTestCacheName, listName, [listValue]);
                 final fetchResp1 = await cacheClient.listFetch(
                     integrationTestCacheName, listName);
                 switch (fetchResp1) {
