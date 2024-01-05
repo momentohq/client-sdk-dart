@@ -407,10 +407,8 @@ void main() {
                         final pushResp1 = await cacheClient.listPushBack(
                             invalidString, validString, StringValue("string"));
                         switch (pushResp1) {
-                          case ListPushBackHit():
-                            fail('Expected Error but got Hit');
-                          case ListPushBackMiss():
-                            fail('Expected Error but got Miss');
+                          case ListPushBackSuccess():
+                            fail('Expected Error but got Success');
                           case ListPushBackError():
                             expect(pushResp1.errorCode,
                                 MomentoErrorCode.invalidArgumentError,
@@ -421,10 +419,8 @@ void main() {
                         final pushResp2 = await cacheClient.listPushBack(
                             validString, invalidString, StringValue("string"));
                         switch (pushResp2) {
-                          case ListPushBackHit():
-                            fail('Expected Error but got Hit');
-                          case ListPushBackMiss():
-                            fail('Expected Error but got Miss');
+                          case ListPushBackSuccess():
+                            fail('Expected Error but got Success');
                           case ListPushBackError():
                             expect(pushResp2.errorCode,
                                 MomentoErrorCode.invalidArgumentError,
@@ -439,10 +435,8 @@ void main() {
                         final pushResp1 = await cacheClient.listPushFront(
                             invalidString, validString, StringValue("string"));
                         switch (pushResp1) {
-                          case ListPushFrontHit():
-                            fail('Expected Error but got Hit');
-                          case ListPushFrontMiss():
-                            fail('Expected Error but got Miss');
+                          case ListPushFrontSuccess():
+                            fail('Expected Error but got Success');
                           case ListPushFrontError():
                             expect(pushResp1.errorCode,
                                 MomentoErrorCode.invalidArgumentError,
@@ -453,10 +447,8 @@ void main() {
                         final pushResp2 = await cacheClient.listPushFront(
                             validString, invalidString, StringValue("string"));
                         switch (pushResp2) {
-                          case ListPushFrontHit():
-                            fail('Expected Error but got Hit');
-                          case ListPushFrontMiss():
-                            fail('Expected Error but got Miss');
+                          case ListPushFrontSuccess():
+                            fail('Expected Error but got Success');
                           case ListPushFrontError():
                             expect(pushResp2.errorCode,
                                 MomentoErrorCode.invalidArgumentError,

@@ -333,7 +333,7 @@ class DataClient implements AbstractDataClient {
           options: CallOptions(metadata: {
             'cache': cacheName,
           }));
-      return ListPushBackHit(response.listLength);
+      return ListPushBackSuccess(response.listLength);
     } catch (e) {
       if (e is GrpcError) {
         return ListPushBackError(grpcStatusToSdkException(e));
@@ -361,7 +361,7 @@ class DataClient implements AbstractDataClient {
           options: CallOptions(metadata: {
             'cache': cacheName,
           }));
-      return ListPushFrontHit(response.listLength);
+      return ListPushFrontSuccess(response.listLength);
     } catch (e) {
       if (e is GrpcError) {
         return ListPushFrontError(grpcStatusToSdkException(e));
