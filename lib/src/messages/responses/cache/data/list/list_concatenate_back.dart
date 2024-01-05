@@ -28,6 +28,7 @@ class ListConcatenateBackSuccess implements ListConcatenateBackResponse {
 /// - `errorCode`: a unique Momento error code indicating the type of error that occurred
 /// - `message`: a human-readable description of the error
 /// - `innerException`: the original error that caused the failure; can be re-thrown
-class ListConcatenateBackError extends ErrorResponseBase implements ListConcatenateBackResponse {
+class ListConcatenateBackError extends ErrorResponseBase
+    implements ListConcatenateBackResponse {
   ListConcatenateBackError(super.exception);
 }

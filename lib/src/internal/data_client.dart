@@ -38,8 +38,8 @@ abstract class AbstractDataClient {
       String cacheName, String listName, List<Value> values,
       {CollectionTtl? ttl, int? truncateBackToSize});
 
-  Future<ListFetchResponse> listFetch(
-      String cacheName, String listName, {int? startIndex, int? endIndex});
+  Future<ListFetchResponse> listFetch(String cacheName, String listName,
+      {int? startIndex, int? endIndex});
   Future<ListLengthResponse> listLength(String cacheName, String listName);
   Future<ListPopBackResponse> listPopBack(String cacheName, String listName);
   Future<ListPopFrontResponse> listPopFront(String cacheName, String listName);
@@ -55,8 +55,8 @@ abstract class AbstractDataClient {
   Future<ListRemoveValueResponse> listRemoveValue(
       String cacheName, String listName, Value value);
 
-  Future<ListRetainResponse> listRetain(
-      String cacheName, String listName, {int? startIndex, int? endIndex, CollectionTtl? ttl});
+  Future<ListRetainResponse> listRetain(String cacheName, String listName,
+      {int? startIndex, int? endIndex, CollectionTtl? ttl});
 }
 
 class DataClient implements AbstractDataClient {
@@ -147,14 +147,17 @@ class DataClient implements AbstractDataClient {
   }
 
   @override
-  Future<ListConcatenateBackResponse> listConcatenateBack(String cacheName, String listName, List<Value> values, {CollectionTtl? ttl, int? truncateFrontToSize}) async {
+  Future<ListConcatenateBackResponse> listConcatenateBack(
+      String cacheName, String listName, List<Value> values,
+      {CollectionTtl? ttl, int? truncateFrontToSize}) async {
     try {
       var request = ListConcatenateBackRequest_();
       request.listName = utf8.encode(listName);
       request.truncateFrontToSize = truncateFrontToSize ?? 0;
       request.values.addAll(values.map((e) => e.toBinary()));
       CollectionTtl _ttl = ttl ?? CollectionTtl.fromCacheTtl();
-      request.ttlMilliseconds = Int64(_ttl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
+      request.ttlMilliseconds =
+          Int64(_ttl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
       request.refreshTtl = _ttl.refreshTtl();
       var response = await _client.listConcatenateBack(request,
           options: CallOptions(metadata: {
@@ -172,14 +175,17 @@ class DataClient implements AbstractDataClient {
   }
 
   @override
-  Future<ListConcatenateFrontResponse> listConcatenateFront(String cacheName, String listName, List<Value> values, {CollectionTtl? ttl, int? truncateBackToSize}) async {
+  Future<ListConcatenateFrontResponse> listConcatenateFront(
+      String cacheName, String listName, List<Value> values,
+      {CollectionTtl? ttl, int? truncateBackToSize}) async {
     try {
       var request = ListConcatenateFrontRequest_();
       request.listName = utf8.encode(listName);
       request.truncateBackToSize = truncateBackToSize ?? 0;
       request.values.addAll(values.map((e) => e.toBinary()));
       CollectionTtl _ttl = ttl ?? CollectionTtl.fromCacheTtl();
-      request.ttlMilliseconds = Int64(_ttl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
+      request.ttlMilliseconds =
+          Int64(_ttl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
       request.refreshTtl = _ttl.refreshTtl();
       var response = await _client.listConcatenateFront(request,
           options: CallOptions(metadata: {
@@ -197,15 +203,20 @@ class DataClient implements AbstractDataClient {
   }
 
   @override
-  Future<ListFetchResponse> listFetch(String cacheName, String listName, {int? startIndex, int? endIndex}) async {
+  Future<ListFetchResponse> listFetch(String cacheName, String listName,
+      {int? startIndex, int? endIndex}) async {
     try {
       var request = ListFetchRequest_();
       request.listName = utf8.encode(cacheName);
 
-      if (startIndex != null) {request.inclusiveStart = startIndex;} else {
+      if (startIndex != null) {
+        request.inclusiveStart = startIndex;
+      } else {
         request.unboundedStart = Unbounded_();
       }
-      if (endIndex != null) {request.exclusiveEnd = endIndex;} else {
+      if (endIndex != null) {
+        request.exclusiveEnd = endIndex;
+      } else {
         request.unboundedEnd = Unbounded_();
       }
       var response = await _client.listFetch(request,
@@ -218,7 +229,8 @@ class DataClient implements AbstractDataClient {
         case ListFetchResponse__List.missing:
           return ListFetchMiss();
         default:
-          return ListFetchError(UnknownException("Unexpected error: $response", null, null));
+          return ListFetchError(
+              UnknownException("Unexpected error: $response", null, null));
       }
     } catch (e) {
       if (e is GrpcError) {
@@ -231,7 +243,8 @@ class DataClient implements AbstractDataClient {
   }
 
   @override
-  Future<ListLengthResponse> listLength(String cacheName, String listName) async {
+  Future<ListLengthResponse> listLength(
+      String cacheName, String listName) async {
     try {
       var request = ListLengthRequest_();
       request.listName = utf8.encode(listName);
@@ -245,7 +258,8 @@ class DataClient implements AbstractDataClient {
         case ListLengthResponse__List.missing:
           return ListLengthMiss();
         default:
-          return ListLengthError(UnknownException("Unexpected error: $response", null, null));
+          return ListLengthError(
+              UnknownException("Unexpected error: $response", null, null));
       }
     } catch (e) {
       if (e is GrpcError) {
@@ -258,7 +272,8 @@ class DataClient implements AbstractDataClient {
   }
 
   @override
-  Future<ListPopBackResponse> listPopBack(String cacheName, String listName) async {
+  Future<ListPopBackResponse> listPopBack(
+      String cacheName, String listName) async {
     try {
       var request = ListPopBackRequest_();
       request.listName = utf8.encode(listName);
@@ -272,7 +287,8 @@ class DataClient implements AbstractDataClient {
         case ListPopBackResponse__List.missing:
           return ListPopBackMiss();
         default:
-          return ListPopBackError(UnknownException("Unexpected error: $response", null, null));
+          return ListPopBackError(
+              UnknownException("Unexpected error: $response", null, null));
       }
     } catch (e) {
       if (e is GrpcError) {
@@ -285,7 +301,8 @@ class DataClient implements AbstractDataClient {
   }
 
   @override
-  Future<ListPopFrontResponse> listPopFront(String cacheName, String listName) async {
+  Future<ListPopFrontResponse> listPopFront(
+      String cacheName, String listName) async {
     try {
       var request = ListPopFrontRequest_();
       request.listName = utf8.encode(listName);
@@ -299,7 +316,8 @@ class DataClient implements AbstractDataClient {
         case ListPopFrontResponse__List.missing:
           return ListPopFrontMiss();
         default:
-          return ListPopFrontError(UnknownException("Unexpected error: $response", null, null));
+          return ListPopFrontError(
+              UnknownException("Unexpected error: $response", null, null));
       }
     } catch (e) {
       if (e is GrpcError) {
@@ -312,14 +330,17 @@ class DataClient implements AbstractDataClient {
   }
 
   @override
-  Future<ListPushBackResponse> listPushBack(String cacheName, String listName, Value value, {CollectionTtl? ttl, int? truncateFrontToSize}) async {
+  Future<ListPushBackResponse> listPushBack(
+      String cacheName, String listName, Value value,
+      {CollectionTtl? ttl, int? truncateFrontToSize}) async {
     try {
       var request = ListPushBackRequest_();
       request.listName = utf8.encode(listName);
       request.truncateFrontToSize = truncateFrontToSize ?? 0;
       request.value.addAll(value.toBinary());
       CollectionTtl _ttl = ttl ?? CollectionTtl.fromCacheTtl();
-      request.ttlMilliseconds = Int64(_ttl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
+      request.ttlMilliseconds =
+          Int64(_ttl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
       request.refreshTtl = _ttl.refreshTtl();
       var response = await _client.listPushBack(request,
           options: CallOptions(metadata: {
@@ -337,14 +358,17 @@ class DataClient implements AbstractDataClient {
   }
 
   @override
-  Future<ListPushFrontResponse> listPushFront(String cacheName, String listName, Value value, {CollectionTtl? ttl, int? truncateBackToSize}) async {
+  Future<ListPushFrontResponse> listPushFront(
+      String cacheName, String listName, Value value,
+      {CollectionTtl? ttl, int? truncateBackToSize}) async {
     try {
       var request = ListPushFrontRequest_();
       request.listName = utf8.encode(listName);
       request.truncateBackToSize = truncateBackToSize ?? 0;
       request.value.addAll(value.toBinary());
       CollectionTtl _ttl = ttl ?? CollectionTtl.fromCacheTtl();
-      request.ttlMilliseconds = Int64(_ttl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
+      request.ttlMilliseconds =
+          Int64(_ttl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
       request.refreshTtl = _ttl.refreshTtl();
       var response = await _client.listPushFront(request,
           options: CallOptions(metadata: {
@@ -362,7 +386,8 @@ class DataClient implements AbstractDataClient {
   }
 
   @override
-  Future<ListRemoveValueResponse> listRemoveValue(String cacheName, String listName, Value value) async {
+  Future<ListRemoveValueResponse> listRemoveValue(
+      String cacheName, String listName, Value value) async {
     try {
       var request = ListRemoveRequest_();
       request.listName = utf8.encode(listName);
@@ -383,18 +408,24 @@ class DataClient implements AbstractDataClient {
   }
 
   @override
-  Future<ListRetainResponse> listRetain(String cacheName, String listName, {int? startIndex, int? endIndex, CollectionTtl? ttl}) async {
+  Future<ListRetainResponse> listRetain(String cacheName, String listName,
+      {int? startIndex, int? endIndex, CollectionTtl? ttl}) async {
     try {
       var request = ListRetainRequest_();
       request.listName = utf8.encode(listName);
-      if (startIndex != null) {request.inclusiveStart = startIndex;} else {
+      if (startIndex != null) {
+        request.inclusiveStart = startIndex;
+      } else {
         request.unboundedStart = Unbounded_();
       }
-      if (endIndex != null) {request.exclusiveEnd = endIndex;} else {
+      if (endIndex != null) {
+        request.exclusiveEnd = endIndex;
+      } else {
         request.unboundedEnd = Unbounded_();
       }
       CollectionTtl _ttl = ttl ?? CollectionTtl.fromCacheTtl();
-      request.ttlMilliseconds = Int64(_ttl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
+      request.ttlMilliseconds =
+          Int64(_ttl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
       request.refreshTtl = _ttl.refreshTtl();
       _client.listRetain(request,
           options: CallOptions(metadata: {

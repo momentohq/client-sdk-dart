@@ -26,7 +26,8 @@ class ListPopFrontMiss implements ListPopFrontResponse {}
 /// - `errorCode`: a unique Momento error code indicating the type of error that occurred
 /// - `message`: a human-readable description of the error
 /// - `innerException`: the original error that caused the failure; can be re-thrown
-class ListPopFrontError extends ErrorResponseBase implements ListPopFrontResponse {
+class ListPopFrontError extends ErrorResponseBase
+    implements ListPopFrontResponse {
   ListPopFrontError(super.exception);
 }
 

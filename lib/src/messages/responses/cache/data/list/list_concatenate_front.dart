@@ -28,6 +28,7 @@ class ListConcatenateFrontSuccess implements ListConcatenateFrontResponse {
 /// - `errorCode`: a unique Momento error code indicating the type of error that occurred
 /// - `message`: a human-readable description of the error
 /// - `innerException`: the original error that caused the failure; can be re-thrown
-class ListConcatenateFrontError extends ErrorResponseBase implements ListConcatenateFrontResponse {
+class ListConcatenateFrontError extends ErrorResponseBase
+    implements ListConcatenateFrontResponse {
   ListConcatenateFrontError(super.exception);
 }

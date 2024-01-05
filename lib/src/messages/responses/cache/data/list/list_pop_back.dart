@@ -26,7 +26,8 @@ class ListPopBackMiss implements ListPopBackResponse {}
 /// - `errorCode`: a unique Momento error code indicating the type of error that occurred
 /// - `message`: a human-readable description of the error
 /// - `innerException`: the original error that caused the failure; can be re-thrown
-class ListPopBackError extends ErrorResponseBase implements ListPopBackResponse {
+class ListPopBackError extends ErrorResponseBase
+    implements ListPopBackResponse {
   ListPopBackError(super.exception);
 }
 

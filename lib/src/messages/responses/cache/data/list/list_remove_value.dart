@@ -22,6 +22,7 @@ class ListRemoveValueSuccess implements ListRemoveValueResponse {}
 /// - `errorCode`: a unique Momento error code indicating the type of error that occurred
 /// - `message`: a human-readable description of the error
 /// - `innerException`: the original error that caused the failure; can be re-thrown
-class ListRemoveValueError extends ErrorResponseBase implements ListRemoveValueResponse {
+class ListRemoveValueError extends ErrorResponseBase
+    implements ListRemoveValueResponse {
   ListRemoveValueError(super.exception);
 }

@@ -6,7 +6,8 @@ sealed class ListPushFrontResponse {}
 
 class ListPushFrontMiss implements ListPushFrontResponse {}
 
-class ListPushFrontError extends ErrorResponseBase implements ListPushFrontResponse {
+class ListPushFrontError extends ErrorResponseBase
+    implements ListPushFrontResponse {
   ListPushFrontError(super.exception);
 }
 

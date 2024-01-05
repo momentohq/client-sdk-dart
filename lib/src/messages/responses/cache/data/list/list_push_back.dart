@@ -6,7 +6,8 @@ sealed class ListPushBackResponse {}
 
 class ListPushBackMiss implements ListPushBackResponse {}
 
-class ListPushBackError extends ErrorResponseBase implements ListPushBackResponse {
+class ListPushBackError extends ErrorResponseBase
+    implements ListPushBackResponse {
   ListPushBackError(super.exception);
 }
 
