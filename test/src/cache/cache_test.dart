@@ -533,13 +533,21 @@ void main() {
                   () async {
                 final listName = generateStringWithUuid("list-name");
                 final listValue = StringValue("string value");
-                await cacheClient.listConcatenateFront(
-                    integrationTestCacheName, listName, [listValue]);
+                final listPushFrontResp = await cacheClient.listPushFront(
+                    integrationTestCacheName, listName, listValue,
+                    ttl: CollectionTtl(Duration(hours: 60), true));
+                switch (listPushFrontResp) {
+                  case ListPushFrontSuccess():
+                    expect(listPushFrontResp.length, 1);
+                    break;
+                  case ListPushFrontError():
+                    fail('Expected list push front Success but got Error');
+                }
                 final fetchResp1 = await cacheClient.listFetch(
                     integrationTestCacheName, listName);
                 switch (fetchResp1) {
                   case ListFetchHit():
-                    expect(fetchResp1.values.toList(), [listValue],
+                    expect(fetchResp1.values, [listValue.toUtf8()],
                         reason:
                             "list should contain the value that was pushed");
                   case ListFetchMiss():

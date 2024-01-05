@@ -194,7 +194,7 @@ class DataClient implements AbstractDataClient {
       {int? startIndex, int? endIndex}) async {
     try {
       var request = ListFetchRequest_();
-      request.listName = utf8.encode(cacheName);
+      request.listName = utf8.encode(listName);
 
       if (startIndex != null) {
         request.inclusiveStart = startIndex;
@@ -324,7 +324,7 @@ class DataClient implements AbstractDataClient {
       var request = ListPushBackRequest_();
       request.listName = utf8.encode(listName);
       request.truncateFrontToSize = truncateFrontToSize ?? 0;
-      request.value.addAll(value.toBinary());
+      request.value = value.toBinary();
       CollectionTtl actualTtl = ttl ?? CollectionTtl.fromCacheTtl();
       request.ttlMilliseconds =
           Int64(actualTtl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
@@ -352,7 +352,7 @@ class DataClient implements AbstractDataClient {
       var request = ListPushFrontRequest_();
       request.listName = utf8.encode(listName);
       request.truncateBackToSize = truncateBackToSize ?? 0;
-      request.value.addAll(value.toBinary());
+      request.value = value.toBinary();
       CollectionTtl actualTtl = ttl ?? CollectionTtl.fromCacheTtl();
       request.ttlMilliseconds =
           Int64(actualTtl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
