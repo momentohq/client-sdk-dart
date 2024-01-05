@@ -7,38 +7,38 @@ class CollectionTtl {
     _refreshTtl = refreshTtl;
   }
 
-  ttlSeconds() {
-    return _ttlSeconds;
+  int? ttlSeconds() {
+    return _ttlSeconds?.inSeconds;
   }
 
-  ttlMilliseconds() {
+  int? ttlMilliseconds() {
     if (_ttlSeconds == null) {
       return null;
     }
     return _ttlSeconds?.inMilliseconds;
   }
 
-  refreshTtl() {
+  bool refreshTtl() {
     return _refreshTtl;
   }
 
-  static fromCacheTtl() {
+  static CollectionTtl fromCacheTtl() {
     return CollectionTtl(null, false);
   }
 
-  static of(Duration ttlSeconds) {
+  static CollectionTtl of(Duration ttlSeconds) {
     return CollectionTtl(ttlSeconds, true);
   }
 
-  static refreshTtlIfProvided(Duration? ttlSeconds) {
+  static CollectionTtl refreshTtlIfProvided(Duration? ttlSeconds) {
     return CollectionTtl(ttlSeconds, ttlSeconds == null ? true : false);
   }
 
-  withRefreshTtlOnUpdates() {
+  CollectionTtl withRefreshTtlOnUpdates() {
     return CollectionTtl(_ttlSeconds, true);
   }
 
-  withNoRefreshTtlOnUpdates() {
+  CollectionTtl withNoRefreshTtlOnUpdates() {
     return CollectionTtl(_ttlSeconds, false);
   }
 }

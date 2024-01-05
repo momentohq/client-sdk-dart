@@ -11,3 +11,6 @@ void validateCacheName(String cacheName) =>
 
 void validateTopicName(String topicName) =>
     _validateString(topicName, "Invalid topic name");
+
+void validateListName(String listName) =>
+    _validateString(listName, "Invalid list name");

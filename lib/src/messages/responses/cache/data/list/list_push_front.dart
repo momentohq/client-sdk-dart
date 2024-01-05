@@ -11,10 +11,9 @@ class ListPushFrontError extends ErrorResponseBase implements ListPushFrontRespo
 }
 
 class ListPushFrontHit implements ListPushFrontResponse {
-  ListPushFrontHit(this._value);
+  ListPushFrontHit(this._length);
 
-  final List<int> _value;
+  final int _length;
 
-  String get value => utf8.decode(_value);
-  List<int> get binaryValue => _value;
+  int get length => _length;
 }

@@ -2,25 +2,25 @@ import 'dart:convert';
 
 import 'package:momento/src/messages/responses/responses_base.dart';
 
-/// Sealed class for a get cache item request.
+/// Sealed class for a cache list fetch response.
 ///
 /// Pattern matching can be used to operate on the appropriate subtype.
 /// ```dart
 /// switch (response) {
-///  case GetHit():
+///  case ListFetchHit():
 ///   // handle cache hit
-///  case GetMiss():
+///  case ListFetchMiss():
 ///   // handle cache miss
-///  case GetError():
+///  case ListFetchError():
 ///   // handle error
 /// }
 /// ```
 sealed class ListFetchResponse {}
 
-/// Indicates that the requested data was not available in the cache.
+/// Indicates that the requested list was not available in the cache.
 class ListFetchMiss implements ListFetchResponse {}
 
-/// Indicates that an error occurred during the get cache item request.
+/// Indicates that an error occurred during the list fetch request.
 ///
 /// The response object includes the following fields you can use to determine how you want to handle the error:
 /// - `errorCode`: a unique Momento error code indicating the type of error that occurred
@@ -30,7 +30,7 @@ class ListFetchError extends ErrorResponseBase implements ListFetchResponse {
   ListFetchError(super.exception);
 }
 
-/// Indicates that the requested data was successfully retrieved from the cache and can be accessed by the fields `value` or `binaryValue`.
+/// Indicates that the requested list was successfully retrieved from the cache and can be accessed by the fields `values` or `binaryValues`.
 class ListFetchHit implements ListFetchResponse {
   ListFetchHit(this._values);
 
