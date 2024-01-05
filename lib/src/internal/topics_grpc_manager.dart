@@ -12,8 +12,9 @@ class TopicGrpcManager {
     _channel = ClientChannel(credentialProvider.cacheEndpoint,
         options: ChannelOptions(
             keepAlive: ClientKeepAliveOptions(
-                pingInterval: Duration(seconds: 10),
-                timeout: Duration(seconds: 5))));
+                pingInterval: Duration(seconds: 20),
+                // timeout: Duration(seconds: 15),
+                permitWithoutCalls: true)));
     _client = PubsubClient(_channel,
         options: CallOptions(metadata: {
           'authorization': credentialProvider.apiKey,
