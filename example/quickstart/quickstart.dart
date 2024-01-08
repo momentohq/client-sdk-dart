@@ -3,7 +3,7 @@ import 'package:momento/momento.dart';
 Future<void> main() async {
   final cacheClient = CacheClient(
       CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
-      MobileCacheConfiguration.latest(),
+      CacheClientConfigurations.latest(),
       Duration(seconds: 30));
 
   final cacheName = "cache";

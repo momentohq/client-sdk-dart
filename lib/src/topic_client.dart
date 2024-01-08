@@ -19,8 +19,8 @@ class TopicClient implements ITopicClient {
   final ClientPubsub _pubsubClient;
   final MomentoLogger _logger = MomentoLogger('MomentoTopicClient');
 
-  TopicClient(
-      CredentialProvider credentialProvider, TopicConfiguration configuration)
+  TopicClient(CredentialProvider credentialProvider,
+      TopicClientConfiguration configuration)
       : _pubsubClient = ClientPubsub(credentialProvider, configuration) {
     _logger.setLevel(configuration.logLevel);
     _logger.trace("initializing topic client");

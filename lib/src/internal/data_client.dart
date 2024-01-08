@@ -19,7 +19,7 @@ abstract class AbstractDataClient {
 class DataClient implements AbstractDataClient {
   late ClientChannel _channel;
   late ScsClient _client;
-  final CacheConfiguration _configuration;
+  final CacheClientConfiguration _configuration;
   final Duration _defaultTtl;
 
   DataClient(CredentialProvider credentialProvider, this._configuration,

@@ -32,7 +32,7 @@ class CacheClient implements ICacheClient {
   final MomentoLogger _logger = MomentoLogger('MomentoCacheClient');
 
   CacheClient(CredentialProvider credentialProvider,
-      CacheConfiguration configuration, Duration defaultTtl) {
+      CacheClientConfiguration configuration, Duration defaultTtl) {
     _dataClient = DataClient(credentialProvider, configuration, defaultTtl);
     _controlClient = ControlClient(credentialProvider, configuration);
     _logger.setLevel(configuration.logLevel);
