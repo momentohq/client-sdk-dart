@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'package:grpc/grpc.dart';
 import 'package:momento/momento.dart';
 
 Future<void> main() async {
