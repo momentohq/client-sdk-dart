@@ -26,8 +26,6 @@ void main() async {
           print("Binary value: ${msg.value}");
         case TopicSubscriptionItemText():
           print("String value: ${msg.value}");
-        case TopicSubscriptionItemNotSet():
-          print("Value was not set");
       }
     }
   } catch (e) {
