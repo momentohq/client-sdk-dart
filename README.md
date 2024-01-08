@@ -50,10 +50,9 @@ Check out our [example](./example/) directory for complete examples of using the
 
 Here is a quickstart you can use for your own project:
 
-import 'dart:io';
 import 'package:momento/momento.dart';
 
-void main() async {
+Future<void> main() async {
   final cacheClient = CacheClient(
       CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
       MobileCacheConfiguration.latest(),
@@ -81,7 +80,7 @@ void main() async {
       print("Got an error: ${getResp.errorCode} ${getResp.message}");
   }
 
-  exit(0);
+  await cacheClient.close();
 }
 
 
