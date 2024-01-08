@@ -12,6 +12,8 @@ abstract class AbstractDataClient {
       {Duration? ttl});
 
   Future<DeleteResponse> delete(String cacheName, Value key);
+
+  Future<void> close();
 }
 
 class DataClient implements AbstractDataClient {
@@ -99,5 +101,10 @@ class DataClient implements AbstractDataClient {
             UnknownException("Unexpected error: $e", null, null));
       }
     }
+  }
+
+  @override
+  Future<void> close() async {
+    await _channel.shutdown();
   }
 }

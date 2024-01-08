@@ -10,6 +10,8 @@ abstract class AbstractControlClient {
   Future<DeleteCacheResponse> deleteCache(String cacheName);
 
   Future<ListCachesResponse> listCaches();
+
+  Future<void> close();
 }
 
 class ControlClient implements AbstractControlClient {
@@ -82,5 +84,10 @@ class ControlClient implements AbstractControlClient {
             UnknownException("Unexpected error: $e", null, null));
       }
     }
+  }
+
+  @override
+  Future<void> close() async {
+    await _channel.shutdown();
   }
 }

@@ -71,5 +71,4 @@ void main() async {
 
   topicClient.close();
   print("End of Momento topics example");
-  exit(0);
 }

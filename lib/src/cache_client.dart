@@ -22,6 +22,8 @@ abstract class ICacheClient {
       {Duration? ttl});
 
   Future<DeleteResponse> delete(String cacheName, Value key);
+
+  Future<void> close();
 }
 
 class CacheClient implements ICacheClient {
@@ -116,5 +118,11 @@ class CacheClient implements ICacheClient {
       }
     }
     return _dataClient.delete(cacheName, key);
+  }
+
+  @override
+  Future<void> close() async {
+    await _dataClient.close();
+    await _controlClient.close();
   }
 }

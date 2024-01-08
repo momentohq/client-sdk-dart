@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:momento/momento.dart';
 
 void main() async {
@@ -38,5 +37,4 @@ void main() async {
 
   topicClient.close();
   print("Closed Momento Topics subscriber");
-  exit(0);
 }
