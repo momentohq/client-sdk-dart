@@ -62,7 +62,7 @@ void main() {
       final listResp = await cacheClient.listCaches();
       switch (listResp) {
         case ListCachesSuccess():
-          final cacheNames = listResp.caches.map((cacheInfo) => cacheInfo.name);
+          final cacheNames = listResp.cacheNames;
           expect(cacheNames.contains(newTestCacheName), true,
               reason: "new cache should be in list of caches");
           expect(cacheNames.contains(integrationTestCacheName), true,
@@ -88,7 +88,7 @@ void main() {
       switch (listResp2) {
         case ListCachesSuccess():
           final cacheNames =
-              listResp2.caches.map((cacheInfo) => cacheInfo.name);
+              listResp2.cacheNames;
           expect(cacheNames.contains(newTestCacheName), false,
               reason: "new cache should no longer be in list of caches");
           expect(cacheNames.contains(integrationTestCacheName), true,

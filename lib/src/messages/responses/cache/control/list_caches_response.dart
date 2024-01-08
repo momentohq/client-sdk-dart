@@ -33,6 +33,8 @@ class ListCachesSuccess implements ListCachesResponse {
   String description() {
     return "[ListCachesSuccess] length of caches list: ${caches.length}";
   }
+
+  List<String> get cacheNames => caches.map((cache) => cache.name).toList();
 }
 
 /// Indicates that an error occurred during the list caches request.
