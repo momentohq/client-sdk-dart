@@ -38,5 +38,4 @@ void main() async {
 
   topicClient.close();
   print("Closed Momento Topics subscriber");
-  exit(0);
 }

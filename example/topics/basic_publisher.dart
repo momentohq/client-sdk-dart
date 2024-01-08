@@ -21,5 +21,4 @@ void main() async {
 
   topicClient.close();
   print("Closed Momento Topics publisher");
-  exit(0);
 }
