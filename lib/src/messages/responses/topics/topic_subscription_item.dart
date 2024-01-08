@@ -1,6 +1,4 @@
 import 'package:momento/generated/cachepubsub.pb.dart';
-import 'package:momento/src/errors/errors.dart';
-import 'package:momento/src/messages/responses/responses_base.dart';
 
 sealed class TopicSubscriptionItemResponse {}
 
@@ -16,10 +14,7 @@ class TopicSubscriptionItemBinary implements TopicSubscriptionItemResponse {
   List<int> get value => _value;
 }
 
-class TopicSubscriptionItemError extends ErrorResponseBase
-    implements TopicSubscriptionItemResponse {
-  TopicSubscriptionItemError(super.exception);
-}
+class TopicSubscriptionItemNotSet implements TopicSubscriptionItemResponse {}
 
 TopicSubscriptionItemResponse createTopicItemResponse(TopicItem_ item) {
   switch (item.value.whichKind()) {
@@ -27,8 +22,7 @@ TopicSubscriptionItemResponse createTopicItemResponse(TopicItem_ item) {
       return TopicSubscriptionItemText(item.value.text);
     case TopicValue__Kind.binary:
       return TopicSubscriptionItemBinary(item.value.binary);
-    default:
-      return TopicSubscriptionItemError(UnknownException(
-          "unknown TopicItemResponse value: ${item.value}", null, null));
+    case TopicValue__Kind.notSet:
+      return TopicSubscriptionItemNotSet();
   }
 }
