@@ -17,7 +17,7 @@ class CredentialProviderError {
   }
 
   static String emptyEnvironmentVariable(String envVarName) {
-    return "Could not find environment variable $envVarName or the variable was an empty string";
+    return "Environment variable $envVarName is required and not set";
   }
 }
 
