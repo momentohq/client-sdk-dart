@@ -1,13 +1,12 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:momento/momento.dart';
 
 void main() async {
   var topicClient = TopicClient(
       CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
-      MobileTopicConfiguration.latest());
+      TopicClientConfigurations.latest());
 
-  var subscription = topicClient.subscribe("cache", "topic");
+  var subscription = await topicClient.subscribe("cache", "topic");
   var messageStream = switch (subscription) {
     TopicSubscription() => subscription.stream,
     TopicSubscribeError() => throw Exception(
@@ -27,8 +26,6 @@ void main() async {
           print("Binary value: ${msg.value}");
         case TopicSubscriptionItemText():
           print("String value: ${msg.value}");
-        case TopicSubscriptionItemError():
-          print("Error receiving message: ${msg.errorCode}");
       }
     }
   } catch (e) {
@@ -38,5 +35,4 @@ void main() async {
 
   topicClient.close();
   print("Closed Momento Topics subscriber");
-  exit(0);
 }

@@ -14,13 +14,13 @@ abstract class AbstractPubsubClient {
   Future<TopicPublishResponse> publish(
       String cacheName, String topicName, Value value);
 
-  TopicSubscribeResponse subscribe(String cacheName, String topicName);
+  Future<TopicSubscribeResponse> subscribe(String cacheName, String topicName);
 
   void close();
 }
 
 class ClientPubsub implements AbstractPubsubClient {
-  final TopicConfiguration _configuration;
+  final TopicClientConfiguration _configuration;
   late final TopicGrpcManager _grpcManager;
 
   ClientPubsub(CredentialProvider credentialProvider, this._configuration) {
@@ -61,8 +61,8 @@ class ClientPubsub implements AbstractPubsubClient {
   }
 
   @override
-  TopicSubscribeResponse subscribe(String cacheName, String topicName,
-      {Int64? resumeAtTopicSequenceNumber}) {
+  Future<TopicSubscribeResponse> subscribe(String cacheName, String topicName,
+      {Int64? resumeAtTopicSequenceNumber}) async {
     var request = SubscriptionRequest_();
     request.cacheName = cacheName;
     request.topic = topicName;
@@ -70,11 +70,20 @@ class ClientPubsub implements AbstractPubsubClient {
         resumeAtTopicSequenceNumber ?? Int64(0);
     try {
       var stream = _grpcManager.client.subscribe(request);
-      return TopicSubscription(stream, request.resumeAtTopicSequenceNumber,
-          this, cacheName, topicName);
+      final subscription = TopicSubscription(stream,
+          request.resumeAtTopicSequenceNumber, this, cacheName, topicName);
+
+      try {
+        await subscription.init();
+        return subscription;
+      } catch (e) {
+        rethrow;
+      }
     } catch (e) {
       if (e is GrpcError) {
         return TopicSubscribeError(grpcStatusToSdkException(e));
+      } else if (e is SdkException) {
+        return TopicSubscribeError(e);
       }
       return TopicSubscribeError(
           UnknownException("Unexpected error: $e", null, null));

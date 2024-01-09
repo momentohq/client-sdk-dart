@@ -44,12 +44,13 @@ abstract class AbstractDataClient {
 
   Future<ListRetainResponse> listRetain(String cacheName, String listName,
       {int? startIndex, int? endIndex, CollectionTtl? ttl});
+  Future<void> close();
 }
 
 class DataClient implements AbstractDataClient {
   late ClientChannel _channel;
   late ScsClient _client;
-  final CacheConfiguration _configuration;
+  final CacheClientConfiguration _configuration;
   final Duration _defaultTtl;
 
   DataClient(CredentialProvider credentialProvider, this._configuration,
@@ -427,5 +428,9 @@ class DataClient implements AbstractDataClient {
             UnknownException("Unexpected error: $e", null, null));
       }
     }
+  }
+
+  Future<void> close() async {
+    await _channel.shutdown();
   }
 }

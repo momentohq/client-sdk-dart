@@ -4,7 +4,7 @@ import 'package:momento/momento.dart';
 void main() async {
   var topicClient = TopicClient(
       CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
-      MobileTopicConfiguration.latest());
+      TopicClientConfigurations.latest());
 
   // publish 10 messages spaced 1 second apart
   for (final i in Iterable.generate(10)) {
@@ -21,5 +21,4 @@ void main() async {
 
   topicClient.close();
   print("Closed Momento Topics publisher");
-  exit(0);
 }

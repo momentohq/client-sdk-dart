@@ -51,6 +51,7 @@ abstract class ICacheClient {
 
   Future<ListRetainResponse> listRetain(String cacheName, String listName,
       {int? startIndex, int? endIndex, CollectionTtl? ttl});
+  Future<void> close();
 }
 
 class CacheClient implements ICacheClient {
@@ -59,7 +60,7 @@ class CacheClient implements ICacheClient {
   final MomentoLogger _logger = MomentoLogger('MomentoCacheClient');
 
   CacheClient(CredentialProvider credentialProvider,
-      CacheConfiguration configuration, Duration defaultTtl) {
+      CacheClientConfiguration configuration, Duration defaultTtl) {
     _dataClient = DataClient(credentialProvider, configuration, defaultTtl);
     _controlClient = ControlClient(credentialProvider, configuration);
     _logger.setLevel(configuration.logLevel);
@@ -324,5 +325,10 @@ class CacheClient implements ICacheClient {
             UnknownException("Unexpected error: $e", null, null)));
       }
     }
+  }
+
+  Future<void> close() async {
+    await _dataClient.close();
+    await _controlClient.close();
   }
 }

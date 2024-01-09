@@ -12,7 +12,7 @@ void main() async {
 
   var topicClient = TopicClient(
       CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
-      MobileTopicConfiguration.latest());
+      TopicClientConfigurations.latest());
 
   // start publishing messages in 2 seconds
   Timer(const Duration(seconds: 2), () async {
@@ -30,7 +30,7 @@ void main() async {
     }
   });
 
-  var subscription = topicClient.subscribe("cache", "topic");
+  var subscription = await topicClient.subscribe("cache", "topic");
   var messageStream = switch (subscription) {
     TopicSubscription() => subscription.stream,
     TopicSubscribeError() => throw Exception(
@@ -50,8 +50,6 @@ void main() async {
           print("Binary value: ${msg.value}");
         case TopicSubscriptionItemText():
           print("String value: ${msg.value}");
-        case TopicSubscriptionItemError():
-          print("Error receiving message: ${msg.errorCode}");
       }
     }
   } catch (e) {
@@ -61,7 +59,7 @@ void main() async {
 
   // unsubscribing should not affect the topic client's ability
   // to subscribe to another topic afterwards
-  var sub2 = topicClient.subscribe("cache", "topic");
+  var sub2 = await topicClient.subscribe("cache", "topic");
   switch (sub2) {
     case TopicSubscription():
       print("Successful 2nd subscription!");
@@ -71,5 +69,4 @@ void main() async {
 
   topicClient.close();
   print("End of Momento topics example");
-  exit(0);
 }

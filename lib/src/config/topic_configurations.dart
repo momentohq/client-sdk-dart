@@ -4,16 +4,9 @@ import 'transport/grpc_configuration.dart';
 import 'transport/transport_strategy.dart';
 
 /// Prebuilt configurations for Momento Topics clients
-abstract interface class TopicClientConfigurations {}
-
-/// Provides prebuilt configurations for the `TopicClient` on mobile platforms
-class MobileTopicConfiguration extends TopicClientConfigurations {
-  static TopicClientConfiguration defaultConfig() {
-    return latest();
-  }
-
+class TopicClientConfigurations {
   static TopicClientConfiguration latest({LogLevel logLevel = LogLevel.info}) {
-    return TopicClientConfiguration(
+    return TopicConfiguration(
         StaticTransportStrategy(StaticGrpcConfiguration(Duration(seconds: 15))),
         logLevel);
   }

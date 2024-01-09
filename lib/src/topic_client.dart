@@ -10,7 +10,7 @@ abstract class ITopicClient {
   Future<TopicPublishResponse> publish(
       String cacheName, String topicName, Value value);
 
-  TopicSubscribeResponse subscribe(String cacheName, String topicName);
+  Future<TopicSubscribeResponse> subscribe(String cacheName, String topicName);
 
   void close();
 }
@@ -19,8 +19,8 @@ class TopicClient implements ITopicClient {
   final ClientPubsub _pubsubClient;
   final MomentoLogger _logger = MomentoLogger('MomentoTopicClient');
 
-  TopicClient(
-      CredentialProvider credentialProvider, TopicConfiguration configuration)
+  TopicClient(CredentialProvider credentialProvider,
+      TopicClientConfiguration configuration)
       : _pubsubClient = ClientPubsub(credentialProvider, configuration) {
     _logger.setLevel(configuration.logLevel);
     _logger.trace("initializing topic client");
@@ -33,8 +33,9 @@ class TopicClient implements ITopicClient {
   }
 
   @override
-  TopicSubscribeResponse subscribe(String cacheName, String topicName) {
-    return _pubsubClient.subscribe(cacheName, topicName);
+  Future<TopicSubscribeResponse> subscribe(
+      String cacheName, String topicName) async {
+    return await _pubsubClient.subscribe(cacheName, topicName);
   }
 
   @override

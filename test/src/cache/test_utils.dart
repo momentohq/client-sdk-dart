@@ -15,7 +15,7 @@ class TestSetup {
 Future<TestSetup> setUpIntegrationTests() async {
   final cacheClient = CacheClient(
       CredentialProvider.fromEnvironmentVariable(apiKeyEnvVarName),
-      MobileCacheConfiguration.latest(),
+      CacheClientConfigurations.latest(),
       Duration(seconds: 30));
   final integrationTestCacheName =
       generateStringWithUuid("dart-sdk-cache-tests");

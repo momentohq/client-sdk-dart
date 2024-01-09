@@ -1,28 +1,96 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+<head>
+  <meta name="Momento Dart Client Library Documentation" content="Dart client software development kit for Momento Cache">
+</head>
+<img src="https://docs.momentohq.com/img/logo.svg" alt="logo" width="400"/>
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+[![project status](https://momentohq.github.io/standards-and-practices/badges/project-status-official.svg)](https://github.com/momentohq/standards-and-practices/blob/main/docs/momento-on-github.md)
+[![project stability](https://momentohq.github.io/standards-and-practices/badges/project-stability-alpha.svg)](https://github.com/momentohq/standards-and-practices/blob/main/docs/momento-on-github.md)
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+# Momento Dart Client Library
 
-## Developer Setup
+Momento Cache is a fast, simple, pay-as-you-go caching solution without any of the operational overhead
+required by traditional caching solutions.  This repo contains the source code for the Momento Dart client library.
 
-1. install [dart using homebrew](https://dart.dev/get-dart#install)
-2. Using Intellij IDE for dart development
-3. Installed [dart plugin](https://plugins.jetbrains.com/plugin/6351-dart) for intellij
-4. `brew info dart` to determine where the dart sdk is installed
-5. followed [these](https://fluttermaster.com/config-dart-sdk-inside-intellij-idea-on-macos/) instructions on how to setup sdk inside of intellij
+To get started with Momento you will need a Momento Auth Token. You can get one from the [Momento Console](https://console.gomomento.com).
 
-In VSCode, there's an extension for Dart and Flutter files.
-To install dependencies using CLI: `dart pub get`
-Running tests: `dart test`
-Linting and formatting: `dart format .` and `dart fix`
+* Website: [https://www.gomomento.com/](https://www.gomomento.com/)
+* Momento Documentation: [https://docs.momentohq.com/](https://docs.momentohq.com/)
+* Getting Started: [https://docs.momentohq.com/getting-started](https://docs.momentohq.com/getting-started)
+* Dart SDK Documentation: [https://docs.momentohq.com/develop/sdks/dart](https://docs.momentohq.com/develop/sdks/dart)
+* Discuss: [Momento Discord](https://discord.gg/3HkAKjUZGq)
+
+# Momento Dart SDK
+
+To get started with Momento you will need a Momento API key. You can get one from the [Momento Console](https://console.gomomento.com/api-keys).
+
+* Website: [https://www.gomomento.com/](https://www.gomomento.com/)
+* Momento Documentation: [https://docs.momentohq.com/](https://docs.momentohq.com/)
+* Getting Started: [https://docs.momentohq.com/getting-started](https://docs.momentohq.com/getting-started)
+* Discuss: [Momento Discord](https://discord.gg/3HkAKjUZGq)
+
+## Packages
+
+The Momento Dart SDK is available on [pub.dev](https://pub.dev/packages/momento) 
+
+To install in your Dart program, use: 
+
+```bash
+dart pub add momento
+```
+
+To install in your Flutter program, use: 
+
+```bash
+flutter pub add momento
+```
+
+## Usage
+
+Check out our [example](./example/) directory for complete examples of using the Momento Dart SDK to implement a publish and subscribe system in a basic Dart program and in a Flutter app.
+
+Here is a quickstart you can use for your own project:
+
+import 'package:momento/momento.dart';
+
+Future<void> main() async {
+  final cacheClient = CacheClient(
+      CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
+      CacheClientConfigurations.latest(),
+      Duration(seconds: 30));
+
+  final cacheName = "cache";
+  final key = StringValue("key");
+  final value = StringValue("value");
+
+  final setResp = await cacheClient.set(cacheName, key, value);
+  switch (setResp) {
+    case SetSuccess():
+      print("Set successful!");
+    case SetError():
+      print("Set error: ${setResp.errorCode} ${setResp.message}");
+  }
+
+  final getResp = await cacheClient.get(cacheName, key);
+  switch (getResp) {
+    case GetHit():
+      print("Found value in $cacheName: ${getResp.value}");
+    case GetMiss():
+      print("Value was not found in $cacheName!");
+    case GetError():
+      print("Got an error: ${getResp.errorCode} ${getResp.message}");
+  }
+
+  await cacheClient.close();
+}
+
+
+## Getting Started and Documentation
+
+General documentation on Momento and the Momento SDKs is available on the [Momento Docs website](https://docs.momentohq.com/). Specific usage examples for the Dart SDK are coming soon!
+
+## Examples
+
+Check out full working code in the [example](./example/) directory of this repository!
 
 ## Logging
 
@@ -41,3 +109,10 @@ This enum can be used to configure the logging level of the Momento package. By 
 ```dart
 var config = Mobile.latest(logLevel: LogLevel.debug);
 ```
+
+## Developing
+
+If you are interested in contributing to the SDK, please see the [CONTRIBUTING](./CONTRIBUTING.md) docs.
+
+----------------------------------------------------------------------------------------
+For more info, visit our website at [https://gomomento.com](https://gomomento.com)!

@@ -10,12 +10,14 @@ abstract class AbstractControlClient {
   Future<DeleteCacheResponse> deleteCache(String cacheName);
 
   Future<ListCachesResponse> listCaches();
+
+  Future<void> close();
 }
 
 class ControlClient implements AbstractControlClient {
   late ClientChannel _channel;
   late ScsControlClient _client;
-  final CacheConfiguration _configuration;
+  final CacheClientConfiguration _configuration;
 
   ControlClient(CredentialProvider credentialProvider, this._configuration) {
     _channel = ClientChannel(credentialProvider.controlEndpoint);
@@ -82,5 +84,10 @@ class ControlClient implements AbstractControlClient {
             UnknownException("Unexpected error: $e", null, null));
       }
     }
+  }
+
+  @override
+  Future<void> close() async {
+    await _channel.shutdown();
   }
 }
