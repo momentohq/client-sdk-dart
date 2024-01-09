@@ -9,13 +9,11 @@ import 'test_utils.dart';
 void main() {
   late final TestSetup testSetup;
   late final String integrationTestCacheName;
-  late final CacheClient cacheClient;
   late final TopicClient topicClient;
 
   setUpAll(() async {
     testSetup = await setUpIntegrationTests();
     integrationTestCacheName = testSetup.cacheName;
-    cacheClient = testSetup.cacheClient;
     topicClient = testSetup.topicClient;
   });
 
