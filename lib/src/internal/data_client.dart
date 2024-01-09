@@ -430,6 +430,7 @@ class DataClient implements AbstractDataClient {
     }
   }
 
+  @override
   Future<void> close() async {
     await _channel.shutdown();
   }

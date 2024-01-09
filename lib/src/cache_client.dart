@@ -327,6 +327,7 @@ class CacheClient implements ICacheClient {
     }
   }
 
+  @override
   Future<void> close() async {
     await _dataClient.close();
     await _controlClient.close();
