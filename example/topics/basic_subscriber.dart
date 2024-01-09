@@ -6,7 +6,7 @@ void main() async {
       CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
       TopicClientConfigurations.latest());
 
-  var subscription = topicClient.subscribe("cache", "topic");
+  var subscription = await topicClient.subscribe("cache", "topic");
   var messageStream = switch (subscription) {
     TopicSubscription() => subscription.stream,
     TopicSubscribeError() => throw Exception(

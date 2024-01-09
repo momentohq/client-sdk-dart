@@ -30,7 +30,7 @@ void main() async {
     }
   });
 
-  var subscription = topicClient.subscribe("cache", "topic");
+  var subscription = await topicClient.subscribe("cache", "topic");
   var messageStream = switch (subscription) {
     TopicSubscription() => subscription.stream,
     TopicSubscribeError() => throw Exception(
@@ -59,7 +59,7 @@ void main() async {
 
   // unsubscribing should not affect the topic client's ability
   // to subscribe to another topic afterwards
-  var sub2 = topicClient.subscribe("cache", "topic");
+  var sub2 = await topicClient.subscribe("cache", "topic");
   switch (sub2) {
     case TopicSubscription():
       print("Successful 2nd subscription!");
