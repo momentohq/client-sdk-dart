@@ -86,6 +86,18 @@ void main() {
                                 reason:
                                     "listConcatenateBack should not accept empty cache name");
                         }
+
+                        final concatResp3 = await cacheClient
+                            .listConcatenateBack(validString, validString, []);
+                        switch (concatResp3) {
+                          case ListConcatenateBackSuccess():
+                            fail('Expected Error but got Success');
+                          case ListConcatenateBackError():
+                            expect(concatResp2.errorCode,
+                                MomentoErrorCode.invalidArgumentError,
+                                reason:
+                                    "listConcatenateBack should not accept empty list of values");
+                        }
                       }),
                       test('listConcatenateFront', () async {
                         final validString = "valid";
@@ -114,7 +126,19 @@ void main() {
                             expect(concatResp2.errorCode,
                                 MomentoErrorCode.invalidArgumentError,
                                 reason:
-                                    "listConcatenateFront should not accept empty cache name");
+                                    "listConcatenateFront should not accept empty list name");
+                        }
+
+                        final concatResp3 = await cacheClient
+                            .listConcatenateFront(validString, validString, []);
+                        switch (concatResp3) {
+                          case ListConcatenateFrontSuccess():
+                            fail('Expected Error but got Success');
+                          case ListConcatenateFrontError():
+                            expect(concatResp2.errorCode,
+                                MomentoErrorCode.invalidArgumentError,
+                                reason:
+                                    "listConcatenateFront should not accept empty list of values");
                         }
                       }),
                       test('listLength', () async {
@@ -408,6 +432,150 @@ void main() {
                   case ListFetchError():
                     fail('Expected Hit but got Error');
                 }
+              });
+            }),
+            group(
+                'listLength',
+                () => {
+                      test('it should return the length of a list', () async {
+                        final listName = generateStringWithUuid("list-length");
+                        final listValue1 = StringValue("string value 1");
+                        final listValue2 = StringValue("string value 2");
+                        await cacheClient.listConcatenateFront(
+                            integrationTestCacheName,
+                            listName,
+                            [listValue1, listValue2]);
+                        await verifyListLength(
+                            integrationTestCacheName, listName, 2, cacheClient);
+                      }),
+                    }),
+            group('listPopBack', () {
+              test('it should pop the last item from a list', () async {
+                final listName = generateStringWithUuid("list-pop-back");
+                final listValue1 = StringValue("string value 1");
+                final listValue2 = StringValue("string value 2");
+                await cacheClient.listConcatenateFront(integrationTestCacheName,
+                    listName, [listValue1, listValue2]);
+                final popResp1 = await cacheClient.listPopBack(
+                    integrationTestCacheName, listName);
+                switch (popResp1) {
+                  case ListPopBackHit():
+                    expect(popResp1.value, listValue2.toUtf8(),
+                        reason:
+                            "popped value should be the last value in the list");
+                  case ListPopBackMiss():
+                    fail('Expected Hit but got Miss');
+                  case ListPopBackError():
+                    fail('Expected Hit but got Error');
+                }
+                await verifyListLength(
+                    integrationTestCacheName, listName, 1, cacheClient);
+              });
+            }),
+            group('listPopFront', () {
+              test('it should pop the first item from a list', () async {
+                final listName = generateStringWithUuid("list-pop-front");
+                final listValue1 = StringValue("string value 1");
+                final listValue2 = StringValue("string value 2");
+                await cacheClient.listConcatenateFront(integrationTestCacheName,
+                    listName, [listValue1, listValue2]);
+                final popResp1 = await cacheClient.listPopFront(
+                    integrationTestCacheName, listName);
+                switch (popResp1) {
+                  case ListPopFrontHit():
+                    expect(popResp1.value, listValue1.toUtf8(),
+                        reason:
+                            "popped value should be the first one in the list");
+                  case ListPopFrontMiss():
+                    fail('Expected Hit but got Miss');
+                  case ListPopFrontError():
+                    fail('Expected Hit but got Error');
+                }
+                await verifyListLength(
+                    integrationTestCacheName, listName, 1, cacheClient);
+              });
+            }),
+            group('listPushFront', () {
+              test('it should push items to the front of a list', () async {
+                final listName = generateStringWithUuid("list-push-front");
+                final listValue1 = StringValue("string value 1");
+                final listValue2 = StringValue("string value 2");
+                await cacheClient.listConcatenateFront(
+                    integrationTestCacheName, listName, [listValue2]);
+                final listPushFrontResp = await cacheClient.listPushFront(
+                    integrationTestCacheName, listName, listValue1);
+                switch (listPushFrontResp) {
+                  case ListPushFrontSuccess():
+                    expect(listPushFrontResp.length, 2,
+                        reason: "list should have length 2 after push");
+                    break;
+                  case ListPushFrontError():
+                    fail('Expected Success but got Error');
+                }
+                await verifyListFetch(integrationTestCacheName, listName,
+                    [listValue1, listValue2], cacheClient);
+              });
+            }),
+            group('listPushBack', () {
+              test('it should push items to the back of a list', () async {
+                final listName = generateStringWithUuid("list-push-back");
+                final listValue1 = StringValue("string value 1");
+                final listValue2 = StringValue("string value 2");
+                await cacheClient.listConcatenateFront(
+                    integrationTestCacheName, listName, [listValue1]);
+                final listPushBackResp = await cacheClient.listPushBack(
+                    integrationTestCacheName, listName, listValue2);
+                switch (listPushBackResp) {
+                  case ListPushBackSuccess():
+                    expect(listPushBackResp.length, 2,
+                        reason: "list should have length 2 after push");
+                    break;
+                  case ListPushBackError():
+                    fail('Expected Success but got Error');
+                }
+                await verifyListFetch(integrationTestCacheName, listName,
+                    [listValue1, listValue2], cacheClient);
+              });
+            }),
+            group('listRemoveValue', () {
+              test('it should remove items from a list', () async {
+                final listName = generateStringWithUuid("list-remove-value");
+                final listValue1 = StringValue("string value 1");
+                final listValue2 = StringValue("string value 2");
+                await cacheClient.listConcatenateFront(integrationTestCacheName,
+                    listName, [listValue1, listValue2]);
+                final removeResp1 = await cacheClient.listRemoveValue(
+                    integrationTestCacheName, listName, listValue1);
+                switch (removeResp1) {
+                  case ListRemoveValueSuccess():
+                    // this is expected
+                    break;
+                  case ListRemoveValueError():
+                    fail('Expected Success but got Error');
+                }
+                await verifyListFetch(integrationTestCacheName, listName,
+                    [listValue2], cacheClient);
+              });
+            }),
+            group('listRetain', () {
+              test('it should remove items from a list', () async {
+                final listName = generateStringWithUuid("list-retain");
+                final listValue1 = StringValue("string value 1");
+                final listValue2 = StringValue("string value 2");
+                await cacheClient.listConcatenateFront(integrationTestCacheName,
+                    listName, [listValue1, listValue2]);
+                final retainResp1 = await cacheClient.listRetain(
+                    integrationTestCacheName, listName,
+                    startIndex: 1);
+                switch (retainResp1) {
+                  case ListRetainSuccess():
+                    // this is expected
+                    break;
+                  case ListRetainError():
+                    fail('Expected Success but got Error');
+                }
+                await verifyListFetch(integrationTestCacheName, listName,
+                    [listValue2], cacheClient);
               });
             }),
           });

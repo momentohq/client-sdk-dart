@@ -379,7 +379,7 @@ class DataClient implements AbstractDataClient {
       var request = ListRemoveRequest_();
       request.listName = utf8.encode(listName);
       request.allElementsWithValue = value.toBinary();
-      _client.listRemove(request,
+      await _client.listRemove(request,
           options: CallOptions(metadata: {
             'cache': cacheName,
           }));
@@ -414,7 +414,7 @@ class DataClient implements AbstractDataClient {
       request.ttlMilliseconds =
           Int64(actualTtl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
       request.refreshTtl = actualTtl.refreshTtl();
-      _client.listRetain(request,
+      await _client.listRetain(request,
           options: CallOptions(metadata: {
             'cache': cacheName,
           }));

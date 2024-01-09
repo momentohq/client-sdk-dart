@@ -154,6 +154,7 @@ class CacheClient implements ICacheClient {
     try {
       validateCacheName(cacheName);
       validateListName(listName);
+      validateList(values);
       return _dataClient.listConcatenateBack(cacheName, listName, values,
           ttl: ttl, truncateFrontToSize: truncateFrontToSize);
     } catch (e) {
@@ -173,6 +174,7 @@ class CacheClient implements ICacheClient {
     try {
       validateCacheName(cacheName);
       validateListName(listName);
+      validateList(values);
       return _dataClient.listConcatenateFront(cacheName, listName, values,
           ttl: ttl, truncateBackToSize: truncateBackToSize);
     } catch (e) {
