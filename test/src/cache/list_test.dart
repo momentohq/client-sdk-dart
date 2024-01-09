@@ -54,7 +54,7 @@ void main() {
                             expect(fetchResp2.errorCode,
                                 MomentoErrorCode.invalidArgumentError,
                                 reason:
-                                    "listFetch should not accept empty cache name");
+                                    "listFetch should not accept empty list name");
                         }
                       }),
                       test('listConcatenateBack', () async {
@@ -84,7 +84,7 @@ void main() {
                             expect(concatResp2.errorCode,
                                 MomentoErrorCode.invalidArgumentError,
                                 reason:
-                                    "listConcatenateBack should not accept empty cache name");
+                                    "listConcatenateBack should not accept empty list name");
                         }
 
                         final concatResp3 = await cacheClient
@@ -170,7 +170,7 @@ void main() {
                             expect(lengthResp2.errorCode,
                                 MomentoErrorCode.invalidArgumentError,
                                 reason:
-                                    "listLength should not accept empty cache name");
+                                    "listLength should not accept empty list name");
                         }
                       }),
                       test('listPopBack', () async {
@@ -202,7 +202,7 @@ void main() {
                             expect(popResp2.errorCode,
                                 MomentoErrorCode.invalidArgumentError,
                                 reason:
-                                    "listPopBack should not accept empty cache name");
+                                    "listPopBack should not accept empty list name");
                         }
                       }),
                       test('listPopFront', () async {
@@ -234,7 +234,7 @@ void main() {
                             expect(popResp2.errorCode,
                                 MomentoErrorCode.invalidArgumentError,
                                 reason:
-                                    "listPopFront should not accept empty cache name");
+                                    "listPopFront should not accept empty list name");
                         }
                       }),
                       test('listPushBack', () async {
@@ -262,7 +262,7 @@ void main() {
                             expect(pushResp2.errorCode,
                                 MomentoErrorCode.invalidArgumentError,
                                 reason:
-                                    "listPushBack should not accept empty cache name");
+                                    "listPushBack should not accept empty list name");
                         }
                       }),
                       test('listPushFront', () async {
@@ -290,7 +290,7 @@ void main() {
                             expect(pushResp2.errorCode,
                                 MomentoErrorCode.invalidArgumentError,
                                 reason:
-                                    "listPushFront should not accept empty cache name");
+                                    "listPushFront should not accept empty list name");
                         }
                       }),
                       test('listRemoveValue', () async {
@@ -318,7 +318,7 @@ void main() {
                             expect(removeResp2.errorCode,
                                 MomentoErrorCode.invalidArgumentError,
                                 reason:
-                                    "listRemoveValue should not accept empty cache name");
+                                    "listRemoveValue should not accept empty list name");
                         }
                       }),
                       test('listRetain', () async {
@@ -346,7 +346,7 @@ void main() {
                             expect(retainResp2.errorCode,
                                 MomentoErrorCode.invalidArgumentError,
                                 reason:
-                                    "listRetain should not accept empty cache name");
+                                    "listRetain should not accept empty list name");
                         }
                       }),
                     }),
@@ -363,7 +363,8 @@ void main() {
                     // this is expected
                     return;
                   case ListFetchError():
-                    fail('Expected Miss but got Error');
+                    fail(
+                        'Expected Miss but got Error: ${fetchResp1.errorCode} ${fetchResp1.message}');
                 }
               });
               test('it should add items to a list, and return the when fetched',
@@ -382,7 +383,8 @@ void main() {
                   case ListFetchMiss():
                     fail('Expected Hit but got Miss');
                   case ListFetchError():
-                    fail('Expected Hit but got Error');
+                    fail(
+                        'Expected Hit but got Error: ${fetchResp1.errorCode} ${fetchResp1.message}');
                 }
               });
               test('it should fetch listed items using start and end indices',
@@ -403,7 +405,8 @@ void main() {
                   case ListFetchMiss():
                     fail('Expected Hit but got Miss');
                   case ListFetchError():
-                    fail('Expected Hit but got Error');
+                    fail(
+                        'Expected Hit but got Error: ${fetchResp1.errorCode} ${fetchResp1.message}');
                 }
 
                 final fetchResp2 = await cacheClient.listFetch(
@@ -417,7 +420,8 @@ void main() {
                   case ListFetchMiss():
                     fail('Expected Hit but got Miss');
                   case ListFetchError():
-                    fail('Expected Hit but got Error');
+                    fail(
+                        'Expected Hit but got Error: ${fetchResp2.errorCode} ${fetchResp2.message}');
                 }
 
                 final fetchResp3 = await cacheClient
@@ -430,7 +434,8 @@ void main() {
                   case ListFetchMiss():
                     fail('Expected Hit but got Miss');
                   case ListFetchError():
-                    fail('Expected Hit but got Error');
+                    fail(
+                        'Expected Hit but got Error: ${fetchResp3.errorCode} ${fetchResp3.message}');
                 }
               });
             }),
@@ -466,7 +471,8 @@ void main() {
                   case ListPopBackMiss():
                     fail('Expected Hit but got Miss');
                   case ListPopBackError():
-                    fail('Expected Hit but got Error');
+                    fail(
+                        'Expected Hit but got Error: ${popResp1.errorCode} ${popResp1.message}');
                 }
                 await verifyListLength(
                     integrationTestCacheName, listName, 1, cacheClient);
@@ -489,7 +495,8 @@ void main() {
                   case ListPopFrontMiss():
                     fail('Expected Hit but got Miss');
                   case ListPopFrontError():
-                    fail('Expected Hit but got Error');
+                    fail(
+                        'Expected Hit but got Error: ${popResp1.errorCode} ${popResp1.message}');
                 }
                 await verifyListLength(
                     integrationTestCacheName, listName, 1, cacheClient);
@@ -510,7 +517,8 @@ void main() {
                         reason: "list should have length 2 after push");
                     break;
                   case ListPushFrontError():
-                    fail('Expected Success but got Error');
+                    fail(
+                        'Expected Success but got Error: ${listPushFrontResp.errorCode} ${listPushFrontResp.message}');
                 }
                 await verifyListFetch(integrationTestCacheName, listName,
                     [listValue1, listValue2], cacheClient);
@@ -531,7 +539,8 @@ void main() {
                         reason: "list should have length 2 after push");
                     break;
                   case ListPushBackError():
-                    fail('Expected Success but got Error');
+                    fail(
+                        'Expected Success but got Error: ${listPushBackResp.errorCode} ${listPushBackResp.message}');
                 }
                 await verifyListFetch(integrationTestCacheName, listName,
                     [listValue1, listValue2], cacheClient);
@@ -551,7 +560,8 @@ void main() {
                     // this is expected
                     break;
                   case ListRemoveValueError():
-                    fail('Expected Success but got Error');
+                    fail(
+                        'Expected Success but got Error: ${removeResp1.errorCode} ${removeResp1.message}');
                 }
                 await verifyListFetch(integrationTestCacheName, listName,
                     [listValue2], cacheClient);
@@ -572,7 +582,8 @@ void main() {
                     // this is expected
                     break;
                   case ListRetainError():
-                    fail('Expected Success but got Error');
+                    fail(
+                        'Expected Success but got Error: ${retainResp1.errorCode} ${retainResp1.message}');
                 }
                 await verifyListFetch(integrationTestCacheName, listName,
                     [listValue2], cacheClient);

@@ -43,7 +43,8 @@ Future<void> verifyListFetch(String cacheName, String listName,
     case ListFetchMiss():
       fail('Expected Hit but got Miss');
     case ListFetchError():
-      fail('Expected Hit but got Error');
+      fail(
+          'Expected Hit but got Error: ${listResp.errorCode} ${listResp.message}');
   }
 }
 
@@ -57,6 +58,7 @@ Future<void> verifyListLength(String cacheName, String listName, int expected,
     case ListLengthMiss():
       fail('Expected Hit but got Miss');
     case ListLengthError():
-      fail('Expected Hit but got Error');
+      fail(
+          'Expected Hit but got Error: ${listResp.errorCode} ${listResp.message}');
   }
 }
