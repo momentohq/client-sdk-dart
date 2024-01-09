@@ -70,10 +70,13 @@ abstract class CredentialProvider {
   final String _controlEndpoint;
   final String _cacheEndpoint;
   CredentialProvider(this._apiKey, this._controlEndpoint, this._cacheEndpoint);
+
   /// The API key used to construct the [CredentialProvider]
   String get apiKey => _apiKey;
+
   /// The URI for the control plane endpoint
   String get controlEndpoint => _controlEndpoint;
+
   /// The URI for the data plane endpoint
   String get cacheEndpoint => _cacheEndpoint;
 
@@ -218,11 +221,13 @@ class EnvMomentoTokenProvider extends StringMomentoTokenProvider {
   /// Parses the API token stored in the environment variable [envVarName].
   EnvMomentoTokenProvider(String envVarName)
       : super(Platform.environment[envVarName] ?? '');
+
   /// Copy constructor to override the base endpoint.
   EnvMomentoTokenProvider.withBaseEndpointOverride(
       String envVarName, String baseEndpoint)
       : super.withBaseEndpointOverride(
             Platform.environment[envVarName] ?? '', baseEndpoint);
+
   /// Constructor allowing override of the cache and control endpoints.
   EnvMomentoTokenProvider.withEndpointOverrides(
       String envVarName, EndpointOverrides overrides)

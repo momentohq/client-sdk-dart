@@ -7,7 +7,6 @@ import 'package:momento/src/internal/utils/validators.dart';
 
 import 'config/logger.dart';
 
-
 abstract class ICacheClient {
   Future<CreateCacheResponse> createCache(String cacheName);
 
@@ -73,7 +72,6 @@ class CacheClient implements ICacheClient {
     }
     return _controlClient.createCache(cacheName);
   }
-
 
   /// Deletes a cache with the name [cacheName].
   ///
