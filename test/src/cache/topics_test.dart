@@ -109,6 +109,7 @@ void main() {
       }
 
       subscribeResp.unsubscribe();
+      topicClient.close();
     });
   });
 }
