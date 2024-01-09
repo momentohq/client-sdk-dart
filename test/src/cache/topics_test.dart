@@ -25,7 +25,8 @@ void main() {
 
   group('topics', () {
     test('arguments are validated', () async {
-      final publishResp = await topicClient.publish("   ", "topic-name", StringValue("message"));
+      final publishResp = await topicClient.publish(
+          "   ", "topic-name", StringValue("message"));
       switch (publishResp) {
         case TopicPublishSuccess():
           fail('Expected Error but got Success');
@@ -34,7 +35,8 @@ void main() {
               reason: "publish should not accept empty cache name");
       }
 
-      final publishResp2 = await topicClient.publish(integrationTestCacheName, "   ", StringValue("message"));
+      final publishResp2 = await topicClient.publish(
+          integrationTestCacheName, "   ", StringValue("message"));
       switch (publishResp2) {
         case TopicPublishSuccess():
           fail('Expected Error but got Success');
@@ -52,12 +54,14 @@ void main() {
               reason: "subscribe should not accept empty cache name");
       }
 
-      final subscribeResp2 = await topicClient.subscribe(integrationTestCacheName, "   ");
+      final subscribeResp2 =
+          await topicClient.subscribe(integrationTestCacheName, "   ");
       switch (subscribeResp2) {
         case TopicSubscription():
           fail('Expected Error but got Success');
         case TopicSubscribeError():
-          expect(subscribeResp2.errorCode, MomentoErrorCode.invalidArgumentError,
+          expect(
+              subscribeResp2.errorCode, MomentoErrorCode.invalidArgumentError,
               reason: "subscribe should not accept empty cache name");
       }
     });
@@ -66,23 +70,27 @@ void main() {
       final topicName = generateStringWithUuid("dart-pubsub");
       final topicValue = "Momento pubsub";
 
-      final subscribeResp = await topicClient.subscribe(integrationTestCacheName, topicName);
+      final subscribeResp =
+          await topicClient.subscribe(integrationTestCacheName, topicName);
       switch (subscribeResp) {
         case TopicSubscription():
           expect(subscribeResp.runtimeType, TopicSubscription,
               reason: "subscribe should succeed");
         case TopicSubscribeError():
-          fail('Expected Success but got Error: ${subscribeResp.errorCode} ${subscribeResp.message}');
+          fail(
+              'Expected Success but got Error: ${subscribeResp.errorCode} ${subscribeResp.message}');
       }
 
       sleep(Duration(seconds: 1));
-      final publishResp = await topicClient.publish(integrationTestCacheName, topicName, StringValue(topicValue));
+      final publishResp = await topicClient.publish(
+          integrationTestCacheName, topicName, StringValue(topicValue));
       switch (publishResp) {
         case TopicPublishSuccess():
           expect(publishResp.runtimeType, TopicPublishSuccess,
               reason: "publish should succeed");
         case TopicPublishError():
-          fail('Expected Success but got Error: ${publishResp.errorCode} ${publishResp.message}');
+          fail(
+              'Expected Success but got Error: ${publishResp.errorCode} ${publishResp.message}');
       }
       sleep(Duration(seconds: 1));
 
@@ -92,7 +100,9 @@ void main() {
             case TopicSubscriptionItemBinary():
               fail("Expected String value, got binary value: ${msg.value}");
             case TopicSubscriptionItemText():
-              expect(msg.value, topicValue, reason: "subscription should receive the published string value");
+              expect(msg.value, topicValue,
+                  reason:
+                      "subscription should receive the published string value");
           }
           break;
         }

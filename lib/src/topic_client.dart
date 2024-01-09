@@ -58,8 +58,8 @@ class TopicClient implements ITopicClient {
       if (e is SdkException) {
         return Future.value(TopicPublishError(e));
       } else {
-        return Future.value(
-            TopicPublishError(UnknownException("Unexpected error: $e", null, null)));
+        return Future.value(TopicPublishError(
+            UnknownException("Unexpected error: $e", null, null)));
       }
     }
     return await _pubsubClient.publish(cacheName, topicName, value);
@@ -100,8 +100,8 @@ class TopicClient implements ITopicClient {
       if (e is SdkException) {
         return Future.value(TopicSubscribeError(e));
       } else {
-        return Future.value(
-            TopicSubscribeError(UnknownException("Unexpected error: $e", null, null)));
+        return Future.value(TopicSubscribeError(
+            UnknownException("Unexpected error: $e", null, null)));
       }
     }
     return await _pubsubClient.subscribe(cacheName, topicName);
