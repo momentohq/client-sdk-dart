@@ -31,7 +31,9 @@ Check out our [example](./example/) directory for complete examples of using the
 
 Here is a quickstart you can use for your own project:
 
+```dart
 {% include "./example/quickstart/quickstart.dart" %}
+```
 
 ## Getting Started and Documentation
 
