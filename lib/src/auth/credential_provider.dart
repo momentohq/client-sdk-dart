@@ -11,22 +11,13 @@ class EndpointOverrides {
   EndpointOverrides(this.cacheEndpoint, this.controlEndpoint);
 }
 
-enum CredentialProviderError {
-  emptyApiKey,
-  emptyAuthEnvironmentVariable,
-  caseBadToken,
-}
+class CredentialProviderError {
+  static String emptyApiKey() {
+    return "API key is an empty string";
+  }
 
-extension CredentialProviderErrorNames on CredentialProviderError {
-  String get name {
-    switch (this) {
-      case CredentialProviderError.emptyApiKey:
-        return "API key is an empty string";
-      case CredentialProviderError.emptyAuthEnvironmentVariable:
-        return "API key environment variable name is an empty string";
-      case CredentialProviderError.caseBadToken:
-        return "invalid API key";
-    }
+  static String emptyEnvironmentVariable(String envVarName) {
+    return "Could not find environment variable $envVarName or the variable was an empty string";
   }
 }
 
@@ -96,7 +87,7 @@ abstract class CredentialProvider {
       return StringMomentoTokenProvider.withBaseEndpointOverride(
           apiKey, baseEndpointOverride);
     }
-    return StringMomentoTokenProvider(apiKey);
+    return StringMomentoTokenProvider.withApiKey(apiKey);
   }
 
   static _ParsedApiKey _parseApiKey(String apiKey) {
@@ -138,9 +129,11 @@ class StringMomentoTokenProvider implements CredentialProvider {
   @override
   String _controlEndpoint = "";
 
-  StringMomentoTokenProvider(String apiKey) {
+  StringMomentoTokenProvider();
+
+  StringMomentoTokenProvider.withApiKey(String apiKey) {
     if (apiKey.isEmpty) {
-      throw CredentialProviderError.emptyApiKey.name;
+      throw CredentialProviderError.emptyApiKey();
     }
     final parsedApiKey = CredentialProvider._parseApiKey(apiKey);
     _apiKey = parsedApiKey.apiKey;
@@ -155,7 +148,7 @@ class StringMomentoTokenProvider implements CredentialProvider {
   StringMomentoTokenProvider.withBaseEndpointOverride(
       String apiKey, String baseEndpoint) {
     if (apiKey.isEmpty) {
-      throw CredentialProviderError.emptyApiKey.name;
+      throw CredentialProviderError.emptyApiKey();
     }
     final parsedApiKey = CredentialProvider._parseApiKey(apiKey);
     final endpoints = _Endpoints(baseEndpoint);
@@ -167,7 +160,7 @@ class StringMomentoTokenProvider implements CredentialProvider {
   StringMomentoTokenProvider.withEndpointOverrides(
       String apiKey, EndpointOverrides overrides) {
     if (apiKey.isEmpty) {
-      throw CredentialProviderError.emptyApiKey.name;
+      throw CredentialProviderError.emptyApiKey();
     }
     final parsedApiKey = CredentialProvider._parseApiKey(apiKey);
     _apiKey = parsedApiKey.apiKey;
@@ -186,14 +179,55 @@ class StringMomentoTokenProvider implements CredentialProvider {
 }
 
 class EnvMomentoTokenProvider extends StringMomentoTokenProvider {
-  EnvMomentoTokenProvider(String envVarName)
-      : super(Platform.environment[envVarName] ?? '');
+  // Calling super() after the constructor name will cause the env var
+  // check in the EnvMomentoTokenProvider constructor bodies to be skipped
+
+  EnvMomentoTokenProvider(String envVarName) {
+    if (Platform.environment.containsKey(envVarName) == false) {
+      throw CredentialProviderError.emptyEnvironmentVariable(envVarName);
+    }
+    final apiKey = Platform.environment[envVarName] ?? '';
+    if (apiKey.isEmpty) {
+      throw CredentialProviderError.emptyApiKey();
+    }
+    final parsedApiKey = CredentialProvider._parseApiKey(apiKey);
+    if (parsedApiKey.controlEndpoint == null ||
+        parsedApiKey.cacheEndpoint == null) {
+      throw IllegalArgumentError("failed to parse jwt token");
+    }
+    _apiKey = parsedApiKey.apiKey;
+    _cacheEndpoint = parsedApiKey.cacheEndpoint!;
+    _controlEndpoint = parsedApiKey.controlEndpoint!;
+  }
+
   EnvMomentoTokenProvider.withBaseEndpointOverride(
-      String envVarName, String baseEndpoint)
-      : super.withBaseEndpointOverride(
-            Platform.environment[envVarName] ?? '', baseEndpoint);
+      String envVarName, String baseEndpoint) {
+    if (Platform.environment.containsKey(envVarName) == false) {
+      throw CredentialProviderError.emptyEnvironmentVariable(envVarName);
+    }
+    final apiKey = Platform.environment[envVarName] ?? '';
+    if (apiKey.isEmpty) {
+      throw CredentialProviderError.emptyApiKey();
+    }
+    final parsedApiKey = CredentialProvider._parseApiKey(apiKey);
+    final endpoints = _Endpoints(baseEndpoint);
+    _apiKey = parsedApiKey.apiKey;
+    _cacheEndpoint = endpoints.cacheEndpoint;
+    _controlEndpoint = endpoints.controlEndpoint;
+  }
+
   EnvMomentoTokenProvider.withEndpointOverrides(
-      String envVarName, EndpointOverrides overrides)
-      : super.withEndpointOverrides(
-            Platform.environment[envVarName] ?? '', overrides);
+      String envVarName, EndpointOverrides overrides) {
+    if (Platform.environment.containsKey(envVarName) == false) {
+      throw CredentialProviderError.emptyEnvironmentVariable(envVarName);
+    }
+    final apiKey = Platform.environment[envVarName] ?? '';
+    if (apiKey.isEmpty) {
+      throw CredentialProviderError.emptyApiKey();
+    }
+    final parsedApiKey = CredentialProvider._parseApiKey(apiKey);
+    _apiKey = parsedApiKey.apiKey;
+    _cacheEndpoint = overrides.cacheEndpoint;
+    _controlEndpoint = overrides.controlEndpoint;
+  }
 }
