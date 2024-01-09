@@ -1,5 +1,7 @@
 import 'package:momento/src/auth/credential_provider.dart';
 import 'package:momento/src/config/logger.dart';
+import 'package:momento/src/errors/errors.dart';
+import 'package:momento/src/internal/utils/validators.dart';
 import 'config/topic_configuration.dart';
 import 'internal/pubsub_client.dart';
 import 'messages/responses/topics/topic_subscribe.dart';
@@ -49,6 +51,17 @@ class TopicClient implements ITopicClient {
   @override
   Future<TopicPublishResponse> publish(
       String cacheName, String topicName, Value value) async {
+    try {
+      validateCacheName(cacheName);
+      validateTopicName(topicName);
+    } catch (e) {
+      if (e is SdkException) {
+        return Future.value(TopicPublishError(e));
+      } else {
+        return Future.value(TopicPublishError(
+            UnknownException("Unexpected error: $e", null, null)));
+      }
+    }
     return await _pubsubClient.publish(cacheName, topicName, value);
   }
 
@@ -80,6 +93,17 @@ class TopicClient implements ITopicClient {
   @override
   Future<TopicSubscribeResponse> subscribe(
       String cacheName, String topicName) async {
+    try {
+      validateCacheName(cacheName);
+      validateTopicName(topicName);
+    } catch (e) {
+      if (e is SdkException) {
+        return Future.value(TopicSubscribeError(e));
+      } else {
+        return Future.value(TopicSubscribeError(
+            UnknownException("Unexpected error: $e", null, null)));
+      }
+    }
     return await _pubsubClient.subscribe(cacheName, topicName);
   }
 

@@ -8,8 +8,9 @@ final uuidGenerator = Uuid();
 class TestSetup {
   late final String cacheName;
   late final CacheClient cacheClient;
+  late final TopicClient topicClient;
 
-  TestSetup(this.cacheName, this.cacheClient);
+  TestSetup(this.cacheName, this.cacheClient, this.topicClient);
 }
 
 Future<TestSetup> setUpIntegrationTests() async {
@@ -17,15 +18,20 @@ Future<TestSetup> setUpIntegrationTests() async {
       CredentialProvider.fromEnvironmentVariable(apiKeyEnvVarName),
       CacheClientConfigurations.latest(),
       Duration(seconds: 30));
+  final topicClient = TopicClient(
+      CredentialProvider.fromEnvironmentVariable(apiKeyEnvVarName),
+      TopicClientConfigurations.latest());
   final integrationTestCacheName =
       generateStringWithUuid("dart-sdk-cache-tests");
   await cacheClient.createCache(integrationTestCacheName);
 
-  return TestSetup(integrationTestCacheName, cacheClient);
+  return TestSetup(integrationTestCacheName, cacheClient, topicClient);
 }
 
 Future<void> cleanUpIntegrationTests(TestSetup testSetup) async {
   await testSetup.cacheClient.deleteCache(testSetup.cacheName);
+  await testSetup.cacheClient.close();
+  testSetup.topicClient.close();
 }
 
 String generateStringWithUuid(String prefix) {
