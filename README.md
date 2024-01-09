@@ -50,6 +50,7 @@ Check out our [example](./example/) directory for complete examples of using the
 
 Here is a quickstart you can use for your own project:
 
+```dart
 import 'package:momento/momento.dart';
 
 Future<void> main() async {
@@ -83,6 +84,7 @@ Future<void> main() async {
   await cacheClient.close();
 }
 
+```
 
 ## Getting Started and Documentation
 
