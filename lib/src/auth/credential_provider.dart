@@ -47,15 +47,37 @@ class _ParsedApiKey {
   _ParsedApiKey(this.apiKey, this.controlEndpoint, this.cacheEndpoint);
 }
 
+/// Reads and parses API tokens from a string or an environment variable.
+///
+/// ```dart
+/// final credentialProvider = CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY");
+/// ```
+/// or
+/// ```dart
+/// CredentialProvider.fromString(myApiTokenString);
+/// ```
 abstract class CredentialProvider {
   final String _apiKey;
   final String _controlEndpoint;
   final String _cacheEndpoint;
   CredentialProvider(this._apiKey, this._controlEndpoint, this._cacheEndpoint);
+
+  /// The API key used to construct the [CredentialProvider]
   String get apiKey => _apiKey;
+
+  /// The URI for the control plane endpoint
   String get controlEndpoint => _controlEndpoint;
+
+  /// The URI for the data plane endpoint
   String get cacheEndpoint => _cacheEndpoint;
 
+  /// Reads and parses an API token stored in an environment variable.
+  ///
+  /// Returns a credential provider object which is used to instantiate Momento
+  /// clients.
+  /// ```dart
+  /// final credentialProvider = CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY");
+  /// ```
   static CredentialProvider fromEnvironmentVariable(String envVarName,
       {String? baseEndpointOverride, EndpointOverrides? endpointOverrides}) {
     if (endpointOverrides != null && baseEndpointOverride != null) {
@@ -73,6 +95,13 @@ abstract class CredentialProvider {
     return EnvMomentoTokenProvider(envVarName);
   }
 
+  /// Reads and parses an API token stored in a string.
+  ///
+  /// Returns a credential provider object which is used to instantiate Momento
+  /// clients.
+  /// ```dart
+  /// final credentialProvider = CredentialProvider.fromString("MOMENTO_API_KEY");
+  /// ```
   static CredentialProvider fromString(String apiKey,
       {String? baseEndpointOverride, EndpointOverrides? endpointOverrides}) {
     if (endpointOverrides != null && baseEndpointOverride != null) {
@@ -131,6 +160,7 @@ class StringMomentoTokenProvider implements CredentialProvider {
 
   StringMomentoTokenProvider();
 
+  /// Parses the API token stored in the string [apiKey].
   StringMomentoTokenProvider.withApiKey(String apiKey) {
     if (apiKey.isEmpty) {
       throw CredentialProviderError.emptyApiKey();
@@ -145,6 +175,7 @@ class StringMomentoTokenProvider implements CredentialProvider {
     _controlEndpoint = parsedApiKey.controlEndpoint!;
   }
 
+  /// Constructor allowing override of the base endpoint.
   StringMomentoTokenProvider.withBaseEndpointOverride(
       String apiKey, String baseEndpoint) {
     if (apiKey.isEmpty) {
@@ -157,6 +188,7 @@ class StringMomentoTokenProvider implements CredentialProvider {
     _controlEndpoint = endpoints.controlEndpoint;
   }
 
+  /// Constructor allowing override of the cache and control endpoints.
   StringMomentoTokenProvider.withEndpointOverrides(
       String apiKey, EndpointOverrides overrides) {
     if (apiKey.isEmpty) {
@@ -182,6 +214,7 @@ class EnvMomentoTokenProvider extends StringMomentoTokenProvider {
   // Calling super() after the constructor name will cause the env var
   // check in the EnvMomentoTokenProvider constructor bodies to be skipped
 
+  /// Parses the API token stored in the environment variable [envVarName].
   EnvMomentoTokenProvider(String envVarName) {
     if (Platform.environment.containsKey(envVarName) == false) {
       throw CredentialProviderError.emptyEnvironmentVariable(envVarName);
@@ -200,6 +233,7 @@ class EnvMomentoTokenProvider extends StringMomentoTokenProvider {
     _controlEndpoint = parsedApiKey.controlEndpoint!;
   }
 
+  /// Copy constructor to override the base endpoint.
   EnvMomentoTokenProvider.withBaseEndpointOverride(
       String envVarName, String baseEndpoint) {
     if (Platform.environment.containsKey(envVarName) == false) {
@@ -216,6 +250,7 @@ class EnvMomentoTokenProvider extends StringMomentoTokenProvider {
     _controlEndpoint = endpoints.controlEndpoint;
   }
 
+  /// Constructor allowing override of the cache and control endpoints.
   EnvMomentoTokenProvider.withEndpointOverrides(
       String envVarName, EndpointOverrides overrides) {
     if (Platform.environment.containsKey(envVarName) == false) {
