@@ -5,10 +5,6 @@ import 'transport/transport_strategy.dart';
 
 /// Prebuilt configurations for Momento Topics clients
 class TopicClientConfigurations {
-  static TopicClientConfiguration defaultConfig() {
-    return latest();
-  }
-
   static TopicClientConfiguration latest({LogLevel logLevel = LogLevel.info}) {
     return TopicConfiguration(
         StaticTransportStrategy(StaticGrpcConfiguration(Duration(seconds: 15))),

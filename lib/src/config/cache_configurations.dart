@@ -6,10 +6,6 @@ import 'cache_configuration.dart';
 
 /// Prebuilt configurations for Momento Cache clients
 class CacheClientConfigurations {
-  static CacheClientConfiguration defaultConfig() {
-    return latest();
-  }
-
   static CacheClientConfiguration latest({LogLevel logLevel = LogLevel.info}) {
     return CacheConfiguration(
         StaticTransportStrategy(StaticGrpcConfiguration(Duration(seconds: 15))),
