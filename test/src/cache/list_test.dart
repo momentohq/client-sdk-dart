@@ -424,7 +424,7 @@ void main() {
                     .listFetch(integrationTestCacheName, listName, endIndex: 1);
                 switch (fetchResp3) {
                   case ListFetchHit():
-                    expect(fetchResp3.values, [listValue2.toUtf8()],
+                    expect(fetchResp3.values, [listValue1.toUtf8()],
                         reason:
                             "list should contain the value that was pushed up until index 1");
                   case ListFetchMiss():
