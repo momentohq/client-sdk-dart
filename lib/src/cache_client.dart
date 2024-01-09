@@ -35,7 +35,7 @@ class CacheClient implements ICacheClient {
   /// ```dart
   /// final cacheClient = CacheClient(
   ///   CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
-  ///   MobileCacheConfiguration.latest(),
+  ///   CacheClientConfigurations.latest(),
   ///   Duration(seconds: 30));
   /// ```
   CacheClient(CredentialProvider credentialProvider,
