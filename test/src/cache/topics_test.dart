@@ -107,6 +107,8 @@ void main() {
       } catch (e) {
         fail("Error with await for loop: $e");
       }
+
+      subscribeResp.unsubscribe();
     });
   });
 }

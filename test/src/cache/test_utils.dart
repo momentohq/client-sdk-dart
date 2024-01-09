@@ -30,6 +30,8 @@ Future<TestSetup> setUpIntegrationTests() async {
 
 Future<void> cleanUpIntegrationTests(TestSetup testSetup) async {
   await testSetup.cacheClient.deleteCache(testSetup.cacheName);
+  await testSetup.cacheClient.close();
+  testSetup.topicClient.close();
 }
 
 String generateStringWithUuid(String prefix) {
