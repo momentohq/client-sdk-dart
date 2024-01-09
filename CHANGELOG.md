@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.1.0](https://github.com/momentohq/client-sdk-dart/compare/v0.0.5...v0.1.0) (2024-01-09)
+
+
+### Features
+
+* add CacheClient close method ([#80](https://github.com/momentohq/client-sdk-dart/issues/80)) ([411d432](https://github.com/momentohq/client-sdk-dart/commit/411d432c0f6989df746cf72d35e7c095351c6307))
+
+
+### Bug Fixes
+
+* readme generator should use generate-and-commit github action ([#75](https://github.com/momentohq/client-sdk-dart/issues/75)) ([492c749](https://github.com/momentohq/client-sdk-dart/commit/492c749e3d0d9708a62763238d75365a198e68fa))
+* rename config classes for better autocompletes ([#82](https://github.com/momentohq/client-sdk-dart/issues/82)) ([2333c12](https://github.com/momentohq/client-sdk-dart/commit/2333c1251a06547ca2323f1cfb1aa3381a155bdd))
+* return topic subscribe error immediately if subscription limit reached ([#62](https://github.com/momentohq/client-sdk-dart/issues/62)) ([30b9f49](https://github.com/momentohq/client-sdk-dart/commit/30b9f49547225a4e438846490bab7ffb1d68e3cf))
+* subscription error handling should expect async stream to throw errors, not TopicSubscriptionItem to return errors ([#81](https://github.com/momentohq/client-sdk-dart/issues/81)) ([57b3b2b](https://github.com/momentohq/client-sdk-dart/commit/57b3b2b596ba45e10b11efad5f306f7693b7b18e))
+
+
+### Miscellaneous
+
+* add docstrings ([#83](https://github.com/momentohq/client-sdk-dart/issues/83)) ([2796786](https://github.com/momentohq/client-sdk-dart/commit/2796786ce513c2b9e759f7650f8d4b193f774740))
+* add readme template and readme generator ci steps ([#59](https://github.com/momentohq/client-sdk-dart/issues/59)) ([616d7be](https://github.com/momentohq/client-sdk-dart/commit/616d7beaf36d0c577f923597d07fbdea9c44a170))
+* offer way to get cache names instead of CacheInfos from ListCachesResponse ([#79](https://github.com/momentohq/client-sdk-dart/issues/79)) ([6de1b98](https://github.com/momentohq/client-sdk-dart/commit/6de1b985128d979614adbc06131a64c8364e116b))
+* provide informational error message when api key env var is not set ([#84](https://github.com/momentohq/client-sdk-dart/issues/84)) ([8511f11](https://github.com/momentohq/client-sdk-dart/commit/8511f11ebffe0a3a41972d407053ca8caa48e3db))
+
 ## [0.0.5](https://github.com/momentohq/client-sdk-dart/compare/v0.0.4...v0.0.5) (2024-01-03)
 
 
