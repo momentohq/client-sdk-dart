@@ -5,16 +5,9 @@ import '../../momento.dart';
 import 'cache_configuration.dart';
 
 /// Prebuilt configurations for Momento Cache clients
-abstract interface class CacheClientConfigurations {}
-
-/// Provides prebuilt configurations for the `CacheClient` on mobile platforms
-class MobileCacheConfiguration extends CacheClientConfigurations {
-  static CacheClientConfiguration defaultConfig() {
-    return latest();
-  }
-
+class CacheClientConfigurations {
   static CacheClientConfiguration latest({LogLevel logLevel = LogLevel.info}) {
-    return CacheClientConfiguration(
+    return CacheConfiguration(
         StaticTransportStrategy(StaticGrpcConfiguration(Duration(seconds: 15))),
         logLevel);
   }

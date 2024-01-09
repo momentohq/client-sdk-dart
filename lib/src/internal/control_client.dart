@@ -17,7 +17,7 @@ abstract class AbstractControlClient {
 class ControlClient implements AbstractControlClient {
   late ClientChannel _channel;
   late ScsControlClient _client;
-  final CacheConfiguration _configuration;
+  final CacheClientConfiguration _configuration;
 
   ControlClient(CredentialProvider credentialProvider, this._configuration) {
     _channel = ClientChannel(credentialProvider.controlEndpoint);

@@ -3,45 +3,47 @@ import 'package:momento/src/config/transport/transport_strategy.dart';
 
 import '../../momento.dart';
 
-abstract interface class CacheConfiguration {
+abstract interface class CacheClientConfiguration {
   /// Configures low-level options for network interactions with the Momento service
   late TransportStrategy transportStrategy;
 
   /// Configures the verbosity of the client-side logger
   LogLevel logLevel;
 
-  /// Constructor for a CacheConfiguration
-  CacheConfiguration(this.transportStrategy, this.logLevel);
+  /// Constructor for a CacheClientConfiguration
+  CacheClientConfiguration(this.transportStrategy, this.logLevel);
 
   /// Copy constructor for overriding TransportStrategy
-  CacheConfiguration withTransportStrategy(TransportStrategy transportStrategy,
+  CacheClientConfiguration withTransportStrategy(
+      TransportStrategy transportStrategy,
       {LogLevel logLevel = LogLevel.info});
 
   /// Convenience copy constructor that updates the client-side
   /// timeout setting in the transport strategy
-  CacheConfiguration withDeadline(Duration deadline,
+  CacheClientConfiguration withDeadline(Duration deadline,
       {LogLevel logLevel = LogLevel.info});
 }
 
-class CacheClientConfiguration implements CacheConfiguration {
+class CacheConfiguration implements CacheClientConfiguration {
   @override
   late TransportStrategy transportStrategy;
 
   @override
   LogLevel logLevel;
 
-  CacheClientConfiguration(this.transportStrategy, this.logLevel);
+  CacheConfiguration(this.transportStrategy, this.logLevel);
 
   @override
-  CacheConfiguration withTransportStrategy(TransportStrategy transportStrategy,
+  CacheClientConfiguration withTransportStrategy(
+      TransportStrategy transportStrategy,
       {LogLevel logLevel = LogLevel.info}) {
-    return CacheClientConfiguration(transportStrategy, logLevel);
+    return CacheConfiguration(transportStrategy, logLevel);
   }
 
   @override
-  CacheConfiguration withDeadline(Duration deadline,
+  CacheClientConfiguration withDeadline(Duration deadline,
       {LogLevel logLevel = LogLevel.info}) {
-    return CacheClientConfiguration(
+    return CacheConfiguration(
         StaticTransportStrategy(StaticGrpcConfiguration(deadline)), logLevel);
   }
 }

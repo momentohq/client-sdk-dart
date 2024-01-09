@@ -20,7 +20,7 @@ abstract class AbstractPubsubClient {
 }
 
 class ClientPubsub implements AbstractPubsubClient {
-  final TopicConfiguration _configuration;
+  final TopicClientConfiguration _configuration;
   late final TopicGrpcManager _grpcManager;
 
   ClientPubsub(CredentialProvider credentialProvider, this._configuration) {
