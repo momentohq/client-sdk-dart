@@ -84,15 +84,9 @@ abstract class CredentialProvider {
       throw IllegalArgumentError(
           "either pass in 'baseEndpointOverride' or 'endpointOverrides', cannot pass in both");
     }
-    if (endpointOverrides != null) {
-      return EnvMomentoTokenProvider.withEndpointOverrides(
-          envVarName, endpointOverrides);
-    }
-    if (baseEndpointOverride != null && baseEndpointOverride.isNotEmpty) {
-      return EnvMomentoTokenProvider.withBaseEndpointOverride(
-          envVarName, baseEndpointOverride);
-    }
-    return EnvMomentoTokenProvider(envVarName);
+    return EnvMomentoTokenProvider(envVarName,
+        baseEndpointOverride: baseEndpointOverride,
+        endpointOverrides: endpointOverrides);
   }
 
   /// Reads and parses an API token stored in a string.
@@ -108,15 +102,9 @@ abstract class CredentialProvider {
       throw IllegalArgumentError(
           "either pass in 'baseEndpointOverride' or 'endpointOverrides', cannot pass in both");
     }
-    if (endpointOverrides != null) {
-      return StringMomentoTokenProvider.withEndpointOverrides(
-          apiKey, endpointOverrides);
-    }
-    if (baseEndpointOverride != null && baseEndpointOverride.isNotEmpty) {
-      return StringMomentoTokenProvider.withBaseEndpointOverride(
-          apiKey, baseEndpointOverride);
-    }
-    return StringMomentoTokenProvider.withApiKey(apiKey);
+    return StringMomentoTokenProvider(apiKey,
+        baseEndpointOverride: baseEndpointOverride,
+        endpointOverrides: endpointOverrides);
   }
 
   static _ParsedApiKey _parseApiKey(String apiKey) {
@@ -158,46 +146,31 @@ class StringMomentoTokenProvider implements CredentialProvider {
   @override
   String _controlEndpoint = "";
 
-  StringMomentoTokenProvider();
-
   /// Parses the API token stored in the string [apiKey].
-  StringMomentoTokenProvider.withApiKey(String apiKey) {
+  /// Also allows overrides of the base endpoint or cache and control endpoints.
+  StringMomentoTokenProvider(String apiKey,
+      {String? baseEndpointOverride, EndpointOverrides? endpointOverrides}) {
     if (apiKey.isEmpty) {
       throw CredentialProviderError.emptyApiKey();
     }
     final parsedApiKey = CredentialProvider._parseApiKey(apiKey);
     _apiKey = parsedApiKey.apiKey;
-    if (parsedApiKey.controlEndpoint == null ||
-        parsedApiKey.cacheEndpoint == null) {
-      throw IllegalArgumentError("failed to parse jwt token");
-    }
-    _cacheEndpoint = parsedApiKey.cacheEndpoint!;
-    _controlEndpoint = parsedApiKey.controlEndpoint!;
-  }
 
-  /// Constructor allowing override of the base endpoint.
-  StringMomentoTokenProvider.withBaseEndpointOverride(
-      String apiKey, String baseEndpoint) {
-    if (apiKey.isEmpty) {
-      throw CredentialProviderError.emptyApiKey();
+    if (baseEndpointOverride != null) {
+      final endpoints = _Endpoints(baseEndpointOverride);
+      _cacheEndpoint = endpoints.cacheEndpoint;
+      _controlEndpoint = endpoints.controlEndpoint;
+    } else if (endpointOverrides != null) {
+      _cacheEndpoint = endpointOverrides.cacheEndpoint;
+      _controlEndpoint = endpointOverrides.controlEndpoint;
+    } else {
+      if (parsedApiKey.controlEndpoint == null ||
+          parsedApiKey.cacheEndpoint == null) {
+        throw IllegalArgumentError("failed to parse jwt token");
+      }
+      _cacheEndpoint = parsedApiKey.cacheEndpoint!;
+      _controlEndpoint = parsedApiKey.controlEndpoint!;
     }
-    final parsedApiKey = CredentialProvider._parseApiKey(apiKey);
-    final endpoints = _Endpoints(baseEndpoint);
-    _apiKey = parsedApiKey.apiKey;
-    _cacheEndpoint = endpoints.cacheEndpoint;
-    _controlEndpoint = endpoints.controlEndpoint;
-  }
-
-  /// Constructor allowing override of the cache and control endpoints.
-  StringMomentoTokenProvider.withEndpointOverrides(
-      String apiKey, EndpointOverrides overrides) {
-    if (apiKey.isEmpty) {
-      throw CredentialProviderError.emptyApiKey();
-    }
-    final parsedApiKey = CredentialProvider._parseApiKey(apiKey);
-    _apiKey = parsedApiKey.apiKey;
-    _cacheEndpoint = overrides.cacheEndpoint;
-    _controlEndpoint = overrides.controlEndpoint;
   }
 
   @override
@@ -210,59 +183,54 @@ class StringMomentoTokenProvider implements CredentialProvider {
   String get controlEndpoint => _controlEndpoint;
 }
 
-class EnvMomentoTokenProvider extends StringMomentoTokenProvider {
-  // Calling super() after the constructor name will cause the env var
-  // check in the EnvMomentoTokenProvider constructor bodies to be skipped
+class EnvMomentoTokenProvider implements CredentialProvider {
+  @override
+  String _apiKey = "";
+
+  @override
+  String _cacheEndpoint = "";
+
+  @override
+  String _controlEndpoint = "";
 
   /// Parses the API token stored in the environment variable [envVarName].
-  EnvMomentoTokenProvider(String envVarName) {
+  /// Also allows overrides of the base endpoint or cache and control endpoints.
+  EnvMomentoTokenProvider(String envVarName,
+      {String? baseEndpointOverride, EndpointOverrides? endpointOverrides}) {
     if (Platform.environment.containsKey(envVarName) == false) {
       throw CredentialProviderError.emptyEnvironmentVariable(envVarName);
     }
+
     final apiKey = Platform.environment[envVarName] ?? '';
     if (apiKey.isEmpty) {
       throw CredentialProviderError.emptyApiKey();
     }
     final parsedApiKey = CredentialProvider._parseApiKey(apiKey);
-    if (parsedApiKey.controlEndpoint == null ||
-        parsedApiKey.cacheEndpoint == null) {
-      throw IllegalArgumentError("failed to parse jwt token");
-    }
     _apiKey = parsedApiKey.apiKey;
-    _cacheEndpoint = parsedApiKey.cacheEndpoint!;
-    _controlEndpoint = parsedApiKey.controlEndpoint!;
+
+    if (baseEndpointOverride != null) {
+      final endpoints = _Endpoints(baseEndpointOverride);
+      _cacheEndpoint = endpoints.cacheEndpoint;
+      _controlEndpoint = endpoints.controlEndpoint;
+    } else if (endpointOverrides != null) {
+      _cacheEndpoint = endpointOverrides.cacheEndpoint;
+      _controlEndpoint = endpointOverrides.controlEndpoint;
+    } else {
+      if (parsedApiKey.controlEndpoint == null ||
+          parsedApiKey.cacheEndpoint == null) {
+        throw IllegalArgumentError("failed to parse jwt token");
+      }
+      _cacheEndpoint = parsedApiKey.cacheEndpoint!;
+      _controlEndpoint = parsedApiKey.controlEndpoint!;
+    }
   }
 
-  /// Copy constructor to override the base endpoint.
-  EnvMomentoTokenProvider.withBaseEndpointOverride(
-      String envVarName, String baseEndpoint) {
-    if (Platform.environment.containsKey(envVarName) == false) {
-      throw CredentialProviderError.emptyEnvironmentVariable(envVarName);
-    }
-    final apiKey = Platform.environment[envVarName] ?? '';
-    if (apiKey.isEmpty) {
-      throw CredentialProviderError.emptyApiKey();
-    }
-    final parsedApiKey = CredentialProvider._parseApiKey(apiKey);
-    final endpoints = _Endpoints(baseEndpoint);
-    _apiKey = parsedApiKey.apiKey;
-    _cacheEndpoint = endpoints.cacheEndpoint;
-    _controlEndpoint = endpoints.controlEndpoint;
-  }
+  @override
+  String get apiKey => _apiKey;
 
-  /// Constructor allowing override of the cache and control endpoints.
-  EnvMomentoTokenProvider.withEndpointOverrides(
-      String envVarName, EndpointOverrides overrides) {
-    if (Platform.environment.containsKey(envVarName) == false) {
-      throw CredentialProviderError.emptyEnvironmentVariable(envVarName);
-    }
-    final apiKey = Platform.environment[envVarName] ?? '';
-    if (apiKey.isEmpty) {
-      throw CredentialProviderError.emptyApiKey();
-    }
-    final parsedApiKey = CredentialProvider._parseApiKey(apiKey);
-    _apiKey = parsedApiKey.apiKey;
-    _cacheEndpoint = overrides.cacheEndpoint;
-    _controlEndpoint = overrides.controlEndpoint;
-  }
+  @override
+  String get cacheEndpoint => _cacheEndpoint;
+
+  @override
+  String get controlEndpoint => _controlEndpoint;
 }
