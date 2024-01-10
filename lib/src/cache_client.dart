@@ -6,6 +6,7 @@ import 'package:momento/src/internal/data_client.dart';
 import 'package:momento/src/internal/utils/validators.dart';
 
 import 'config/logger.dart';
+import 'internal/utils/utils.dart';
 
 abstract class ICacheClient {
   // Control plane RPCs
@@ -16,20 +17,20 @@ abstract class ICacheClient {
   Future<ListCachesResponse> listCaches();
 
   // Unary RPCs
-  Future<GetResponse> get(String cacheName, Value key);
+  Future<GetResponse> get(String cacheName, dynamic key);
 
-  Future<SetResponse> set(String cacheName, Value key, Value value,
+  Future<SetResponse> set(String cacheName, dynamic key, dynamic value,
       {Duration? ttl});
 
-  Future<DeleteResponse> delete(String cacheName, Value key);
+  Future<DeleteResponse> delete(String cacheName, dynamic key);
 
   // List Collection RPCs
   Future<ListConcatenateBackResponse> listConcatenateBack(
-      String cacheName, String listName, List<Value> values,
+      String cacheName, String listName, List<dynamic> values,
       {CollectionTtl? ttl, int? truncateFrontToSize});
 
   Future<ListConcatenateFrontResponse> listConcatenateFront(
-      String cacheName, String listName, List<Value> values,
+      String cacheName, String listName, List<dynamic> values,
       {CollectionTtl? ttl, int? truncateBackToSize});
 
   Future<ListFetchResponse> listFetch(String cacheName, String listName,
@@ -39,15 +40,15 @@ abstract class ICacheClient {
   Future<ListPopFrontResponse> listPopFront(String cacheName, String listName);
 
   Future<ListPushBackResponse> listPushBack(
-      String cacheName, String listName, Value value,
+      String cacheName, String listName, dynamic value,
       {CollectionTtl? ttl, int? truncateFrontToSize});
 
   Future<ListPushFrontResponse> listPushFront(
-      String cacheName, String listName, Value value,
+      String cacheName, String listName, dynamic value,
       {CollectionTtl? ttl, int? truncateBackToSize});
 
   Future<ListRemoveValueResponse> listRemoveValue(
-      String cacheName, String listName, Value value);
+      String cacheName, String listName, dynamic value);
 
   Future<ListRetainResponse> listRetain(String cacheName, String listName,
       {int? startIndex, int? endIndex, CollectionTtl? ttl});
@@ -159,9 +160,11 @@ class CacheClient implements ICacheClient {
   /// }
   /// ```
   @override
-  Future<GetResponse> get(String cacheName, Value key) {
+  Future<GetResponse> get(String cacheName, dynamic key) {
+    Value validatedKey;
     try {
       validateCacheName(cacheName);
+      validatedKey = getStringOrBinaryFromDynamic(key, "key");
     } catch (e) {
       if (e is SdkException) {
         return Future.value(GetError(e));
@@ -170,7 +173,7 @@ class CacheClient implements ICacheClient {
             GetError(UnknownException("Unexpected error: $e", null, null)));
       }
     }
-    return _dataClient.get(cacheName, key);
+    return _dataClient.get(cacheName, validatedKey);
   }
 
   /// Associates the given key with the given value.
@@ -186,10 +189,14 @@ class CacheClient implements ICacheClient {
   /// }
   /// ```
   @override
-  Future<SetResponse> set(String cacheName, Value key, Value value,
+  Future<SetResponse> set(String cacheName, dynamic key, dynamic value,
       {Duration? ttl}) {
+    Value validatedKey;
+    Value validatedValue;
     try {
       validateCacheName(cacheName);
+      validatedKey = getStringOrBinaryFromDynamic(key, "key");
+      validatedValue = getStringOrBinaryFromDynamic(value, "value");
     } catch (e) {
       if (e is SdkException) {
         return Future.value(SetError(e));
@@ -198,7 +205,7 @@ class CacheClient implements ICacheClient {
             SetError(UnknownException("Unexpected error: $e", null, null)));
       }
     }
-    return _dataClient.set(cacheName, key, value, ttl: ttl);
+    return _dataClient.set(cacheName, validatedKey, validatedValue, ttl: ttl);
   }
 
   /// Removes the given key from the cache.
@@ -214,9 +221,11 @@ class CacheClient implements ICacheClient {
   /// }
   /// ```
   @override
-  Future<DeleteResponse> delete(String cacheName, Value key) {
+  Future<DeleteResponse> delete(String cacheName, dynamic key) {
+    Value validatedKey;
     try {
       validateCacheName(cacheName);
+      validatedKey = getStringOrBinaryFromDynamic(key, "key");
     } catch (e) {
       if (e is SdkException) {
         return Future.value(DeleteError(e));
@@ -225,7 +234,7 @@ class CacheClient implements ICacheClient {
             DeleteError(UnknownException("Unexpected error: $e", null, null)));
       }
     }
-    return _dataClient.delete(cacheName, key);
+    return _dataClient.delete(cacheName, validatedKey);
   }
 
   /// Close the client and free up all associated resources.
@@ -233,14 +242,14 @@ class CacheClient implements ICacheClient {
   /// NOTE: the client object will not be usable after calling this method.
   @override
   Future<ListConcatenateBackResponse> listConcatenateBack(
-      String cacheName, String listName, List<Value> values,
+      String cacheName, String listName, List<dynamic> values,
       {CollectionTtl? ttl, int? truncateFrontToSize}) {
+    List<Value> validatedList;
     try {
       validateCacheName(cacheName);
       validateListName(listName);
-      validateList(values);
-      return _dataClient.listConcatenateBack(cacheName, listName, values,
-          ttl: ttl, truncateFrontToSize: truncateFrontToSize);
+      validatedList = getListOfStringOrBinaryFromDynamic(values, "list");
+      validateList(validatedList);
     } catch (e) {
       if (e is SdkException) {
         return Future.value(ListConcatenateBackError(e));
@@ -249,18 +258,20 @@ class CacheClient implements ICacheClient {
             UnknownException("Unexpected error: $e", null, null)));
       }
     }
+    return _dataClient.listConcatenateBack(cacheName, listName, validatedList,
+          ttl: ttl, truncateFrontToSize: truncateFrontToSize);
   }
 
   @override
   Future<ListConcatenateFrontResponse> listConcatenateFront(
-      String cacheName, String listName, List<Value> values,
+      String cacheName, String listName, List<dynamic> values,
       {CollectionTtl? ttl, int? truncateBackToSize}) {
+    List<Value> validatedList;
     try {
       validateCacheName(cacheName);
       validateListName(listName);
-      validateList(values);
-      return _dataClient.listConcatenateFront(cacheName, listName, values,
-          ttl: ttl, truncateBackToSize: truncateBackToSize);
+      validatedList = getListOfStringOrBinaryFromDynamic(values, "list");
+      validateList(validatedList);
     } catch (e) {
       if (e is SdkException) {
         return Future.value(ListConcatenateFrontError(e));
@@ -269,6 +280,8 @@ class CacheClient implements ICacheClient {
             UnknownException("Unexpected error: $e", null, null)));
       }
     }
+    return _dataClient.listConcatenateFront(cacheName, listName, validatedList,
+          ttl: ttl, truncateBackToSize: truncateBackToSize);
   }
 
   @override
@@ -277,8 +290,6 @@ class CacheClient implements ICacheClient {
     try {
       validateCacheName(cacheName);
       validateListName(listName);
-      return _dataClient.listFetch(cacheName, listName,
-          startIndex: startIndex, endIndex: endIndex);
     } catch (e) {
       if (e is SdkException) {
         return Future.value(ListFetchError(e));
@@ -287,6 +298,8 @@ class CacheClient implements ICacheClient {
             UnknownException("Unexpected error: $e", null, null)));
       }
     }
+    return _dataClient.listFetch(cacheName, listName,
+          startIndex: startIndex, endIndex: endIndex);
   }
 
   @override
@@ -294,7 +307,6 @@ class CacheClient implements ICacheClient {
     try {
       validateCacheName(cacheName);
       validateListName(listName);
-      return _dataClient.listLength(cacheName, listName);
     } catch (e) {
       if (e is SdkException) {
         return Future.value(ListLengthError(e));
@@ -303,6 +315,7 @@ class CacheClient implements ICacheClient {
             UnknownException("Unexpected error: $e", null, null)));
       }
     }
+    return _dataClient.listLength(cacheName, listName);
   }
 
   @override
@@ -310,7 +323,6 @@ class CacheClient implements ICacheClient {
     try {
       validateCacheName(cacheName);
       validateListName(listName);
-      return _dataClient.listPopBack(cacheName, listName);
     } catch (e) {
       if (e is SdkException) {
         return Future.value(ListPopBackError(e));
@@ -319,6 +331,7 @@ class CacheClient implements ICacheClient {
             UnknownException("Unexpected error: $e", null, null)));
       }
     }
+    return _dataClient.listPopBack(cacheName, listName);
   }
 
   @override
@@ -326,7 +339,6 @@ class CacheClient implements ICacheClient {
     try {
       validateCacheName(cacheName);
       validateListName(listName);
-      return _dataClient.listPopFront(cacheName, listName);
     } catch (e) {
       if (e is SdkException) {
         return Future.value(ListPopFrontError(e));
@@ -335,17 +347,18 @@ class CacheClient implements ICacheClient {
             UnknownException("Unexpected error: $e", null, null)));
       }
     }
+    return _dataClient.listPopFront(cacheName, listName);
   }
 
   @override
   Future<ListPushBackResponse> listPushBack(
-      String cacheName, String listName, Value value,
+      String cacheName, String listName, dynamic value,
       {CollectionTtl? ttl, int? truncateFrontToSize}) {
+    Value validatedValue;
     try {
       validateCacheName(cacheName);
       validateListName(listName);
-      return _dataClient.listPushBack(cacheName, listName, value,
-          ttl: ttl, truncateFrontToSize: truncateFrontToSize);
+      validatedValue = getStringOrBinaryFromDynamic(value, "value");
     } catch (e) {
       if (e is SdkException) {
         return Future.value(ListPushBackError(e));
@@ -354,17 +367,19 @@ class CacheClient implements ICacheClient {
             UnknownException("Unexpected error: $e", null, null)));
       }
     }
+    return _dataClient.listPushBack(cacheName, listName, validatedValue,
+          ttl: ttl, truncateFrontToSize: truncateFrontToSize);
   }
 
   @override
   Future<ListPushFrontResponse> listPushFront(
-      String cacheName, String listName, Value value,
+      String cacheName, String listName, dynamic value,
       {CollectionTtl? ttl, int? truncateBackToSize}) {
+    Value validatedValue;
     try {
       validateCacheName(cacheName);
       validateListName(listName);
-      return _dataClient.listPushFront(cacheName, listName, value,
-          ttl: ttl, truncateBackToSize: truncateBackToSize);
+      validatedValue = getStringOrBinaryFromDynamic(value, "value");
     } catch (e) {
       if (e is SdkException) {
         return Future.value(ListPushFrontError(e));
@@ -373,15 +388,18 @@ class CacheClient implements ICacheClient {
             UnknownException("Unexpected error: $e", null, null)));
       }
     }
+    return _dataClient.listPushFront(cacheName, listName, validatedValue,
+          ttl: ttl, truncateBackToSize: truncateBackToSize);
   }
 
   @override
   Future<ListRemoveValueResponse> listRemoveValue(
-      String cacheName, String listName, Value value) {
+      String cacheName, String listName, dynamic value) {
+    Value validatedValue;
     try {
       validateCacheName(cacheName);
       validateListName(listName);
-      return _dataClient.listRemoveValue(cacheName, listName, value);
+      validatedValue = getStringOrBinaryFromDynamic(value, "value");
     } catch (e) {
       if (e is SdkException) {
         return Future.value(ListRemoveValueError(e));
@@ -390,6 +408,7 @@ class CacheClient implements ICacheClient {
             UnknownException("Unexpected error: $e", null, null)));
       }
     }
+    return _dataClient.listRemoveValue(cacheName, listName, validatedValue);
   }
 
   @override

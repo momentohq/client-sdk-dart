@@ -4,13 +4,14 @@ import 'package:momento/src/errors/errors.dart';
 import 'package:momento/src/internal/utils/validators.dart';
 import 'config/topic_configuration.dart';
 import 'internal/pubsub_client.dart';
+import 'internal/utils/utils.dart';
 import 'messages/responses/topics/topic_subscribe.dart';
 import 'messages/values.dart';
 import 'messages/responses/topics/topic_publish.dart';
 
 abstract class ITopicClient {
   Future<TopicPublishResponse> publish(
-      String cacheName, String topicName, Value value);
+      String cacheName, String topicName, dynamic value);
 
   Future<TopicSubscribeResponse> subscribe(String cacheName, String topicName);
 
@@ -50,10 +51,12 @@ class TopicClient implements ITopicClient {
   /// ```
   @override
   Future<TopicPublishResponse> publish(
-      String cacheName, String topicName, Value value) async {
+      String cacheName, String topicName, dynamic value) async {
+    Value validatedValue;
     try {
       validateCacheName(cacheName);
       validateTopicName(topicName);
+      validatedValue = getStringOrBinaryFromDynamic(value, "value");
     } catch (e) {
       if (e is SdkException) {
         return Future.value(TopicPublishError(e));
@@ -62,7 +65,7 @@ class TopicClient implements ITopicClient {
             UnknownException("Unexpected error: $e", null, null)));
       }
     }
-    return await _pubsubClient.publish(cacheName, topicName, value);
+    return await _pubsubClient.publish(cacheName, topicName, validatedValue);
   }
 
   /// Subscribe to a topic.

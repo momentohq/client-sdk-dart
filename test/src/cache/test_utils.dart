@@ -39,12 +39,11 @@ String generateStringWithUuid(String prefix) {
 }
 
 Future<void> verifyListFetch(String cacheName, String listName,
-    List<Value> expected, CacheClient cacheClient) async {
+    List<String> expected, CacheClient cacheClient) async {
   final listResp = await cacheClient.listFetch(cacheName, listName);
   switch (listResp) {
     case ListFetchHit():
-      expect(
-          listResp.values.toList(), expected.map((e) => e.toUtf8()).toList());
+      expect(listResp.values.toList(), expected);
       break;
     case ListFetchMiss():
       fail('Expected Hit but got Miss');

@@ -102,8 +102,9 @@ void main() {
 
   group('scalar get, set, delete', () {
     test('arguments are validated', () async {
-      final key = StringValue("key");
-      final value = StringValue("value");
+      final key = "key";
+      final value = "value";
+      final invalid = 123;
 
       final getResp = await cacheClient.get("   ", key);
       switch (getResp) {
@@ -116,6 +117,17 @@ void main() {
               reason: "get should not accept empty cache name");
       }
 
+      final getResp2 = await cacheClient.get(integrationTestCacheName, invalid);
+      switch (getResp2) {
+        case GetHit():
+          fail('Expected Error but got Hit');
+        case GetMiss():
+          fail('Expected Error but got Miss');
+        case GetError():
+          expect(getResp2.errorCode, MomentoErrorCode.invalidArgumentError,
+              reason: "get should not accept key that's not String or List<int>");
+      }
+
       final setResp = await cacheClient.set("   ", key, value);
       switch (setResp) {
         case SetSuccess():
@@ -125,6 +137,24 @@ void main() {
               reason: "set should not accept empty cache name");
       }
 
+      final setResp2 = await cacheClient.set(integrationTestCacheName, invalid, value);
+      switch (setResp2) {
+        case SetSuccess():
+          fail('Expected Error but got Success');
+        case SetError():
+          expect(setResp2.errorCode, MomentoErrorCode.invalidArgumentError,
+              reason: "set should not accept key that's not String or List<int>");
+      }
+
+      final setResp3 = await cacheClient.set(integrationTestCacheName, key, invalid);
+      switch (setResp3) {
+        case SetSuccess():
+          fail('Expected Error but got Success');
+        case SetError():
+          expect(setResp3.errorCode, MomentoErrorCode.invalidArgumentError,
+              reason: "set should not accept value that's not String or List<int>");
+      }
+
       final deleteResp = await cacheClient.delete("   ", key);
       switch (deleteResp) {
         case DeleteSuccess():
@@ -132,6 +162,15 @@ void main() {
         case DeleteError():
           expect(deleteResp.errorCode, MomentoErrorCode.invalidArgumentError,
               reason: "delete cache should not accept empty cache name");
+      }
+
+      final deleteResp2 = await cacheClient.delete(integrationTestCacheName, invalid);
+      switch (deleteResp2) {
+        case DeleteSuccess():
+          fail('Expected Error but got Success');
+        case DeleteError():
+          expect(deleteResp2.errorCode, MomentoErrorCode.invalidArgumentError,
+              reason: "delete cache should not accept key that's not String or List<int>");
       }
     });
 

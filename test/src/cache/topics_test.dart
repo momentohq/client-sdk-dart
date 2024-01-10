@@ -23,8 +23,12 @@ void main() {
 
   group('topics', () {
     test('arguments are validated', () async {
+      final topicName = "topic-name";
+      final validMessage = "message";
+      final invalidMessage = 123;
+
       final publishResp = await topicClient.publish(
-          "   ", "topic-name", StringValue("message"));
+          "   ", topicName, validMessage);
       switch (publishResp) {
         case TopicPublishSuccess():
           fail('Expected Error but got Success');
@@ -34,7 +38,7 @@ void main() {
       }
 
       final publishResp2 = await topicClient.publish(
-          integrationTestCacheName, "   ", StringValue("message"));
+          integrationTestCacheName, "   ", validMessage);
       switch (publishResp2) {
         case TopicPublishSuccess():
           fail('Expected Error but got Success');
@@ -43,7 +47,17 @@ void main() {
               reason: "publish should not accept empty topic name");
       }
 
-      final subscribeResp = await topicClient.subscribe("   ", "topic-name");
+      final publishResp3 = await topicClient.publish(
+          integrationTestCacheName, topicName, invalidMessage);
+      switch (publishResp3) {
+        case TopicPublishSuccess():
+          fail('Expected Error but got Success');
+        case TopicPublishError():
+          expect(publishResp3.errorCode, MomentoErrorCode.invalidArgumentError,
+              reason: "publish should not accept message that is not String or Binary");
+      }
+
+      final subscribeResp = await topicClient.subscribe("   ", topicName);
       switch (subscribeResp) {
         case TopicSubscription():
           fail('Expected Error but got Success');
