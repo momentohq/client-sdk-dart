@@ -19,7 +19,8 @@ sealed class CreateCacheResponse {}
 class CreateCacheSuccess extends ResponseBase implements CreateCacheResponse {}
 
 /// Indicates that the cache already exists, so there was nothing to do.
-class CreateCacheAlreadyExists extends ResponseBase implements CreateCacheResponse {}
+class CreateCacheAlreadyExists extends ResponseBase
+    implements CreateCacheResponse {}
 
 /// Indicates that an error occurred during the create cache request.
 ///
