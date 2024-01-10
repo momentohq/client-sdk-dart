@@ -58,9 +58,9 @@ class DataClient implements AbstractDataClient {
       this._defaultTtl) {
     _channel = ClientChannel(credentialProvider.cacheEndpoint);
     _client = ScsClient(_channel,
-        options: CallOptions(metadata: {
-          'authorization': credentialProvider.apiKey
-        }, timeout: _configuration.transportStrategy.grpcConfig.deadline));
+        options: CallOptions(
+            metadata: {'authorization': credentialProvider.apiKey},
+            timeout: _configuration.transportStrategy.grpcConfig.deadline));
   }
 
   Map<String, String> makeHeaders({String? cacheName}) {

@@ -81,7 +81,8 @@ class ClientPubsub implements AbstractPubsubClient {
     request.resumeAtTopicSequenceNumber =
         resumeAtTopicSequenceNumber ?? Int64(0);
     try {
-      var stream = _grpcManager.client.subscribe(request, options: CallOptions(metadata: makeHeaders()));
+      var stream = _grpcManager.client
+          .subscribe(request, options: CallOptions(metadata: makeHeaders()));
       final subscription = TopicSubscription(stream,
           request.resumeAtTopicSequenceNumber, this, cacheName, topicName);
 

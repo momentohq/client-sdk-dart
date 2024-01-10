@@ -83,7 +83,8 @@ class ControlClient implements AbstractControlClient {
   Future<ListCachesResponse> listCaches() async {
     var request = ListCachesRequest_();
     try {
-      final resp = await _client.listCaches(request, options: CallOptions(metadata: makeHeaders()));
+      final resp = await _client.listCaches(request,
+          options: CallOptions(metadata: makeHeaders()));
       return ListCachesSuccess(resp.cache);
     } catch (e) {
       if (e is GrpcError) {
