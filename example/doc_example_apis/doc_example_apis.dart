@@ -3,7 +3,7 @@ import 'package:momento/momento.dart';
 import 'package:uuid/uuid.dart';
 
 Future<void> example_API_InstantiateCacheClient(
-    String envVarName) async {
+    String envVarName, String longNameForFormatting) async {
   try {
     final cacheClient = CacheClient(
         CredentialProvider.fromEnvironmentVariable(envVarName),
@@ -29,7 +29,7 @@ Future<void> example_API_CreateCache(
 }
 
 Future<void> example_API_ListCaches(
-    CacheClient cacheClient) async {
+    CacheClient cacheClient, String longNameForFormatting) async {
   final result = await cacheClient.listCaches();
   switch (result) {
     case ListCachesError():
@@ -98,9 +98,9 @@ Future<void> main() async {
   final key = StringValue("myKey");
   final value = StringValue("myValue");
 
-  await example_API_InstantiateCacheClient("MOMENTO_API_KEY");
+  await example_API_InstantiateCacheClient("MOMENTO_API_KEY", "");
   await example_API_CreateCache(cacheClient, cacheName);
-  await example_API_ListCaches(cacheClient);
+  await example_API_ListCaches(cacheClient, "");
 
   await example_API_Set(cacheClient, cacheName, key, value);
   await example_API_Get(cacheClient, cacheName, key);
