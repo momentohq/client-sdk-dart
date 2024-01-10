@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:momento/momento.dart';
 import 'package:momento/src/errors/errors.dart';
