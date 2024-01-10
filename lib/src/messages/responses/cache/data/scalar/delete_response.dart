@@ -14,7 +14,7 @@ import 'package:momento/src/messages/responses/responses_base.dart';
 sealed class DeleteResponse {}
 
 /// Indicates a successful delete cache item request.
-class DeleteSuccess extends NonErroResponseBase implements DeleteResponse {}
+class DeleteSuccess extends NonErrorResponseBase implements DeleteResponse {}
 
 /// Indicates that an error occurred during the delete cache item request.
 ///

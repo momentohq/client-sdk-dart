@@ -2,7 +2,7 @@ import 'package:momento/src/messages/responses/responses_base.dart';
 
 sealed class TopicPublishResponse {}
 
-class TopicPublishSuccess extends NonErroResponseBase
+class TopicPublishSuccess extends NonErrorResponseBase
     implements TopicPublishResponse {}
 
 class TopicPublishError extends ErrorResponseBase

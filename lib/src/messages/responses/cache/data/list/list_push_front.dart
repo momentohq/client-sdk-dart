@@ -25,7 +25,7 @@ class ListPushFrontError extends ErrorResponseBase
 }
 
 /// Indicates that the request was successful and the updated length can be accessed by the field `length`.
-class ListPushFrontSuccess extends NonErroResponseBase
+class ListPushFrontSuccess extends NonErrorResponseBase
     implements ListPushFrontResponse {
   ListPushFrontSuccess(this._length);
 

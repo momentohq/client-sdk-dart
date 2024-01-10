@@ -75,8 +75,7 @@ class ControlClient implements AbstractControlClient {
     var request = ListCachesRequest_();
     try {
       final resp = await _client.listCaches(request);
-      return ListCachesSuccess(resp.cache,
-          message: "Successfully fetched all caches in account");
+      return ListCachesSuccess(resp.cache);
     } catch (e) {
       if (e is GrpcError) {
         return ListCachesError(grpcStatusToSdkException(e));

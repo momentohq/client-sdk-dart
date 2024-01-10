@@ -18,7 +18,7 @@ import '../../../responses_base.dart';
 sealed class ListPopBackResponse {}
 
 /// Indicates that the requested list was not available in the cache.
-class ListPopBackMiss extends NonErroResponseBase
+class ListPopBackMiss extends NonErrorResponseBase
     implements ListPopBackResponse {}
 
 /// Indicates that an error occurred during the list pop back request.
@@ -33,7 +33,7 @@ class ListPopBackError extends ErrorResponseBase
 }
 
 /// Indicates that the request was successful and the value can be accessed by the fields `value` or `binaryValue`.
-class ListPopBackHit extends NonErroResponseBase
+class ListPopBackHit extends NonErrorResponseBase
     implements ListPopBackResponse {
   ListPopBackHit(this._value);
 

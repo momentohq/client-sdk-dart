@@ -11,7 +11,7 @@ class ErrorResponseBase extends AbstractExceptionResponseBase
   }
 }
 
-class NonErroResponseBase {
+class NonErrorResponseBase {
   @override
   String toString() {
     return "$runtimeType";
