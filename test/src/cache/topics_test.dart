@@ -27,8 +27,8 @@ void main() {
       final validMessage = "message";
       final invalidMessage = 123;
 
-      final publishResp = await topicClient.publish(
-          "   ", topicName, validMessage);
+      final publishResp =
+          await topicClient.publish("   ", topicName, validMessage);
       switch (publishResp) {
         case TopicPublishSuccess():
           fail('Expected Error but got Success');
@@ -54,7 +54,8 @@ void main() {
           fail('Expected Error but got Success');
         case TopicPublishError():
           expect(publishResp3.errorCode, MomentoErrorCode.invalidArgumentError,
-              reason: "publish should not accept message that is not String or Binary");
+              reason:
+                  "publish should not accept message that is not String or Binary");
       }
 
       final subscribeResp = await topicClient.subscribe("   ", topicName);

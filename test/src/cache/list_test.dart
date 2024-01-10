@@ -100,7 +100,8 @@ void main() {
                         }
 
                         final concatResp4 = await cacheClient
-                            .listConcatenateBack(validString, validString, [123]);
+                            .listConcatenateBack(
+                                validString, validString, [123]);
                         switch (concatResp4) {
                           case ListConcatenateBackSuccess():
                             fail('Expected Error but got Success');
@@ -154,7 +155,8 @@ void main() {
                         }
 
                         final concatResp4 = await cacheClient
-                            .listConcatenateFront(validString, validString, [123]);
+                            .listConcatenateFront(
+                                validString, validString, [123]);
                         switch (concatResp4) {
                           case ListConcatenateFrontSuccess():
                             fail('Expected Error but got Success');
@@ -458,8 +460,7 @@ void main() {
                     integrationTestCacheName, listName);
                 switch (fetchResp1) {
                   case ListFetchHit():
-                    expect(fetchResp1.values,
-                        [listValue1, listValue2],
+                    expect(fetchResp1.values, [listValue1, listValue2],
                         reason:
                             "list should contain the value that was pushed");
                   case ListFetchMiss():

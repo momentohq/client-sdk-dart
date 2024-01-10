@@ -12,7 +12,8 @@ Value getStringOrBinaryFromDynamic(dynamic value, String parameterName) {
   }
 }
 
-List<Value> getListOfStringOrBinaryFromDynamic(List<dynamic> values, String parameterName) {
+List<Value> getListOfStringOrBinaryFromDynamic(
+    List<dynamic> values, String parameterName) {
   final list = <Value>[];
   for (final value in values) {
     list.add(getStringOrBinaryFromDynamic(value, parameterName));

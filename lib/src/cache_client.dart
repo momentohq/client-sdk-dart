@@ -259,7 +259,7 @@ class CacheClient implements ICacheClient {
       }
     }
     return _dataClient.listConcatenateBack(cacheName, listName, validatedList,
-          ttl: ttl, truncateFrontToSize: truncateFrontToSize);
+        ttl: ttl, truncateFrontToSize: truncateFrontToSize);
   }
 
   @override
@@ -281,7 +281,7 @@ class CacheClient implements ICacheClient {
       }
     }
     return _dataClient.listConcatenateFront(cacheName, listName, validatedList,
-          ttl: ttl, truncateBackToSize: truncateBackToSize);
+        ttl: ttl, truncateBackToSize: truncateBackToSize);
   }
 
   @override
@@ -299,7 +299,7 @@ class CacheClient implements ICacheClient {
       }
     }
     return _dataClient.listFetch(cacheName, listName,
-          startIndex: startIndex, endIndex: endIndex);
+        startIndex: startIndex, endIndex: endIndex);
   }
 
   @override
@@ -368,7 +368,7 @@ class CacheClient implements ICacheClient {
       }
     }
     return _dataClient.listPushBack(cacheName, listName, validatedValue,
-          ttl: ttl, truncateFrontToSize: truncateFrontToSize);
+        ttl: ttl, truncateFrontToSize: truncateFrontToSize);
   }
 
   @override
@@ -389,7 +389,7 @@ class CacheClient implements ICacheClient {
       }
     }
     return _dataClient.listPushFront(cacheName, listName, validatedValue,
-          ttl: ttl, truncateBackToSize: truncateBackToSize);
+        ttl: ttl, truncateBackToSize: truncateBackToSize);
   }
 
   @override
