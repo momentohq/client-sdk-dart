@@ -40,7 +40,7 @@ class ControlClient implements AbstractControlClient {
       return CreateCacheSuccess();
     } catch (e) {
       if (e is GrpcError && e.code == StatusCode.alreadyExists) {
-        return AlreadyExists();
+        return CreateCacheAlreadyExists();
       } else if (e is GrpcError) {
         return CreateCacheError(grpcStatusToSdkException(e));
       } else {
