@@ -35,7 +35,15 @@ jobs:
         run: dart test
         env:
           TEST_API_KEY: ${{ secrets.ALPHA_TEST_AUTH_TOKEN }}
-  
+
+      - name: Run examples
+        env:
+          MOMENTO_API_KEY: ${{ secrets.ALPHA_TEST_AUTH_TOKEN }}
+        run: |
+          pushd example/doc_example_apis
+            dart run doc_example_apis.dart
+          popd        
+
   readme:
     runs-on: ubuntu-latest
     steps:

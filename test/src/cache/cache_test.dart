@@ -27,7 +27,7 @@ void main() {
       switch (createResp) {
         case CreateCacheSuccess():
           fail('Expected Error but got Success');
-        case AlreadyExists():
+        case CreateCacheAlreadyExists():
           fail('Expected Error but got AlreadyExists');
         case CreateCacheError():
           expect(createResp.errorCode, MomentoErrorCode.invalidArgumentError,
@@ -51,7 +51,7 @@ void main() {
         case CreateCacheSuccess():
           expect(createResp.runtimeType, CreateCacheSuccess,
               reason: "create cache should succeed");
-        case AlreadyExists():
+        case CreateCacheAlreadyExists():
           fail('Expected Success but got AlreadyExists');
         case CreateCacheError():
           fail(

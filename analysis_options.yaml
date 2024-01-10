@@ -23,6 +23,7 @@ analyzer:
  exclude:
    - lib/generated/**
    - example/flutter_chat_app/**
+   - example/doc_example_apis/**
 
 # For more information about the core and recommended set of lints, see
 # https://dart.dev/go/core-lints
