@@ -22,6 +22,7 @@ abstract class AbstractPubsubClient {
 class ClientPubsub implements AbstractPubsubClient {
   final TopicClientConfiguration _configuration;
   late final TopicGrpcManager _grpcManager;
+  var firstRequest = true;
 
   ClientPubsub(CredentialProvider credentialProvider, this._configuration) {
     _grpcManager = TopicGrpcManager(credentialProvider);
@@ -39,6 +40,16 @@ class ClientPubsub implements AbstractPubsubClient {
     }
   }
 
+  Map<String, String>? makeHeaders() {
+    if (firstRequest) {
+      firstRequest = false;
+      return {
+        'agent': 'dart:0.1.0',
+      };
+    }
+    return null;
+  }
+
   @override
   Future<TopicPublishResponse> publish(
       String cacheName, String topicName, Value value) async {
@@ -49,6 +60,7 @@ class ClientPubsub implements AbstractPubsubClient {
     try {
       await _grpcManager.client.publish(request,
           options: CallOptions(
+              metadata: makeHeaders(),
               timeout: _configuration.transportStrategy.grpcConfig.deadline));
       return TopicPublishSuccess();
     } catch (e) {
@@ -69,7 +81,7 @@ class ClientPubsub implements AbstractPubsubClient {
     request.resumeAtTopicSequenceNumber =
         resumeAtTopicSequenceNumber ?? Int64(0);
     try {
-      var stream = _grpcManager.client.subscribe(request);
+      var stream = _grpcManager.client.subscribe(request, options: CallOptions(metadata: makeHeaders()));
       final subscription = TopicSubscription(stream,
           request.resumeAtTopicSequenceNumber, this, cacheName, topicName);
 

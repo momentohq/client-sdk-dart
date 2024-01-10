@@ -12,8 +12,7 @@ class TopicGrpcManager {
     _channel = ClientChannel(credentialProvider.cacheEndpoint);
     _client = PubsubClient(_channel,
         options: CallOptions(metadata: {
-          'authorization': credentialProvider.apiKey,
-          'agent': 'dart:0.1.0'
+          'authorization': credentialProvider.apiKey
         }));
   }
 
