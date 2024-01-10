@@ -16,8 +16,7 @@ import '../../../responses_base.dart';
 sealed class ListLengthResponse {}
 
 /// Indicates that the requested list was not available in the cache.
-class ListLengthMiss extends NonErrorResponseBase
-    implements ListLengthResponse {}
+class ListLengthMiss extends ResponseBase implements ListLengthResponse {}
 
 /// Indicates that an error occurred during the list length request.
 ///
@@ -30,7 +29,7 @@ class ListLengthError extends ErrorResponseBase implements ListLengthResponse {
 }
 
 /// Indicates that the requested list length was successfully retrieved from the cache and the length can be accessed by the field `length`.
-class ListLengthHit extends NonErrorResponseBase implements ListLengthResponse {
+class ListLengthHit extends ResponseBase implements ListLengthResponse {
   ListLengthHit(this._length);
 
   final int _length;

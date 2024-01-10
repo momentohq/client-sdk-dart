@@ -23,8 +23,7 @@ class CacheInfo {
 sealed class ListCachesResponse {}
 
 /// Indicates a successful list caches request.
-class ListCachesSuccess extends NonErrorResponseBase
-    implements ListCachesResponse {
+class ListCachesSuccess extends ResponseBase implements ListCachesResponse {
   late final List<CacheInfo> caches;
 
   ListCachesSuccess(List<Cache_> grpcCaches) {

@@ -18,7 +18,7 @@ import 'package:momento/src/messages/responses/responses_base.dart';
 sealed class GetResponse {}
 
 /// Indicates that the requested data was not available in the cache.
-class GetMiss extends NonErrorResponseBase implements GetResponse {}
+class GetMiss extends ResponseBase implements GetResponse {}
 
 /// Indicates that an error occurred during the get cache item request.
 ///
@@ -31,7 +31,7 @@ class GetError extends ErrorResponseBase implements GetResponse {
 }
 
 /// Indicates that the requested data was successfully retrieved from the cache and can be accessed by the fields `value` or `binaryValue`.
-class GetHit extends NonErrorResponseBase implements GetResponse {
+class GetHit extends ResponseBase implements GetResponse {
   GetHit(this._value);
 
   final List<int> _value;

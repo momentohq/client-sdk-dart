@@ -14,7 +14,7 @@ import '../../../responses_base.dart';
 sealed class ListConcatenateFrontResponse {}
 
 /// Indicates that the request was successful and the updated length can be accessed by the field `length`.
-class ListConcatenateFrontSuccess extends NonErrorResponseBase
+class ListConcatenateFrontSuccess extends ResponseBase
     implements ListConcatenateFrontResponse {
   ListConcatenateFrontSuccess(this._length);
 

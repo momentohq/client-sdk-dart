@@ -10,8 +10,7 @@ import 'topic_subscription_item.dart';
 
 sealed class TopicSubscribeResponse {}
 
-class TopicSubscription extends NonErrorResponseBase
-    implements TopicSubscribeResponse {
+class TopicSubscription extends ResponseBase implements TopicSubscribeResponse {
   ResponseStream<SubscriptionItem_> _stream;
   Int64 lastSequenceNumber;
   final ClientPubsub _client;
