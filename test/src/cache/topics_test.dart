@@ -88,7 +88,7 @@ void main() {
       // publish a message 2 seconds from now
       Timer(const Duration(seconds: 2), () async {
         final publishResp = await topicClient.publish(
-          integrationTestCacheName, topicName, StringValue(topicValue));
+            integrationTestCacheName, topicName, StringValue(topicValue));
         switch (publishResp) {
           case TopicPublishSuccess():
             expect(publishResp.runtimeType, TopicPublishSuccess,
