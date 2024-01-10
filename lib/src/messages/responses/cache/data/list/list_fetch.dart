@@ -18,7 +18,9 @@ import 'package:momento/src/messages/responses/responses_base.dart';
 sealed class ListFetchResponse {}
 
 /// Indicates that the requested list was not available in the cache.
-class ListFetchMiss implements ListFetchResponse {}
+class ListFetchMiss extends NonErroResponseBase implements ListFetchResponse {
+  ListFetchMiss({String message = "ListFetchMiss"}) : super(message);
+}
 
 /// Indicates that an error occurred during the list fetch request.
 ///
@@ -31,8 +33,9 @@ class ListFetchError extends ErrorResponseBase implements ListFetchResponse {
 }
 
 /// Indicates that the requested list was successfully retrieved from the cache and can be accessed by the fields `values` or `binaryValues`.
-class ListFetchHit implements ListFetchResponse {
-  ListFetchHit(this._values);
+class ListFetchHit extends NonErroResponseBase implements ListFetchResponse {
+  ListFetchHit(this._values, {String message = "ListFetchHit"})
+      : super(message);
 
   final List<List<int>> _values;
 

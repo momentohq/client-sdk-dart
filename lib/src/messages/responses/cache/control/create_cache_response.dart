@@ -16,10 +16,15 @@ import 'package:momento/src/messages/responses/responses_base.dart';
 sealed class CreateCacheResponse {}
 
 /// Indicates a successful create cache request.
-class CreateCacheSuccess implements CreateCacheResponse {}
+class CreateCacheSuccess extends NonErroResponseBase
+    implements CreateCacheResponse {
+  CreateCacheSuccess({String message = "CreateCacheSuccess"}) : super(message);
+}
 
 /// Indicates that the cache already exists, so there was nothing to do.
-class AlreadyExists implements CreateCacheResponse {}
+class AlreadyExists extends NonErroResponseBase implements CreateCacheResponse {
+  AlreadyExists({String message = "AlreadyExists"}) : super(message);
+}
 
 /// Indicates that an error occurred during the create cache request.
 ///

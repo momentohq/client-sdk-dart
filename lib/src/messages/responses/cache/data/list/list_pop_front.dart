@@ -18,7 +18,10 @@ import '../../../responses_base.dart';
 sealed class ListPopFrontResponse {}
 
 /// Indicates that the requested list was not available in the cache.
-class ListPopFrontMiss implements ListPopFrontResponse {}
+class ListPopFrontMiss extends NonErroResponseBase
+    implements ListPopFrontResponse {
+  ListPopFrontMiss({String message = "ListPopFrontMiss"}) : super(message);
+}
 
 /// Indicates that an error occurred during the list pop front request.
 ///
@@ -32,8 +35,10 @@ class ListPopFrontError extends ErrorResponseBase
 }
 
 /// Indicates that the request was successful and the value can be accessed by the fields `value` or `binaryValue`.
-class ListPopFrontHit implements ListPopFrontResponse {
-  ListPopFrontHit(this._value);
+class ListPopFrontHit extends NonErroResponseBase
+    implements ListPopFrontResponse {
+  ListPopFrontHit(this._value, {String message = "ListPopFrontHit"})
+      : super(message);
 
   final List<int> _value;
 

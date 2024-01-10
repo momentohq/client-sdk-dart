@@ -10,7 +10,8 @@ import 'topic_subscription_item.dart';
 
 sealed class TopicSubscribeResponse {}
 
-class TopicSubscription implements TopicSubscribeResponse {
+class TopicSubscription extends NonErroResponseBase
+    implements TopicSubscribeResponse {
   ResponseStream<SubscriptionItem_> _stream;
   Int64 lastSequenceNumber;
   final ClientPubsub _client;
@@ -21,7 +22,8 @@ class TopicSubscription implements TopicSubscribeResponse {
   late Stream _broadcastStream;
 
   TopicSubscription(this._stream, this.lastSequenceNumber, this._client,
-      this.cacheName, this.topicName) {
+      this.cacheName, this.topicName)
+      : super("TopicSubscription to topic '$topicName' in cache '$cacheName'") {
     _broadcastStream = _stream.asBroadcastStream();
   }
 

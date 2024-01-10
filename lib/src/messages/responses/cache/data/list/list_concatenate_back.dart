@@ -14,8 +14,11 @@ import '../../../responses_base.dart';
 sealed class ListConcatenateBackResponse {}
 
 /// Indicates that the request was successful and the updated length can be accessed by the field `length`.
-class ListConcatenateBackSuccess implements ListConcatenateBackResponse {
-  ListConcatenateBackSuccess(this._length);
+class ListConcatenateBackSuccess extends NonErroResponseBase
+    implements ListConcatenateBackResponse {
+  ListConcatenateBackSuccess(this._length,
+      {String message = "ListConcatenateBackSuccess"})
+      : super(message);
 
   final int _length;
 

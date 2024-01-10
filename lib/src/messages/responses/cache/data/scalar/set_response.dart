@@ -14,7 +14,9 @@ import 'package:momento/src/messages/responses/responses_base.dart';
 sealed class SetResponse {}
 
 /// Indicates a successful set cache item request.
-class SetSuccess implements SetResponse {}
+class SetSuccess extends NonErroResponseBase implements SetResponse {
+  SetSuccess({String message = "SetSuccess"}) : super(message);
+}
 
 /// Indicates that an error occurred during the set cache item request.
 ///

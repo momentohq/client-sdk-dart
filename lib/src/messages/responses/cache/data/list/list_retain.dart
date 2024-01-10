@@ -14,7 +14,10 @@ import '../../../responses_base.dart';
 sealed class ListRetainResponse {}
 
 /// Indicates that the request was successful.
-class ListRetainSuccess implements ListRetainResponse {}
+class ListRetainSuccess extends NonErroResponseBase
+    implements ListRetainResponse {
+  ListRetainSuccess({String message = "ListRetainSuccess"}) : super(message);
+}
 
 /// Indicates that an error occurred during the list retain request.
 ///

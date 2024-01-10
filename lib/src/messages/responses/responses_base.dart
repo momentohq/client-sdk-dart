@@ -10,3 +10,14 @@ class ErrorResponseBase extends AbstractExceptionResponseBase
     return "[${super.errorCode}] ${super.message}";
   }
 }
+
+class NonErroResponseBase {
+  final String _message;
+
+  NonErroResponseBase(this._message);
+
+  @override
+  String toString() {
+    return _message;
+  }
+}

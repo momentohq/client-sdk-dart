@@ -23,10 +23,13 @@ class CacheInfo {
 sealed class ListCachesResponse {}
 
 /// Indicates a successful list caches request.
-class ListCachesSuccess implements ListCachesResponse {
+class ListCachesSuccess extends NonErroResponseBase
+    implements ListCachesResponse {
   late final List<CacheInfo> caches;
 
-  ListCachesSuccess(List<Cache_> grpcCaches) {
+  ListCachesSuccess(List<Cache_> grpcCaches,
+      {String message = "ListCachesSuccess"})
+      : super(message) {
     caches = grpcCaches.map((cache) => CacheInfo(cache.cacheName)).toList();
   }
 
