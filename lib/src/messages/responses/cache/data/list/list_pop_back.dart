@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:momento/src/internal/utils/display.dart';
+
 import '../../../responses_base.dart';
 
 /// Sealed class for a cache list pop back response.
@@ -18,7 +20,7 @@ import '../../../responses_base.dart';
 sealed class ListPopBackResponse {}
 
 /// Indicates that the requested list was not available in the cache.
-class ListPopBackMiss implements ListPopBackResponse {}
+class ListPopBackMiss extends ResponseBase implements ListPopBackResponse {}
 
 /// Indicates that an error occurred during the list pop back request.
 ///
@@ -32,11 +34,16 @@ class ListPopBackError extends ErrorResponseBase
 }
 
 /// Indicates that the request was successful and the value can be accessed by the fields `value` or `binaryValue`.
-class ListPopBackHit implements ListPopBackResponse {
+class ListPopBackHit extends ResponseBase implements ListPopBackResponse {
   ListPopBackHit(this._value);
 
   final List<int> _value;
 
   String get value => utf8.decode(_value);
   List<int> get binaryValue => _value;
+
+  @override
+  String toString() {
+    return "${super.toString()}: ${truncateString(value)}";
+  }
 }

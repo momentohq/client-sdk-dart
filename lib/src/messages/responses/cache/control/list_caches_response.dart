@@ -1,4 +1,5 @@
 import 'package:momento/generated/controlclient.pb.dart';
+import 'package:momento/src/internal/utils/display.dart';
 import 'package:momento/src/messages/responses/responses_base.dart';
 
 /// Represents information about a listed cache, such as its name.
@@ -23,7 +24,7 @@ class CacheInfo {
 sealed class ListCachesResponse {}
 
 /// Indicates a successful list caches request.
-class ListCachesSuccess implements ListCachesResponse {
+class ListCachesSuccess extends ResponseBase implements ListCachesResponse {
   late final List<CacheInfo> caches;
 
   ListCachesSuccess(List<Cache_> grpcCaches) {
@@ -35,6 +36,11 @@ class ListCachesSuccess implements ListCachesResponse {
   }
 
   List<String> get cacheNames => caches.map((cache) => cache.name).toList();
+
+  @override
+  String toString() {
+    return "${super.toString()}: ${truncateStringArray(cacheNames)}";
+  }
 }
 
 /// Indicates that an error occurred during the list caches request.

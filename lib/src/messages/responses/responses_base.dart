@@ -10,3 +10,10 @@ class ErrorResponseBase extends AbstractExceptionResponseBase
     return "[${super.errorCode}] ${super.message}";
   }
 }
+
+class ResponseBase {
+  @override
+  String toString() {
+    return "$runtimeType";
+  }
+}
