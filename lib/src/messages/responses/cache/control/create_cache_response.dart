@@ -20,7 +20,8 @@ class CreateCacheSuccess extends NonErroResponseBase
     implements CreateCacheResponse {}
 
 /// Indicates that the cache already exists, so there was nothing to do.
-class AlreadyExists extends NonErroResponseBase implements CreateCacheResponse {}
+class AlreadyExists extends NonErroResponseBase
+    implements CreateCacheResponse {}
 
 /// Indicates that an error occurred during the create cache request.
 ///

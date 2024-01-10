@@ -79,7 +79,7 @@ void main() {
               'Expected Success but got Error: ${subscribeResp.errorCode} ${subscribeResp.message}');
       }
 
-      sleep(Duration(seconds: 5));
+      sleep(Duration(seconds: 3));
       final publishResp = await topicClient.publish(
           integrationTestCacheName, topicName, StringValue(topicValue));
       switch (publishResp) {
@@ -90,7 +90,7 @@ void main() {
           fail(
               'Expected Success but got Error: ${publishResp.errorCode} ${publishResp.message}');
       }
-      sleep(Duration(seconds: 5));
+      sleep(Duration(seconds: 3));
 
       try {
         await for (final msg in subscribeResp.stream) {
