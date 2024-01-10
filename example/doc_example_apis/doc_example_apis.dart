@@ -37,7 +37,7 @@ Future<void> example_API_ListCaches(CacheClient cacheClient) async {
 }
 
 Future<void> example_API_DeleteCache(CacheClient cacheClient, String cacheName) async {
-  final result = cacheClient.deleteCache(cacheName);
+  final result = await cacheClient.deleteCache(cacheName);
   switch (result) {
     case DeleteCacheError():
       print("Error deleting cache: $result");
