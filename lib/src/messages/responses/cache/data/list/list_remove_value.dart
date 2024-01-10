@@ -15,10 +15,7 @@ sealed class ListRemoveValueResponse {}
 
 /// Indicates that the request was successful.
 class ListRemoveValueSuccess extends NonErroResponseBase
-    implements ListRemoveValueResponse {
-  ListRemoveValueSuccess({String message = "ListRemoveValueSuccess"})
-      : super(message);
-}
+    implements ListRemoveValueResponse {}
 
 /// Indicates that an error occurred during the list remove value request.
 ///

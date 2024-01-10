@@ -28,8 +28,7 @@ class ListCachesSuccess extends NonErroResponseBase
   late final List<CacheInfo> caches;
 
   ListCachesSuccess(List<Cache_> grpcCaches,
-      {String message = "ListCachesSuccess"})
-      : super(message) {
+      {String message = "ListCachesSuccess"}) {
     caches = grpcCaches.map((cache) => CacheInfo(cache.cacheName)).toList();
   }
 
@@ -38,6 +37,11 @@ class ListCachesSuccess extends NonErroResponseBase
   }
 
   List<String> get cacheNames => caches.map((cache) => cache.name).toList();
+
+  @override
+  String toString() {
+    return "$runtimeType: $cacheNames";
+  }
 }
 
 /// Indicates that an error occurred during the list caches request.

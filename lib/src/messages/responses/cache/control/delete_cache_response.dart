@@ -15,9 +15,7 @@ sealed class DeleteCacheResponse {}
 
 /// Indicates a successful delete cache request.
 class DeleteCacheSuccess extends NonErroResponseBase
-    implements DeleteCacheResponse {
-  DeleteCacheSuccess({String message = "DeleteCacheSuccess"}) : super(message);
-}
+    implements DeleteCacheResponse {}
 
 /// Indicates that an error occurred during the delete cache request.
 ///

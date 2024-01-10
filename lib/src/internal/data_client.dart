@@ -75,11 +75,9 @@ class DataClient implements AbstractDataClient {
 
       switch (resp.result) {
         case ECacheResult.Miss:
-          return GetMiss(
-              message: "Miss for key '${key.toUtf8()}' in cache '$cacheName'");
+          return GetMiss();
         case ECacheResult.Hit:
-          return GetHit(resp.cacheBody,
-              message: "Hit for key '${key.toUtf8()}' in cache '$cacheName'");
+          return GetHit(resp.cacheBody);
         default:
           return GetError(UnknownException(
               "unknown cache get error ${resp.result}", null, null));
@@ -106,9 +104,7 @@ class DataClient implements AbstractDataClient {
           options: CallOptions(metadata: {
             'cache': cacheName,
           }));
-      return SetSuccess(
-          message:
-              "Successfully set key '${key.toUtf8()}' and value '${value.toUtf8()}' in cache '$cacheName'");
+      return SetSuccess();
     } catch (e) {
       if (e is GrpcError) {
         return SetError(grpcStatusToSdkException(e));
@@ -127,9 +123,7 @@ class DataClient implements AbstractDataClient {
           options: CallOptions(metadata: {
             'cache': cacheName,
           }));
-      return DeleteSuccess(
-          message:
-              "Successfully deleted key '${key.toUtf8()}' in cache '$cacheName'");
+      return DeleteSuccess();
     } catch (e) {
       if (e is GrpcError) {
         return DeleteError(grpcStatusToSdkException(e));
@@ -157,9 +151,7 @@ class DataClient implements AbstractDataClient {
           options: CallOptions(metadata: {
             'cache': cacheName,
           }));
-      return ListConcatenateBackSuccess(response.listLength,
-          message:
-              "Concatenated ${values.length} values to back of list '$listName' in cache '$cacheName'");
+      return ListConcatenateBackSuccess(response.listLength);
     } catch (e) {
       if (e is GrpcError) {
         return ListConcatenateBackError(grpcStatusToSdkException(e));
@@ -187,9 +179,7 @@ class DataClient implements AbstractDataClient {
           options: CallOptions(metadata: {
             'cache': cacheName,
           }));
-      return ListConcatenateFrontSuccess(response.listLength,
-          message:
-              "Concatenated ${values.length} values to front of list '$listName' in cache '$cacheName'");
+      return ListConcatenateFrontSuccess(response.listLength,);
     } catch (e) {
       if (e is GrpcError) {
         return ListConcatenateFrontError(grpcStatusToSdkException(e));
@@ -223,11 +213,9 @@ class DataClient implements AbstractDataClient {
           }));
       switch (response.whichList()) {
         case ListFetchResponse__List.found:
-          return ListFetchHit(response.found.values,
-              message: "Found list '$listName' in cache '$cacheName'");
+          return ListFetchHit(response.found.values);
         case ListFetchResponse__List.missing:
-          return ListFetchMiss(
-              message: "List '$listName' not found in cache '$cacheName'");
+          return ListFetchMiss();
         default:
           return ListFetchError(
               UnknownException("Unexpected error: $response", null, null));
@@ -254,12 +242,9 @@ class DataClient implements AbstractDataClient {
           }));
       switch (response.whichList()) {
         case ListLengthResponse__List.found:
-          return ListLengthHit(response.found.length,
-              message:
-                  "List '$listName' in cache '$cacheName' has length ${response.found.length}");
+          return ListLengthHit(response.found.length);
         case ListLengthResponse__List.missing:
-          return ListLengthMiss(
-              message: "List '$listName' not found in cache '$cacheName'");
+          return ListLengthMiss();
         default:
           return ListLengthError(
               UnknownException("Unexpected error: $response", null, null));
@@ -286,12 +271,9 @@ class DataClient implements AbstractDataClient {
           }));
       switch (response.whichList()) {
         case ListPopBackResponse__List.found:
-          return ListPopBackHit(response.found.back,
-              message:
-                  "Popped back value '${response.found.back}' from list '$listName' in cache '$cacheName'");
+          return ListPopBackHit(response.found.back,);
         case ListPopBackResponse__List.missing:
-          return ListPopBackMiss(
-              message: "List '$listName' not found in cache '$cacheName'");
+          return ListPopBackMiss();
         default:
           return ListPopBackError(
               UnknownException("Unexpected error: $response", null, null));
@@ -318,12 +300,9 @@ class DataClient implements AbstractDataClient {
           }));
       switch (response.whichList()) {
         case ListPopFrontResponse__List.found:
-          return ListPopFrontHit(response.found.front,
-              message:
-                  "Popped front value '${response.found.front}' from list '$listName' in cache '$cacheName'");
+          return ListPopFrontHit(response.found.front);
         case ListPopFrontResponse__List.missing:
-          return ListPopFrontMiss(
-              message: "List '$listName' not found in cache '$cacheName'");
+          return ListPopFrontMiss();
         default:
           return ListPopFrontError(
               UnknownException("Unexpected error: $response", null, null));
@@ -355,9 +334,7 @@ class DataClient implements AbstractDataClient {
           options: CallOptions(metadata: {
             'cache': cacheName,
           }));
-      return ListPushBackSuccess(response.listLength,
-          message:
-              "Pushed value '${value.toUtf8()}' to back of list '$listName' in cache '$cacheName'");
+      return ListPushBackSuccess(response.listLength);
     } catch (e) {
       if (e is GrpcError) {
         return ListPushBackError(grpcStatusToSdkException(e));
@@ -385,9 +362,7 @@ class DataClient implements AbstractDataClient {
           options: CallOptions(metadata: {
             'cache': cacheName,
           }));
-      return ListPushFrontSuccess(response.listLength,
-          message:
-              "Pushed value '${value.toUtf8()}' to front of list '$listName' in cache '$cacheName'");
+      return ListPushFrontSuccess(response.listLength);
     } catch (e) {
       if (e is GrpcError) {
         return ListPushFrontError(grpcStatusToSdkException(e));
@@ -409,9 +384,7 @@ class DataClient implements AbstractDataClient {
           options: CallOptions(metadata: {
             'cache': cacheName,
           }));
-      return ListRemoveValueSuccess(
-          message:
-              "Removed all instances of value '${value.toUtf8()}' from list '$listName' in cache '$cacheName'");
+      return ListRemoveValueSuccess();
     } catch (e) {
       if (e is GrpcError) {
         return ListRemoveValueError(grpcStatusToSdkException(e));
@@ -446,9 +419,7 @@ class DataClient implements AbstractDataClient {
           options: CallOptions(metadata: {
             'cache': cacheName,
           }));
-      return ListRetainSuccess(
-          message:
-              "Retained values in list '$listName' in cache '$cacheName' with startIndex '${startIndex ?? 'unbounded'}' and endIndex '${endIndex ?? 'unbounded'}'");
+      return ListRetainSuccess();
     } catch (e) {
       if (e is GrpcError) {
         return ListRetainError(grpcStatusToSdkException(e));

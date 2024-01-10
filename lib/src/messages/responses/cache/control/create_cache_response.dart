@@ -17,14 +17,10 @@ sealed class CreateCacheResponse {}
 
 /// Indicates a successful create cache request.
 class CreateCacheSuccess extends NonErroResponseBase
-    implements CreateCacheResponse {
-  CreateCacheSuccess({String message = "CreateCacheSuccess"}) : super(message);
-}
+    implements CreateCacheResponse {}
 
 /// Indicates that the cache already exists, so there was nothing to do.
-class AlreadyExists extends NonErroResponseBase implements CreateCacheResponse {
-  AlreadyExists({String message = "AlreadyExists"}) : super(message);
-}
+class AlreadyExists extends NonErroResponseBase implements CreateCacheResponse {}
 
 /// Indicates that an error occurred during the create cache request.
 ///

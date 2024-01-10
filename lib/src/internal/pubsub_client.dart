@@ -50,9 +50,7 @@ class ClientPubsub implements AbstractPubsubClient {
       await _grpcManager.client.publish(request,
           options: CallOptions(
               timeout: _configuration.transportStrategy.grpcConfig.deadline));
-      return TopicPublishSuccess(
-          message:
-              "Published value '${value.toUtf8()}' to topic '$topicName' in cache '$cacheName'");
+      return TopicPublishSuccess();
     } catch (e) {
       if (e is GrpcError) {
         return TopicPublishError(grpcStatusToSdkException(e));

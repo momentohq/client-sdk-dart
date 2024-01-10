@@ -19,9 +19,7 @@ sealed class ListPopBackResponse {}
 
 /// Indicates that the requested list was not available in the cache.
 class ListPopBackMiss extends NonErroResponseBase
-    implements ListPopBackResponse {
-  ListPopBackMiss({String message = "ListPopBackMiss"}) : super(message);
-}
+    implements ListPopBackResponse {}
 
 /// Indicates that an error occurred during the list pop back request.
 ///
@@ -37,11 +35,15 @@ class ListPopBackError extends ErrorResponseBase
 /// Indicates that the request was successful and the value can be accessed by the fields `value` or `binaryValue`.
 class ListPopBackHit extends NonErroResponseBase
     implements ListPopBackResponse {
-  ListPopBackHit(this._value, {String message = "ListPopBackHit"})
-      : super(message);
+  ListPopBackHit(this._value);
 
   final List<int> _value;
 
   String get value => utf8.decode(_value);
   List<int> get binaryValue => _value;
+
+  @override
+  String toString() {
+    return "$runtimeType: $value";
+  }
 }

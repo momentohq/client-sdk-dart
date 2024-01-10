@@ -12,12 +12,8 @@ class ErrorResponseBase extends AbstractExceptionResponseBase
 }
 
 class NonErroResponseBase {
-  final String _message;
-
-  NonErroResponseBase(this._message);
-
   @override
   String toString() {
-    return _message;
+    return "$runtimeType";
   }
 }

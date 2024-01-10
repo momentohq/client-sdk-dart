@@ -16,13 +16,16 @@ sealed class ListConcatenateBackResponse {}
 /// Indicates that the request was successful and the updated length can be accessed by the field `length`.
 class ListConcatenateBackSuccess extends NonErroResponseBase
     implements ListConcatenateBackResponse {
-  ListConcatenateBackSuccess(this._length,
-      {String message = "ListConcatenateBackSuccess"})
-      : super(message);
+  ListConcatenateBackSuccess(this._length);
 
   final int _length;
 
   int get length => _length;
+
+  @override
+  String toString() {
+    return "$runtimeType: Length $length";
+  }
 }
 
 /// Indicates that an error occurred during the list concatenate back request.

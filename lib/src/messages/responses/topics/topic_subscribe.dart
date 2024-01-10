@@ -22,8 +22,7 @@ class TopicSubscription extends NonErroResponseBase
   late Stream _broadcastStream;
 
   TopicSubscription(this._stream, this.lastSequenceNumber, this._client,
-      this.cacheName, this.topicName)
-      : super("TopicSubscription to topic '$topicName' in cache '$cacheName'") {
+      this.cacheName, this.topicName) {
     _broadcastStream = _stream.asBroadcastStream();
   }
 

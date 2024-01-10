@@ -37,10 +37,10 @@ class ControlClient implements AbstractControlClient {
           options: CallOptions(metadata: {
             'cache': cacheName,
           }));
-      return CreateCacheSuccess(message: "Created cache '$cacheName'");
+      return CreateCacheSuccess();
     } catch (e) {
       if (e is GrpcError && e.code == StatusCode.alreadyExists) {
-        return AlreadyExists(message: "Cache '$cacheName' already exists");
+        return AlreadyExists();
       } else if (e is GrpcError) {
         return CreateCacheError(grpcStatusToSdkException(e));
       } else {
@@ -59,7 +59,7 @@ class ControlClient implements AbstractControlClient {
           options: CallOptions(metadata: {
             'cache': cacheName,
           }));
-      return DeleteCacheSuccess(message: "Deleted cache '$cacheName'");
+      return DeleteCacheSuccess();
     } catch (e) {
       if (e is GrpcError) {
         return DeleteCacheError(grpcStatusToSdkException(e));

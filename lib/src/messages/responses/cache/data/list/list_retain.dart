@@ -15,9 +15,7 @@ sealed class ListRetainResponse {}
 
 /// Indicates that the request was successful.
 class ListRetainSuccess extends NonErroResponseBase
-    implements ListRetainResponse {
-  ListRetainSuccess({String message = "ListRetainSuccess"}) : super(message);
-}
+    implements ListRetainResponse {}
 
 /// Indicates that an error occurred during the list retain request.
 ///

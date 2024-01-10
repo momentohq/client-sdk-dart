@@ -16,13 +16,16 @@ sealed class ListConcatenateFrontResponse {}
 /// Indicates that the request was successful and the updated length can be accessed by the field `length`.
 class ListConcatenateFrontSuccess extends NonErroResponseBase
     implements ListConcatenateFrontResponse {
-  ListConcatenateFrontSuccess(this._length,
-      {String message = "ListConcatenateFrontSuccess"})
-      : super(message);
+  ListConcatenateFrontSuccess(this._length);
 
   final int _length;
 
   int get length => _length;
+
+  @override
+  String toString() {
+    return "$runtimeType: Length $length";
+  }
 }
 
 /// Indicates that an error occurred during the list concatenate front request.
