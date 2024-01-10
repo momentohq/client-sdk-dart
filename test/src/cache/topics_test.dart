@@ -55,7 +55,7 @@ void main() {
         case TopicPublishError():
           expect(publishResp3.errorCode, MomentoErrorCode.invalidArgumentError,
               reason:
-                  "publish should not accept message that is not String or Binary");
+                  "publish should not accept message that is not String or List<int>");
       }
 
       final subscribeResp = await topicClient.subscribe("   ", topicName);
@@ -96,7 +96,7 @@ void main() {
 
       sleep(Duration(seconds: 5));
       final publishResp = await topicClient.publish(
-          integrationTestCacheName, topicName, StringValue(topicValue));
+          integrationTestCacheName, topicName, topicValue);
       switch (publishResp) {
         case TopicPublishSuccess():
           expect(publishResp.runtimeType, TopicPublishSuccess,

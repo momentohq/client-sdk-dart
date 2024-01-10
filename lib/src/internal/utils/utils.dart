@@ -6,6 +6,8 @@ Value getStringOrBinaryFromDynamic(dynamic value, String parameterName) {
     return StringValue(value);
   } else if (value is List<int>) {
     return BinaryValue(value);
+  } else if (value is Value) {
+    return value;
   } else {
     throw InvalidArgumentException(
         "$parameterName must be a String or List<int>", null, null);
