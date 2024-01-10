@@ -1,4 +1,5 @@
 import 'package:momento/generated/controlclient.pb.dart';
+import 'package:momento/src/internal/utils/display.dart';
 import 'package:momento/src/messages/responses/responses_base.dart';
 
 /// Represents information about a listed cache, such as its name.
@@ -38,7 +39,7 @@ class ListCachesSuccess extends ResponseBase implements ListCachesResponse {
 
   @override
   String toString() {
-    return "$runtimeType: $cacheNames";
+    return "${super.toString()}: ${truncateStringArray(cacheNames)}";
   }
 }
 

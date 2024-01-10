@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:momento/src/internal/utils/display.dart';
 import 'package:momento/src/messages/responses/responses_base.dart';
 
 /// Sealed class for a get cache item request.
@@ -41,6 +42,6 @@ class GetHit extends ResponseBase implements GetResponse {
 
   @override
   String toString() {
-    return "$runtimeType: $value";
+    return "${super.toString()}: ${truncateString(value)}";
   }
 }

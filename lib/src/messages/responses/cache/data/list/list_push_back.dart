@@ -34,6 +34,6 @@ class ListPushBackSuccess extends ResponseBase implements ListPushBackResponse {
 
   @override
   String toString() {
-    return "$runtimeType: Length $length";
+    return "${super.toString()}: Length $length";
   }
 }

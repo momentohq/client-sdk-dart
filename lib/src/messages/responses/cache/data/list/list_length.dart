@@ -38,6 +38,6 @@ class ListLengthHit extends ResponseBase implements ListLengthResponse {
 
   @override
   String toString() {
-    return "$runtimeType: Length $length";
+    return "${super.toString()}: Length $length";
   }
 }

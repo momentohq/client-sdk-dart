@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:momento/src/internal/utils/display.dart';
+
 import '../../../responses_base.dart';
 
 /// Sealed class for a cache list pop back response.
@@ -42,6 +44,6 @@ class ListPopBackHit extends ResponseBase implements ListPopBackResponse {
 
   @override
   String toString() {
-    return "$runtimeType: $value";
+    return "${super.toString()}: ${truncateString(value)}";
   }
 }

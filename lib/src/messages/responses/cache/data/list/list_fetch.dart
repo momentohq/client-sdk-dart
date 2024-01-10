@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:momento/src/internal/utils/display.dart';
 import 'package:momento/src/messages/responses/responses_base.dart';
 
 /// Sealed class for a cache list fetch response.
@@ -41,6 +42,6 @@ class ListFetchHit extends ResponseBase implements ListFetchResponse {
 
   @override
   String toString() {
-    return "$runtimeType: $values";
+    return "${super.toString()}: ${truncateStringArray(values.toList())}";
   }
 }

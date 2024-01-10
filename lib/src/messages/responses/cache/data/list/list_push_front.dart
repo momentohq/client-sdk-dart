@@ -35,6 +35,6 @@ class ListPushFrontSuccess extends ResponseBase
 
   @override
   String toString() {
-    return "$runtimeType: Length $length";
+    return "${super.toString()}: Length $length";
   }
 }
