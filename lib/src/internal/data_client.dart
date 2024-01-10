@@ -179,7 +179,9 @@ class DataClient implements AbstractDataClient {
           options: CallOptions(metadata: {
             'cache': cacheName,
           }));
-      return ListConcatenateFrontSuccess(response.listLength);
+      return ListConcatenateFrontSuccess(
+        response.listLength,
+      );
     } catch (e) {
       if (e is GrpcError) {
         return ListConcatenateFrontError(grpcStatusToSdkException(e));
@@ -271,7 +273,9 @@ class DataClient implements AbstractDataClient {
           }));
       switch (response.whichList()) {
         case ListPopBackResponse__List.found:
-          return ListPopBackHit(response.found.back);
+          return ListPopBackHit(
+            response.found.back,
+          );
         case ListPopBackResponse__List.missing:
           return ListPopBackMiss();
         default:

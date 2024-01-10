@@ -14,7 +14,8 @@ import '../../../responses_base.dart';
 sealed class ListRemoveValueResponse {}
 
 /// Indicates that the request was successful.
-class ListRemoveValueSuccess implements ListRemoveValueResponse {}
+class ListRemoveValueSuccess extends ResponseBase
+    implements ListRemoveValueResponse {}
 
 /// Indicates that an error occurred during the list remove value request.
 ///

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:momento/src/internal/utils/display.dart';
 import 'package:momento/src/messages/responses/responses_base.dart';
 
 /// Sealed class for a get cache item request.
@@ -18,7 +19,7 @@ import 'package:momento/src/messages/responses/responses_base.dart';
 sealed class GetResponse {}
 
 /// Indicates that the requested data was not available in the cache.
-class GetMiss implements GetResponse {}
+class GetMiss extends ResponseBase implements GetResponse {}
 
 /// Indicates that an error occurred during the get cache item request.
 ///
@@ -31,11 +32,16 @@ class GetError extends ErrorResponseBase implements GetResponse {
 }
 
 /// Indicates that the requested data was successfully retrieved from the cache and can be accessed by the fields `value` or `binaryValue`.
-class GetHit implements GetResponse {
+class GetHit extends ResponseBase implements GetResponse {
   GetHit(this._value);
 
   final List<int> _value;
 
   String get value => utf8.decode(_value);
   List<int> get binaryValue => _value;
+
+  @override
+  String toString() {
+    return "${super.toString()}: ${truncateString(value)}";
+  }
 }

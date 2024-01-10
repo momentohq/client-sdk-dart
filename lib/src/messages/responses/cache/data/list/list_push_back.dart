@@ -25,10 +25,15 @@ class ListPushBackError extends ErrorResponseBase
 }
 
 /// Indicates that the request was successful and the updated length can be accessed by the field `length`.
-class ListPushBackSuccess implements ListPushBackResponse {
+class ListPushBackSuccess extends ResponseBase implements ListPushBackResponse {
   ListPushBackSuccess(this._length);
 
   final int _length;
 
   int get length => _length;
+
+  @override
+  String toString() {
+    return "${super.toString()}: Length $length";
+  }
 }

@@ -14,12 +14,18 @@ import '../../../responses_base.dart';
 sealed class ListConcatenateFrontResponse {}
 
 /// Indicates that the request was successful and the updated length can be accessed by the field `length`.
-class ListConcatenateFrontSuccess implements ListConcatenateFrontResponse {
+class ListConcatenateFrontSuccess extends ResponseBase
+    implements ListConcatenateFrontResponse {
   ListConcatenateFrontSuccess(this._length);
 
   final int _length;
 
   int get length => _length;
+
+  @override
+  String toString() {
+    return "${super.toString()}: Length $length";
+  }
 }
 
 /// Indicates that an error occurred during the list concatenate front request.

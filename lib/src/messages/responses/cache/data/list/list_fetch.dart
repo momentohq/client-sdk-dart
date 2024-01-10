@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:momento/src/internal/utils/display.dart';
 import 'package:momento/src/messages/responses/responses_base.dart';
 
 /// Sealed class for a cache list fetch response.
@@ -18,7 +19,7 @@ import 'package:momento/src/messages/responses/responses_base.dart';
 sealed class ListFetchResponse {}
 
 /// Indicates that the requested list was not available in the cache.
-class ListFetchMiss implements ListFetchResponse {}
+class ListFetchMiss extends ResponseBase implements ListFetchResponse {}
 
 /// Indicates that an error occurred during the list fetch request.
 ///
@@ -31,11 +32,16 @@ class ListFetchError extends ErrorResponseBase implements ListFetchResponse {
 }
 
 /// Indicates that the requested list was successfully retrieved from the cache and can be accessed by the fields `values` or `binaryValues`.
-class ListFetchHit implements ListFetchResponse {
+class ListFetchHit extends ResponseBase implements ListFetchResponse {
   ListFetchHit(this._values);
 
   final List<List<int>> _values;
 
   Iterable<String> get values => _values.map((e) => utf8.decode(e));
   Iterable<List<int>> get binaryValues => _values;
+
+  @override
+  String toString() {
+    return "${super.toString()}: ${truncateStringArray(values.toList())}";
+  }
 }
