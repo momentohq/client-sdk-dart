@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:momento/momento.dart';
@@ -79,18 +80,24 @@ void main() {
               'Expected Success but got Error: ${subscribeResp.errorCode} ${subscribeResp.message}');
       }
 
-      sleep(Duration(seconds: 3));
-      final publishResp = await topicClient.publish(
+      // unsubscribe 10 seconds from now
+      Timer(const Duration(seconds: 10), () {
+        subscribeResp.unsubscribe();
+      });
+
+      // publish a message 2 seconds from now
+      Timer(const Duration(seconds: 2), () async {
+        final publishResp = await topicClient.publish(
           integrationTestCacheName, topicName, StringValue(topicValue));
-      switch (publishResp) {
-        case TopicPublishSuccess():
-          expect(publishResp.runtimeType, TopicPublishSuccess,
-              reason: "publish should succeed");
-        case TopicPublishError():
-          fail(
-              'Expected Success but got Error: ${publishResp.errorCode} ${publishResp.message}');
-      }
-      sleep(Duration(seconds: 3));
+        switch (publishResp) {
+          case TopicPublishSuccess():
+            expect(publishResp.runtimeType, TopicPublishSuccess,
+                reason: "publish should succeed");
+          case TopicPublishError():
+            fail(
+                'Expected Success but got Error: ${publishResp.errorCode} ${publishResp.message}');
+        }
+      });
 
       try {
         await for (final msg in subscribeResp.stream) {
@@ -109,7 +116,6 @@ void main() {
       }
 
       subscribeResp.unsubscribe();
-      topicClient.close();
     });
   });
 }
