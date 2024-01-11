@@ -273,6 +273,20 @@ class CacheClient implements ICacheClient {
     return _dataClient.delete(cacheName, StringValue(key));
   }
 
+  /// Adds multiple elements to the back of the given list. Creates the list if it does not already exist.
+  /// 
+  /// 
+  /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
+  /// Provide [truncateFrontToSize] to truncate the list to the given size after the concatenation.
+  /// Returns a response that can be resolved to one of its possible types:
+  /// ```dart
+  /// switch(response) {
+  ///   case ListConcatenateBackSuccess():
+  ///     print("New list length: ${response.length}");
+  ///   case ListConcatenateBackError():
+  ///     print("Got an error: ${response.errorCode} ${response.message}");
+  /// }
+  /// ```
   @override
   Future<ListConcatenateBackResponse> listConcatenateBack(
       String cacheName, String listName, List<String> values,
@@ -282,6 +296,20 @@ class CacheClient implements ICacheClient {
         ttl: ttl, truncateFrontToSize: truncateFrontToSize);
   }
 
+  /// Adds multiple elements to the back of the given list. Creates the list if it does not already exist.
+  /// 
+  /// 
+  /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
+  /// Provide [truncateFrontToSize] to truncate the list to the given size after the concatenation.
+  /// Returns a response that can be resolved to one of its possible types:
+  /// ```dart
+  /// switch(response) {
+  ///   case ListConcatenateBackSuccess():
+  ///     print("New list length: ${response.length}");
+  ///   case ListConcatenateBackError():
+  ///     print("Got an error: ${response.errorCode} ${response.message}");
+  /// }
+  /// ```
   @override
   Future<ListConcatenateBackResponse> listConcatenateBackBinary(
       String cacheName, String listName, List<List<int>> values,
@@ -309,6 +337,20 @@ class CacheClient implements ICacheClient {
         ttl: ttl, truncateFrontToSize: truncateFrontToSize);
   }
 
+  /// Adds multiple elements to the front of the given list. Creates the list if it does not already exist.
+  /// 
+  /// 
+  /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
+  /// Provide [truncateBackToSize] to truncate the list to the given size after the concatenation.
+  /// Returns a response that can be resolved to one of its possible types:
+  /// ```dart
+  /// switch(response) {
+  ///   case ListConcatenateFrontSuccess():
+  ///     print("New list length: ${response.length}");
+  ///   case ListConcatenateFrontError():
+  ///     print("Got an error: ${response.errorCode} ${response.message}");
+  /// }
+  /// ```
   @override
   Future<ListConcatenateFrontResponse> listConcatenateFront(
       String cacheName, String listName, List<String> values,
@@ -318,6 +360,20 @@ class CacheClient implements ICacheClient {
         ttl: ttl, truncateBackToSize: truncateBackToSize);
   }
 
+  /// Adds multiple elements to the front of the given list. Creates the list if it does not already exist.
+  /// 
+  /// 
+  /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
+  /// Provide [truncateBackToSize] to truncate the list to the given size after the concatenation.
+  /// Returns a response that can be resolved to one of its possible types:
+  /// ```dart
+  /// switch(response) {
+  ///   case ListConcatenateFrontSuccess():
+  ///     print("New list length: ${response.length}");
+  ///   case ListConcatenateFrontError():
+  ///     print("Got an error: ${response.errorCode} ${response.message}");
+  /// }
+  /// ```
   @override
   Future<ListConcatenateFrontResponse> listConcatenateFrontBinary(
       String cacheName, String listName, List<List<int>> values,
@@ -345,6 +401,20 @@ class CacheClient implements ICacheClient {
         ttl: ttl, truncateBackToSize: truncateBackToSize);
   }
 
+  /// Fetches all elements of the given list.
+  /// 
+  /// Provide [startIndex] (inclusive) and [endIndex] (exclusive) to fetch a subset of the list.
+  /// Returns a response that can be resolved to one of its possible types:
+  /// ```dart
+  /// switch(response) {
+  ///   case ListFetchHit():
+  ///     print("Fetched list: ${response.values}");
+  ///   case ListFetchMiss():
+  ///     print("Could not find list in cache");
+  ///   case ListFetchError():
+  ///     print("Got an error: ${response.errorCode} ${response.message}");
+  /// }
+  /// ```
   @override
   Future<ListFetchResponse> listFetch(String cacheName, String listName,
       {int? startIndex, int? endIndex}) {
@@ -363,6 +433,19 @@ class CacheClient implements ICacheClient {
         startIndex: startIndex, endIndex: endIndex);
   }
 
+  /// Gets the number of elements in the given list.
+  /// 
+  /// Returns a response that can be resolved to one of its possible types:
+  /// ```dart
+  /// switch(response) {
+  ///   case ListLengthHit():
+  ///     print("List length: ${response.length}");
+  ///   case ListLengthMiss():
+  ///     print("Could not find list in cache");
+  ///   case ListLengthError():
+  ///     print("Got an error: ${response.errorCode} ${response.message}");
+  /// }
+  /// ```
   @override
   Future<ListLengthResponse> listLength(String cacheName, String listName) {
     try {
@@ -379,6 +462,19 @@ class CacheClient implements ICacheClient {
     return _dataClient.listLength(cacheName, listName);
   }
 
+  /// Gets and removes the last value from the given list.
+  /// 
+  /// Returns a response that can be resolved to one of its possible types:
+  /// ```dart
+  /// switch(response) {
+  ///   case ListPopBackHit():
+  ///     print("Popped value: ${response.value}");
+  ///   case ListPopBackMiss():
+  ///     print("Could not find list in cache");
+  ///   case ListPopBackError():
+  ///     print("Got an error: ${response.errorCode} ${response.message}");
+  /// }
+  /// ```
   @override
   Future<ListPopBackResponse> listPopBack(String cacheName, String listName) {
     try {
@@ -395,6 +491,19 @@ class CacheClient implements ICacheClient {
     return _dataClient.listPopBack(cacheName, listName);
   }
 
+  /// Gets and removes the first value from the given list.
+  /// 
+  /// Returns a response that can be resolved to one of its possible types:
+  /// ```dart
+  /// switch(response) {
+  ///   case ListPopFrontHit():
+  ///     print("Popped value: ${response.value}");
+  ///   case ListPopFrontMiss():
+  ///     print("Could not find list in cache");
+  ///   case ListPopFrontError():
+  ///     print("Got an error: ${response.errorCode} ${response.message}");
+  /// }
+  /// ```
   @override
   Future<ListPopFrontResponse> listPopFront(String cacheName, String listName) {
     try {
@@ -411,6 +520,19 @@ class CacheClient implements ICacheClient {
     return _dataClient.listPopFront(cacheName, listName);
   }
 
+  /// Adds an element to the back of the given list. Creates the list if it does not already exist.
+  /// 
+  /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
+  /// Provide [truncateFrontToSize] to truncate the list to the given size after the operation.
+  /// Returns a response that can be resolved to one of its possible types:
+  /// ```dart
+  /// switch(response) {
+  ///   case ListPushBackSuccess():
+  ///     print("New list length: ${response.length}");
+  ///   case ListPushBackError():
+  ///     print("Got an error: ${response.errorCode} ${response.message}");
+  /// }
+  /// ```
   @override
   Future<ListPushBackResponse> listPushBack(
       String cacheName, String listName, String value,
@@ -419,6 +541,19 @@ class CacheClient implements ICacheClient {
         ttl: ttl, truncateFrontToSize: truncateFrontToSize);
   }
 
+  /// Adds an element to the back of the given list. Creates the list if it does not already exist.
+  /// 
+  /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
+  /// Provide [truncateFrontToSize] to truncate the list to the given size after the operation.
+  /// Returns a response that can be resolved to one of its possible types:
+  /// ```dart
+  /// switch(response) {
+  ///   case ListPushBackSuccess():
+  ///     print("New list length: ${response.length}");
+  ///   case ListPushBackError():
+  ///     print("Got an error: ${response.errorCode} ${response.message}");
+  /// }
+  /// ```
   @override
   Future<ListPushBackResponse> listPushBackBinary(
       String cacheName, String listName, List<int> value,
@@ -445,6 +580,19 @@ class CacheClient implements ICacheClient {
         ttl: ttl, truncateFrontToSize: truncateFrontToSize);
   }
 
+  /// Adds an element to the front of the given list. Creates the list if it does not already exist.
+  /// 
+  /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
+  /// Provide [truncateBackToSize] to truncate the list to the given size after the operation.
+  /// Returns a response that can be resolved to one of its possible types:
+  /// ```dart
+  /// switch(response) {
+  ///   case ListPushFrontSuccess():
+  ///     print("New list length: ${response.length}");
+  ///   case ListPushFrontError():
+  ///     print("Got an error: ${response.errorCode} ${response.message}");
+  /// }
+  /// ```
   @override
   Future<ListPushFrontResponse> listPushFront(
       String cacheName, String listName, String value,
@@ -453,6 +601,19 @@ class CacheClient implements ICacheClient {
         ttl: ttl, truncateBackToSize: truncateBackToSize);
   }
 
+  /// Adds an element to the front of the given list. Creates the list if it does not already exist.
+  /// 
+  /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
+  /// Provide [truncateBackToSize] to truncate the list to the given size after the operation.
+  /// Returns a response that can be resolved to one of its possible types:
+  /// ```dart
+  /// switch(response) {
+  ///   case ListPushFrontSuccess():
+  ///     print("New list length: ${response.length}");
+  ///   case ListPushFrontError():
+  ///     print("Got an error: ${response.errorCode} ${response.message}");
+  /// }
+  /// ```
   @override
   Future<ListPushFrontResponse> listPushFrontBinary(
       String cacheName, String listName, List<int> value,
@@ -479,12 +640,34 @@ class CacheClient implements ICacheClient {
         ttl: ttl, truncateBackToSize: truncateBackToSize);
   }
 
+  /// Removes all elements from the given list equal to the given value.
+  /// 
+  /// Returns a response that can be resolved to one of its possible types:
+  /// ```dart
+  /// switch(response) {
+  ///   case ListRemoveValueSuccess():
+  ///     print("Removed value");
+  ///   case ListRemoveValueError():
+  ///     print("Got an error: ${response.errorCode} ${response.message}");
+  /// }
+  /// ```
   @override
   Future<ListRemoveValueResponse> listRemoveValue(
       String cacheName, String listName, String value) {
     return _doListRemoveValue(cacheName, listName, StringValue(value));
   }
 
+  /// Removes all elements from the given list equal to the given value.
+  /// 
+  /// Returns a response that can be resolved to one of its possible types:
+  /// ```dart
+  /// switch(response) {
+  ///   case ListRemoveValueSuccess():
+  ///     print("Removed value");
+  ///   case ListRemoveValueError():
+  ///     print("Got an error: ${response.errorCode} ${response.message}");
+  /// }
+  /// ```
   @override
   Future<ListRemoveValueResponse> listRemoveValueBinary(
       String cacheName, String listName, List<int> value) {
@@ -507,6 +690,19 @@ class CacheClient implements ICacheClient {
     return _dataClient.listRemoveValue(cacheName, listName, value);
   }
 
+  /// Retains slice of elements of a given list, deletes the rest of the list that isn't being retained.
+  /// 
+  /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
+  /// Provide [startIndex] (inclusive) and [endIndex] (exclusive) to specify a subset of the list to retain.
+  /// Returns a response that can be resolved to one of its possible types:
+  /// ```dart
+  /// switch(response) {
+  ///   case ListRetainSuccess():
+  ///     print("Success");
+  ///   case ListRetainError():
+  ///     print("Got an error: ${response.errorCode} ${response.message}");
+  /// }
+  /// ```
   @override
   Future<ListRetainResponse> listRetain(String cacheName, String listName,
       {int? startIndex, int? endIndex, CollectionTtl? ttl}) {
