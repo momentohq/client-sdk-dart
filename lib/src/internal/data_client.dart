@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:momento/generated/cacheclient.pbgrpc.dart';
 import 'package:momento/momento.dart';
@@ -6,6 +7,7 @@ import 'package:momento/src/config/cache_configuration.dart';
 import 'package:momento/src/errors/errors.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
+import 'package:yaml/yaml.dart';
 
 abstract class AbstractDataClient {
   // Unary RPCs
@@ -70,7 +72,9 @@ class DataClient implements AbstractDataClient {
     }
     if (firstRequest) {
       firstRequest = false;
-      headers.addEntries({'agent': 'dart:0.1.0'}.entries);
+      Map pubspec = loadYaml(File("pubspec.yaml").readAsStringSync());
+      String version = pubspec['version'];
+      headers.addEntries({'agent': version}.entries);
     }
     return headers;
   }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:momento/generated/cachepubsub.pbgrpc.dart';
 import 'package:momento/src/auth/credential_provider.dart';
 import 'package:momento/src/errors/errors.dart';
@@ -5,6 +7,7 @@ import 'package:momento/src/internal/topics_grpc_manager.dart';
 import 'package:momento/src/messages/responses/topics/topic_subscribe.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
+import 'package:yaml/yaml.dart';
 
 import '../config/topic_configuration.dart';
 import '../messages/values.dart';
@@ -43,9 +46,9 @@ class ClientPubsub implements AbstractPubsubClient {
   Map<String, String>? makeHeaders() {
     if (firstRequest) {
       firstRequest = false;
-      return {
-        'agent': 'dart:0.1.0',
-      };
+      Map pubspec = loadYaml(File("pubspec.yaml").readAsStringSync());
+      String version = pubspec['version'];
+      return {'agent': version};
     }
     return null;
   }
