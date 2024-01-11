@@ -12,6 +12,7 @@ import 'package:yaml/yaml.dart';
 import '../config/topic_configuration.dart';
 import '../messages/values.dart';
 import '../messages/responses/topics/topic_publish.dart';
+import 'utils/utils.dart';
 
 abstract class AbstractPubsubClient {
   Future<TopicPublishResponse> publish(
@@ -43,12 +44,11 @@ class ClientPubsub implements AbstractPubsubClient {
     }
   }
 
-  Map<String, String>? makeHeaders() {
+  Future<Map<String, String>?> makeHeaders() async {
     if (firstRequest) {
       firstRequest = false;
-      Map pubspec = loadYaml(File("pubspec.yaml").readAsStringSync());
-      String version = pubspec['version'];
-      return {'agent': version};
+      String? packageVersion = await findPackageVersion();
+      return {'agent': packageVersion ?? 'unknown'};
     }
     return null;
   }
@@ -63,7 +63,7 @@ class ClientPubsub implements AbstractPubsubClient {
     try {
       await _grpcManager.client.publish(request,
           options: CallOptions(
-              metadata: makeHeaders(),
+              metadata: await makeHeaders(),
               timeout: _configuration.transportStrategy.grpcConfig.deadline));
       return TopicPublishSuccess();
     } catch (e) {
@@ -84,8 +84,8 @@ class ClientPubsub implements AbstractPubsubClient {
     request.resumeAtTopicSequenceNumber =
         resumeAtTopicSequenceNumber ?? Int64(0);
     try {
-      var stream = _grpcManager.client
-          .subscribe(request, options: CallOptions(metadata: makeHeaders()));
+      var stream = _grpcManager.client.subscribe(request,
+          options: CallOptions(metadata: await makeHeaders()));
       final subscription = TopicSubscription(stream,
           request.resumeAtTopicSequenceNumber, this, cacheName, topicName);
 

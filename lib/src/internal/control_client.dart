@@ -7,6 +7,8 @@ import 'package:momento/src/errors/errors.dart';
 import 'package:grpc/grpc.dart';
 import 'package:yaml/yaml.dart';
 
+import 'utils/utils.dart';
+
 abstract class AbstractControlClient {
   Future<CreateCacheResponse> createCache(String cacheName);
 
@@ -32,17 +34,15 @@ class ControlClient implements AbstractControlClient {
         }, timeout: _configuration.transportStrategy.grpcConfig.deadline));
   }
 
-  Map<String, String> makeHeaders({String? cacheName}) {
+  Future<Map<String, String>> makeHeaders({String? cacheName}) async {
     var headers = <String, String>{};
     if (cacheName != null) {
       headers.addEntries({'cache': cacheName}.entries);
     }
     if (firstRequest) {
       firstRequest = false;
-      headers.addEntries({'agent': 'dart:0.1.0'}.entries);
-      Map pubspec = loadYaml(File("pubspec.yaml").readAsStringSync());
-      String version = pubspec['version'];
-      headers.addEntries({'agent': version}.entries);
+      String? packageVersion = await findPackageVersion();
+      headers.addEntries({'agent': packageVersion ?? 'unknown'}.entries);
     }
     return headers;
   }
@@ -53,7 +53,8 @@ class ControlClient implements AbstractControlClient {
     request.cacheName = cacheName;
     try {
       await _client.createCache(request,
-          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
+          options:
+              CallOptions(metadata: await makeHeaders(cacheName: cacheName)));
       return CreateCacheSuccess();
     } catch (e) {
       if (e is GrpcError && e.code == StatusCode.alreadyExists) {
@@ -73,7 +74,8 @@ class ControlClient implements AbstractControlClient {
     request.cacheName = cacheName;
     try {
       await _client.deleteCache(request,
-          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
+          options:
+              CallOptions(metadata: await makeHeaders(cacheName: cacheName)));
       return DeleteCacheSuccess();
     } catch (e) {
       if (e is GrpcError) {
@@ -90,7 +92,7 @@ class ControlClient implements AbstractControlClient {
     var request = ListCachesRequest_();
     try {
       final resp = await _client.listCaches(request,
-          options: CallOptions(metadata: makeHeaders()));
+          options: CallOptions(metadata: await makeHeaders()));
       return ListCachesSuccess(resp.cache);
     } catch (e) {
       if (e is GrpcError) {
