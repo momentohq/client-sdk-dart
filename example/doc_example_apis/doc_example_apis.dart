@@ -91,7 +91,7 @@ Future<void> main() async {
   final key = StringValue("myKey");
   final value = StringValue("myValue");
 
-  await example_API_InstantiateCacheClient("MOMENTO_API_KEY");
+  await example_API_InstantiateCacheClient();
   await example_API_CreateCache(cacheClient, cacheName);
   await example_API_ListCaches(cacheClient);
 
