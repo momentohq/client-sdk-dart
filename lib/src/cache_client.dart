@@ -21,7 +21,7 @@ abstract class ICacheClient {
   Future<SetResponse> set(String cacheName, String key, String value,
       {Duration? ttl});
 
-  Future<SetResponse> setBinary(String cacheName, String key, List<int> value,
+  Future<SetResponse> setBytes(String cacheName, String key, List<int> value,
       {Duration? ttl});
 
   Future<DeleteResponse> delete(String cacheName, String key);
@@ -31,7 +31,7 @@ abstract class ICacheClient {
       String cacheName, String listName, List<String> values,
       {CollectionTtl? ttl, int? truncateFrontToSize});
 
-  Future<ListConcatenateBackResponse> listConcatenateBackBinary(
+  Future<ListConcatenateBackResponse> listConcatenateBackBytes(
       String cacheName, String listName, List<List<int>> values,
       {CollectionTtl? ttl, int? truncateFrontToSize});
 
@@ -39,7 +39,7 @@ abstract class ICacheClient {
       String cacheName, String listName, List<String> values,
       {CollectionTtl? ttl, int? truncateBackToSize});
 
-  Future<ListConcatenateFrontResponse> listConcatenateFrontBinary(
+  Future<ListConcatenateFrontResponse> listConcatenateFrontBytes(
       String cacheName, String listName, List<List<int>> values,
       {CollectionTtl? ttl, int? truncateBackToSize});
 
@@ -53,7 +53,7 @@ abstract class ICacheClient {
       String cacheName, String listName, String value,
       {CollectionTtl? ttl, int? truncateFrontToSize});
 
-  Future<ListPushBackResponse> listPushBackBinary(
+  Future<ListPushBackResponse> listPushBackBytes(
       String cacheName, String listName, List<int> value,
       {CollectionTtl? ttl, int? truncateFrontToSize});
 
@@ -61,14 +61,14 @@ abstract class ICacheClient {
       String cacheName, String listName, String value,
       {CollectionTtl? ttl, int? truncateBackToSize});
 
-  Future<ListPushFrontResponse> listPushFrontBinary(
+  Future<ListPushFrontResponse> listPushFrontBytes(
       String cacheName, String listName, List<int> value,
       {CollectionTtl? ttl, int? truncateBackToSize});
 
   Future<ListRemoveValueResponse> listRemoveValue(
       String cacheName, String listName, String value);
 
-  Future<ListRemoveValueResponse> listRemoveValueBinary(
+  Future<ListRemoveValueResponse> listRemoveValueBytes(
       String cacheName, String listName, List<int> value);
 
   Future<ListRetainResponse> listRetain(String cacheName, String listName,
@@ -226,7 +226,7 @@ class CacheClient implements ICacheClient {
   /// }
   /// ```
   @override
-  Future<SetResponse> setBinary(String cacheName, String key, List<int> value,
+  Future<SetResponse> setBytes(String cacheName, String key, List<int> value,
       {Duration? ttl}) {
     return _doSet(cacheName, StringValue(key), BinaryValue(value), ttl: ttl);
   }
@@ -274,8 +274,8 @@ class CacheClient implements ICacheClient {
   }
 
   /// Adds multiple elements to the back of the given list. Creates the list if it does not already exist.
-  /// 
-  /// 
+  ///
+  ///
   /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
   /// Provide [truncateFrontToSize] to truncate the list to the given size after the concatenation.
   /// Returns a response that can be resolved to one of its possible types:
@@ -297,8 +297,8 @@ class CacheClient implements ICacheClient {
   }
 
   /// Adds multiple elements to the back of the given list. Creates the list if it does not already exist.
-  /// 
-  /// 
+  ///
+  ///
   /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
   /// Provide [truncateFrontToSize] to truncate the list to the given size after the concatenation.
   /// Returns a response that can be resolved to one of its possible types:
@@ -311,7 +311,7 @@ class CacheClient implements ICacheClient {
   /// }
   /// ```
   @override
-  Future<ListConcatenateBackResponse> listConcatenateBackBinary(
+  Future<ListConcatenateBackResponse> listConcatenateBackBytes(
       String cacheName, String listName, List<List<int>> values,
       {CollectionTtl? ttl, int? truncateFrontToSize}) {
     return _doListConcatenateBack(
@@ -338,8 +338,8 @@ class CacheClient implements ICacheClient {
   }
 
   /// Adds multiple elements to the front of the given list. Creates the list if it does not already exist.
-  /// 
-  /// 
+  ///
+  ///
   /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
   /// Provide [truncateBackToSize] to truncate the list to the given size after the concatenation.
   /// Returns a response that can be resolved to one of its possible types:
@@ -361,8 +361,8 @@ class CacheClient implements ICacheClient {
   }
 
   /// Adds multiple elements to the front of the given list. Creates the list if it does not already exist.
-  /// 
-  /// 
+  ///
+  ///
   /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
   /// Provide [truncateBackToSize] to truncate the list to the given size after the concatenation.
   /// Returns a response that can be resolved to one of its possible types:
@@ -375,7 +375,7 @@ class CacheClient implements ICacheClient {
   /// }
   /// ```
   @override
-  Future<ListConcatenateFrontResponse> listConcatenateFrontBinary(
+  Future<ListConcatenateFrontResponse> listConcatenateFrontBytes(
       String cacheName, String listName, List<List<int>> values,
       {CollectionTtl? ttl, int? truncateBackToSize}) {
     return _doListConcatenateFront(
@@ -402,7 +402,7 @@ class CacheClient implements ICacheClient {
   }
 
   /// Fetches all elements of the given list.
-  /// 
+  ///
   /// Provide [startIndex] (inclusive) and [endIndex] (exclusive) to fetch a subset of the list.
   /// Returns a response that can be resolved to one of its possible types:
   /// ```dart
@@ -434,7 +434,7 @@ class CacheClient implements ICacheClient {
   }
 
   /// Gets the number of elements in the given list.
-  /// 
+  ///
   /// Returns a response that can be resolved to one of its possible types:
   /// ```dart
   /// switch(response) {
@@ -463,7 +463,7 @@ class CacheClient implements ICacheClient {
   }
 
   /// Gets and removes the last value from the given list.
-  /// 
+  ///
   /// Returns a response that can be resolved to one of its possible types:
   /// ```dart
   /// switch(response) {
@@ -492,7 +492,7 @@ class CacheClient implements ICacheClient {
   }
 
   /// Gets and removes the first value from the given list.
-  /// 
+  ///
   /// Returns a response that can be resolved to one of its possible types:
   /// ```dart
   /// switch(response) {
@@ -521,7 +521,7 @@ class CacheClient implements ICacheClient {
   }
 
   /// Adds an element to the back of the given list. Creates the list if it does not already exist.
-  /// 
+  ///
   /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
   /// Provide [truncateFrontToSize] to truncate the list to the given size after the operation.
   /// Returns a response that can be resolved to one of its possible types:
@@ -542,7 +542,7 @@ class CacheClient implements ICacheClient {
   }
 
   /// Adds an element to the back of the given list. Creates the list if it does not already exist.
-  /// 
+  ///
   /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
   /// Provide [truncateFrontToSize] to truncate the list to the given size after the operation.
   /// Returns a response that can be resolved to one of its possible types:
@@ -555,7 +555,7 @@ class CacheClient implements ICacheClient {
   /// }
   /// ```
   @override
-  Future<ListPushBackResponse> listPushBackBinary(
+  Future<ListPushBackResponse> listPushBackBytes(
       String cacheName, String listName, List<int> value,
       {CollectionTtl? ttl, int? truncateFrontToSize}) {
     return _doListPushBack(cacheName, listName, BinaryValue(value),
@@ -581,7 +581,7 @@ class CacheClient implements ICacheClient {
   }
 
   /// Adds an element to the front of the given list. Creates the list if it does not already exist.
-  /// 
+  ///
   /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
   /// Provide [truncateBackToSize] to truncate the list to the given size after the operation.
   /// Returns a response that can be resolved to one of its possible types:
@@ -602,7 +602,7 @@ class CacheClient implements ICacheClient {
   }
 
   /// Adds an element to the front of the given list. Creates the list if it does not already exist.
-  /// 
+  ///
   /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
   /// Provide [truncateBackToSize] to truncate the list to the given size after the operation.
   /// Returns a response that can be resolved to one of its possible types:
@@ -615,7 +615,7 @@ class CacheClient implements ICacheClient {
   /// }
   /// ```
   @override
-  Future<ListPushFrontResponse> listPushFrontBinary(
+  Future<ListPushFrontResponse> listPushFrontBytes(
       String cacheName, String listName, List<int> value,
       {CollectionTtl? ttl, int? truncateBackToSize}) {
     return _doListPushFront(cacheName, listName, BinaryValue(value),
@@ -641,7 +641,7 @@ class CacheClient implements ICacheClient {
   }
 
   /// Removes all elements from the given list equal to the given value.
-  /// 
+  ///
   /// Returns a response that can be resolved to one of its possible types:
   /// ```dart
   /// switch(response) {
@@ -658,7 +658,7 @@ class CacheClient implements ICacheClient {
   }
 
   /// Removes all elements from the given list equal to the given value.
-  /// 
+  ///
   /// Returns a response that can be resolved to one of its possible types:
   /// ```dart
   /// switch(response) {
@@ -669,7 +669,7 @@ class CacheClient implements ICacheClient {
   /// }
   /// ```
   @override
-  Future<ListRemoveValueResponse> listRemoveValueBinary(
+  Future<ListRemoveValueResponse> listRemoveValueBytes(
       String cacheName, String listName, List<int> value) {
     return _doListRemoveValue(cacheName, listName, BinaryValue(value));
   }
@@ -691,7 +691,7 @@ class CacheClient implements ICacheClient {
   }
 
   /// Retains slice of elements of a given list, deletes the rest of the list that isn't being retained.
-  /// 
+  ///
   /// Provide a [ttl] to set a time-to-live for the list (see [CollectionTtl] for more details).
   /// Provide [startIndex] (inclusive) and [endIndex] (exclusive) to specify a subset of the list to retain.
   /// Returns a response that can be resolved to one of its possible types:

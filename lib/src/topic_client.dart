@@ -12,7 +12,7 @@ abstract class ITopicClient {
   Future<TopicPublishResponse> publish(
       String cacheName, String topicName, String value);
 
-  Future<TopicPublishResponse> publishBinary(
+  Future<TopicPublishResponse> publishBytes(
       String cacheName, String topicName, List<int> value);
 
   Future<TopicSubscribeResponse> subscribe(String cacheName, String topicName);
@@ -40,7 +40,7 @@ class TopicClient implements ITopicClient {
 
   /// Publish a value to a topic.
   ///
-  /// Publishes a string [value] to a topic specified by [topicName] which exists on a cache
+  /// Publishes a [value] to a topic specified by [topicName] which exists on a cache
   /// specified by [cacheName].
   /// Returns a response that can be resolved to one of its possible types:
   /// ```dart
@@ -59,7 +59,7 @@ class TopicClient implements ITopicClient {
 
   /// Publish a value to a topic.
   ///
-  /// Publishes a binary [value] to a topic specified by [topicName] which exists on a cache
+  /// Publishes a [value] to a topic specified by [topicName] which exists on a cache
   /// specified by [cacheName].
   /// Returns a response that can be resolved to one of its possible types:
   /// ```dart
@@ -71,7 +71,7 @@ class TopicClient implements ITopicClient {
   /// }
   /// ```
   @override
-  Future<TopicPublishResponse> publishBinary(
+  Future<TopicPublishResponse> publishBytes(
       String cacheName, String topicName, List<int> value) {
     return _doPublish(cacheName, topicName, BinaryValue(value));
   }
