@@ -6,6 +6,7 @@ import 'package:momento/src/messages/responses/topics/topic_subscribe.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
 
+import '../config/logger.dart';
 import '../config/topic_configuration.dart';
 import '../messages/values.dart';
 import '../messages/responses/topics/topic_publish.dart';
@@ -23,6 +24,7 @@ abstract class AbstractPubsubClient {
 class ClientPubsub implements AbstractPubsubClient {
   final TopicClientConfiguration _configuration;
   late final TopicGrpcManager _grpcManager;
+  final MomentoLogger _logger = MomentoLogger('MomentoPubsubClient');
   var firstRequest = true;
 
   ClientPubsub(CredentialProvider credentialProvider, this._configuration) {
@@ -44,8 +46,14 @@ class ClientPubsub implements AbstractPubsubClient {
   Future<Map<String, String>?> makeHeaders() async {
     if (firstRequest) {
       firstRequest = false;
-      String? packageVersion = await findPackageVersion();
-      return {'agent': packageVersion ?? 'unknown'};
+      try {
+        String? packageVersion = await findPackageVersion();
+        return {'agent': packageVersion ?? 'unknown'};
+      } catch (e) {
+        // Pubspec file was probably not found
+        _logger.info("Could not find package version: $e");
+        return {'agent': 'unknown'};
+      }
     }
     return null;
   }

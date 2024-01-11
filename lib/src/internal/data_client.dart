@@ -7,6 +7,7 @@ import 'package:momento/src/errors/errors.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
 
+import '../config/logger.dart';
 import 'utils/utils.dart';
 
 abstract class AbstractDataClient {
@@ -54,6 +55,7 @@ class DataClient implements AbstractDataClient {
   late ScsClient _client;
   final CacheClientConfiguration _configuration;
   final Duration _defaultTtl;
+  final MomentoLogger _logger = MomentoLogger('MomentoCacheDataClient');
   var firstRequest = true;
 
   DataClient(CredentialProvider credentialProvider, this._configuration,
@@ -72,8 +74,14 @@ class DataClient implements AbstractDataClient {
     }
     if (firstRequest) {
       firstRequest = false;
-      String? packageVersion = await findPackageVersion();
-      headers.addEntries({'agent': packageVersion ?? 'unknown'}.entries);
+      try {
+        String? packageVersion = await findPackageVersion();
+        headers.addEntries({'agent': packageVersion ?? 'unknown'}.entries);
+      } catch (e) {
+        // Pubspec file was probably not found
+        _logger.info("Could not find package version: $e");
+        headers.addEntries({'agent': 'unknown'}.entries);
+      }
     }
     return headers;
   }
