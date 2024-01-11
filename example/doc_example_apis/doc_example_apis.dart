@@ -2,11 +2,10 @@ import 'dart:io';
 import 'package:momento/momento.dart';
 import 'package:uuid/uuid.dart';
 
-Future<void> example_API_InstantiateCacheClient(
-    String envVarName, String longNameForFormatting) async {
+Future<void> example_API_InstantiateCacheClient() async {
   try {
     final cacheClient = CacheClient(
-        CredentialProvider.fromEnvironmentVariable(envVarName),
+        CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
         CacheClientConfigurations.latest(),
         Duration(seconds: 30));
   } catch (e) {
@@ -15,8 +14,7 @@ Future<void> example_API_InstantiateCacheClient(
   }
 }
 
-Future<void> example_API_CreateCache(
-    CacheClient cacheClient, String cacheName) async {
+Future<void> example_API_CreateCache(CacheClient cacheClient, String cacheName) async {
   final result = await cacheClient.createCache(cacheName);
   switch (result) {
     case CreateCacheAlreadyExists():
@@ -28,8 +26,7 @@ Future<void> example_API_CreateCache(
   }
 }
 
-Future<void> example_API_ListCaches(
-    CacheClient cacheClient, String longNameForFormatting) async {
+Future<void> example_API_ListCaches(CacheClient cacheClient) async {
   final result = await cacheClient.listCaches();
   switch (result) {
     case ListCachesError():
@@ -39,8 +36,7 @@ Future<void> example_API_ListCaches(
   }
 }
 
-Future<void> example_API_DeleteCache(
-    CacheClient cacheClient, String cacheName) async {
+Future<void> example_API_DeleteCache(CacheClient cacheClient, String cacheName) async {
   final result = await cacheClient.deleteCache(cacheName);
   switch (result) {
     case DeleteCacheError():
@@ -51,8 +47,7 @@ Future<void> example_API_DeleteCache(
   }
 }
 
-Future<void> example_API_Set(
-    CacheClient cacheClient, String cacheName, Value key, Value value) async {
+Future<void> example_API_Set(CacheClient cacheClient, String cacheName, Value key, Value value) async {
   final result = await cacheClient.set(cacheName, key, value);
   switch (result) {
     case SetError():
@@ -63,8 +58,7 @@ Future<void> example_API_Set(
   }
 }
 
-Future<void> example_API_Get(
-    CacheClient cacheClient, String cacheName, Value key) async {
+Future<void> example_API_Get(CacheClient cacheClient, String cacheName, Value key) async {
   final result = await cacheClient.get(cacheName, key);
   switch (result) {
     case GetMiss():
@@ -76,8 +70,7 @@ Future<void> example_API_Get(
   }
 }
 
-Future<void> example_API_Delete(
-    CacheClient cacheClient, String cacheName, Value key) async {
+Future<void> example_API_Delete(CacheClient cacheClient, String cacheName, Value key) async {
   final result = await cacheClient.delete(cacheName, key);
   switch (result) {
     case DeleteError():
@@ -98,9 +91,9 @@ Future<void> main() async {
   final key = StringValue("myKey");
   final value = StringValue("myValue");
 
-  await example_API_InstantiateCacheClient("MOMENTO_API_KEY", "");
+  await example_API_InstantiateCacheClient("MOMENTO_API_KEY");
   await example_API_CreateCache(cacheClient, cacheName);
-  await example_API_ListCaches(cacheClient, "");
+  await example_API_ListCaches(cacheClient);
 
   await example_API_Set(cacheClient, cacheName, key, value);
   await example_API_Get(cacheClient, cacheName, key);
