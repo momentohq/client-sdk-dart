@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:momento/momento.dart';
 import 'package:momento/generated/controlclient.pbgrpc.dart';
 import 'package:momento/src/config/cache_configuration.dart';
 import 'package:momento/src/errors/errors.dart';
 import 'package:grpc/grpc.dart';
-import 'package:yaml/yaml.dart';
 
 import 'utils/utils.dart';
 
