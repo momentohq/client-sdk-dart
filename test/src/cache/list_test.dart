@@ -76,7 +76,7 @@ void main() {
 
                         final concatResp2 = await cacheClient
                             .listConcatenateBack(
-                                validString, invalidString, []);
+                                integrationTestCacheName, invalidString, []);
                         switch (concatResp2) {
                           case ListConcatenateBackSuccess():
                             fail('Expected Error but got Success');
@@ -88,7 +88,8 @@ void main() {
                         }
 
                         final concatResp3 = await cacheClient
-                            .listConcatenateBack(validString, validString, []);
+                            .listConcatenateBack(
+                                integrationTestCacheName, validString, []);
                         switch (concatResp3) {
                           case ListConcatenateBackSuccess():
                             fail('Expected Error but got Success');
@@ -97,19 +98,6 @@ void main() {
                                 MomentoErrorCode.invalidArgumentError,
                                 reason:
                                     "listConcatenateBack should not accept empty list of values");
-                        }
-
-                        final concatResp4 = await cacheClient
-                            .listConcatenateBack(
-                                validString, validString, [123]);
-                        switch (concatResp4) {
-                          case ListConcatenateBackSuccess():
-                            fail('Expected Error but got Success');
-                          case ListConcatenateBackError():
-                            expect(concatResp4.errorCode,
-                                MomentoErrorCode.invalidArgumentError,
-                                reason:
-                                    "listConcatenateBack should not accept list with values that aren't String or List<int>");
                         }
                       }),
                       test('listConcatenateFront', () async {
@@ -131,7 +119,7 @@ void main() {
 
                         final concatResp2 = await cacheClient
                             .listConcatenateFront(
-                                validString, invalidString, []);
+                                integrationTestCacheName, invalidString, []);
                         switch (concatResp2) {
                           case ListConcatenateFrontSuccess():
                             fail('Expected Error but got Success');
@@ -143,7 +131,8 @@ void main() {
                         }
 
                         final concatResp3 = await cacheClient
-                            .listConcatenateFront(validString, validString, []);
+                            .listConcatenateFront(
+                                integrationTestCacheName, validString, []);
                         switch (concatResp3) {
                           case ListConcatenateFrontSuccess():
                             fail('Expected Error but got Success');
@@ -152,19 +141,6 @@ void main() {
                                 MomentoErrorCode.invalidArgumentError,
                                 reason:
                                     "listConcatenateFront should not accept empty list of values");
-                        }
-
-                        final concatResp4 = await cacheClient
-                            .listConcatenateFront(
-                                validString, validString, [123]);
-                        switch (concatResp4) {
-                          case ListConcatenateFrontSuccess():
-                            fail('Expected Error but got Success');
-                          case ListConcatenateFrontError():
-                            expect(concatResp4.errorCode,
-                                MomentoErrorCode.invalidArgumentError,
-                                reason:
-                                    "listConcatenateFront should not accept list with values that aren't String or List<int>");
                         }
                       }),
                       test('listLength', () async {
@@ -290,18 +266,6 @@ void main() {
                                 reason:
                                     "listPushBack should not accept empty list name");
                         }
-
-                        final pushResp3 = await cacheClient.listPushBack(
-                            validString, invalidString, 123);
-                        switch (pushResp3) {
-                          case ListPushBackSuccess():
-                            fail('Expected Error but got Success');
-                          case ListPushBackError():
-                            expect(pushResp3.errorCode,
-                                MomentoErrorCode.invalidArgumentError,
-                                reason:
-                                    "listPushBack should not accept value that isn't String or List<int>");
-                        }
                       }),
                       test('listPushFront', () async {
                         final validString = "valid";
@@ -330,18 +294,6 @@ void main() {
                                 reason:
                                     "listPushFront should not accept empty list name");
                         }
-
-                        final pushResp3 = await cacheClient.listPushFront(
-                            validString, invalidString, 123);
-                        switch (pushResp3) {
-                          case ListPushFrontSuccess():
-                            fail('Expected Error but got Success');
-                          case ListPushFrontError():
-                            expect(pushResp3.errorCode,
-                                MomentoErrorCode.invalidArgumentError,
-                                reason:
-                                    "listPushFront should not accept value that isn't String or List<int>");
-                        }
                       }),
                       test('listRemoveValue', () async {
                         final validString = "valid";
@@ -369,18 +321,6 @@ void main() {
                                 MomentoErrorCode.invalidArgumentError,
                                 reason:
                                     "listRemoveValue should not accept empty list name");
-                        }
-
-                        final removeResp3 = await cacheClient.listRemoveValue(
-                            validString, invalidString, 123);
-                        switch (removeResp3) {
-                          case ListRemoveValueSuccess():
-                            fail('Expected Error but got Success');
-                          case ListRemoveValueError():
-                            expect(removeResp3.errorCode,
-                                MomentoErrorCode.invalidArgumentError,
-                                reason:
-                                    "listRemoveValue should not accept value that isn't String or List<int>,m9");
                         }
                       }),
                       test('listRetain', () async {

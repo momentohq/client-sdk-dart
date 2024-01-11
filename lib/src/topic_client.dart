@@ -4,14 +4,16 @@ import 'package:momento/src/errors/errors.dart';
 import 'package:momento/src/internal/utils/validators.dart';
 import 'config/topic_configuration.dart';
 import 'internal/pubsub_client.dart';
-import 'internal/utils/utils.dart';
 import 'messages/responses/topics/topic_subscribe.dart';
 import 'messages/values.dart';
 import 'messages/responses/topics/topic_publish.dart';
 
 abstract class ITopicClient {
   Future<TopicPublishResponse> publish(
-      String cacheName, String topicName, dynamic value);
+      String cacheName, String topicName, String value);
+
+  Future<TopicPublishResponse> publishBinary(
+      String cacheName, String topicName, List<int> value);
 
   Future<TopicSubscribeResponse> subscribe(String cacheName, String topicName);
 
@@ -38,7 +40,7 @@ class TopicClient implements ITopicClient {
 
   /// Publish a value to a topic.
   ///
-  /// Publishes [value] to a topic specified by [topicName] which exists on a cache
+  /// Publishes a string [value] to a topic specified by [topicName] which exists on a cache
   /// specified by [cacheName].
   /// Returns a response that can be resolved to one of its possible types:
   /// ```dart
@@ -51,12 +53,34 @@ class TopicClient implements ITopicClient {
   /// ```
   @override
   Future<TopicPublishResponse> publish(
-      String cacheName, String topicName, dynamic value) async {
-    Value validatedValue;
+      String cacheName, String topicName, String value) {
+    return _doPublish(cacheName, topicName, StringValue(value));
+  }
+
+  /// Publish a value to a topic.
+  ///
+  /// Publishes a binary [value] to a topic specified by [topicName] which exists on a cache
+  /// specified by [cacheName].
+  /// Returns a response that can be resolved to one of its possible types:
+  /// ```dart
+  /// switch (publishResponse) {
+  ///   case TopicPublishSuccess():
+  ///     print("Published to topic");
+  ///   case TopicPublishError():
+  ///     print("Got an error: ${publishResponse.errorCode} ${publishResponse.message}");
+  /// }
+  /// ```
+  @override
+  Future<TopicPublishResponse> publishBinary(
+      String cacheName, String topicName, List<int> value) {
+    return _doPublish(cacheName, topicName, BinaryValue(value));
+  }
+
+  Future<TopicPublishResponse> _doPublish(
+      String cacheName, String topicName, Value value) async {
     try {
       validateCacheName(cacheName);
       validateTopicName(topicName);
-      validatedValue = getStringOrBinaryFromDynamic(value, "value");
     } catch (e) {
       if (e is SdkException) {
         return Future.value(TopicPublishError(e));
@@ -65,7 +89,7 @@ class TopicClient implements ITopicClient {
             UnknownException("Unexpected error: $e", null, null)));
       }
     }
-    return await _pubsubClient.publish(cacheName, topicName, validatedValue);
+    return await _pubsubClient.publish(cacheName, topicName, value);
   }
 
   /// Subscribe to a topic.
