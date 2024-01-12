@@ -14,9 +14,8 @@ Future<void> example_API_InstantiateCacheClient() async {
   }
 }
 
-Future<void> example_API_CreateCache(
-    CacheClient cacheClient, String cacheName) async {
-  final result = await cacheClient.createCache(cacheName);
+Future<void> example_API_CreateCache(CacheClient cacheClient) async {
+  final result = await cacheClient.createCache("test-cache");
   switch (result) {
     case CreateCacheAlreadyExists():
       print("Cache already exists");
@@ -37,9 +36,8 @@ Future<void> example_API_ListCaches(CacheClient cacheClient) async {
   }
 }
 
-Future<void> example_API_DeleteCache(
-    CacheClient cacheClient, String cacheName) async {
-  final result = await cacheClient.deleteCache(cacheName);
+Future<void> example_API_DeleteCache(CacheClient cacheClient) async {
+  final result = await cacheClient.deleteCache("test-cache");
   switch (result) {
     case DeleteCacheError():
       print("Error deleting cache: $result");
@@ -49,9 +47,8 @@ Future<void> example_API_DeleteCache(
   }
 }
 
-Future<void> example_API_Set(
-    CacheClient cacheClient, String cacheName, String key, String value) async {
-  final result = await cacheClient.set(cacheName, key, value);
+Future<void> example_API_Set(CacheClient cacheClient) async {
+  final result = await cacheClient.set("test-cache", "test-key", "test-value");
   switch (result) {
     case SetError():
       print("Error setting key: $result");
@@ -61,9 +58,8 @@ Future<void> example_API_Set(
   }
 }
 
-Future<void> example_API_Get(
-    CacheClient cacheClient, String cacheName, String key) async {
-  final result = await cacheClient.get(cacheName, key);
+Future<void> example_API_Get(CacheClient cacheClient) async {
+  final result = await cacheClient.get("test-cache", "test-key");
   switch (result) {
     case GetMiss():
       print("Key was not found in cache.");
@@ -74,9 +70,8 @@ Future<void> example_API_Get(
   }
 }
 
-Future<void> example_API_Delete(
-    CacheClient cacheClient, String cacheName, String key) async {
-  final result = await cacheClient.delete(cacheName, key);
+Future<void> example_API_Delete(CacheClient cacheClient) async {
+  final result = await cacheClient.delete("test-cache", "test-key");
   switch (result) {
     case DeleteError():
       print("Error deleting key: $result");
@@ -97,13 +92,13 @@ Future<void> main() async {
   final value = "myValue";
 
   await example_API_InstantiateCacheClient();
-  await example_API_CreateCache(cacheClient, cacheName);
+  await example_API_CreateCache(cacheClient);
   await example_API_ListCaches(cacheClient);
 
-  await example_API_Set(cacheClient, cacheName, key, value);
-  await example_API_Get(cacheClient, cacheName, key);
-  await example_API_Delete(cacheClient, cacheName, key);
+  await example_API_Set(cacheClient);
+  await example_API_Get(cacheClient);
+  await example_API_Delete(cacheClient);
 
-  await example_API_DeleteCache(cacheClient, cacheName);
+  await example_API_DeleteCache(cacheClient);
   await cacheClient.close();
 }
