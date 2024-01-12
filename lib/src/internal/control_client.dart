@@ -32,21 +32,11 @@ class ControlClient implements AbstractControlClient {
         }, timeout: _configuration.transportStrategy.grpcConfig.deadline));
   }
 
-  Future<Map<String, String>> makeHeaders({String? cacheName}) async {
-    var headers = <String, String>{};
-    if (cacheName != null) {
-      headers.addEntries({'cache': cacheName}.entries);
-    }
+  Map<String, String> makeHeaders({String? cacheName}) {
+    final headers = constructHeaders(firstRequest, cacheName: cacheName);
     if (firstRequest) {
       firstRequest = false;
-      try {
-        String? packageVersion = await findPackageVersion();
-        headers.addEntries({'agent': 'dart:${packageVersion ?? 'unkown'}'}.entries);
-      } catch (e) {
-        // Pubspec file was probably not found
-        _logger.info("Could not find package version: $e");
-        headers.addEntries({'agent': 'dart:unknown'}.entries);
-      }
+      _logger.info("First request, sending agent header: $headers");
     }
     return headers;
   }
@@ -57,8 +47,7 @@ class ControlClient implements AbstractControlClient {
     request.cacheName = cacheName;
     try {
       await _client.createCache(request,
-          options:
-              CallOptions(metadata: await makeHeaders(cacheName: cacheName)));
+          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
       return CreateCacheSuccess();
     } catch (e) {
       if (e is GrpcError && e.code == StatusCode.alreadyExists) {
@@ -78,8 +67,7 @@ class ControlClient implements AbstractControlClient {
     request.cacheName = cacheName;
     try {
       await _client.deleteCache(request,
-          options:
-              CallOptions(metadata: await makeHeaders(cacheName: cacheName)));
+          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
       return DeleteCacheSuccess();
     } catch (e) {
       if (e is GrpcError) {
@@ -96,7 +84,7 @@ class ControlClient implements AbstractControlClient {
     var request = ListCachesRequest_();
     try {
       final resp = await _client.listCaches(request,
-          options: CallOptions(metadata: await makeHeaders()));
+          options: CallOptions(metadata: makeHeaders()));
       return ListCachesSuccess(resp.cache);
     } catch (e) {
       if (e is GrpcError) {

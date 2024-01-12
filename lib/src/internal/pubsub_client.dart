@@ -43,19 +43,13 @@ class ClientPubsub implements AbstractPubsubClient {
     }
   }
 
-  Future<Map<String, String>?> makeHeaders() async {
+  Map<String, String> makeHeaders({String? cacheName}) {
+    final headers = constructHeaders(firstRequest, cacheName: cacheName);
     if (firstRequest) {
       firstRequest = false;
-      try {
-        String? packageVersion = await findPackageVersion();
-        return {'agent': 'dart:${packageVersion ?? 'unkown'}'};
-      } catch (e) {
-        // Pubspec file was probably not found
-        _logger.info("Could not find package version: $e");
-        return {'agent': 'dart:unknown'};
-      }
+      _logger.info("First request, sending agent header: $headers");
     }
-    return null;
+    return headers;
   }
 
   @override
@@ -68,7 +62,7 @@ class ClientPubsub implements AbstractPubsubClient {
     try {
       await _grpcManager.client.publish(request,
           options: CallOptions(
-              metadata: await makeHeaders(),
+              metadata: makeHeaders(),
               timeout: _configuration.transportStrategy.grpcConfig.deadline));
       return TopicPublishSuccess();
     } catch (e) {
@@ -89,8 +83,8 @@ class ClientPubsub implements AbstractPubsubClient {
     request.resumeAtTopicSequenceNumber =
         resumeAtTopicSequenceNumber ?? Int64(0);
     try {
-      var stream = _grpcManager.client.subscribe(request,
-          options: CallOptions(metadata: await makeHeaders()));
+      var stream = _grpcManager.client
+          .subscribe(request, options: CallOptions(metadata: makeHeaders()));
       final subscription = TopicSubscription(stream,
           request.resumeAtTopicSequenceNumber, this, cacheName, topicName);
 

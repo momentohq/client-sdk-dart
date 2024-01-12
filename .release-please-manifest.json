@@ -1,0 +1,5 @@
+{
+  "extra-files": [
+    "lib/src/internal/utils/package_version.dart"
+  ]
+}
