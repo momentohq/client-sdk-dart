@@ -88,7 +88,7 @@ Future<void> example_API_InstantiateTopicClient() async {
         CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
         TopicClientConfigurations.latest());
   } catch (e) {
-    print("Unable to create cache client: $e");
+    print("Unable to create topic client: $e");
     exit(1);
   }
 }
