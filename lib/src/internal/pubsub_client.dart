@@ -6,9 +6,11 @@ import 'package:momento/src/messages/responses/topics/topic_subscribe.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
 
+import '../config/logger.dart';
 import '../config/topic_configuration.dart';
 import '../messages/values.dart';
 import '../messages/responses/topics/topic_publish.dart';
+import 'utils/utils.dart';
 
 abstract class AbstractPubsubClient {
   Future<TopicPublishResponse> publish(
@@ -22,6 +24,8 @@ abstract class AbstractPubsubClient {
 class ClientPubsub implements AbstractPubsubClient {
   final TopicClientConfiguration _configuration;
   late final TopicGrpcManager _grpcManager;
+  final MomentoLogger _logger = MomentoLogger('MomentoPubsubClient');
+  var firstRequest = true;
 
   ClientPubsub(CredentialProvider credentialProvider, this._configuration) {
     _grpcManager = TopicGrpcManager(credentialProvider);
@@ -39,6 +43,15 @@ class ClientPubsub implements AbstractPubsubClient {
     }
   }
 
+  Map<String, String> makeHeaders({String? cacheName}) {
+    final headers = constructHeaders(firstRequest, cacheName: cacheName);
+    if (firstRequest) {
+      firstRequest = false;
+      _logger.info("First request, sending agent header: $headers");
+    }
+    return headers;
+  }
+
   @override
   Future<TopicPublishResponse> publish(
       String cacheName, String topicName, Value value) async {
@@ -49,6 +62,7 @@ class ClientPubsub implements AbstractPubsubClient {
     try {
       await _grpcManager.client.publish(request,
           options: CallOptions(
+              metadata: makeHeaders(),
               timeout: _configuration.transportStrategy.grpcConfig.deadline));
       return TopicPublishSuccess();
     } catch (e) {
@@ -69,7 +83,8 @@ class ClientPubsub implements AbstractPubsubClient {
     request.resumeAtTopicSequenceNumber =
         resumeAtTopicSequenceNumber ?? Int64(0);
     try {
-      var stream = _grpcManager.client.subscribe(request);
+      var stream = _grpcManager.client
+          .subscribe(request, options: CallOptions(metadata: makeHeaders()));
       final subscription = TopicSubscription(stream,
           request.resumeAtTopicSequenceNumber, this, cacheName, topicName);
 

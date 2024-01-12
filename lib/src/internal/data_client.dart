@@ -7,6 +7,9 @@ import 'package:momento/src/errors/errors.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
 
+import '../config/logger.dart';
+import 'utils/utils.dart';
+
 abstract class AbstractDataClient {
   // Unary RPCs
   Future<GetResponse> get(String cacheName, Value key);
@@ -52,15 +55,25 @@ class DataClient implements AbstractDataClient {
   late ScsClient _client;
   final CacheClientConfiguration _configuration;
   final Duration _defaultTtl;
+  final MomentoLogger _logger = MomentoLogger('MomentoCacheDataClient');
+  var firstRequest = true;
 
   DataClient(CredentialProvider credentialProvider, this._configuration,
       this._defaultTtl) {
     _channel = ClientChannel(credentialProvider.cacheEndpoint);
     _client = ScsClient(_channel,
-        options: CallOptions(metadata: {
-          'authorization': credentialProvider.apiKey,
-          'agent': 'dart:0.1.0',
-        }, timeout: _configuration.transportStrategy.grpcConfig.deadline));
+        options: CallOptions(
+            metadata: {'authorization': credentialProvider.apiKey},
+            timeout: _configuration.transportStrategy.grpcConfig.deadline));
+  }
+
+  Map<String, String> makeHeaders({String? cacheName}) {
+    final headers = constructHeaders(firstRequest, cacheName: cacheName);
+    if (firstRequest) {
+      firstRequest = false;
+      _logger.info("First request, sending agent header: $headers");
+    }
+    return headers;
   }
 
   @override
@@ -69,9 +82,7 @@ class DataClient implements AbstractDataClient {
     request.cacheKey = key.toBinary();
     try {
       var resp = await _client.get(request,
-          options: CallOptions(metadata: {
-            'cache': cacheName,
-          }));
+          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
 
       switch (resp.result) {
         case ECacheResult.Miss:
@@ -101,9 +112,7 @@ class DataClient implements AbstractDataClient {
         Int64(ttl != null ? ttl.inMilliseconds : _defaultTtl.inMilliseconds);
     try {
       await _client.set(request,
-          options: CallOptions(metadata: {
-            'cache': cacheName,
-          }));
+          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
       return SetSuccess();
     } catch (e) {
       if (e is GrpcError) {
@@ -120,9 +129,7 @@ class DataClient implements AbstractDataClient {
     request.cacheKey = key.toBinary();
     try {
       await _client.delete(request,
-          options: CallOptions(metadata: {
-            'cache': cacheName,
-          }));
+          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
       return DeleteSuccess();
     } catch (e) {
       if (e is GrpcError) {
@@ -148,9 +155,7 @@ class DataClient implements AbstractDataClient {
           Int64(actualTtl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
       request.refreshTtl = actualTtl.refreshTtl();
       var response = await _client.listConcatenateBack(request,
-          options: CallOptions(metadata: {
-            'cache': cacheName,
-          }));
+          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
       return ListConcatenateBackSuccess(response.listLength);
     } catch (e) {
       if (e is GrpcError) {
@@ -176,12 +181,8 @@ class DataClient implements AbstractDataClient {
           Int64(actualTtl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
       request.refreshTtl = actualTtl.refreshTtl();
       var response = await _client.listConcatenateFront(request,
-          options: CallOptions(metadata: {
-            'cache': cacheName,
-          }));
-      return ListConcatenateFrontSuccess(
-        response.listLength,
-      );
+          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
+      return ListConcatenateFrontSuccess(response.listLength);
     } catch (e) {
       if (e is GrpcError) {
         return ListConcatenateFrontError(grpcStatusToSdkException(e));
@@ -210,9 +211,7 @@ class DataClient implements AbstractDataClient {
         request.unboundedEnd = Unbounded_();
       }
       var response = await _client.listFetch(request,
-          options: CallOptions(metadata: {
-            'cache': cacheName,
-          }));
+          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
       switch (response.whichList()) {
         case ListFetchResponse__List.found:
           return ListFetchHit(response.found.values);
@@ -239,9 +238,7 @@ class DataClient implements AbstractDataClient {
       var request = ListLengthRequest_();
       request.listName = utf8.encode(listName);
       var response = await _client.listLength(request,
-          options: CallOptions(metadata: {
-            'cache': cacheName,
-          }));
+          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
       switch (response.whichList()) {
         case ListLengthResponse__List.found:
           return ListLengthHit(response.found.length);
@@ -268,9 +265,7 @@ class DataClient implements AbstractDataClient {
       var request = ListPopBackRequest_();
       request.listName = utf8.encode(listName);
       var response = await _client.listPopBack(request,
-          options: CallOptions(metadata: {
-            'cache': cacheName,
-          }));
+          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
       switch (response.whichList()) {
         case ListPopBackResponse__List.found:
           return ListPopBackHit(
@@ -299,9 +294,7 @@ class DataClient implements AbstractDataClient {
       var request = ListPopFrontRequest_();
       request.listName = utf8.encode(listName);
       var response = await _client.listPopFront(request,
-          options: CallOptions(metadata: {
-            'cache': cacheName,
-          }));
+          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
       switch (response.whichList()) {
         case ListPopFrontResponse__List.found:
           return ListPopFrontHit(response.found.front);
@@ -335,9 +328,7 @@ class DataClient implements AbstractDataClient {
           Int64(actualTtl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
       request.refreshTtl = actualTtl.refreshTtl();
       var response = await _client.listPushBack(request,
-          options: CallOptions(metadata: {
-            'cache': cacheName,
-          }));
+          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
       return ListPushBackSuccess(response.listLength);
     } catch (e) {
       if (e is GrpcError) {
@@ -363,9 +354,7 @@ class DataClient implements AbstractDataClient {
           Int64(actualTtl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
       request.refreshTtl = actualTtl.refreshTtl();
       var response = await _client.listPushFront(request,
-          options: CallOptions(metadata: {
-            'cache': cacheName,
-          }));
+          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
       return ListPushFrontSuccess(response.listLength);
     } catch (e) {
       if (e is GrpcError) {
@@ -385,9 +374,7 @@ class DataClient implements AbstractDataClient {
       request.listName = utf8.encode(listName);
       request.allElementsWithValue = value.toBinary();
       await _client.listRemove(request,
-          options: CallOptions(metadata: {
-            'cache': cacheName,
-          }));
+          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
       return ListRemoveValueSuccess();
     } catch (e) {
       if (e is GrpcError) {
@@ -420,9 +407,7 @@ class DataClient implements AbstractDataClient {
           Int64(actualTtl.ttlMilliseconds() ?? _defaultTtl.inMilliseconds);
       request.refreshTtl = actualTtl.refreshTtl();
       await _client.listRetain(request,
-          options: CallOptions(metadata: {
-            'cache': cacheName,
-          }));
+          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
       return ListRetainSuccess();
     } catch (e) {
       if (e is GrpcError) {

@@ -4,6 +4,9 @@ import 'package:momento/src/config/cache_configuration.dart';
 import 'package:momento/src/errors/errors.dart';
 import 'package:grpc/grpc.dart';
 
+import '../config/logger.dart';
+import 'utils/utils.dart';
+
 abstract class AbstractControlClient {
   Future<CreateCacheResponse> createCache(String cacheName);
 
@@ -18,14 +21,24 @@ class ControlClient implements AbstractControlClient {
   late ClientChannel _channel;
   late ScsControlClient _client;
   final CacheClientConfiguration _configuration;
+  final MomentoLogger _logger = MomentoLogger('MomentoCacheControlClient');
+  var firstRequest = true;
 
   ControlClient(CredentialProvider credentialProvider, this._configuration) {
     _channel = ClientChannel(credentialProvider.controlEndpoint);
     _client = ScsControlClient(_channel,
         options: CallOptions(metadata: {
           'authorization': credentialProvider.apiKey,
-          'agent': 'dart:0.1.0',
         }, timeout: _configuration.transportStrategy.grpcConfig.deadline));
+  }
+
+  Map<String, String> makeHeaders({String? cacheName}) {
+    final headers = constructHeaders(firstRequest, cacheName: cacheName);
+    if (firstRequest) {
+      firstRequest = false;
+      _logger.info("First request, sending agent header: $headers");
+    }
+    return headers;
   }
 
   @override
@@ -34,9 +47,7 @@ class ControlClient implements AbstractControlClient {
     request.cacheName = cacheName;
     try {
       await _client.createCache(request,
-          options: CallOptions(metadata: {
-            'cache': cacheName,
-          }));
+          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
       return CreateCacheSuccess();
     } catch (e) {
       if (e is GrpcError && e.code == StatusCode.alreadyExists) {
@@ -56,9 +67,7 @@ class ControlClient implements AbstractControlClient {
     request.cacheName = cacheName;
     try {
       await _client.deleteCache(request,
-          options: CallOptions(metadata: {
-            'cache': cacheName,
-          }));
+          options: CallOptions(metadata: makeHeaders(cacheName: cacheName)));
       return DeleteCacheSuccess();
     } catch (e) {
       if (e is GrpcError) {
@@ -74,7 +83,8 @@ class ControlClient implements AbstractControlClient {
   Future<ListCachesResponse> listCaches() async {
     var request = ListCachesRequest_();
     try {
-      final resp = await _client.listCaches(request);
+      final resp = await _client.listCaches(request,
+          options: CallOptions(metadata: makeHeaders()));
       return ListCachesSuccess(resp.cache);
     } catch (e) {
       if (e is GrpcError) {
