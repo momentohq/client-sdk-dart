@@ -24,4 +24,5 @@ jobs:
           package-name: momento
           default-branch: main
           changelog-types: '[{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Bug Fixes","hidden":false},{"type":"chore","section":"Miscellaneous","hidden":false}]'
-          extra-files: ["lib/src/internal/utils/package_version.dart"]
+          extra-files: | 
+            lib/src/internal/utils/package_version.dart
