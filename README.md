@@ -60,8 +60,8 @@ Future<void> main() async {
       Duration(seconds: 30));
 
   final cacheName = "cache";
-  final key = StringValue("key");
-  final value = StringValue("value");
+  final key = "key";
+  final value = "value";
 
   final setResp = await cacheClient.set(cacheName, key, value);
   switch (setResp) {

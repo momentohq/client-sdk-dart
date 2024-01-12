@@ -55,7 +55,7 @@ void main() {
           fail('Expected Success but got AlreadyExists');
         case CreateCacheError():
           fail(
-              'Expected Success but got Error: ${createResp.errorCode} ${createResp.message}');
+              'Expected Success but got Error while creating cache $newTestCacheName: ${createResp.errorCode} ${createResp.message}');
       }
 
       sleep(Duration(seconds: 1));
@@ -69,7 +69,7 @@ void main() {
               reason: "integration test cache should be in list of caches");
         case ListCachesError():
           fail(
-              'Expected Success but got Error: ${listResp.errorCode} ${listResp.message}');
+              'Expected Success but got Error while listing caches: ${listResp.errorCode} ${listResp.message}');
       }
 
       sleep(Duration(seconds: 1));
@@ -80,7 +80,7 @@ void main() {
               reason: "delete cache should succeed");
         case DeleteCacheError():
           fail(
-              'Expected Success but got Error: ${deleteResp.errorCode} ${deleteResp.message}');
+              'Expected Success but got Error when trying to delete cache $newTestCacheName: ${deleteResp.errorCode} ${deleteResp.message}');
       }
 
       sleep(Duration(seconds: 1));
@@ -95,15 +95,15 @@ void main() {
                   "integration test cache should still be in list of caches");
         case ListCachesError():
           fail(
-              'Expected Success but got Error: ${listResp2.errorCode} ${listResp2.message}');
+              'Expected Success but got Error listing caches after deletion: ${listResp2.errorCode} ${listResp2.message}');
       }
     });
   });
 
   group('scalar get, set, delete', () {
     test('arguments are validated', () async {
-      final key = StringValue("key");
-      final value = StringValue("value");
+      final key = "key";
+      final value = "value";
 
       final getResp = await cacheClient.get("   ", key);
       switch (getResp) {
@@ -136,8 +136,8 @@ void main() {
     });
 
     test('cache items can be set, get, and deleted', () async {
-      final key = StringValue("key");
-      final value = StringValue("value");
+      final key = "key";
+      final value = "value";
 
       // expect first get to miss
       final getResp1 = await cacheClient.get(integrationTestCacheName, key);
