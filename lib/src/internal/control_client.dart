@@ -29,7 +29,6 @@ class ControlClient implements AbstractControlClient {
     _client = ScsControlClient(_channel,
         options: CallOptions(metadata: {
           'authorization': credentialProvider.apiKey,
-          'agent': 'dart:0.1.0',
         }, timeout: _configuration.transportStrategy.grpcConfig.deadline));
   }
 
@@ -42,11 +41,11 @@ class ControlClient implements AbstractControlClient {
       firstRequest = false;
       try {
         String? packageVersion = await findPackageVersion();
-        headers.addEntries({'agent': packageVersion ?? 'unknown'}.entries);
+        headers.addEntries({'agent': 'dart:${packageVersion ?? 'unkown'}'}.entries);
       } catch (e) {
         // Pubspec file was probably not found
         _logger.info("Could not find package version: $e");
-        headers.addEntries({'agent': 'unknown'}.entries);
+        headers.addEntries({'agent': 'dart:unknown'}.entries);
       }
     }
     return headers;

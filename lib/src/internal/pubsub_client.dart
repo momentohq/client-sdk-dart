@@ -48,11 +48,11 @@ class ClientPubsub implements AbstractPubsubClient {
       firstRequest = false;
       try {
         String? packageVersion = await findPackageVersion();
-        return {'agent': packageVersion ?? 'unknown'};
+        return {'agent': 'dart:${packageVersion ?? 'unkown'}'};
       } catch (e) {
         // Pubspec file was probably not found
         _logger.info("Could not find package version: $e");
-        return {'agent': 'unknown'};
+        return {'agent': 'dart:unknown'};
       }
     }
     return null;
