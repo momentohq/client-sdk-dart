@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:momento/momento.dart';
 import 'package:uuid/uuid.dart';
@@ -81,11 +82,65 @@ Future<void> example_API_Delete(CacheClient cacheClient) async {
   }
 }
 
+Future<void> example_API_InstantiateTopicClient() async {
+  try {
+    final topicClient = TopicClient(
+        CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
+        TopicClientConfigurations.latest());
+  } catch (e) {
+    print("Unable to create cache client: $e");
+    exit(1);
+  }
+}
+
+Future<void> example_API_TopicSubscribe(TopicClient topicClient) async {
+  final subscription = await topicClient.subscribe("test-cache", "test-topic");
+  final messageStream = switch (subscription) {
+    TopicSubscription() => subscription.stream,
+    TopicSubscribeError() => throw Exception(
+        "Subscribe error: ${subscription.errorCode} ${subscription.message}"),
+  };
+
+  // cancel subscription 5 seconds from now
+  Timer(const Duration(seconds: 5), () {
+    print("Cancelling subscription!");
+    subscription.unsubscribe();
+  });
+
+  try {
+    await for (final msg in messageStream) {
+      switch (msg) {
+        case TopicSubscriptionItemBinary():
+          print("Binary value: ${msg.value}");
+        case TopicSubscriptionItemText():
+          print("String value: ${msg.value}");
+      }
+    }
+  } catch (e) {
+    print("Runtime type: ${e.runtimeType}");
+    print("Error with await for loop: $e");
+  }
+}
+
+Future<void> example_API_TopicPublish(TopicClient topicClient) async {
+  final result = await topicClient.publish("cache", "topic", "hello message!");
+  switch (result) {
+    case TopicPublishSuccess():
+      print("Successful publish!");
+    case TopicPublishError():
+      print("Publish error: ${result.errorCode} ${result.message}");
+  }
+}
+
 Future<void> main() async {
   final cacheClient = CacheClient(
       CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
       CacheClientConfigurations.latest(),
       Duration(seconds: 30));
+
+  final topicClient = TopicClient(
+      CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
+      TopicClientConfigurations.latest());
 
   final cacheName = "doc-example-apis-${Uuid().v4()}";
   final key = "myKey";
@@ -100,5 +155,19 @@ Future<void> main() async {
   await example_API_Delete(cacheClient);
 
   await example_API_DeleteCache(cacheClient);
+
+  await example_API_InstantiateTopicClient();
+
+  // the following topics tests need "test-cache" created
+  await example_API_CreateCache(cacheClient);
+
+  await example_API_TopicSubscribe(topicClient);
+  await example_API_TopicPublish(topicClient);
+
+  // clean up cache used for topic methods
+  await example_API_DeleteCache(cacheClient);
+
+  // close the clients to clean up their resources and allow the program to exit
   await cacheClient.close();
+  topicClient.close();
 }
