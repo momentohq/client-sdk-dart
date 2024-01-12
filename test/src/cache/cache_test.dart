@@ -102,8 +102,8 @@ void main() {
 
   group('scalar get, set, delete', () {
     test('arguments are validated', () async {
-      final key = StringValue("key");
-      final value = StringValue("value");
+      final key = "key";
+      final value = "value";
 
       final getResp = await cacheClient.get("   ", key);
       switch (getResp) {
@@ -136,8 +136,8 @@ void main() {
     });
 
     test('cache items can be set, get, and deleted', () async {
-      final key = StringValue("key");
-      final value = StringValue("value");
+      final key = "key";
+      final value = "value";
 
       // expect first get to miss
       final getResp1 = await cacheClient.get(integrationTestCacheName, key);

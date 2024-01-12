@@ -10,7 +10,10 @@ import 'messages/responses/topics/topic_publish.dart';
 
 abstract class ITopicClient {
   Future<TopicPublishResponse> publish(
-      String cacheName, String topicName, Value value);
+      String cacheName, String topicName, String value);
+
+  Future<TopicPublishResponse> publishBytes(
+      String cacheName, String topicName, List<int> value);
 
   Future<TopicSubscribeResponse> subscribe(String cacheName, String topicName);
 
@@ -37,7 +40,7 @@ class TopicClient implements ITopicClient {
 
   /// Publish a value to a topic.
   ///
-  /// Publishes [value] to a topic specified by [topicName] which exists on a cache
+  /// Publishes a [value] to a topic specified by [topicName] which exists on a cache
   /// specified by [cacheName].
   /// Returns a response that can be resolved to one of its possible types:
   /// ```dart
@@ -50,6 +53,30 @@ class TopicClient implements ITopicClient {
   /// ```
   @override
   Future<TopicPublishResponse> publish(
+      String cacheName, String topicName, String value) {
+    return _doPublish(cacheName, topicName, StringValue(value));
+  }
+
+  /// Publish a value to a topic.
+  ///
+  /// Publishes a [value] to a topic specified by [topicName] which exists on a cache
+  /// specified by [cacheName].
+  /// Returns a response that can be resolved to one of its possible types:
+  /// ```dart
+  /// switch (publishResponse) {
+  ///   case TopicPublishSuccess():
+  ///     print("Published to topic");
+  ///   case TopicPublishError():
+  ///     print("Got an error: ${publishResponse.errorCode} ${publishResponse.message}");
+  /// }
+  /// ```
+  @override
+  Future<TopicPublishResponse> publishBytes(
+      String cacheName, String topicName, List<int> value) {
+    return _doPublish(cacheName, topicName, BinaryValue(value));
+  }
+
+  Future<TopicPublishResponse> _doPublish(
       String cacheName, String topicName, Value value) async {
     try {
       validateCacheName(cacheName);

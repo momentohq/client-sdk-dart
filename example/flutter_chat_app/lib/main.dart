@@ -77,8 +77,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> publishMessage() async {
-    final result = await _topicClient.publish(
-        "cache", "topic", StringValue(_textInputController.text));
+    final result =
+        await _topicClient.publish("cache", "topic", _textInputController.text);
     switch (result) {
       case TopicPublishSuccess():
         print("Successful publish");

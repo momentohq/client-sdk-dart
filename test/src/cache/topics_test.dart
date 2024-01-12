@@ -23,8 +23,11 @@ void main() {
 
   group('topics', () {
     test('arguments are validated', () async {
-      final publishResp = await topicClient.publish(
-          "   ", "topic-name", StringValue("message"));
+      final topicName = "topic-name";
+      final validMessage = "message";
+
+      final publishResp =
+          await topicClient.publish("   ", topicName, validMessage);
       switch (publishResp) {
         case TopicPublishSuccess():
           fail('Expected Error but got Success');
@@ -34,7 +37,7 @@ void main() {
       }
 
       final publishResp2 = await topicClient.publish(
-          integrationTestCacheName, "   ", StringValue("message"));
+          integrationTestCacheName, "   ", validMessage);
       switch (publishResp2) {
         case TopicPublishSuccess():
           fail('Expected Error but got Success');
@@ -43,7 +46,7 @@ void main() {
               reason: "publish should not accept empty topic name");
       }
 
-      final subscribeResp = await topicClient.subscribe("   ", "topic-name");
+      final subscribeResp = await topicClient.subscribe("   ", topicName);
       switch (subscribeResp) {
         case TopicSubscription():
           fail('Expected Error but got Success');
@@ -87,7 +90,7 @@ void main() {
       // publish a message 2 seconds from now
       Timer(const Duration(seconds: 2), () async {
         final publishResp = await topicClient.publish(
-            integrationTestCacheName, topicName, StringValue(topicValue));
+            integrationTestCacheName, topicName, topicValue);
         switch (publishResp) {
           case TopicPublishSuccess():
             expect(publishResp.runtimeType, TopicPublishSuccess,
