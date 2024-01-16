@@ -10,6 +10,16 @@ Future<void> main() async {
   final key = "key";
   final value = "value";
 
+  final createResp = await cacheClient.createCache(cacheName);
+  switch (createResp) {
+    case CreateCacheSuccess():
+      print("Cache created!");
+    case CreateCacheAlreadyExists():
+      print("Cache already exists!");
+    case CreateCacheError():
+      print("Cache creation error: ${createResp.errorCode} ${createResp.message}");
+  }
+
   final setResp = await cacheClient.set(cacheName, key, value);
   switch (setResp) {
     case SetSuccess():

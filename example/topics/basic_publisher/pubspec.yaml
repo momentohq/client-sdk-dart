@@ -1,0 +1,12 @@
+name: basic_publisher
+description: A basic example of how to use Momento Topics to publish a message.
+version: 1.0.0
+
+environment:
+  sdk: ^3.2.3
+
+dependencies:
+  momento: ^0.1.0
+
+dev_dependencies:
+  lints: ^2.1.0

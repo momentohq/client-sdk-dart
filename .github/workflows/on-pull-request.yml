@@ -41,8 +41,24 @@ jobs:
           MOMENTO_API_KEY: ${{ secrets.ALPHA_TEST_AUTH_TOKEN }}
         run: |
           pushd example/doc_example_apis
-            dart run doc_example_apis.dart
-          popd        
+            dart run
+          popd 
+
+          pushd example/quickstart
+            dart run
+          popd
+
+          pushd example/topics/advanced
+            dart run
+          popd
+
+          pushd example/topics/basic_publisher
+            dart run
+          popd
+
+          pushd example/topics/basic_subscriber
+            dart run
+          popd
 
   readme:
     runs-on: ubuntu-latest
