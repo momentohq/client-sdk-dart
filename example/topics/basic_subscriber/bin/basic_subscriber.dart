@@ -19,6 +19,7 @@ void main() async {
     subscription.unsubscribe();
   });
 
+  print("Subscribed to topic! Listening for messages...");
   try {
     await for (final msg in messageStream) {
       switch (msg) {
@@ -29,7 +30,6 @@ void main() async {
       }
     }
   } catch (e) {
-    print("Runtime type: ${e.runtimeType}");
     print("Error with await for loop: $e");
   }
 

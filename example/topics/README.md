@@ -10,13 +10,15 @@
 A very basic example of a Topics subscriber can be run using:
 
 ```
-MOMENTO_API_KEY="your-api-key" dart run basic_subscriber.dart
+cd topics/basic_subscriber
+MOMENTO_API_KEY="your-api-key" dart run
 ```
 
 A very basic example of a Topics publisher can be run using:
 
 ```
-MOMENTO_API_KEY="your-api-key" dart run basic_publisher.dart
+cd topics/basic_publisher
+MOMENTO_API_KEY="your-api-key" dart run
 ```
 
 ## Advanced Example
@@ -24,5 +26,6 @@ MOMENTO_API_KEY="your-api-key" dart run basic_publisher.dart
 The advanced example shows how you can unsubscribe from a topic (i.e. cancel a stream of messages) as well as how you can enable logging at a desired logging level.
 
 ```
-MOMENTO_API_KEY="your-api-key" dart run advanced.dart
+cd topics/advanced
+MOMENTO_API_KEY="your-api-key" dart run
 ```

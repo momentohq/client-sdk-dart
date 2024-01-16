@@ -34,8 +34,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   TopicClient _topicClient = TopicClient(
-      CredentialProvider.fromEnvironmentVariable('MOMENTO_API_KEY'),
-      MobileTopicConfiguration.latest());
+      CredentialProvider.fromString(
+          const String.fromEnvironment('MOMENTO_API_KEY')),
+      TopicClientConfigurations.latest());
 
   List<String> _messages = ["Welcome to Momento Topics!"];
   final TextEditingController _textInputController = TextEditingController();
@@ -66,8 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
               setState(() {
                 _messages.add(item.value.toString());
               });
-            case TopicSubscriptionItemError():
-              print("Error receiving item: ${item.message}");
           }
         });
       case TopicSubscribeError():

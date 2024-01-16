@@ -1,0 +1,12 @@
+name: quickstart
+description: A small command-line application showing how to quickly get started with Momento.
+version: 1.0.0
+
+environment:
+  sdk: ^3.2.3
+
+dependencies:
+  momento: ^0.1.0
+
+dev_dependencies:
+  lints: ^2.1.0
