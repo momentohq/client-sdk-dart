@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/momentohq/client-sdk-dart/compare/v0.1.0...v0.1.1) (2024-01-16)
+
+
+### Miscellaneous
+
+* examples should consume momento sdk from pub.dev ([#104](https://github.com/momentohq/client-sdk-dart/issues/104)) ([2e9da49](https://github.com/momentohq/client-sdk-dart/commit/2e9da49f73828fe23dbe5cf13c025ed5ce2d2998))
+
 ## [0.1.0](https://github.com/momentohq/client-sdk-dart/compare/v0.0.5...v0.1.0) (2024-01-13)
 
 
