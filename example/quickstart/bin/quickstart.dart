@@ -17,7 +17,8 @@ Future<void> main() async {
     case CreateCacheAlreadyExists():
       print("Cache already exists!");
     case CreateCacheError():
-      print("Cache creation error: ${createResp.errorCode} ${createResp.message}");
+      print(
+          "Cache creation error: ${createResp.errorCode} ${createResp.message}");
   }
 
   final setResp = await cacheClient.set(cacheName, key, value);
