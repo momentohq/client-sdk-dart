@@ -1,7 +1,7 @@
 <head>
   <meta name="Momento Dart Client Library Documentation" content="Dart client software development kit for Momento Cache">
 </head>
-<img src="https://docs.momentohq.com/img/logo.svg" alt="logo" width="400"/>
+<img src="https://docs.momentohq.com/img/momento-logo-forest.svg" alt="logo" width="400"/>
 
 [![project status](https://momentohq.github.io/standards-and-practices/badges/project-status-official.svg)](https://github.com/momentohq/standards-and-practices/blob/main/docs/momento-on-github.md)
 [![project stability](https://momentohq.github.io/standards-and-practices/badges/project-stability-beta.svg)](https://github.com/momentohq/standards-and-practices/blob/main/docs/momento-on-github.md)
@@ -62,6 +62,17 @@ Future<void> main() async {
   final cacheName = "cache";
   final key = "key";
   final value = "value";
+
+  final createResp = await cacheClient.createCache(cacheName);
+  switch (createResp) {
+    case CreateCacheSuccess():
+      print("Cache created!");
+    case CreateCacheAlreadyExists():
+      print("Cache already exists!");
+    case CreateCacheError():
+      print(
+          "Cache creation error: ${createResp.errorCode} ${createResp.message}");
+  }
 
   final setResp = await cacheClient.set(cacheName, key, value);
   switch (setResp) {
