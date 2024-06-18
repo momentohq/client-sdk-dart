@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.0](https://github.com/momentohq/client-sdk-dart/compare/v0.1.0...v0.2.0) (2024-06-18)
+
+
+### Features
+
+* add onetime headers ([#107](https://github.com/momentohq/client-sdk-dart/issues/107)) ([9a9d4c5](https://github.com/momentohq/client-sdk-dart/commit/9a9d4c518fa8ed769eb6cafc4f710a6e0ffca11c))
+
+
+### Miscellaneous
+
+* examples should consume momento sdk from pub.dev ([#104](https://github.com/momentohq/client-sdk-dart/issues/104)) ([2e9da49](https://github.com/momentohq/client-sdk-dart/commit/2e9da49f73828fe23dbe5cf13c025ed5ce2d2998))
+
 ## [0.1.0](https://github.com/momentohq/client-sdk-dart/compare/v0.0.5...v0.1.0) (2024-01-13)
 
 
