@@ -1,7 +1,8 @@
 import 'package_version.dart';
 import 'dart:io' show Platform;
 
-Map<String, String> constructHeaders(bool firstRequest, String clientType, {String? cacheName}) {
+Map<String, String> constructHeaders(bool firstRequest, String clientType,
+    {String? cacheName}) {
   var headers = <String, String>{};
   if (cacheName != null) {
     headers.addEntries({'cache': cacheName}.entries);
