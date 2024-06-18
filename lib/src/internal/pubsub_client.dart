@@ -44,7 +44,8 @@ class ClientPubsub implements AbstractPubsubClient {
   }
 
   Map<String, String> makeHeaders({String? cacheName}) {
-    final headers = constructHeaders(firstRequest, cacheName: cacheName);
+    final headers =
+        constructHeaders(firstRequest, "topic", cacheName: cacheName);
     if (firstRequest) {
       firstRequest = false;
       _logger.info("First request, sending agent header: $headers");
