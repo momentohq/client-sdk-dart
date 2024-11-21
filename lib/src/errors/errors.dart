@@ -187,20 +187,25 @@ class CancelledException extends SdkException {
 }
 
 class LimitExceededException extends SdkException {
-  LimitExceededException(String message, Exception? innerException, MomentoErrorTransportDetails? transportDetails)
+  LimitExceededException(String message, Exception? innerException,
+      MomentoErrorTransportDetails? transportDetails)
       : super(
-      message,
-      MomentoErrorCode.limitExceededError,
-      innerException,
-      _generateMessageFromMetadata(transportDetails, message),
-      transportDetails);
+            message,
+            MomentoErrorCode.limitExceededError,
+            innerException,
+            _generateMessageFromMetadata(transportDetails, message),
+            transportDetails);
 
-  static String _generateMessageFromMetadata(MomentoErrorTransportDetails? transportDetails, String message) {
-    String messageWrapper = LimitExceededMessageWrapper.UNKNOWN_LIMIT_EXCEEDED.toString();
+  static String _generateMessageFromMetadata(
+      MomentoErrorTransportDetails? transportDetails, String message) {
+    String messageWrapper =
+        LimitExceededMessageWrapper.UNKNOWN_LIMIT_EXCEEDED.toString();
     if (transportDetails != null && transportDetails.grpc.metadata != null) {
       var metadata = transportDetails.grpc.metadata;
       String errorCause = metadata?.metadata["err"] ?? '';
-      messageWrapper = LimitExceededMessageWrapper.fromErrorCause(errorCause, message).toString();
+      messageWrapper =
+          LimitExceededMessageWrapper.fromErrorCause(errorCause, message)
+              .toString();
     }
 
     return messageWrapper;
@@ -300,8 +305,7 @@ SdkException grpcStatusToSdkException(GrpcError grpcError) {
     case StatusCode.permissionDenied:
       return PermissionException(message, grpcError, transportDetails);
     case StatusCode.resourceExhausted:
-      return LimitExceededException(
-          message, grpcError, transportDetails);
+      return LimitExceededException(message, grpcError, transportDetails);
     case StatusCode.unauthenticated:
       return AuthenticationException(message, grpcError, transportDetails);
     case StatusCode.unimplemented:
@@ -314,8 +318,10 @@ SdkException grpcStatusToSdkException(GrpcError grpcError) {
 }
 
 enum LimitExceededMessageWrapper {
-  TOPIC_SUBSCRIPTIONS_LIMIT_EXCEEDED("Topic subscriptions limit exceeded for this account"),
-  OPERATIONS_RATE_LIMIT_EXCEEDED("Request rate limit exceeded for this account"),
+  TOPIC_SUBSCRIPTIONS_LIMIT_EXCEEDED(
+      "Topic subscriptions limit exceeded for this account"),
+  OPERATIONS_RATE_LIMIT_EXCEEDED(
+      "Request rate limit exceeded for this account"),
   THROUGHPUT_RATE_LIMIT_EXCEEDED("Bandwidth limit exceeded for this account"),
   REQUEST_SIZE_LIMIT_EXCEEDED("Request size limit exceeded for this account"),
   ITEM_SIZE_LIMIT_EXCEEDED("Item size limit exceeded for this account"),
@@ -331,7 +337,8 @@ enum LimitExceededMessageWrapper {
     return messageWrapper;
   }
 
-  static LimitExceededMessageWrapper fromErrorCause(String errorCause, String message) {
+  static LimitExceededMessageWrapper fromErrorCause(
+      String errorCause, String message) {
     switch (errorCause) {
       case "topic_subscriptions_limit_exceeded":
         return LimitExceededMessageWrapper.TOPIC_SUBSCRIPTIONS_LIMIT_EXCEEDED;
