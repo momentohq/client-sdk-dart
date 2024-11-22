@@ -186,7 +186,6 @@ class CancelledException extends SdkException {
             transportDetails);
 }
 
-/// Request rate, bandwidth, or object size exceeded the limits for the account
 class LimitExceededException extends SdkException {
   LimitExceededException(String message, Exception? innerException,
       MomentoErrorTransportDetails? transportDetails)
@@ -194,8 +193,23 @@ class LimitExceededException extends SdkException {
             message,
             MomentoErrorCode.limitExceededError,
             innerException,
-            "Request rate, bandwidth, or object size exceeded the limits for this account.  To resolve this error, reduce your usage as appropriate or contact Momento to request a limit increase.",
+            _generateMessageFromMetadata(transportDetails, message),
             transportDetails);
+
+  static String _generateMessageFromMetadata(
+      MomentoErrorTransportDetails? transportDetails, String message) {
+    String messageWrapper =
+        LimitExceededMessageWrapper.UNKNOWN_LIMIT_EXCEEDED.toString();
+    if (transportDetails != null && transportDetails.grpc.metadata != null) {
+      var metadata = transportDetails.grpc.metadata;
+      String errorCause = metadata?.metadata["err"] ?? '';
+      messageWrapper =
+          LimitExceededMessageWrapper.fromErrorCause(errorCause, message)
+              .toString();
+    }
+
+    return messageWrapper;
+  }
 }
 
 /// Request was invalid
@@ -291,8 +305,7 @@ SdkException grpcStatusToSdkException(GrpcError grpcError) {
     case StatusCode.permissionDenied:
       return PermissionException(message, grpcError, transportDetails);
     case StatusCode.resourceExhausted:
-      return ClientResourceExhaustedException(
-          message, grpcError, transportDetails);
+      return LimitExceededException(message, grpcError, transportDetails);
     case StatusCode.unauthenticated:
       return AuthenticationException(message, grpcError, transportDetails);
     case StatusCode.unimplemented:
@@ -301,5 +314,64 @@ SdkException grpcStatusToSdkException(GrpcError grpcError) {
       return UnknownException(message, grpcError, transportDetails);
     default:
       return UnknownException(message, grpcError, transportDetails);
+  }
+}
+
+enum LimitExceededMessageWrapper {
+  TOPIC_SUBSCRIPTIONS_LIMIT_EXCEEDED(
+      "Topic subscriptions limit exceeded for this account"),
+  OPERATIONS_RATE_LIMIT_EXCEEDED(
+      "Request rate limit exceeded for this account"),
+  THROUGHPUT_RATE_LIMIT_EXCEEDED("Bandwidth limit exceeded for this account"),
+  REQUEST_SIZE_LIMIT_EXCEEDED("Request size limit exceeded for this account"),
+  ITEM_SIZE_LIMIT_EXCEEDED("Item size limit exceeded for this account"),
+  ELEMENT_SIZE_LIMIT_EXCEEDED("Element size limit exceeded for this account"),
+  UNKNOWN_LIMIT_EXCEEDED("Limit exceeded for this account");
+
+  final String messageWrapper;
+
+  const LimitExceededMessageWrapper(this.messageWrapper);
+
+  @override
+  String toString() {
+    return messageWrapper;
+  }
+
+  static LimitExceededMessageWrapper fromErrorCause(
+      String errorCause, String message) {
+    switch (errorCause) {
+      case "topic_subscriptions_limit_exceeded":
+        return LimitExceededMessageWrapper.TOPIC_SUBSCRIPTIONS_LIMIT_EXCEEDED;
+      case "operations_rate_limit_exceeded":
+        return LimitExceededMessageWrapper.OPERATIONS_RATE_LIMIT_EXCEEDED;
+      case "throughput_rate_limit_exceeded":
+        return LimitExceededMessageWrapper.THROUGHPUT_RATE_LIMIT_EXCEEDED;
+      case "request_size_limit_exceeded":
+        return LimitExceededMessageWrapper.REQUEST_SIZE_LIMIT_EXCEEDED;
+      case "item_size_limit_exceeded":
+        return LimitExceededMessageWrapper.ITEM_SIZE_LIMIT_EXCEEDED;
+      case "element_size_limit_exceeded":
+        return LimitExceededMessageWrapper.ELEMENT_SIZE_LIMIT_EXCEEDED;
+      default:
+        return fromErrorString(message);
+    }
+  }
+
+  static LimitExceededMessageWrapper fromErrorString(String errorString) {
+    String lowerCasedMessage = errorString.toLowerCase();
+    if (lowerCasedMessage.contains("subscribers")) {
+      return LimitExceededMessageWrapper.TOPIC_SUBSCRIPTIONS_LIMIT_EXCEEDED;
+    } else if (lowerCasedMessage.contains("operations")) {
+      return LimitExceededMessageWrapper.OPERATIONS_RATE_LIMIT_EXCEEDED;
+    } else if (lowerCasedMessage.contains("throughput")) {
+      return LimitExceededMessageWrapper.THROUGHPUT_RATE_LIMIT_EXCEEDED;
+    } else if (lowerCasedMessage.contains("request limit")) {
+      return LimitExceededMessageWrapper.REQUEST_SIZE_LIMIT_EXCEEDED;
+    } else if (lowerCasedMessage.contains("item size")) {
+      return LimitExceededMessageWrapper.ITEM_SIZE_LIMIT_EXCEEDED;
+    } else if (lowerCasedMessage.contains("element size")) {
+      return LimitExceededMessageWrapper.ELEMENT_SIZE_LIMIT_EXCEEDED;
+    }
+    return LimitExceededMessageWrapper.UNKNOWN_LIMIT_EXCEEDED;
   }
 }
