@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.1](https://github.com/momentohq/client-sdk-dart/compare/v0.2.0...v0.2.1) (2024-11-22)
+
+
+### Bug Fixes
+
+* copyright name ([#109](https://github.com/momentohq/client-sdk-dart/issues/109)) ([5c08363](https://github.com/momentohq/client-sdk-dart/commit/5c0836369ff7e9fa0135150de276a4ad4445294d))
+
+
+### Miscellaneous
+
+* add limit exceeded error message wrapper ([#108](https://github.com/momentohq/client-sdk-dart/issues/108)) ([1c3cd8e](https://github.com/momentohq/client-sdk-dart/commit/1c3cd8e2bbe364d3af5810c45eafcd5d54310caa))
+
 ## [0.2.0](https://github.com/momentohq/client-sdk-dart/compare/v0.1.0...v0.2.0) (2024-06-18)
 
 
