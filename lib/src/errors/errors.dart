@@ -86,8 +86,8 @@ class SdkException extends AbstractExceptionResponseBase implements Exception {
   final String _messageWrapper;
   final MomentoErrorTransportDetails? _transportDetails;
 
-  SdkException(super.message, super.errorCode,
-      super.innerException, this._messageWrapper, this._transportDetails);
+  SdkException(super.message, super.errorCode, super.innerException,
+      this._messageWrapper, this._transportDetails);
 
   String get messageWrapper => _messageWrapper;
   MomentoErrorTransportDetails? get transportDetails => _transportDetails;
