@@ -77,17 +77,23 @@ class ClientPubsub implements AbstractPubsubClient {
 
   @override
   Future<TopicSubscribeResponse> subscribe(String cacheName, String topicName,
-      {Int64? resumeAtTopicSequenceNumber}) async {
+      {Int64? resumeAtTopicSequenceNumber, Int64? sequencePage}) async {
     var request = SubscriptionRequest_();
     request.cacheName = cacheName;
     request.topic = topicName;
     request.resumeAtTopicSequenceNumber =
         resumeAtTopicSequenceNumber ?? Int64(0);
+    request.sequencePage = sequencePage ?? Int64(0);
     try {
       var stream = _grpcManager.client
           .subscribe(request, options: CallOptions(metadata: makeHeaders()));
-      final subscription = TopicSubscription(stream,
-          request.resumeAtTopicSequenceNumber, this, cacheName, topicName);
+      final subscription = TopicSubscription(
+          stream,
+          request.resumeAtTopicSequenceNumber,
+          this,
+          cacheName,
+          topicName,
+          request.sequencePage);
 
       try {
         await subscription.init();
