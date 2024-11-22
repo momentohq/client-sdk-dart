@@ -319,8 +319,7 @@ SdkException grpcStatusToSdkException(GrpcError grpcError) {
 enum LimitExceededMessageWrapper {
   topicSubscriptionsLimitExceeded(
       "Topic subscriptions limit exceeded for this account"),
-  operationsRateLimitExceeded(
-      "Request rate limit exceeded for this account"),
+  operationsRateLimitExceeded("Request rate limit exceeded for this account"),
   throughputRateLimitExceeded("Bandwidth limit exceeded for this account"),
   requestSizeLimitExceeded("Request size limit exceeded for this account"),
   itemSizeLimitExceeded("Item size limit exceeded for this account"),
