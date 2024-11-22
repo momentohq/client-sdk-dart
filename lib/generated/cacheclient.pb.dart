@@ -15,6 +15,7 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'cacheclient.pbenum.dart';
+import 'common.pb.dart' as $3;
 
 export 'cacheclient.pbenum.dart';
 
@@ -176,6 +177,59 @@ class GetResponse_ extends $pb.GeneratedMessage {
   $core.bool hasMessage() => $_has(2);
   @$pb.TagNumber(3)
   void clearMessage() => clearField(3);
+}
+
+class GetBatchRequest_ extends $pb.GeneratedMessage {
+  factory GetBatchRequest_({
+    $core.Iterable<GetRequest_>? items,
+  }) {
+    final $result = create();
+    if (items != null) {
+      $result.items.addAll(items);
+    }
+    return $result;
+  }
+  GetBatchRequest_._() : super();
+  factory GetBatchRequest_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory GetBatchRequest_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_GetBatchRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client'),
+      createEmptyInstance: create)
+    ..pc<GetRequest_>(1, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM,
+        subBuilder: GetRequest_.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  GetBatchRequest_ clone() => GetBatchRequest_()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  GetBatchRequest_ copyWith(void Function(GetBatchRequest_) updates) =>
+      super.copyWith((message) => updates(message as GetBatchRequest_))
+          as GetBatchRequest_;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetBatchRequest_ create() => GetBatchRequest_._();
+  GetBatchRequest_ createEmptyInstance() => create();
+  static $pb.PbList<GetBatchRequest_> createRepeated() =>
+      $pb.PbList<GetBatchRequest_>();
+  @$core.pragma('dart2js:noInline')
+  static GetBatchRequest_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetBatchRequest_>(create);
+  static GetBatchRequest_? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<GetRequest_> get items => $_getList(0);
 }
 
 class DeleteRequest_ extends $pb.GeneratedMessage {
@@ -457,6 +511,484 @@ class SetResponse_ extends $pb.GeneratedMessage {
   $core.bool hasMessage() => $_has(1);
   @$pb.TagNumber(2)
   void clearMessage() => clearField(2);
+}
+
+class SetBatchRequest_ extends $pb.GeneratedMessage {
+  factory SetBatchRequest_({
+    $core.Iterable<SetRequest_>? items,
+  }) {
+    final $result = create();
+    if (items != null) {
+      $result.items.addAll(items);
+    }
+    return $result;
+  }
+  SetBatchRequest_._() : super();
+  factory SetBatchRequest_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory SetBatchRequest_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_SetBatchRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client'),
+      createEmptyInstance: create)
+    ..pc<SetRequest_>(1, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM,
+        subBuilder: SetRequest_.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  SetBatchRequest_ clone() => SetBatchRequest_()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  SetBatchRequest_ copyWith(void Function(SetBatchRequest_) updates) =>
+      super.copyWith((message) => updates(message as SetBatchRequest_))
+          as SetBatchRequest_;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetBatchRequest_ create() => SetBatchRequest_._();
+  SetBatchRequest_ createEmptyInstance() => create();
+  static $pb.PbList<SetBatchRequest_> createRepeated() =>
+      $pb.PbList<SetBatchRequest_>();
+  @$core.pragma('dart2js:noInline')
+  static SetBatchRequest_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SetBatchRequest_>(create);
+  static SetBatchRequest_? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<SetRequest_> get items => $_getList(0);
+}
+
+enum SetIfRequest__Condition {
+  present,
+  presentAndNotEqual,
+  absent,
+  equal,
+  absentOrEqual,
+  notEqual,
+  notSet
+}
+
+class SetIfRequest_ extends $pb.GeneratedMessage {
+  factory SetIfRequest_({
+    $core.List<$core.int>? cacheKey,
+    $core.List<$core.int>? cacheBody,
+    $fixnum.Int64? ttlMilliseconds,
+    $3.Present? present,
+    $3.PresentAndNotEqual? presentAndNotEqual,
+    $3.Absent? absent,
+    $3.Equal? equal,
+    $3.AbsentOrEqual? absentOrEqual,
+    $3.NotEqual? notEqual,
+  }) {
+    final $result = create();
+    if (cacheKey != null) {
+      $result.cacheKey = cacheKey;
+    }
+    if (cacheBody != null) {
+      $result.cacheBody = cacheBody;
+    }
+    if (ttlMilliseconds != null) {
+      $result.ttlMilliseconds = ttlMilliseconds;
+    }
+    if (present != null) {
+      $result.present = present;
+    }
+    if (presentAndNotEqual != null) {
+      $result.presentAndNotEqual = presentAndNotEqual;
+    }
+    if (absent != null) {
+      $result.absent = absent;
+    }
+    if (equal != null) {
+      $result.equal = equal;
+    }
+    if (absentOrEqual != null) {
+      $result.absentOrEqual = absentOrEqual;
+    }
+    if (notEqual != null) {
+      $result.notEqual = notEqual;
+    }
+    return $result;
+  }
+  SetIfRequest_._() : super();
+  factory SetIfRequest_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory SetIfRequest_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
+  static const $core.Map<$core.int, SetIfRequest__Condition>
+      _SetIfRequest__ConditionByTag = {
+    4: SetIfRequest__Condition.present,
+    5: SetIfRequest__Condition.presentAndNotEqual,
+    6: SetIfRequest__Condition.absent,
+    7: SetIfRequest__Condition.equal,
+    8: SetIfRequest__Condition.absentOrEqual,
+    9: SetIfRequest__Condition.notEqual,
+    0: SetIfRequest__Condition.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_SetIfRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client'),
+      createEmptyInstance: create)
+    ..oo(0, [4, 5, 6, 7, 8, 9])
+    ..a<$core.List<$core.int>>(
+        1, _omitFieldNames ? '' : 'cacheKey', $pb.PbFieldType.OY)
+    ..a<$core.List<$core.int>>(
+        2, _omitFieldNames ? '' : 'cacheBody', $pb.PbFieldType.OY)
+    ..a<$fixnum.Int64>(
+        3, _omitFieldNames ? '' : 'ttlMilliseconds', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<$3.Present>(4, _omitFieldNames ? '' : 'present',
+        subBuilder: $3.Present.create)
+    ..aOM<$3.PresentAndNotEqual>(5, _omitFieldNames ? '' : 'presentAndNotEqual',
+        subBuilder: $3.PresentAndNotEqual.create)
+    ..aOM<$3.Absent>(6, _omitFieldNames ? '' : 'absent',
+        subBuilder: $3.Absent.create)
+    ..aOM<$3.Equal>(7, _omitFieldNames ? '' : 'equal',
+        subBuilder: $3.Equal.create)
+    ..aOM<$3.AbsentOrEqual>(8, _omitFieldNames ? '' : 'absentOrEqual',
+        subBuilder: $3.AbsentOrEqual.create)
+    ..aOM<$3.NotEqual>(9, _omitFieldNames ? '' : 'notEqual',
+        subBuilder: $3.NotEqual.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  SetIfRequest_ clone() => SetIfRequest_()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  SetIfRequest_ copyWith(void Function(SetIfRequest_) updates) =>
+      super.copyWith((message) => updates(message as SetIfRequest_))
+          as SetIfRequest_;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetIfRequest_ create() => SetIfRequest_._();
+  SetIfRequest_ createEmptyInstance() => create();
+  static $pb.PbList<SetIfRequest_> createRepeated() =>
+      $pb.PbList<SetIfRequest_>();
+  @$core.pragma('dart2js:noInline')
+  static SetIfRequest_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SetIfRequest_>(create);
+  static SetIfRequest_? _defaultInstance;
+
+  SetIfRequest__Condition whichCondition() =>
+      _SetIfRequest__ConditionByTag[$_whichOneof(0)]!;
+  void clearCondition() => clearField($_whichOneof(0));
+
+  @$pb.TagNumber(1)
+  $core.List<$core.int> get cacheKey => $_getN(0);
+  @$pb.TagNumber(1)
+  set cacheKey($core.List<$core.int> v) {
+    $_setBytes(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasCacheKey() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCacheKey() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.List<$core.int> get cacheBody => $_getN(1);
+  @$pb.TagNumber(2)
+  set cacheBody($core.List<$core.int> v) {
+    $_setBytes(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasCacheBody() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCacheBody() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get ttlMilliseconds => $_getI64(2);
+  @$pb.TagNumber(3)
+  set ttlMilliseconds($fixnum.Int64 v) {
+    $_setInt64(2, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasTtlMilliseconds() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTtlMilliseconds() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $3.Present get present => $_getN(3);
+  @$pb.TagNumber(4)
+  set present($3.Present v) {
+    setField(4, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasPresent() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPresent() => clearField(4);
+  @$pb.TagNumber(4)
+  $3.Present ensurePresent() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $3.PresentAndNotEqual get presentAndNotEqual => $_getN(4);
+  @$pb.TagNumber(5)
+  set presentAndNotEqual($3.PresentAndNotEqual v) {
+    setField(5, v);
+  }
+
+  @$pb.TagNumber(5)
+  $core.bool hasPresentAndNotEqual() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearPresentAndNotEqual() => clearField(5);
+  @$pb.TagNumber(5)
+  $3.PresentAndNotEqual ensurePresentAndNotEqual() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  $3.Absent get absent => $_getN(5);
+  @$pb.TagNumber(6)
+  set absent($3.Absent v) {
+    setField(6, v);
+  }
+
+  @$pb.TagNumber(6)
+  $core.bool hasAbsent() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearAbsent() => clearField(6);
+  @$pb.TagNumber(6)
+  $3.Absent ensureAbsent() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  $3.Equal get equal => $_getN(6);
+  @$pb.TagNumber(7)
+  set equal($3.Equal v) {
+    setField(7, v);
+  }
+
+  @$pb.TagNumber(7)
+  $core.bool hasEqual() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearEqual() => clearField(7);
+  @$pb.TagNumber(7)
+  $3.Equal ensureEqual() => $_ensure(6);
+
+  @$pb.TagNumber(8)
+  $3.AbsentOrEqual get absentOrEqual => $_getN(7);
+  @$pb.TagNumber(8)
+  set absentOrEqual($3.AbsentOrEqual v) {
+    setField(8, v);
+  }
+
+  @$pb.TagNumber(8)
+  $core.bool hasAbsentOrEqual() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearAbsentOrEqual() => clearField(8);
+  @$pb.TagNumber(8)
+  $3.AbsentOrEqual ensureAbsentOrEqual() => $_ensure(7);
+
+  @$pb.TagNumber(9)
+  $3.NotEqual get notEqual => $_getN(8);
+  @$pb.TagNumber(9)
+  set notEqual($3.NotEqual v) {
+    setField(9, v);
+  }
+
+  @$pb.TagNumber(9)
+  $core.bool hasNotEqual() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearNotEqual() => clearField(9);
+  @$pb.TagNumber(9)
+  $3.NotEqual ensureNotEqual() => $_ensure(8);
+}
+
+class SetIfResponse___Stored extends $pb.GeneratedMessage {
+  factory SetIfResponse___Stored() => create();
+  SetIfResponse___Stored._() : super();
+  factory SetIfResponse___Stored.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory SetIfResponse___Stored.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_SetIfResponse._Stored',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client'),
+      createEmptyInstance: create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  SetIfResponse___Stored clone() =>
+      SetIfResponse___Stored()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  SetIfResponse___Stored copyWith(
+          void Function(SetIfResponse___Stored) updates) =>
+      super.copyWith((message) => updates(message as SetIfResponse___Stored))
+          as SetIfResponse___Stored;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetIfResponse___Stored create() => SetIfResponse___Stored._();
+  SetIfResponse___Stored createEmptyInstance() => create();
+  static $pb.PbList<SetIfResponse___Stored> createRepeated() =>
+      $pb.PbList<SetIfResponse___Stored>();
+  @$core.pragma('dart2js:noInline')
+  static SetIfResponse___Stored getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SetIfResponse___Stored>(create);
+  static SetIfResponse___Stored? _defaultInstance;
+}
+
+class SetIfResponse___NotStored extends $pb.GeneratedMessage {
+  factory SetIfResponse___NotStored() => create();
+  SetIfResponse___NotStored._() : super();
+  factory SetIfResponse___NotStored.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory SetIfResponse___NotStored.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_SetIfResponse._NotStored',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client'),
+      createEmptyInstance: create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  SetIfResponse___NotStored clone() =>
+      SetIfResponse___NotStored()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  SetIfResponse___NotStored copyWith(
+          void Function(SetIfResponse___NotStored) updates) =>
+      super.copyWith((message) => updates(message as SetIfResponse___NotStored))
+          as SetIfResponse___NotStored;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetIfResponse___NotStored create() => SetIfResponse___NotStored._();
+  SetIfResponse___NotStored createEmptyInstance() => create();
+  static $pb.PbList<SetIfResponse___NotStored> createRepeated() =>
+      $pb.PbList<SetIfResponse___NotStored>();
+  @$core.pragma('dart2js:noInline')
+  static SetIfResponse___NotStored getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SetIfResponse___NotStored>(create);
+  static SetIfResponse___NotStored? _defaultInstance;
+}
+
+enum SetIfResponse__Result { stored, notStored, notSet }
+
+class SetIfResponse_ extends $pb.GeneratedMessage {
+  factory SetIfResponse_({
+    SetIfResponse___Stored? stored,
+    SetIfResponse___NotStored? notStored,
+  }) {
+    final $result = create();
+    if (stored != null) {
+      $result.stored = stored;
+    }
+    if (notStored != null) {
+      $result.notStored = notStored;
+    }
+    return $result;
+  }
+  SetIfResponse_._() : super();
+  factory SetIfResponse_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory SetIfResponse_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
+  static const $core.Map<$core.int, SetIfResponse__Result>
+      _SetIfResponse__ResultByTag = {
+    1: SetIfResponse__Result.stored,
+    2: SetIfResponse__Result.notStored,
+    0: SetIfResponse__Result.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_SetIfResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client'),
+      createEmptyInstance: create)
+    ..oo(0, [1, 2])
+    ..aOM<SetIfResponse___Stored>(1, _omitFieldNames ? '' : 'stored',
+        subBuilder: SetIfResponse___Stored.create)
+    ..aOM<SetIfResponse___NotStored>(2, _omitFieldNames ? '' : 'notStored',
+        subBuilder: SetIfResponse___NotStored.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  SetIfResponse_ clone() => SetIfResponse_()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  SetIfResponse_ copyWith(void Function(SetIfResponse_) updates) =>
+      super.copyWith((message) => updates(message as SetIfResponse_))
+          as SetIfResponse_;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetIfResponse_ create() => SetIfResponse_._();
+  SetIfResponse_ createEmptyInstance() => create();
+  static $pb.PbList<SetIfResponse_> createRepeated() =>
+      $pb.PbList<SetIfResponse_>();
+  @$core.pragma('dart2js:noInline')
+  static SetIfResponse_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SetIfResponse_>(create);
+  static SetIfResponse_? _defaultInstance;
+
+  SetIfResponse__Result whichResult() =>
+      _SetIfResponse__ResultByTag[$_whichOneof(0)]!;
+  void clearResult() => clearField($_whichOneof(0));
+
+  @$pb.TagNumber(1)
+  SetIfResponse___Stored get stored => $_getN(0);
+  @$pb.TagNumber(1)
+  set stored(SetIfResponse___Stored v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasStored() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStored() => clearField(1);
+  @$pb.TagNumber(1)
+  SetIfResponse___Stored ensureStored() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  SetIfResponse___NotStored get notStored => $_getN(1);
+  @$pb.TagNumber(2)
+  set notStored(SetIfResponse___NotStored v) {
+    setField(2, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasNotStored() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNotStored() => clearField(2);
+  @$pb.TagNumber(2)
+  SetIfResponse___NotStored ensureNotStored() => $_ensure(1);
 }
 
 class SetIfNotExistsRequest_ extends $pb.GeneratedMessage {
@@ -3816,6 +4348,282 @@ class SetFetchResponse_ extends $pb.GeneratedMessage {
   void clearMissing() => clearField(2);
   @$pb.TagNumber(2)
   SetFetchResponse___Missing ensureMissing() => $_ensure(1);
+}
+
+class SetSampleRequest_ extends $pb.GeneratedMessage {
+  factory SetSampleRequest_({
+    $core.List<$core.int>? setName,
+    $fixnum.Int64? limit,
+  }) {
+    final $result = create();
+    if (setName != null) {
+      $result.setName = setName;
+    }
+    if (limit != null) {
+      $result.limit = limit;
+    }
+    return $result;
+  }
+  SetSampleRequest_._() : super();
+  factory SetSampleRequest_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory SetSampleRequest_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_SetSampleRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client'),
+      createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(
+        1, _omitFieldNames ? '' : 'setName', $pb.PbFieldType.OY)
+    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'limit', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  SetSampleRequest_ clone() => SetSampleRequest_()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  SetSampleRequest_ copyWith(void Function(SetSampleRequest_) updates) =>
+      super.copyWith((message) => updates(message as SetSampleRequest_))
+          as SetSampleRequest_;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetSampleRequest_ create() => SetSampleRequest_._();
+  SetSampleRequest_ createEmptyInstance() => create();
+  static $pb.PbList<SetSampleRequest_> createRepeated() =>
+      $pb.PbList<SetSampleRequest_>();
+  @$core.pragma('dart2js:noInline')
+  static SetSampleRequest_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SetSampleRequest_>(create);
+  static SetSampleRequest_? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.int> get setName => $_getN(0);
+  @$pb.TagNumber(1)
+  set setName($core.List<$core.int> v) {
+    $_setBytes(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasSetName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSetName() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get limit => $_getI64(1);
+  @$pb.TagNumber(2)
+  set limit($fixnum.Int64 v) {
+    $_setInt64(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasLimit() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLimit() => clearField(2);
+}
+
+class SetSampleResponse___Found extends $pb.GeneratedMessage {
+  factory SetSampleResponse___Found({
+    $core.Iterable<$core.List<$core.int>>? elements,
+  }) {
+    final $result = create();
+    if (elements != null) {
+      $result.elements.addAll(elements);
+    }
+    return $result;
+  }
+  SetSampleResponse___Found._() : super();
+  factory SetSampleResponse___Found.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory SetSampleResponse___Found.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_SetSampleResponse._Found',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client'),
+      createEmptyInstance: create)
+    ..p<$core.List<$core.int>>(
+        1, _omitFieldNames ? '' : 'elements', $pb.PbFieldType.PY)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  SetSampleResponse___Found clone() =>
+      SetSampleResponse___Found()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  SetSampleResponse___Found copyWith(
+          void Function(SetSampleResponse___Found) updates) =>
+      super.copyWith((message) => updates(message as SetSampleResponse___Found))
+          as SetSampleResponse___Found;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetSampleResponse___Found create() => SetSampleResponse___Found._();
+  SetSampleResponse___Found createEmptyInstance() => create();
+  static $pb.PbList<SetSampleResponse___Found> createRepeated() =>
+      $pb.PbList<SetSampleResponse___Found>();
+  @$core.pragma('dart2js:noInline')
+  static SetSampleResponse___Found getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SetSampleResponse___Found>(create);
+  static SetSampleResponse___Found? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.List<$core.int>> get elements => $_getList(0);
+}
+
+class SetSampleResponse___Missing extends $pb.GeneratedMessage {
+  factory SetSampleResponse___Missing() => create();
+  SetSampleResponse___Missing._() : super();
+  factory SetSampleResponse___Missing.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory SetSampleResponse___Missing.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_SetSampleResponse._Missing',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client'),
+      createEmptyInstance: create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  SetSampleResponse___Missing clone() =>
+      SetSampleResponse___Missing()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  SetSampleResponse___Missing copyWith(
+          void Function(SetSampleResponse___Missing) updates) =>
+      super.copyWith(
+              (message) => updates(message as SetSampleResponse___Missing))
+          as SetSampleResponse___Missing;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetSampleResponse___Missing create() =>
+      SetSampleResponse___Missing._();
+  SetSampleResponse___Missing createEmptyInstance() => create();
+  static $pb.PbList<SetSampleResponse___Missing> createRepeated() =>
+      $pb.PbList<SetSampleResponse___Missing>();
+  @$core.pragma('dart2js:noInline')
+  static SetSampleResponse___Missing getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SetSampleResponse___Missing>(create);
+  static SetSampleResponse___Missing? _defaultInstance;
+}
+
+enum SetSampleResponse__Set { found, missing, notSet }
+
+class SetSampleResponse_ extends $pb.GeneratedMessage {
+  factory SetSampleResponse_({
+    SetSampleResponse___Found? found,
+    SetSampleResponse___Missing? missing,
+  }) {
+    final $result = create();
+    if (found != null) {
+      $result.found = found;
+    }
+    if (missing != null) {
+      $result.missing = missing;
+    }
+    return $result;
+  }
+  SetSampleResponse_._() : super();
+  factory SetSampleResponse_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory SetSampleResponse_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
+  static const $core.Map<$core.int, SetSampleResponse__Set>
+      _SetSampleResponse__SetByTag = {
+    1: SetSampleResponse__Set.found,
+    2: SetSampleResponse__Set.missing,
+    0: SetSampleResponse__Set.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_SetSampleResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client'),
+      createEmptyInstance: create)
+    ..oo(0, [1, 2])
+    ..aOM<SetSampleResponse___Found>(1, _omitFieldNames ? '' : 'found',
+        subBuilder: SetSampleResponse___Found.create)
+    ..aOM<SetSampleResponse___Missing>(2, _omitFieldNames ? '' : 'missing',
+        subBuilder: SetSampleResponse___Missing.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  SetSampleResponse_ clone() => SetSampleResponse_()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  SetSampleResponse_ copyWith(void Function(SetSampleResponse_) updates) =>
+      super.copyWith((message) => updates(message as SetSampleResponse_))
+          as SetSampleResponse_;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetSampleResponse_ create() => SetSampleResponse_._();
+  SetSampleResponse_ createEmptyInstance() => create();
+  static $pb.PbList<SetSampleResponse_> createRepeated() =>
+      $pb.PbList<SetSampleResponse_>();
+  @$core.pragma('dart2js:noInline')
+  static SetSampleResponse_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SetSampleResponse_>(create);
+  static SetSampleResponse_? _defaultInstance;
+
+  SetSampleResponse__Set whichSet() =>
+      _SetSampleResponse__SetByTag[$_whichOneof(0)]!;
+  void clearSet() => clearField($_whichOneof(0));
+
+  @$pb.TagNumber(1)
+  SetSampleResponse___Found get found => $_getN(0);
+  @$pb.TagNumber(1)
+  set found(SetSampleResponse___Found v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasFound() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFound() => clearField(1);
+  @$pb.TagNumber(1)
+  SetSampleResponse___Found ensureFound() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  SetSampleResponse___Missing get missing => $_getN(1);
+  @$pb.TagNumber(2)
+  set missing(SetSampleResponse___Missing v) {
+    setField(2, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasMissing() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMissing() => clearField(2);
+  @$pb.TagNumber(2)
+  SetSampleResponse___Missing ensureMissing() => $_ensure(1);
 }
 
 class SetUnionRequest_ extends $pb.GeneratedMessage {
@@ -7517,44 +8325,6 @@ class ListRemoveResponse_ extends $pb.GeneratedMessage {
   ListRemoveResponse___Missing ensureMissing() => $_ensure(1);
 }
 
-class Unbounded_ extends $pb.GeneratedMessage {
-  factory Unbounded_() => create();
-  Unbounded_._() : super();
-  factory Unbounded_.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory Unbounded_.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : '_Unbounded',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'cache_client'),
-      createEmptyInstance: create)
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  Unbounded_ clone() => Unbounded_()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  Unbounded_ copyWith(void Function(Unbounded_) updates) =>
-      super.copyWith((message) => updates(message as Unbounded_)) as Unbounded_;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static Unbounded_ create() => Unbounded_._();
-  Unbounded_ createEmptyInstance() => create();
-  static $pb.PbList<Unbounded_> createRepeated() => $pb.PbList<Unbounded_>();
-  @$core.pragma('dart2js:noInline')
-  static Unbounded_ getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Unbounded_>(create);
-  static Unbounded_? _defaultInstance;
-}
-
 enum ListFetchRequest__StartIndex { unboundedStart, inclusiveStart, notSet }
 
 enum ListFetchRequest__EndIndex { unboundedEnd, exclusiveEnd, notSet }
@@ -7562,9 +8332,9 @@ enum ListFetchRequest__EndIndex { unboundedEnd, exclusiveEnd, notSet }
 class ListFetchRequest_ extends $pb.GeneratedMessage {
   factory ListFetchRequest_({
     $core.List<$core.int>? listName,
-    Unbounded_? unboundedStart,
+    $3.Unbounded_? unboundedStart,
     $core.int? inclusiveStart,
-    Unbounded_? unboundedEnd,
+    $3.Unbounded_? unboundedEnd,
     $core.int? exclusiveEnd,
   }) {
     final $result = create();
@@ -7613,12 +8383,12 @@ class ListFetchRequest_ extends $pb.GeneratedMessage {
     ..oo(1, [4, 5])
     ..a<$core.List<$core.int>>(
         1, _omitFieldNames ? '' : 'listName', $pb.PbFieldType.OY)
-    ..aOM<Unbounded_>(2, _omitFieldNames ? '' : 'unboundedStart',
-        subBuilder: Unbounded_.create)
+    ..aOM<$3.Unbounded_>(2, _omitFieldNames ? '' : 'unboundedStart',
+        subBuilder: $3.Unbounded_.create)
     ..a<$core.int>(
         3, _omitFieldNames ? '' : 'inclusiveStart', $pb.PbFieldType.OS3)
-    ..aOM<Unbounded_>(4, _omitFieldNames ? '' : 'unboundedEnd',
-        subBuilder: Unbounded_.create)
+    ..aOM<$3.Unbounded_>(4, _omitFieldNames ? '' : 'unboundedEnd',
+        subBuilder: $3.Unbounded_.create)
     ..a<$core.int>(
         5, _omitFieldNames ? '' : 'exclusiveEnd', $pb.PbFieldType.OS3)
     ..hasRequiredFields = false;
@@ -7667,9 +8437,9 @@ class ListFetchRequest_ extends $pb.GeneratedMessage {
   void clearListName() => clearField(1);
 
   @$pb.TagNumber(2)
-  Unbounded_ get unboundedStart => $_getN(1);
+  $3.Unbounded_ get unboundedStart => $_getN(1);
   @$pb.TagNumber(2)
-  set unboundedStart(Unbounded_ v) {
+  set unboundedStart($3.Unbounded_ v) {
     setField(2, v);
   }
 
@@ -7678,7 +8448,7 @@ class ListFetchRequest_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearUnboundedStart() => clearField(2);
   @$pb.TagNumber(2)
-  Unbounded_ ensureUnboundedStart() => $_ensure(1);
+  $3.Unbounded_ ensureUnboundedStart() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.int get inclusiveStart => $_getIZ(2);
@@ -7693,9 +8463,9 @@ class ListFetchRequest_ extends $pb.GeneratedMessage {
   void clearInclusiveStart() => clearField(3);
 
   @$pb.TagNumber(4)
-  Unbounded_ get unboundedEnd => $_getN(3);
+  $3.Unbounded_ get unboundedEnd => $_getN(3);
   @$pb.TagNumber(4)
-  set unboundedEnd(Unbounded_ v) {
+  set unboundedEnd($3.Unbounded_ v) {
     setField(4, v);
   }
 
@@ -7704,7 +8474,7 @@ class ListFetchRequest_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearUnboundedEnd() => clearField(4);
   @$pb.TagNumber(4)
-  Unbounded_ ensureUnboundedEnd() => $_ensure(3);
+  $3.Unbounded_ ensureUnboundedEnd() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $core.int get exclusiveEnd => $_getIZ(4);
@@ -7726,9 +8496,9 @@ enum ListRetainRequest__EndIndex { unboundedEnd, exclusiveEnd, notSet }
 class ListRetainRequest_ extends $pb.GeneratedMessage {
   factory ListRetainRequest_({
     $core.List<$core.int>? listName,
-    Unbounded_? unboundedStart,
+    $3.Unbounded_? unboundedStart,
     $core.int? inclusiveStart,
-    Unbounded_? unboundedEnd,
+    $3.Unbounded_? unboundedEnd,
     $core.int? exclusiveEnd,
     $fixnum.Int64? ttlMilliseconds,
     $core.bool? refreshTtl,
@@ -7785,12 +8555,12 @@ class ListRetainRequest_ extends $pb.GeneratedMessage {
     ..oo(1, [4, 5])
     ..a<$core.List<$core.int>>(
         1, _omitFieldNames ? '' : 'listName', $pb.PbFieldType.OY)
-    ..aOM<Unbounded_>(2, _omitFieldNames ? '' : 'unboundedStart',
-        subBuilder: Unbounded_.create)
+    ..aOM<$3.Unbounded_>(2, _omitFieldNames ? '' : 'unboundedStart',
+        subBuilder: $3.Unbounded_.create)
     ..a<$core.int>(
         3, _omitFieldNames ? '' : 'inclusiveStart', $pb.PbFieldType.OS3)
-    ..aOM<Unbounded_>(4, _omitFieldNames ? '' : 'unboundedEnd',
-        subBuilder: Unbounded_.create)
+    ..aOM<$3.Unbounded_>(4, _omitFieldNames ? '' : 'unboundedEnd',
+        subBuilder: $3.Unbounded_.create)
     ..a<$core.int>(
         5, _omitFieldNames ? '' : 'exclusiveEnd', $pb.PbFieldType.OS3)
     ..a<$fixnum.Int64>(
@@ -7843,9 +8613,9 @@ class ListRetainRequest_ extends $pb.GeneratedMessage {
   void clearListName() => clearField(1);
 
   @$pb.TagNumber(2)
-  Unbounded_ get unboundedStart => $_getN(1);
+  $3.Unbounded_ get unboundedStart => $_getN(1);
   @$pb.TagNumber(2)
-  set unboundedStart(Unbounded_ v) {
+  set unboundedStart($3.Unbounded_ v) {
     setField(2, v);
   }
 
@@ -7854,7 +8624,7 @@ class ListRetainRequest_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearUnboundedStart() => clearField(2);
   @$pb.TagNumber(2)
-  Unbounded_ ensureUnboundedStart() => $_ensure(1);
+  $3.Unbounded_ ensureUnboundedStart() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.int get inclusiveStart => $_getIZ(2);
@@ -7869,9 +8639,9 @@ class ListRetainRequest_ extends $pb.GeneratedMessage {
   void clearInclusiveStart() => clearField(3);
 
   @$pb.TagNumber(4)
-  Unbounded_ get unboundedEnd => $_getN(3);
+  $3.Unbounded_ get unboundedEnd => $_getN(3);
   @$pb.TagNumber(4)
-  set unboundedEnd(Unbounded_ v) {
+  set unboundedEnd($3.Unbounded_ v) {
     setField(4, v);
   }
 
@@ -7880,7 +8650,7 @@ class ListRetainRequest_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearUnboundedEnd() => clearField(4);
   @$pb.TagNumber(4)
-  Unbounded_ ensureUnboundedEnd() => $_ensure(3);
+  $3.Unbounded_ ensureUnboundedEnd() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $core.int get exclusiveEnd => $_getIZ(4);
@@ -8831,9 +9601,9 @@ enum SortedSetFetchRequest___ByIndex_End {
 
 class SortedSetFetchRequest___ByIndex extends $pb.GeneratedMessage {
   factory SortedSetFetchRequest___ByIndex({
-    Unbounded_? unboundedStart,
+    $3.Unbounded_? unboundedStart,
     $core.int? inclusiveStartIndex,
-    Unbounded_? unboundedEnd,
+    $3.Unbounded_? unboundedEnd,
     $core.int? exclusiveEndIndex,
   }) {
     final $result = create();
@@ -8877,12 +9647,12 @@ class SortedSetFetchRequest___ByIndex extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..oo(0, [1, 2])
     ..oo(1, [3, 4])
-    ..aOM<Unbounded_>(1, _omitFieldNames ? '' : 'unboundedStart',
-        subBuilder: Unbounded_.create)
+    ..aOM<$3.Unbounded_>(1, _omitFieldNames ? '' : 'unboundedStart',
+        subBuilder: $3.Unbounded_.create)
     ..a<$core.int>(
         2, _omitFieldNames ? '' : 'inclusiveStartIndex', $pb.PbFieldType.OS3)
-    ..aOM<Unbounded_>(3, _omitFieldNames ? '' : 'unboundedEnd',
-        subBuilder: Unbounded_.create)
+    ..aOM<$3.Unbounded_>(3, _omitFieldNames ? '' : 'unboundedEnd',
+        subBuilder: $3.Unbounded_.create)
     ..a<$core.int>(
         4, _omitFieldNames ? '' : 'exclusiveEndIndex', $pb.PbFieldType.OS3)
     ..hasRequiredFields = false;
@@ -8924,9 +9694,9 @@ class SortedSetFetchRequest___ByIndex extends $pb.GeneratedMessage {
   void clearEnd() => clearField($_whichOneof(1));
 
   @$pb.TagNumber(1)
-  Unbounded_ get unboundedStart => $_getN(0);
+  $3.Unbounded_ get unboundedStart => $_getN(0);
   @$pb.TagNumber(1)
-  set unboundedStart(Unbounded_ v) {
+  set unboundedStart($3.Unbounded_ v) {
     setField(1, v);
   }
 
@@ -8935,7 +9705,7 @@ class SortedSetFetchRequest___ByIndex extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearUnboundedStart() => clearField(1);
   @$pb.TagNumber(1)
-  Unbounded_ ensureUnboundedStart() => $_ensure(0);
+  $3.Unbounded_ ensureUnboundedStart() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.int get inclusiveStartIndex => $_getIZ(1);
@@ -8950,9 +9720,9 @@ class SortedSetFetchRequest___ByIndex extends $pb.GeneratedMessage {
   void clearInclusiveStartIndex() => clearField(2);
 
   @$pb.TagNumber(3)
-  Unbounded_ get unboundedEnd => $_getN(2);
+  $3.Unbounded_ get unboundedEnd => $_getN(2);
   @$pb.TagNumber(3)
-  set unboundedEnd(Unbounded_ v) {
+  set unboundedEnd($3.Unbounded_ v) {
     setField(3, v);
   }
 
@@ -8961,7 +9731,7 @@ class SortedSetFetchRequest___ByIndex extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearUnboundedEnd() => clearField(3);
   @$pb.TagNumber(3)
-  Unbounded_ ensureUnboundedEnd() => $_ensure(2);
+  $3.Unbounded_ ensureUnboundedEnd() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.int get exclusiveEndIndex => $_getIZ(3);
@@ -9066,9 +9836,9 @@ enum SortedSetFetchRequest___ByScore_Max { unboundedMax, maxScore, notSet }
 
 class SortedSetFetchRequest___ByScore extends $pb.GeneratedMessage {
   factory SortedSetFetchRequest___ByScore({
-    Unbounded_? unboundedMin,
+    $3.Unbounded_? unboundedMin,
     SortedSetFetchRequest___ByScore__Score? minScore,
-    Unbounded_? unboundedMax,
+    $3.Unbounded_? unboundedMax,
     SortedSetFetchRequest___ByScore__Score? maxScore,
     $core.int? offset,
     $core.int? count,
@@ -9120,13 +9890,13 @@ class SortedSetFetchRequest___ByScore extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..oo(0, [1, 2])
     ..oo(1, [3, 4])
-    ..aOM<Unbounded_>(1, _omitFieldNames ? '' : 'unboundedMin',
-        subBuilder: Unbounded_.create)
+    ..aOM<$3.Unbounded_>(1, _omitFieldNames ? '' : 'unboundedMin',
+        subBuilder: $3.Unbounded_.create)
     ..aOM<SortedSetFetchRequest___ByScore__Score>(
         2, _omitFieldNames ? '' : 'minScore',
         subBuilder: SortedSetFetchRequest___ByScore__Score.create)
-    ..aOM<Unbounded_>(3, _omitFieldNames ? '' : 'unboundedMax',
-        subBuilder: Unbounded_.create)
+    ..aOM<$3.Unbounded_>(3, _omitFieldNames ? '' : 'unboundedMax',
+        subBuilder: $3.Unbounded_.create)
     ..aOM<SortedSetFetchRequest___ByScore__Score>(
         4, _omitFieldNames ? '' : 'maxScore',
         subBuilder: SortedSetFetchRequest___ByScore__Score.create)
@@ -9171,9 +9941,9 @@ class SortedSetFetchRequest___ByScore extends $pb.GeneratedMessage {
   void clearMax() => clearField($_whichOneof(1));
 
   @$pb.TagNumber(1)
-  Unbounded_ get unboundedMin => $_getN(0);
+  $3.Unbounded_ get unboundedMin => $_getN(0);
   @$pb.TagNumber(1)
-  set unboundedMin(Unbounded_ v) {
+  set unboundedMin($3.Unbounded_ v) {
     setField(1, v);
   }
 
@@ -9182,7 +9952,7 @@ class SortedSetFetchRequest___ByScore extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearUnboundedMin() => clearField(1);
   @$pb.TagNumber(1)
-  Unbounded_ ensureUnboundedMin() => $_ensure(0);
+  $3.Unbounded_ ensureUnboundedMin() => $_ensure(0);
 
   @$pb.TagNumber(2)
   SortedSetFetchRequest___ByScore__Score get minScore => $_getN(1);
@@ -9199,9 +9969,9 @@ class SortedSetFetchRequest___ByScore extends $pb.GeneratedMessage {
   SortedSetFetchRequest___ByScore__Score ensureMinScore() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  Unbounded_ get unboundedMax => $_getN(2);
+  $3.Unbounded_ get unboundedMax => $_getN(2);
   @$pb.TagNumber(3)
-  set unboundedMax(Unbounded_ v) {
+  set unboundedMax($3.Unbounded_ v) {
     setField(3, v);
   }
 
@@ -9210,7 +9980,7 @@ class SortedSetFetchRequest___ByScore extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearUnboundedMax() => clearField(3);
   @$pb.TagNumber(3)
-  Unbounded_ ensureUnboundedMax() => $_ensure(2);
+  $3.Unbounded_ ensureUnboundedMax() => $_ensure(2);
 
   @$pb.TagNumber(4)
   SortedSetFetchRequest___ByScore__Score get maxScore => $_getN(3);
@@ -11284,10 +12054,10 @@ class SortedSetLengthByScoreRequest_ extends $pb.GeneratedMessage {
     $core.List<$core.int>? setName,
     $core.double? inclusiveMin,
     $core.double? exclusiveMin,
-    Unbounded_? unboundedMin,
+    $3.Unbounded_? unboundedMin,
     $core.double? inclusiveMax,
     $core.double? exclusiveMax,
-    Unbounded_? unboundedMax,
+    $3.Unbounded_? unboundedMax,
   }) {
     final $result = create();
     if (setName != null) {
@@ -11347,14 +12117,14 @@ class SortedSetLengthByScoreRequest_ extends $pb.GeneratedMessage {
         2, _omitFieldNames ? '' : 'inclusiveMin', $pb.PbFieldType.OD)
     ..a<$core.double>(
         3, _omitFieldNames ? '' : 'exclusiveMin', $pb.PbFieldType.OD)
-    ..aOM<Unbounded_>(4, _omitFieldNames ? '' : 'unboundedMin',
-        subBuilder: Unbounded_.create)
+    ..aOM<$3.Unbounded_>(4, _omitFieldNames ? '' : 'unboundedMin',
+        subBuilder: $3.Unbounded_.create)
     ..a<$core.double>(
         5, _omitFieldNames ? '' : 'inclusiveMax', $pb.PbFieldType.OD)
     ..a<$core.double>(
         6, _omitFieldNames ? '' : 'exclusiveMax', $pb.PbFieldType.OD)
-    ..aOM<Unbounded_>(7, _omitFieldNames ? '' : 'unboundedMax',
-        subBuilder: Unbounded_.create)
+    ..aOM<$3.Unbounded_>(7, _omitFieldNames ? '' : 'unboundedMax',
+        subBuilder: $3.Unbounded_.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('Using this can add significant overhead to your binary. '
@@ -11429,9 +12199,9 @@ class SortedSetLengthByScoreRequest_ extends $pb.GeneratedMessage {
   void clearExclusiveMin() => clearField(3);
 
   @$pb.TagNumber(4)
-  Unbounded_ get unboundedMin => $_getN(3);
+  $3.Unbounded_ get unboundedMin => $_getN(3);
   @$pb.TagNumber(4)
-  set unboundedMin(Unbounded_ v) {
+  set unboundedMin($3.Unbounded_ v) {
     setField(4, v);
   }
 
@@ -11440,7 +12210,7 @@ class SortedSetLengthByScoreRequest_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearUnboundedMin() => clearField(4);
   @$pb.TagNumber(4)
-  Unbounded_ ensureUnboundedMin() => $_ensure(3);
+  $3.Unbounded_ ensureUnboundedMin() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $core.double get inclusiveMax => $_getN(4);
@@ -11467,9 +12237,9 @@ class SortedSetLengthByScoreRequest_ extends $pb.GeneratedMessage {
   void clearExclusiveMax() => clearField(6);
 
   @$pb.TagNumber(7)
-  Unbounded_ get unboundedMax => $_getN(6);
+  $3.Unbounded_ get unboundedMax => $_getN(6);
   @$pb.TagNumber(7)
-  set unboundedMax(Unbounded_ v) {
+  set unboundedMax($3.Unbounded_ v) {
     setField(7, v);
   }
 
@@ -11478,7 +12248,7 @@ class SortedSetLengthByScoreRequest_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearUnboundedMax() => clearField(7);
   @$pb.TagNumber(7)
-  Unbounded_ ensureUnboundedMax() => $_ensure(6);
+  $3.Unbounded_ ensureUnboundedMax() => $_ensure(6);
 }
 
 class SortedSetLengthByScoreResponse___Found extends $pb.GeneratedMessage {

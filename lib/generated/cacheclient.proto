@@ -1,0 +1,1027 @@
+syntax = "proto3";
+
+import "common.proto";
+
+option go_package = "github.com/momentohq/client-sdk-go;client_sdk_go";
+option java_multiple_files = true;
+option java_package = "grpc.cache_client";
+option csharp_namespace = "Momento.Protos.CacheClient";
+
+package cache_client;
+
+enum ECacheResult {
+  Invalid = 0;
+  Ok = 1;
+  Hit = 2;
+  Miss = 3;
+
+  reserved 4 to 6;
+}
+
+service Scs {
+  rpc Get (_GetRequest) returns (_GetResponse) {}
+  rpc GetBatch (_GetBatchRequest) returns (stream _GetResponse) {}
+  rpc Set (_SetRequest) returns (_SetResponse) {}
+  rpc SetBatch (_SetBatchRequest) returns (stream _SetResponse) {}
+  rpc SetIf (_SetIfRequest) returns (_SetIfResponse) {}
+
+  // Deprecated because we have SetIf - Absent to cover this case.
+  rpc SetIfNotExists (_SetIfNotExistsRequest) returns (_SetIfNotExistsResponse) {
+    option deprecated = true;
+  }
+  rpc Delete (_DeleteRequest) returns (_DeleteResponse) {}
+  rpc KeysExist (_KeysExistRequest) returns (_KeysExistResponse) {}
+  rpc Increment (_IncrementRequest) returns (_IncrementResponse) {}
+  rpc UpdateTtl (_UpdateTtlRequest) returns (_UpdateTtlResponse) {}
+  rpc ItemGetTtl (_ItemGetTtlRequest) returns (_ItemGetTtlResponse) {}
+  rpc ItemGetType (_ItemGetTypeRequest) returns (_ItemGetTypeResponse) {}
+
+  rpc DictionaryGet (_DictionaryGetRequest) returns (_DictionaryGetResponse) {}
+  rpc DictionaryFetch (_DictionaryFetchRequest) returns (_DictionaryFetchResponse) {}
+  rpc DictionarySet (_DictionarySetRequest) returns (_DictionarySetResponse) {}
+  rpc DictionaryIncrement (_DictionaryIncrementRequest) returns (_DictionaryIncrementResponse) {}
+  rpc DictionaryDelete (_DictionaryDeleteRequest) returns (_DictionaryDeleteResponse) {}
+  rpc DictionaryLength(_DictionaryLengthRequest) returns (_DictionaryLengthResponse) {}
+
+  rpc SetFetch (_SetFetchRequest) returns (_SetFetchResponse) {}
+  rpc SetSample (_SetSampleRequest) returns (_SetSampleResponse) {}
+  rpc SetUnion (_SetUnionRequest) returns (_SetUnionResponse) {}
+  rpc SetDifference (_SetDifferenceRequest) returns (_SetDifferenceResponse) {}
+  rpc SetContains (_SetContainsRequest) returns (_SetContainsResponse) {}
+  rpc SetLength(_SetLengthRequest) returns (_SetLengthResponse) {}
+  rpc SetPop(_SetPopRequest) returns (_SetPopResponse) {}
+
+  rpc ListPushFront(_ListPushFrontRequest) returns (_ListPushFrontResponse) {}
+  rpc ListPushBack(_ListPushBackRequest) returns (_ListPushBackResponse) {}
+  rpc ListPopFront(_ListPopFrontRequest) returns (_ListPopFrontResponse) {}
+  rpc ListPopBack(_ListPopBackRequest) returns (_ListPopBackResponse) {}
+  rpc ListErase(_ListEraseRequest) returns (_ListEraseResponse) {}
+  rpc ListRemove(_ListRemoveRequest) returns (_ListRemoveResponse) {}
+  rpc ListFetch(_ListFetchRequest) returns (_ListFetchResponse) {}
+  rpc ListLength(_ListLengthRequest) returns (_ListLengthResponse) {}
+  rpc ListConcatenateFront(_ListConcatenateFrontRequest) returns (_ListConcatenateFrontResponse) {}
+  rpc ListConcatenateBack(_ListConcatenateBackRequest) returns (_ListConcatenateBackResponse) {}
+  rpc ListRetain(_ListRetainRequest) returns (_ListRetainResponse) {}
+
+  // Sorted Set Operations
+  // A sorted set is a collection of elements ordered by their score.
+  // The elements with same score are ordered lexicographically.
+
+  // Add or Updates new element with its score to the Sorted Set.
+  // If sorted set doesn't exist, a new one is created with the specified
+  // element and its associated score.
+  // If an element exists, then its associate score gets overridden with the one
+  // provided in this operation.
+  rpc SortedSetPut(_SortedSetPutRequest) returns (_SortedSetPutResponse) {}
+  // Fetches a subset of elements in the sorted set.
+  rpc SortedSetFetch(_SortedSetFetchRequest) returns (_SortedSetFetchResponse) {}
+  // Gets the specified element and its associated score if it exists in the
+  // sorted set.
+  rpc SortedSetGetScore(_SortedSetGetScoreRequest) returns (_SortedSetGetScoreResponse) {}
+  // Removes specified elements and their associated scores
+  rpc SortedSetRemove(_SortedSetRemoveRequest) returns (_SortedSetRemoveResponse) {}
+  // Changes the score associated with the element by specified amount.
+  // If the provided amount is negative, then the score associated with the
+  // element is decremented.
+  // If the element that needs to be incremented isn't present in the sorted
+  // set, it is added with specified number as the score.
+  // If the set itself doesn't exist then a new one with specified element and
+  // score is created.
+  rpc SortedSetIncrement(_SortedSetIncrementRequest) returns (_SortedSetIncrementResponse) {}
+  // Gives the rank of an element.
+  rpc SortedSetGetRank(_SortedSetGetRankRequest) returns (_SortedSetGetRankResponse) {}
+  // Returns length of the sorted set
+  rpc SortedSetLength(_SortedSetLengthRequest) returns (_SortedSetLengthResponse) {}
+  // Returns number of elements in the sorted set between a given min and max score
+  rpc SortedSetLengthByScore(_SortedSetLengthByScoreRequest) returns (_SortedSetLengthByScoreResponse) {}
+}
+
+message _GetRequest {
+  bytes cache_key = 1;
+}
+
+message _GetResponse {
+  ECacheResult result = 1;
+  bytes cache_body = 2;
+  string message = 3;
+}
+
+message _GetBatchRequest {
+  repeated _GetRequest items = 1;
+}
+
+message _DeleteRequest {
+  bytes cache_key = 1;
+}
+
+message _DeleteResponse {}
+
+message _SetRequest {
+  bytes cache_key = 1;
+  bytes cache_body = 2;
+  uint64 ttl_milliseconds = 3;
+}
+
+message _SetResponse {
+  ECacheResult result = 1;
+  string message = 2;
+}
+
+message _SetBatchRequest {
+  repeated _SetRequest items = 1;
+}
+
+message _SetIfRequest {
+  bytes cache_key = 1;
+  bytes cache_body = 2;
+  uint64 ttl_milliseconds = 3;
+  oneof condition {
+    common.Present present = 4;
+    common.PresentAndNotEqual present_and_not_equal = 5;
+    common.Absent absent = 6;
+    common.Equal equal = 7;
+    common.AbsentOrEqual absent_or_equal = 8;
+    common.NotEqual not_equal = 9;
+  }
+}
+
+message _SetIfResponse {
+  oneof result {
+    _Stored stored = 1;
+    _NotStored not_stored = 2;
+  }
+  message _Stored { }
+  message _NotStored { }
+}
+
+message _SetIfNotExistsRequest {
+  bytes cache_key = 1;
+  bytes cache_body = 2;
+  uint64 ttl_milliseconds = 3;
+}
+
+message _SetIfNotExistsResponse {
+  oneof result {
+    _Stored stored = 1;
+    _NotStored not_stored = 2;
+  }
+  message _Stored { }
+  message _NotStored { }
+}
+
+message _KeysExistRequest {
+  repeated bytes cache_keys = 1;
+}
+
+message _KeysExistResponse {
+  repeated bool exists = 1;
+}
+
+message _IncrementRequest {
+  bytes cache_key = 1;
+  // Amount to add to the stored value.
+  // If this key doesn't currently exist, it's created with this value (encoded as a base 10 string)
+  int64 amount = 2;
+  uint64 ttl_milliseconds = 3;
+}
+
+message _IncrementResponse {
+  // The value stored after the increment operation.
+  int64 value = 1;
+}
+
+
+message _UpdateTtlRequest {
+  bytes cache_key = 1;
+  oneof update_ttl {
+    // Sets the ttl to this value only if it is an increase compared to the existing ttl
+    uint64 increase_to_milliseconds = 2;
+    // Sets the ttl to this value only if it is a decrease compared to the existing ttl
+    uint64 decrease_to_milliseconds = 3;
+    // Sets the ttl to this value unconditionally
+    uint64 overwrite_to_milliseconds = 4;
+  }
+}
+
+message _UpdateTtlResponse {
+  // Indicates that the ttl was applied.
+  message _Set{}
+  // Indicates that the ttl was not applied due to a failed condition.
+  message _NotSet{}
+  // Indicates that the key did not exist.
+  message _Missing{}
+  oneof result {
+    _Set set = 1;
+    _NotSet not_set = 2;
+    _Missing missing = 3;
+  }
+}
+
+message _ItemGetTtlRequest {
+  bytes cache_key = 1;
+}
+
+message _ItemGetTtlResponse {
+  message _Found{
+    uint64 remaining_ttl_millis = 1;
+  }
+  message _Missing{}
+  oneof result {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _ItemGetTypeRequest {
+  bytes cache_key = 1;
+}
+
+message _ItemGetTypeResponse {
+  enum ItemType {
+    SCALAR = 0;
+    DICTIONARY = 1;
+    SET = 2;
+    LIST = 3;
+    SORTED_SET = 4;
+  }
+  message _Found{
+    ItemType item_type = 1;
+  }
+  message _Missing{}
+  oneof result {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _DictionaryGetRequest {
+  bytes dictionary_name = 1;
+  repeated bytes fields = 2;
+}
+
+message _DictionaryGetResponse {
+  message _DictionaryGetResponsePart {
+    ECacheResult result = 1;
+    bytes cache_body = 2;
+  }
+
+  message _Found {
+    repeated _DictionaryGetResponsePart items = 1;
+  }
+
+  message _Missing {}
+
+  oneof dictionary {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _DictionaryFetchRequest {
+  bytes dictionary_name = 1;
+}
+
+message _DictionaryFieldValuePair {
+  bytes field = 1;
+  bytes value = 2;
+}
+
+message _DictionaryFetchResponse {
+  message _Found {
+    repeated _DictionaryFieldValuePair items = 1;
+  }
+
+  message _Missing {}
+
+  oneof dictionary {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _DictionarySetRequest {
+  bytes dictionary_name = 1;
+  repeated _DictionaryFieldValuePair items = 2;
+  uint64 ttl_milliseconds = 3;
+  bool refresh_ttl = 4;
+}
+
+message _DictionarySetResponse {}
+
+message _DictionaryIncrementRequest {
+  bytes dictionary_name = 1;
+  bytes field = 2;
+  int64 amount = 3;
+  uint64 ttl_milliseconds = 4;
+  bool refresh_ttl = 5;
+}
+
+message _DictionaryIncrementResponse {
+  int64 value = 1;
+}
+
+message _DictionaryDeleteRequest {
+  message Some {
+    repeated bytes fields = 1;
+  }
+  message All { }
+
+  bytes dictionary_name = 1;
+  oneof delete {
+    Some some = 2;
+    All all = 3;
+  }
+}
+
+message _DictionaryDeleteResponse {}
+
+message _DictionaryLengthRequest {
+  bytes dictionary_name = 1;
+}
+
+message _DictionaryLengthResponse {
+  message _Found {
+    uint32 length = 1;
+  }
+
+  message _Missing {}
+
+  oneof dictionary {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _SetFetchRequest {
+  bytes set_name = 1;
+}
+
+message _SetFetchResponse {
+  message _Found {
+    repeated bytes elements = 1;
+  }
+
+  message _Missing {}
+
+  oneof set {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _SetSampleRequest {
+  bytes set_name = 1;
+  uint64 limit = 2;
+}
+
+message _SetSampleResponse {
+  message _Found {
+    repeated bytes elements = 1;
+  }
+
+  message _Missing {}
+
+  oneof set {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+message _SetUnionRequest {
+  bytes set_name = 1;
+  repeated bytes elements = 2;
+  uint64 ttl_milliseconds = 3;
+  bool refresh_ttl = 4;
+}
+
+message _SetUnionResponse {}
+
+message _SetDifferenceRequest {
+  // cache = request - stored
+  message _Minuend {
+    repeated bytes elements = 1;
+  }
+  // cache = stored - request
+  message _Subtrahend {
+    // Subtract a set of elements
+    message _Set {
+      repeated bytes elements = 1;
+    }
+    // Subtract the set's identity (itself) from itself - which deletes it.
+    message _Identity {}
+
+    oneof subtrahend_set {
+      _Set set = 1;
+      _Identity identity = 2;
+    }
+  }
+
+  bytes set_name = 1;
+  oneof difference {
+    _Minuend minuend = 2;
+    _Subtrahend subtrahend = 3;
+  }
+}
+
+message _SetDifferenceResponse {
+  message _Found {}
+
+  message _Missing {}
+
+  oneof set {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _SetContainsRequest {
+  bytes set_name = 1;
+  repeated bytes elements = 2;
+}
+
+message _SetContainsResponse {
+  message _Found {
+    // This will be the same length as the elements passed in the request.
+    // It represents whether each element is a member of the set, with indices corresponding to the request elements.
+    repeated bool contains = 1;
+  }
+
+  message _Missing {}
+
+  oneof set {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _SetLengthRequest {
+  bytes set_name = 1;
+}
+
+message _SetLengthResponse {
+  message _Found {
+    uint32 length = 1;
+  }
+
+  message _Missing {}
+
+  oneof set {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _SetPopRequest {
+  bytes set_name = 1;
+  uint32 count = 2;
+}
+
+message _SetPopResponse {
+  message _Found {
+    repeated bytes elements = 1;
+  }
+
+  message _Missing {}
+
+  oneof set {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _ListConcatenateFrontRequest {
+  bytes list_name = 1;
+  repeated bytes values = 2;
+  uint64 ttl_milliseconds = 3;
+  bool refresh_ttl = 4;
+
+  // ensure total length <= this; remove excess from back of list
+  uint32 truncate_back_to_size = 5;
+}
+
+message _ListConcatenateFrontResponse {
+  // length of the list after the concatenation
+  uint32 list_length = 1;
+}
+
+
+message _ListConcatenateBackRequest {
+  bytes list_name = 1;
+  repeated bytes values = 2;
+  uint64 ttl_milliseconds = 3;
+  bool refresh_ttl = 4;
+
+  // ensure total length <= this; remove excess from front of list
+  uint32 truncate_front_to_size = 5;
+}
+
+message _ListConcatenateBackResponse {
+  // length of the list after the concatenation
+  uint32 list_length = 1;
+}
+
+// stored = request + stored
+message _ListPushFrontRequest {
+  bytes list_name = 1;
+  bytes value = 2;
+  uint64 ttl_milliseconds = 3;
+  bool refresh_ttl = 4;
+
+  // ensure total length <= this; remove excess from back of list
+  uint32 truncate_back_to_size = 5;
+}
+
+message _ListPushFrontResponse {
+  // length of the list after the push
+  uint32 list_length = 1;
+}
+
+// stored = stored + request
+message _ListPushBackRequest {
+  bytes list_name = 1;
+  bytes value = 2;
+  uint64 ttl_milliseconds = 3;
+  bool refresh_ttl = 4;
+
+  // ensure total length <= this; remove excess from front of list
+  uint32 truncate_front_to_size = 5;
+}
+
+message _ListPushBackResponse {
+  // length of the list after the push
+  uint32 list_length = 1;
+}
+
+message _ListPopFrontRequest {
+  bytes list_name = 1;
+}
+
+message _ListPopFrontResponse {
+  message _Found {
+    bytes front = 1;
+    // length of the list after the pop
+    uint32 list_length = 2;
+  }
+
+  message _Missing {}
+
+  oneof list {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _ListPopBackRequest {
+  bytes list_name = 1;
+}
+
+message _ListPopBackResponse {
+  message _Found {
+    bytes back = 1;
+    // length of the list after the pop
+    uint32 list_length = 2;
+  }
+
+  message _Missing {}
+
+  oneof list {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _ListRange {
+  uint32 begin_index = 1;
+  uint32 count = 2;
+}
+
+message _ListEraseRequest {
+  message _All {}
+
+  message _ListRanges {
+    repeated _ListRange ranges = 1;
+  }
+
+  bytes list_name = 1;
+  oneof erase {
+    _ListRanges some = 2;
+    _All all = 3;
+  }
+}
+
+message _ListEraseResponse {
+  message _Found {
+    uint32 list_length = 1;
+  }
+
+  message _Missing {}
+
+  oneof list {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _ListRemoveRequest {
+  bytes list_name = 1;
+  oneof remove {
+    // Remove all appearances in the list where the element is this value
+    bytes all_elements_with_value = 2;
+  }
+}
+
+message _ListRemoveResponse {
+  message _Found {
+    uint32 list_length = 1;
+  }
+
+  message _Missing {}
+
+  oneof list {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+/*
+  # ListFetch and ListRetain documentation and examples
+
+  # start and end are zero-based indexes, both are optional
+
+  # start is inclusive
+  # If start is not set, then the default is Unbounded, which is treated as 0
+  # Unbounded == 0,
+  # this field has a explicit presence for future compatibility to support reverse order and controlling our stride
+
+  # end is exclusive
+  # If end is not set, then the default is Unbounded which becomes (list.len)
+
+  # start and end can be negative numbers, negative indicates offsets starting at the end of the list.
+  # For example, -1 is the last element of the list, -2 the penultimate, etc
+  # list:                     [  a,  b,  c,  d,  e,  f,  g,  h,  i,  j]
+  # positive index positions:    0,  1,  2,  3,  4,  5,  6,  7,  8,  9
+  # negative index positions:  -10, -9, -8, -7, -6, -5, -4, -3, -2, -1
+
+  list_ = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+  # Using the slice notation:
+  # start:end
+
+  # start=0, end=Unbounded
+  list_[0:] == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+  # start=5, end=Unbounded
+  list_[5:] == [5, 6, 7, 8, 9]
+
+  # start=5, end=0
+  list_[5:0] == []
+
+  # start=-5, end=Unbounded
+  list_[-5:] == [5, 6, 7, 8, 9]
+
+  # start=-5, end=0
+  list_[-5:0] == []
+
+  # start=0, end=5
+  list_[0:5] == [0, 1, 2, 3]
+
+  # start=Unbounded, end=5
+  list_[0:5] == [0, 1, 2, 3]
+
+  # start=0, end=-5
+  list_[0:-5] == [0, 1, 2, 3, 4]
+
+  # start=Unbounded, end=-5
+  list_[0:-5] == [0, 1, 2, 3, 4]
+
+  # start=2, end=6
+  list_[2:6] == [2, 3, 4, 5]
+
+  # start=2, end=-6
+  list_[2:-6] == [2, 3]
+
+  # start=-7, end=-2
+  list_[-7:-2] == [3, 4, 5, 6, 7]
+
+  // if using ListRetain, this will remove all elements in the list
+  # start=-2, end=-6
+  list_[-2:-6] == []
+
+  # empty list
+  list_[0:0] == []
+
+  # List of length one special cases
+  list_size_one_ = ['a']
+
+  # start=-1, end=1
+  list_size_one_[-1:1] == ['a']
+
+  # start=1, end=-1
+  list_size_one_[1:-1] == []
+
+  # start=0, end=0
+  list_size_one_[0:0] == []
+
+  # start=0, end=-1
+  list_size_one_[0:-1] == []
+ */
+
+message _ListFetchRequest {
+  bytes list_name = 1;
+  // Inclusive.
+  // If unbounded, 0 (start of list) by default
+  // A negative index counts from the end of the list
+  oneof start_index {
+    common._Unbounded unbounded_start = 2;
+    sint32 inclusive_start = 3;
+  }
+  // Exclusive.
+  // If unbounded, this effectively means list.length()
+  // If end_index is > the number of elements to return, return as much as you can
+  // A negative index counts from the end of the list
+  oneof end_index {
+    common._Unbounded unbounded_end = 4;
+    sint32 exclusive_end = 5;
+  }
+}
+
+message _ListRetainRequest {
+  bytes list_name = 1;
+  oneof start_index {
+    common._Unbounded unbounded_start = 2;
+    sint32 inclusive_start = 3;
+  }
+  oneof end_index {
+    common._Unbounded unbounded_end = 4;
+    sint32 exclusive_end = 5;
+  }
+  uint64 ttl_milliseconds = 6;
+  bool refresh_ttl = 7;
+}
+
+message _ListRetainResponse {
+  message _Found {
+    uint32 list_length = 1;
+  }
+
+  message _Missing {}
+
+  oneof list {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _ListFetchResponse {
+  message _Found {
+    repeated bytes values = 1;
+  }
+
+  message _Missing {}
+
+  oneof list {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _ListLengthRequest {
+  bytes list_name = 1;
+}
+
+message _ListLengthResponse {
+  message _Found {
+    uint32 length = 1;
+  }
+
+  message _Missing {}
+
+  oneof list {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _SortedSetElement {
+  bytes value = 1;
+  double score = 2;
+}
+
+message _SortedSetPutRequest {
+  bytes set_name = 1;
+  repeated _SortedSetElement elements = 2;
+  uint64 ttl_milliseconds = 3;
+  bool refresh_ttl = 4;
+}
+
+message _SortedSetPutResponse {}
+
+message _SortedSetFetchRequest {
+  enum Order {
+    ASCENDING = 0;
+    DESCENDING = 1;
+  }
+
+  message _ByIndex {
+    // Start and end are zero-based indexes, with 0 being the first element.
+    // A negative index indicates offsets from the end of the sorted set, with
+    // -1 being the last element.
+
+    // Start is inclusive.
+    // Unbounded is treated as 0.
+    oneof start {
+      common._Unbounded unbounded_start = 1;
+      sint32 inclusive_start_index = 2;
+    }
+    // End is exclusive.
+    // Unbounded is treated as the number of elements in the sorted set.
+    oneof end {
+      common._Unbounded unbounded_end = 3;
+      sint32 exclusive_end_index = 4;
+    }
+  }
+
+  message _ByScore {
+    message _Score {
+      double score = 1;
+      bool exclusive = 2;
+    }
+
+    oneof min {
+      common._Unbounded unbounded_min = 1;
+      _Score min_score = 2;
+    }
+    oneof max {
+      common._Unbounded unbounded_max = 3;
+      _Score max_score = 4;
+    }
+    // Offset and count are used to only get a range of the matching elements,
+    // similar to "SELECT LIMIT offset, count" in SQL.
+    // A negative count returns all elements from the offset.
+    // Use (0, -1) to return all matching elements.
+    uint32 offset = 5;
+    sint32 count = 6;
+  }
+
+  bytes set_name = 1;
+  Order order = 2;
+  bool with_scores = 3;
+  oneof range {
+    _ByIndex by_index = 4;
+    _ByScore by_score = 5;
+  }
+}
+
+message _SortedSetFetchResponse {
+  message _Found {
+    message _ValuesWithScores {
+      repeated _SortedSetElement elements = 1;
+    }
+
+    message _Values {
+      repeated bytes values = 1;
+    }
+
+    oneof elements {
+      _ValuesWithScores values_with_scores = 1;
+      _Values values = 2;
+    }
+  }
+
+  message _Missing {}
+
+  oneof sorted_set {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _SortedSetGetScoreRequest {
+  bytes set_name = 1;
+  repeated bytes values = 2;
+}
+
+message _SortedSetGetScoreResponse {
+  message _SortedSetGetScoreResponsePart {
+    ECacheResult result = 1;
+    double score = 2;
+  }
+
+  message _SortedSetFound {
+    repeated _SortedSetGetScoreResponsePart elements = 1;
+  }
+
+  message _SortedSetMissing {
+  }
+
+  oneof sorted_set {
+    _SortedSetFound found = 1;
+    _SortedSetMissing missing = 2;
+  }
+}
+
+message _SortedSetRemoveRequest {
+  bytes set_name = 1;
+  message _All {}
+  message _Some {
+    repeated bytes values = 1;
+  }
+  oneof remove_elements {
+    _All all = 2;
+    _Some some = 3;
+  }
+}
+
+message _SortedSetRemoveResponse {}
+
+message _SortedSetIncrementRequest {
+  bytes set_name = 1;
+  bytes value = 2;
+  double amount = 3;
+  uint64 ttl_milliseconds = 4;
+  bool refresh_ttl = 5;
+}
+
+message _SortedSetIncrementResponse {
+  // The updated score stored after the increment operation.
+  double score = 1;
+}
+
+message _SortedSetGetRankRequest {
+  enum Order {
+    ASCENDING = 0;
+    DESCENDING = 1;
+  }
+
+  bytes set_name = 1;
+  bytes value = 2;
+  // The order in which sorted set will be sorted to determine the rank.
+  //
+  // When Order.ASCENDING is specified, will return the rank of the value
+  // when sorted set scores are ordered from low to high. This is the default
+  // when no Order is specified.
+  //
+  // When Order.DESCENDING is specified, will return the rank of the value
+  // when sorted set scores are ordered from high to low.
+  Order order = 3;
+}
+
+message _SortedSetGetRankResponse {
+  message _RankResponsePart {
+    ECacheResult result = 1;
+    // Rank is 0-based i.e. when sort order is descending the rank of the
+    // value with the highest score will be 0. Similarly for ascending order,
+    // value with the lowest score will have rank 0.
+    uint64 rank = 2;
+  }
+
+  message _SortedSetMissing {}
+
+  oneof rank {
+    _RankResponsePart element_rank = 1;
+    _SortedSetMissing missing = 2;
+  }
+}
+
+message _SortedSetLengthRequest {
+  bytes set_name = 1;
+}
+
+message _SortedSetLengthResponse {
+  message _Found {
+    uint32 length = 1;
+  }
+
+  message _Missing {}
+
+  oneof sorted_set {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}
+
+message _SortedSetLengthByScoreRequest {
+  bytes set_name = 1;
+  oneof min {
+    double inclusive_min = 2;
+    double exclusive_min = 3;
+    common._Unbounded unbounded_min = 4;
+  };
+  oneof max {
+    double inclusive_max = 5;
+    double exclusive_max = 6;
+    common._Unbounded unbounded_max = 7;
+  }
+}
+
+message _SortedSetLengthByScoreResponse {
+  message _Found {
+    uint32 length = 1;
+  }
+
+  message _Missing {}
+
+  oneof sorted_set {
+    _Found found = 1;
+    _Missing missing = 2;
+  }
+}

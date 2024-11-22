@@ -601,6 +601,7 @@ class GenerateApiTokenRequest_ extends $pb.GeneratedMessage {
     $core.String? authToken,
     $9.Permissions? permissions,
     $core.String? tokenId,
+    $core.String? description,
   }) {
     final $result = create();
     if (never != null) {
@@ -617,6 +618,9 @@ class GenerateApiTokenRequest_ extends $pb.GeneratedMessage {
     }
     if (tokenId != null) {
       $result.tokenId = tokenId;
+    }
+    if (description != null) {
+      $result.description = description;
     }
     return $result;
   }
@@ -647,6 +651,7 @@ class GenerateApiTokenRequest_ extends $pb.GeneratedMessage {
     ..aOM<$9.Permissions>(4, _omitFieldNames ? '' : 'permissions',
         subBuilder: $9.Permissions.create)
     ..aOS(5, _omitFieldNames ? '' : 'tokenId')
+    ..aOS(6, _omitFieldNames ? '' : 'description')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('Using this can add significant overhead to your binary. '
@@ -743,6 +748,18 @@ class GenerateApiTokenRequest_ extends $pb.GeneratedMessage {
   $core.bool hasTokenId() => $_has(4);
   @$pb.TagNumber(5)
   void clearTokenId() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get description => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set description($core.String v) {
+    $_setString(5, v);
+  }
+
+  @$pb.TagNumber(6)
+  $core.bool hasDescription() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearDescription() => clearField(6);
 }
 
 class GenerateApiTokenResponse_ extends $pb.GeneratedMessage {

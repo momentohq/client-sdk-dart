@@ -13,6 +13,94 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use createStoreRequest_Descriptor instead')
+const CreateStoreRequest_$json = {
+  '1': '_CreateStoreRequest',
+  '2': [
+    {'1': 'store_name', '3': 1, '4': 1, '5': 9, '10': 'storeName'},
+  ],
+};
+
+/// Descriptor for `_CreateStoreRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List createStoreRequest_Descriptor = $convert.base64Decode(
+    'ChNfQ3JlYXRlU3RvcmVSZXF1ZXN0Eh0KCnN0b3JlX25hbWUYASABKAlSCXN0b3JlTmFtZQ==');
+
+@$core.Deprecated('Use createStoreResponse_Descriptor instead')
+const CreateStoreResponse_$json = {
+  '1': '_CreateStoreResponse',
+};
+
+/// Descriptor for `_CreateStoreResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List createStoreResponse_Descriptor =
+    $convert.base64Decode('ChRfQ3JlYXRlU3RvcmVSZXNwb25zZQ==');
+
+@$core.Deprecated('Use deleteStoreRequest_Descriptor instead')
+const DeleteStoreRequest_$json = {
+  '1': '_DeleteStoreRequest',
+  '2': [
+    {'1': 'store_name', '3': 1, '4': 1, '5': 9, '10': 'storeName'},
+  ],
+};
+
+/// Descriptor for `_DeleteStoreRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteStoreRequest_Descriptor = $convert.base64Decode(
+    'ChNfRGVsZXRlU3RvcmVSZXF1ZXN0Eh0KCnN0b3JlX25hbWUYASABKAlSCXN0b3JlTmFtZQ==');
+
+@$core.Deprecated('Use deleteStoreResponse_Descriptor instead')
+const DeleteStoreResponse_$json = {
+  '1': '_DeleteStoreResponse',
+};
+
+/// Descriptor for `_DeleteStoreResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteStoreResponse_Descriptor =
+    $convert.base64Decode('ChRfRGVsZXRlU3RvcmVSZXNwb25zZQ==');
+
+@$core.Deprecated('Use listStoresRequest_Descriptor instead')
+const ListStoresRequest_$json = {
+  '1': '_ListStoresRequest',
+  '2': [
+    {'1': 'next_token', '3': 1, '4': 1, '5': 9, '10': 'nextToken'},
+  ],
+};
+
+/// Descriptor for `_ListStoresRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listStoresRequest_Descriptor =
+    $convert.base64Decode(
+        'ChJfTGlzdFN0b3Jlc1JlcXVlc3QSHQoKbmV4dF90b2tlbhgBIAEoCVIJbmV4dFRva2Vu');
+
+@$core.Deprecated('Use listStoresResponse_Descriptor instead')
+const ListStoresResponse_$json = {
+  '1': '_ListStoresResponse',
+  '2': [
+    {
+      '1': 'store',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.control_client._Store',
+      '10': 'store'
+    },
+    {'1': 'next_token', '3': 2, '4': 1, '5': 9, '10': 'nextToken'},
+  ],
+};
+
+/// Descriptor for `_ListStoresResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listStoresResponse_Descriptor = $convert.base64Decode(
+    'ChNfTGlzdFN0b3Jlc1Jlc3BvbnNlEiwKBXN0b3JlGAEgAygLMhYuY29udHJvbF9jbGllbnQuX1'
+    'N0b3JlUgVzdG9yZRIdCgpuZXh0X3Rva2VuGAIgASgJUgluZXh0VG9rZW4=');
+
+@$core.Deprecated('Use store_Descriptor instead')
+const Store_$json = {
+  '1': '_Store',
+  '2': [
+    {'1': 'store_name', '3': 1, '4': 1, '5': 9, '10': 'storeName'},
+  ],
+};
+
+/// Descriptor for `_Store`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List store_Descriptor = $convert
+    .base64Decode('CgZfU3RvcmUSHQoKc3RvcmVfbmFtZRgBIAEoCVIJc3RvcmVOYW1l');
+
 @$core.Deprecated('Use similarityMetric_Descriptor instead')
 const SimilarityMetric_$json = {
   '1': '_SimilarityMetric',

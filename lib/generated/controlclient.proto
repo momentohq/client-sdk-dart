@@ -1,0 +1,186 @@
+syntax = "proto3";
+
+
+option go_package = "github.com/momentohq/client-sdk-go;client_sdk_go";
+option java_multiple_files = true;
+option java_package = "grpc.control_client";
+option csharp_namespace = "Momento.Protos.ControlClient";
+
+package control_client;
+
+service ScsControl {
+  rpc CreateCache (_CreateCacheRequest) returns (_CreateCacheResponse) {}
+  rpc DeleteCache (_DeleteCacheRequest) returns (_DeleteCacheResponse) {}
+  rpc ListCaches (_ListCachesRequest) returns (_ListCachesResponse) {}
+  rpc FlushCache (_FlushCacheRequest) returns (_FlushCacheResponse) {}
+  rpc CreateSigningKey (_CreateSigningKeyRequest) returns (_CreateSigningKeyResponse) {}
+  rpc RevokeSigningKey (_RevokeSigningKeyRequest) returns (_RevokeSigningKeyResponse) {}
+  rpc ListSigningKeys (_ListSigningKeysRequest) returns (_ListSigningKeysResponse) {}
+  rpc CreateIndex (_CreateIndexRequest) returns (_CreateIndexResponse) {}
+  rpc DeleteIndex(_DeleteIndexRequest) returns (_DeleteIndexResponse) {}
+  rpc ListIndexes(_ListIndexesRequest) returns (_ListIndexesResponse) {}
+  rpc CreateStore (_CreateStoreRequest) returns (_CreateStoreResponse) {}
+  rpc DeleteStore (_DeleteStoreRequest) returns (_DeleteStoreResponse) {}
+  rpc ListStores (_ListStoresRequest) returns (_ListStoresResponse) {}
+}
+
+message _CreateStoreRequest {
+  string store_name = 1;
+}
+
+message _CreateStoreResponse {
+}
+
+message _DeleteStoreRequest {
+  string store_name = 1;
+}
+
+message _DeleteStoreResponse {
+}
+
+message _ListStoresRequest {
+  string next_token = 1;
+}
+
+message _ListStoresResponse {
+  repeated _Store store = 1;
+  string next_token = 2;
+}
+
+message _Store {
+  string store_name = 1;
+}
+
+message _SimilarityMetric {
+  message _EuclideanSimilarity {
+  }
+
+  message _InnerProduct {
+  }
+
+  message _CosineSimilarity {
+  }
+
+  oneof similarity_metric {
+    _EuclideanSimilarity euclidean_similarity = 1;
+    _InnerProduct inner_product = 2;
+    _CosineSimilarity cosine_similarity = 3;
+  }
+}
+
+message _CreateIndexRequest {
+  string index_name = 1;
+  uint64 num_dimensions = 2;
+  _SimilarityMetric similarity_metric = 3;
+}
+
+message _CreateIndexResponse {
+}
+
+message _DeleteIndexRequest {
+  string index_name = 1;
+}
+
+message _DeleteIndexResponse {
+}
+
+message _ListIndexesRequest {
+}
+
+message _ListIndexesResponse {
+  message _Index {
+    string index_name = 1;
+    uint64 num_dimensions = 2;
+    _SimilarityMetric similarity_metric = 3;
+  }
+  repeated _Index indexes = 1;
+}
+
+message _DeleteCacheRequest {
+  string cache_name = 1;
+}
+
+message _DeleteCacheResponse {
+}
+
+message _CreateCacheRequest {
+  string cache_name = 1;
+}
+
+message _CreateCacheResponse {
+}
+
+message _ListCachesRequest {
+  string next_token = 1;
+}
+
+message _CacheLimits {
+  // The amount of transactions per second that can be exercised
+  uint32 max_traffic_rate = 1; 
+  // The amount of traffic per second that can be exercised in KiB
+  uint32 max_throughput_kbps = 2;
+  // The maximum size of a single item in KiB
+  uint32 max_item_size_kb = 3;
+  // The maximum TTL allowed for a single item, in seconds
+  uint64 max_ttl_seconds = 4;
+}
+
+message _TopicLimits {
+  // The amount of messages that can be published per second
+  uint32 max_publish_rate = 1;
+  // The maximum amount of active subscriptions per cache
+  uint32 max_subscription_count = 2;
+  // The maximum size of a single publish message, in KiB
+  uint32 max_publish_message_size_kb = 3;
+}
+
+message _Cache {
+  string cache_name = 1;
+  _CacheLimits cache_limits = 2;
+  _TopicLimits topic_limits = 3;
+}
+
+message _ListCachesResponse {
+  repeated _Cache cache = 1;
+  string next_token = 2;
+}
+
+message _CreateSigningKeyRequest {
+  uint32 ttl_minutes = 1;
+}
+
+message _CreateSigningKeyResponse {
+  string key = 1;
+  uint64 expires_at = 2;
+}
+
+message _RevokeSigningKeyRequest {
+  string key_id = 1;
+}
+
+message _RevokeSigningKeyResponse {
+}
+
+message _SigningKey {
+  // The id of the signing key
+  string key_id = 1;
+  // Epoch time in seconds when the signing key expires
+  uint64 expires_at = 2;
+}
+
+message _ListSigningKeysRequest {
+  string next_token = 1;
+}
+
+message _ListSigningKeysResponse {
+  repeated _SigningKey signing_key = 1;
+  string next_token = 2;
+}
+
+message _FlushCacheRequest {
+  string cache_name = 1;
+}
+
+message _FlushCacheResponse {
+
+}

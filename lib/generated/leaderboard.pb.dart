@@ -13,6 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'common.pb.dart' as $3;
 import 'leaderboard.pbenum.dart';
 
 export 'leaderboard.pbenum.dart';
@@ -45,7 +46,7 @@ class Element_ extends $pb.GeneratedMessage {
       package: const $pb.PackageName(_omitMessageNames ? '' : 'leaderboard'),
       createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.OU3)
-    ..a<$core.double>(2, _omitFieldNames ? '' : 'score', $pb.PbFieldType.OF)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'score', $pb.PbFieldType.OD)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('Using this can add significant overhead to your binary. '
@@ -87,17 +88,17 @@ class Element_ extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   /// The value by which this element is sorted within the leaderboard.
-  @$pb.TagNumber(2)
+  @$pb.TagNumber(3)
   $core.double get score => $_getN(1);
-  @$pb.TagNumber(2)
+  @$pb.TagNumber(3)
   set score($core.double v) {
-    $_setFloat(1, v);
+    $_setDouble(1, v);
   }
 
-  @$pb.TagNumber(2)
+  @$pb.TagNumber(3)
   $core.bool hasScore() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearScore() => clearField(2);
+  @$pb.TagNumber(3)
+  void clearScore() => clearField(3);
 }
 
 /// Query APIs returning RankedElement offer the familiar Element id and score tuple, but they
@@ -105,18 +106,18 @@ class Element_ extends $pb.GeneratedMessage {
 class RankedElement_ extends $pb.GeneratedMessage {
   factory RankedElement_({
     $core.int? id,
-    $core.double? score,
     $core.int? rank,
+    $core.double? score,
   }) {
     final $result = create();
     if (id != null) {
       $result.id = id;
     }
-    if (score != null) {
-      $result.score = score;
-    }
     if (rank != null) {
       $result.rank = rank;
+    }
+    if (score != null) {
+      $result.score = score;
     }
     return $result;
   }
@@ -133,8 +134,8 @@ class RankedElement_ extends $pb.GeneratedMessage {
       package: const $pb.PackageName(_omitMessageNames ? '' : 'leaderboard'),
       createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.OU3)
-    ..a<$core.double>(2, _omitFieldNames ? '' : 'score', $pb.PbFieldType.OF)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'rank', $pb.PbFieldType.OU3)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'score', $pb.PbFieldType.OD)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('Using this can add significant overhead to your binary. '
@@ -172,29 +173,29 @@ class RankedElement_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
 
-  @$pb.TagNumber(2)
-  $core.double get score => $_getN(1);
-  @$pb.TagNumber(2)
-  set score($core.double v) {
-    $_setFloat(1, v);
-  }
-
-  @$pb.TagNumber(2)
-  $core.bool hasScore() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearScore() => clearField(2);
-
   @$pb.TagNumber(3)
-  $core.int get rank => $_getIZ(2);
+  $core.int get rank => $_getIZ(1);
   @$pb.TagNumber(3)
   set rank($core.int v) {
-    $_setUnsignedInt32(2, v);
+    $_setUnsignedInt32(1, v);
   }
 
   @$pb.TagNumber(3)
-  $core.bool hasRank() => $_has(2);
+  $core.bool hasRank() => $_has(1);
   @$pb.TagNumber(3)
   void clearRank() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get score => $_getN(2);
+  @$pb.TagNumber(4)
+  set score($core.double v) {
+    $_setDouble(2, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasScore() => $_has(2);
+  @$pb.TagNumber(4)
+  void clearScore() => clearField(4);
 }
 
 ///  Query APIs using RankRange expect a limit of 8192 elements. Requesting a range wider than
@@ -292,44 +293,6 @@ class RankRange_ extends $pb.GeneratedMessage {
   void clearEndExclusive() => clearField(2);
 }
 
-class Unbounded_ extends $pb.GeneratedMessage {
-  factory Unbounded_() => create();
-  Unbounded_._() : super();
-  factory Unbounded_.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory Unbounded_.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : '_Unbounded',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'leaderboard'),
-      createEmptyInstance: create)
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  Unbounded_ clone() => Unbounded_()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  Unbounded_ copyWith(void Function(Unbounded_) updates) =>
-      super.copyWith((message) => updates(message as Unbounded_)) as Unbounded_;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static Unbounded_ create() => Unbounded_._();
-  Unbounded_ createEmptyInstance() => create();
-  static $pb.PbList<Unbounded_> createRepeated() => $pb.PbList<Unbounded_>();
-  @$core.pragma('dart2js:noInline')
-  static Unbounded_ getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Unbounded_>(create);
-  static Unbounded_? _defaultInstance;
-}
-
 enum ScoreRange__Min { unboundedMin, minInclusive, notSet }
 
 enum ScoreRange__Max { unboundedMax, maxExclusive, notSet }
@@ -341,20 +304,20 @@ enum ScoreRange__Max { unboundedMax, maxExclusive, notSet }
 ///  ScoreRange models half-open ranges: 0..4 refers to scores 0, 1.1234, 2.5 and 3.999.
 class ScoreRange_ extends $pb.GeneratedMessage {
   factory ScoreRange_({
-    Unbounded_? unboundedMin,
+    $3.Unbounded_? unboundedMin,
+    $3.Unbounded_? unboundedMax,
     $core.double? minInclusive,
-    Unbounded_? unboundedMax,
     $core.double? maxExclusive,
   }) {
     final $result = create();
     if (unboundedMin != null) {
       $result.unboundedMin = unboundedMin;
     }
-    if (minInclusive != null) {
-      $result.minInclusive = minInclusive;
-    }
     if (unboundedMax != null) {
       $result.unboundedMax = unboundedMax;
+    }
+    if (minInclusive != null) {
+      $result.minInclusive = minInclusive;
     }
     if (maxExclusive != null) {
       $result.maxExclusive = maxExclusive;
@@ -371,28 +334,28 @@ class ScoreRange_ extends $pb.GeneratedMessage {
 
   static const $core.Map<$core.int, ScoreRange__Min> _ScoreRange__MinByTag = {
     1: ScoreRange__Min.unboundedMin,
-    2: ScoreRange__Min.minInclusive,
+    5: ScoreRange__Min.minInclusive,
     0: ScoreRange__Min.notSet
   };
   static const $core.Map<$core.int, ScoreRange__Max> _ScoreRange__MaxByTag = {
     3: ScoreRange__Max.unboundedMax,
-    4: ScoreRange__Max.maxExclusive,
+    6: ScoreRange__Max.maxExclusive,
     0: ScoreRange__Max.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : '_ScoreRange',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'leaderboard'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2])
-    ..oo(1, [3, 4])
-    ..aOM<Unbounded_>(1, _omitFieldNames ? '' : 'unboundedMin',
-        subBuilder: Unbounded_.create)
+    ..oo(0, [1, 5])
+    ..oo(1, [3, 6])
+    ..aOM<$3.Unbounded_>(1, _omitFieldNames ? '' : 'unboundedMin',
+        subBuilder: $3.Unbounded_.create)
+    ..aOM<$3.Unbounded_>(3, _omitFieldNames ? '' : 'unboundedMax',
+        subBuilder: $3.Unbounded_.create)
     ..a<$core.double>(
-        2, _omitFieldNames ? '' : 'minInclusive', $pb.PbFieldType.OF)
-    ..aOM<Unbounded_>(3, _omitFieldNames ? '' : 'unboundedMax',
-        subBuilder: Unbounded_.create)
+        5, _omitFieldNames ? '' : 'minInclusive', $pb.PbFieldType.OD)
     ..a<$core.double>(
-        4, _omitFieldNames ? '' : 'maxExclusive', $pb.PbFieldType.OF)
+        6, _omitFieldNames ? '' : 'maxExclusive', $pb.PbFieldType.OD)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('Using this can add significant overhead to your binary. '
@@ -424,9 +387,9 @@ class ScoreRange_ extends $pb.GeneratedMessage {
   void clearMax() => clearField($_whichOneof(1));
 
   @$pb.TagNumber(1)
-  Unbounded_ get unboundedMin => $_getN(0);
+  $3.Unbounded_ get unboundedMin => $_getN(0);
   @$pb.TagNumber(1)
-  set unboundedMin(Unbounded_ v) {
+  set unboundedMin($3.Unbounded_ v) {
     setField(1, v);
   }
 
@@ -435,87 +398,49 @@ class ScoreRange_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearUnboundedMin() => clearField(1);
   @$pb.TagNumber(1)
-  Unbounded_ ensureUnboundedMin() => $_ensure(0);
-
-  /// IEEE 754 single precision 32 bit floating point number.
-  /// Momento does not support NaN or Inf in leaderboards.
-  @$pb.TagNumber(2)
-  $core.double get minInclusive => $_getN(1);
-  @$pb.TagNumber(2)
-  set minInclusive($core.double v) {
-    $_setFloat(1, v);
-  }
-
-  @$pb.TagNumber(2)
-  $core.bool hasMinInclusive() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearMinInclusive() => clearField(2);
+  $3.Unbounded_ ensureUnboundedMin() => $_ensure(0);
 
   @$pb.TagNumber(3)
-  Unbounded_ get unboundedMax => $_getN(2);
+  $3.Unbounded_ get unboundedMax => $_getN(1);
   @$pb.TagNumber(3)
-  set unboundedMax(Unbounded_ v) {
+  set unboundedMax($3.Unbounded_ v) {
     setField(3, v);
   }
 
   @$pb.TagNumber(3)
-  $core.bool hasUnboundedMax() => $_has(2);
+  $core.bool hasUnboundedMax() => $_has(1);
   @$pb.TagNumber(3)
   void clearUnboundedMax() => clearField(3);
   @$pb.TagNumber(3)
-  Unbounded_ ensureUnboundedMax() => $_ensure(2);
+  $3.Unbounded_ ensureUnboundedMax() => $_ensure(1);
 
-  /// IEEE 754 single precision 32 bit floating point number.
+  /// IEEE 754 single precision 64 bit floating point number.
   /// Momento does not support NaN or Inf in leaderboards.
-  @$pb.TagNumber(4)
-  $core.double get maxExclusive => $_getN(3);
-  @$pb.TagNumber(4)
-  set maxExclusive($core.double v) {
-    $_setFloat(3, v);
+  @$pb.TagNumber(5)
+  $core.double get minInclusive => $_getN(2);
+  @$pb.TagNumber(5)
+  set minInclusive($core.double v) {
+    $_setDouble(2, v);
   }
 
-  @$pb.TagNumber(4)
+  @$pb.TagNumber(5)
+  $core.bool hasMinInclusive() => $_has(2);
+  @$pb.TagNumber(5)
+  void clearMinInclusive() => clearField(5);
+
+  /// IEEE 754 single precision 64 bit floating point number.
+  /// Momento does not support NaN or Inf in leaderboards.
+  @$pb.TagNumber(6)
+  $core.double get maxExclusive => $_getN(3);
+  @$pb.TagNumber(6)
+  set maxExclusive($core.double v) {
+    $_setDouble(3, v);
+  }
+
+  @$pb.TagNumber(6)
   $core.bool hasMaxExclusive() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearMaxExclusive() => clearField(4);
-}
-
-class Empty_ extends $pb.GeneratedMessage {
-  factory Empty_() => create();
-  Empty_._() : super();
-  factory Empty_.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory Empty_.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : '_Empty',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'leaderboard'),
-      createEmptyInstance: create)
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  Empty_ clone() => Empty_()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  Empty_ copyWith(void Function(Empty_) updates) =>
-      super.copyWith((message) => updates(message as Empty_)) as Empty_;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static Empty_ create() => Empty_._();
-  Empty_ createEmptyInstance() => create();
-  static $pb.PbList<Empty_> createRepeated() => $pb.PbList<Empty_>();
-  @$core.pragma('dart2js:noInline')
-  static Empty_ getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Empty_>(create);
-  static Empty_? _defaultInstance;
+  @$pb.TagNumber(6)
+  void clearMaxExclusive() => clearField(6);
 }
 
 class DeleteLeaderboardRequest_ extends $pb.GeneratedMessage {
