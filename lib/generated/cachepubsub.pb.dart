@@ -14,45 +14,6 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class Empty_ extends $pb.GeneratedMessage {
-  factory Empty_() => create();
-  Empty_._() : super();
-  factory Empty_.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory Empty_.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : '_Empty',
-      package:
-          const $pb.PackageName(_omitMessageNames ? '' : 'cache_client.pubsub'),
-      createEmptyInstance: create)
-    ..hasRequiredFields = false;
-
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
-  Empty_ clone() => Empty_()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  Empty_ copyWith(void Function(Empty_) updates) =>
-      super.copyWith((message) => updates(message as Empty_)) as Empty_;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static Empty_ create() => Empty_._();
-  Empty_ createEmptyInstance() => create();
-  static $pb.PbList<Empty_> createRepeated() => $pb.PbList<Empty_>();
-  @$core.pragma('dart2js:noInline')
-  static Empty_ getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Empty_>(create);
-  static Empty_? _defaultInstance;
-}
-
 /// A value to publish through a topic.
 class PublishRequest_ extends $pb.GeneratedMessage {
   factory PublishRequest_({
@@ -163,6 +124,7 @@ class SubscriptionRequest_ extends $pb.GeneratedMessage {
     $core.String? cacheName,
     $core.String? topic,
     $fixnum.Int64? resumeAtTopicSequenceNumber,
+    $fixnum.Int64? sequencePage,
   }) {
     final $result = create();
     if (cacheName != null) {
@@ -173,6 +135,9 @@ class SubscriptionRequest_ extends $pb.GeneratedMessage {
     }
     if (resumeAtTopicSequenceNumber != null) {
       $result.resumeAtTopicSequenceNumber = resumeAtTopicSequenceNumber;
+    }
+    if (sequencePage != null) {
+      $result.sequencePage = sequencePage;
     }
     return $result;
   }
@@ -193,6 +158,9 @@ class SubscriptionRequest_ extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'topic')
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'resumeAtTopicSequenceNumber',
         $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(
+        4, _omitFieldNames ? '' : 'sequencePage', $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -246,12 +214,12 @@ class SubscriptionRequest_ extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearTopic() => clearField(2);
 
-  ///  --> Providing this is not required. <--
-  ///
-  ///  If provided, attempt to reconnect to the topic and replay messages starting from
-  ///  the provided sequence number. You may get a discontinuity if some (or all) of the
-  ///  messages are not available.
-  ///  If not provided (or 0), the subscription will begin with the latest messages.
+  /// If provided, attempt to reconnect to the topic and replay messages starting from
+  /// the provided sequence number. You may get a discontinuity if some (or all) of the
+  /// messages are not available.
+  /// If provided at 1, you may receive some messages leading up to whatever the
+  /// newest message is. The exact amount is unspecified and subject to change.
+  /// If not provided (or 0), the subscription will begin with the latest messages.
   @$pb.TagNumber(3)
   $fixnum.Int64 get resumeAtTopicSequenceNumber => $_getI64(2);
   @$pb.TagNumber(3)
@@ -263,6 +231,23 @@ class SubscriptionRequest_ extends $pb.GeneratedMessage {
   $core.bool hasResumeAtTopicSequenceNumber() => $_has(2);
   @$pb.TagNumber(3)
   void clearResumeAtTopicSequenceNumber() => clearField(3);
+
+  /// Determined by the service when a topic is created. This clarifies the intent of
+  /// a subscription, and ensures the right messages are sent for a given
+  /// `resume_at_topic_sequence_number`.
+  /// Include this in your Subscribe() calls when you are reconnecting. The right value
+  /// is the last sequence_page you received.
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get sequencePage => $_getI64(3);
+  @$pb.TagNumber(4)
+  set sequencePage($fixnum.Int64 v) {
+    $_setInt64(3, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasSequencePage() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSequencePage() => clearField(4);
 }
 
 enum SubscriptionItem__Kind { item, discontinuity, heartbeat, notSet }
@@ -400,6 +385,7 @@ class TopicItem_ extends $pb.GeneratedMessage {
     $fixnum.Int64? topicSequenceNumber,
     TopicValue_? value,
     $core.String? publisherId,
+    $fixnum.Int64? sequencePage,
   }) {
     final $result = create();
     if (topicSequenceNumber != null) {
@@ -410,6 +396,9 @@ class TopicItem_ extends $pb.GeneratedMessage {
     }
     if (publisherId != null) {
       $result.publisherId = publisherId;
+    }
+    if (sequencePage != null) {
+      $result.sequencePage = sequencePage;
     }
     return $result;
   }
@@ -432,6 +421,9 @@ class TopicItem_ extends $pb.GeneratedMessage {
     ..aOM<TopicValue_>(2, _omitFieldNames ? '' : 'value',
         subBuilder: TopicValue_.create)
     ..aOS(3, _omitFieldNames ? '' : 'publisherId')
+    ..a<$fixnum.Int64>(
+        4, _omitFieldNames ? '' : 'sequencePage', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('Using this can add significant overhead to your binary. '
@@ -455,14 +447,8 @@ class TopicItem_ extends $pb.GeneratedMessage {
       $pb.GeneratedMessage.$_defaultFor<TopicItem_>(create);
   static TopicItem_? _defaultInstance;
 
-  /// Topic sequence numbers are **best-effort** and **informational**.
-  /// They are not transactional.
-  /// They exist:
-  /// * to help reconnect to an existing topic while trying to avoid missing items.
-  /// * to facilitate richer monitoring and logging.
-  /// * to provide a best-effort awareness of stream contiguity, or lack thereof,
-  ///   in case you need to know.
-  /// You can safely ignore them if none of that matters to you!
+  /// Topic sequence numbers give an order of messages per-topic.
+  /// All subscribers to a topic will receive messages in the same order, with the same sequence numbers.
   @$pb.TagNumber(1)
   $fixnum.Int64 get topicSequenceNumber => $_getI64(0);
   @$pb.TagNumber(1)
@@ -502,6 +488,23 @@ class TopicItem_ extends $pb.GeneratedMessage {
   $core.bool hasPublisherId() => $_has(2);
   @$pb.TagNumber(3)
   void clearPublisherId() => clearField(3);
+
+  ///  Sequence pages exist to determine which sequence number range a message belongs to. On a topic reset,
+  ///  the sequence numbers reset and a new sequence_page is given.
+  ///  For a given sequence_page, the next message in a topic is topic_sequence_number + 1.
+  ///
+  ///  Later sequence pages are numbered greater than earlier pages, but they don't go one-by-one.
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get sequencePage => $_getI64(3);
+  @$pb.TagNumber(4)
+  set sequencePage($fixnum.Int64 v) {
+    $_setInt64(3, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasSequencePage() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSequencePage() => clearField(4);
 }
 
 enum TopicValue__Kind { text, binary, notSet }
@@ -602,6 +605,7 @@ class Discontinuity_ extends $pb.GeneratedMessage {
   factory Discontinuity_({
     $fixnum.Int64? lastTopicSequence,
     $fixnum.Int64? newTopicSequence,
+    $fixnum.Int64? newSequencePage,
   }) {
     final $result = create();
     if (lastTopicSequence != null) {
@@ -609,6 +613,9 @@ class Discontinuity_ extends $pb.GeneratedMessage {
     }
     if (newTopicSequence != null) {
       $result.newTopicSequence = newTopicSequence;
+    }
+    if (newSequencePage != null) {
+      $result.newSequencePage = newSequencePage;
     }
     return $result;
   }
@@ -630,6 +637,9 @@ class Discontinuity_ extends $pb.GeneratedMessage {
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(
         2, _omitFieldNames ? '' : 'newTopicSequence', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(
+        3, _omitFieldNames ? '' : 'newSequencePage', $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -681,6 +691,22 @@ class Discontinuity_ extends $pb.GeneratedMessage {
   $core.bool hasNewTopicSequence() => $_has(1);
   @$pb.TagNumber(2)
   void clearNewTopicSequence() => clearField(2);
+
+  /// The new topic sequence_page. If you had one before and this one is different, then your topic reset.
+  /// If you didn't have one, then this is just telling you what the sequence page is expected to be.
+  /// If you had one before, and this one is the same, then it's just telling you that you missed some messages
+  /// in the topic. Probably your client is consuming messages a little too slowly in this case!
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get newSequencePage => $_getI64(2);
+  @$pb.TagNumber(3)
+  set newSequencePage($fixnum.Int64 v) {
+    $_setInt64(2, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasNewSequencePage() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearNewSequencePage() => clearField(3);
 }
 
 /// A message from Momento for when we want to reassure clients or frameworks that a

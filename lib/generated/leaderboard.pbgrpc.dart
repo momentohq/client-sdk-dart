@@ -15,6 +15,7 @@ import 'dart:core' as $core;
 import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'common.pb.dart' as $3;
 import 'leaderboard.pb.dart' as $7;
 
 export 'leaderboard.pb.dart';
@@ -22,20 +23,20 @@ export 'leaderboard.pb.dart';
 @$pb.GrpcServiceName('leaderboard.Leaderboard')
 class LeaderboardClient extends $grpc.Client {
   static final _$deleteLeaderboard =
-      $grpc.ClientMethod<$7.DeleteLeaderboardRequest_, $7.Empty_>(
+      $grpc.ClientMethod<$7.DeleteLeaderboardRequest_, $3.Empty_>(
           '/leaderboard.Leaderboard/DeleteLeaderboard',
           ($7.DeleteLeaderboardRequest_ value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) => $7.Empty_.fromBuffer(value));
+          ($core.List<$core.int> value) => $3.Empty_.fromBuffer(value));
   static final _$upsertElements =
-      $grpc.ClientMethod<$7.UpsertElementsRequest_, $7.Empty_>(
+      $grpc.ClientMethod<$7.UpsertElementsRequest_, $3.Empty_>(
           '/leaderboard.Leaderboard/UpsertElements',
           ($7.UpsertElementsRequest_ value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) => $7.Empty_.fromBuffer(value));
+          ($core.List<$core.int> value) => $3.Empty_.fromBuffer(value));
   static final _$removeElements =
-      $grpc.ClientMethod<$7.RemoveElementsRequest_, $7.Empty_>(
+      $grpc.ClientMethod<$7.RemoveElementsRequest_, $3.Empty_>(
           '/leaderboard.Leaderboard/RemoveElements',
           ($7.RemoveElementsRequest_ value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) => $7.Empty_.fromBuffer(value));
+          ($core.List<$core.int> value) => $3.Empty_.fromBuffer(value));
   static final _$getLeaderboardLength = $grpc.ClientMethod<
           $7.GetLeaderboardLengthRequest_, $7.GetLeaderboardLengthResponse_>(
       '/leaderboard.Leaderboard/GetLeaderboardLength',
@@ -66,19 +67,19 @@ class LeaderboardClient extends $grpc.Client {
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$7.Empty_> deleteLeaderboard(
+  $grpc.ResponseFuture<$3.Empty_> deleteLeaderboard(
       $7.DeleteLeaderboardRequest_ request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteLeaderboard, request, options: options);
   }
 
-  $grpc.ResponseFuture<$7.Empty_> upsertElements(
+  $grpc.ResponseFuture<$3.Empty_> upsertElements(
       $7.UpsertElementsRequest_ request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$upsertElements, request, options: options);
   }
 
-  $grpc.ResponseFuture<$7.Empty_> removeElements(
+  $grpc.ResponseFuture<$3.Empty_> removeElements(
       $7.RemoveElementsRequest_ request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$removeElements, request, options: options);
@@ -113,30 +114,30 @@ abstract class LeaderboardServiceBase extends $grpc.Service {
   $core.String get $name => 'leaderboard.Leaderboard';
 
   LeaderboardServiceBase() {
-    $addMethod($grpc.ServiceMethod<$7.DeleteLeaderboardRequest_, $7.Empty_>(
+    $addMethod($grpc.ServiceMethod<$7.DeleteLeaderboardRequest_, $3.Empty_>(
         'DeleteLeaderboard',
         deleteLeaderboard_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
             $7.DeleteLeaderboardRequest_.fromBuffer(value),
-        ($7.Empty_ value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$7.UpsertElementsRequest_, $7.Empty_>(
+        ($3.Empty_ value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$7.UpsertElementsRequest_, $3.Empty_>(
         'UpsertElements',
         upsertElements_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
             $7.UpsertElementsRequest_.fromBuffer(value),
-        ($7.Empty_ value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$7.RemoveElementsRequest_, $7.Empty_>(
+        ($3.Empty_ value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$7.RemoveElementsRequest_, $3.Empty_>(
         'RemoveElements',
         removeElements_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
             $7.RemoveElementsRequest_.fromBuffer(value),
-        ($7.Empty_ value) => value.writeToBuffer()));
+        ($3.Empty_ value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$7.GetLeaderboardLengthRequest_,
             $7.GetLeaderboardLengthResponse_>(
         'GetLeaderboardLength',
@@ -171,17 +172,17 @@ abstract class LeaderboardServiceBase extends $grpc.Service {
             ($7.GetByScoreResponse_ value) => value.writeToBuffer()));
   }
 
-  $async.Future<$7.Empty_> deleteLeaderboard_Pre($grpc.ServiceCall call,
+  $async.Future<$3.Empty_> deleteLeaderboard_Pre($grpc.ServiceCall call,
       $async.Future<$7.DeleteLeaderboardRequest_> request) async {
     return deleteLeaderboard(call, await request);
   }
 
-  $async.Future<$7.Empty_> upsertElements_Pre($grpc.ServiceCall call,
+  $async.Future<$3.Empty_> upsertElements_Pre($grpc.ServiceCall call,
       $async.Future<$7.UpsertElementsRequest_> request) async {
     return upsertElements(call, await request);
   }
 
-  $async.Future<$7.Empty_> removeElements_Pre($grpc.ServiceCall call,
+  $async.Future<$3.Empty_> removeElements_Pre($grpc.ServiceCall call,
       $async.Future<$7.RemoveElementsRequest_> request) async {
     return removeElements(call, await request);
   }
@@ -207,11 +208,11 @@ abstract class LeaderboardServiceBase extends $grpc.Service {
     return getByScore(call, await request);
   }
 
-  $async.Future<$7.Empty_> deleteLeaderboard(
+  $async.Future<$3.Empty_> deleteLeaderboard(
       $grpc.ServiceCall call, $7.DeleteLeaderboardRequest_ request);
-  $async.Future<$7.Empty_> upsertElements(
+  $async.Future<$3.Empty_> upsertElements(
       $grpc.ServiceCall call, $7.UpsertElementsRequest_ request);
-  $async.Future<$7.Empty_> removeElements(
+  $async.Future<$3.Empty_> removeElements(
       $grpc.ServiceCall call, $7.RemoveElementsRequest_ request);
   $async.Future<$7.GetLeaderboardLengthResponse_> getLeaderboardLength(
       $grpc.ServiceCall call, $7.GetLeaderboardLengthRequest_ request);

@@ -157,6 +157,7 @@ const GenerateApiTokenRequest_$json = {
       '10': 'permissions'
     },
     {'1': 'token_id', '3': 5, '4': 1, '5': 9, '10': 'tokenId'},
+    {'1': 'description', '3': 6, '4': 1, '5': 9, '10': 'description'},
   ],
   '3': [
     GenerateApiTokenRequest__Never$json,
@@ -193,8 +194,9 @@ final $typed_data.Uint8List generateApiTokenRequest_Descriptor = $convert.base64
     'aC5fR2VuZXJhdGVBcGlUb2tlblJlcXVlc3QuRXhwaXJlc0gAUgdleHBpcmVzEh0KCmF1dGhfdG'
     '9rZW4YAyABKAlSCWF1dGhUb2tlbhJCCgtwZXJtaXNzaW9ucxgEIAEoCzIgLnBlcm1pc3Npb25f'
     'bWVzc2FnZXMuUGVybWlzc2lvbnNSC3Blcm1pc3Npb25zEhkKCHRva2VuX2lkGAUgASgJUgd0b2'
-    'tlbklkGgcKBU5ldmVyGjUKB0V4cGlyZXMSKgoRdmFsaWRfZm9yX3NlY29uZHMYASABKA1SD3Zh'
-    'bGlkRm9yU2Vjb25kc0IICgZleHBpcnk=');
+    'tlbklkEiAKC2Rlc2NyaXB0aW9uGAYgASgJUgtkZXNjcmlwdGlvbhoHCgVOZXZlcho1CgdFeHBp'
+    'cmVzEioKEXZhbGlkX2Zvcl9zZWNvbmRzGAEgASgNUg92YWxpZEZvclNlY29uZHNCCAoGZXhwaX'
+    'J5');
 
 @$core.Deprecated('Use generateApiTokenResponse_Descriptor instead')
 const GenerateApiTokenResponse_$json = {

@@ -25,10 +25,25 @@ class ScsClient extends $grpc.Client {
       '/cache_client.Scs/Get',
       ($0.GetRequest_ value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.GetResponse_.fromBuffer(value));
+  static final _$getBatch =
+      $grpc.ClientMethod<$0.GetBatchRequest_, $0.GetResponse_>(
+          '/cache_client.Scs/GetBatch',
+          ($0.GetBatchRequest_ value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $0.GetResponse_.fromBuffer(value));
   static final _$set = $grpc.ClientMethod<$0.SetRequest_, $0.SetResponse_>(
       '/cache_client.Scs/Set',
       ($0.SetRequest_ value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.SetResponse_.fromBuffer(value));
+  static final _$setBatch =
+      $grpc.ClientMethod<$0.SetBatchRequest_, $0.SetResponse_>(
+          '/cache_client.Scs/SetBatch',
+          ($0.SetBatchRequest_ value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $0.SetResponse_.fromBuffer(value));
+  static final _$setIf =
+      $grpc.ClientMethod<$0.SetIfRequest_, $0.SetIfResponse_>(
+          '/cache_client.Scs/SetIf',
+          ($0.SetIfRequest_ value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $0.SetIfResponse_.fromBuffer(value));
   static final _$setIfNotExists =
       $grpc.ClientMethod<$0.SetIfNotExistsRequest_, $0.SetIfNotExistsResponse_>(
           '/cache_client.Scs/SetIfNotExists',
@@ -113,6 +128,12 @@ class ScsClient extends $grpc.Client {
           ($0.SetFetchRequest_ value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.SetFetchResponse_.fromBuffer(value));
+  static final _$setSample =
+      $grpc.ClientMethod<$0.SetSampleRequest_, $0.SetSampleResponse_>(
+          '/cache_client.Scs/SetSample',
+          ($0.SetSampleRequest_ value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.SetSampleResponse_.fromBuffer(value));
   static final _$setUnion =
       $grpc.ClientMethod<$0.SetUnionRequest_, $0.SetUnionResponse_>(
           '/cache_client.Scs/SetUnion',
@@ -269,9 +290,28 @@ class ScsClient extends $grpc.Client {
     return $createUnaryCall(_$get, request, options: options);
   }
 
+  $grpc.ResponseStream<$0.GetResponse_> getBatch($0.GetBatchRequest_ request,
+      {$grpc.CallOptions? options}) {
+    return $createStreamingCall(
+        _$getBatch, $async.Stream.fromIterable([request]),
+        options: options);
+  }
+
   $grpc.ResponseFuture<$0.SetResponse_> set($0.SetRequest_ request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$set, request, options: options);
+  }
+
+  $grpc.ResponseStream<$0.SetResponse_> setBatch($0.SetBatchRequest_ request,
+      {$grpc.CallOptions? options}) {
+    return $createStreamingCall(
+        _$setBatch, $async.Stream.fromIterable([request]),
+        options: options);
+  }
+
+  $grpc.ResponseFuture<$0.SetIfResponse_> setIf($0.SetIfRequest_ request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$setIf, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.SetIfNotExistsResponse_> setIfNotExists(
@@ -355,6 +395,12 @@ class ScsClient extends $grpc.Client {
       $0.SetFetchRequest_ request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$setFetch, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.SetSampleResponse_> setSample(
+      $0.SetSampleRequest_ request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$setSample, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.SetUnionResponse_> setUnion(
@@ -514,6 +560,13 @@ abstract class ScsServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetRequest_.fromBuffer(value),
         ($0.GetResponse_ value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetBatchRequest_, $0.GetResponse_>(
+        'GetBatch',
+        getBatch_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.GetBatchRequest_.fromBuffer(value),
+        ($0.GetResponse_ value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.SetRequest_, $0.SetResponse_>(
         'Set',
         set_Pre,
@@ -521,6 +574,20 @@ abstract class ScsServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.SetRequest_.fromBuffer(value),
         ($0.SetResponse_ value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SetBatchRequest_, $0.SetResponse_>(
+        'SetBatch',
+        setBatch_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.SetBatchRequest_.fromBuffer(value),
+        ($0.SetResponse_ value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SetIfRequest_, $0.SetIfResponse_>(
+        'SetIf',
+        setIf_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.SetIfRequest_.fromBuffer(value),
+        ($0.SetIfResponse_ value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.SetIfNotExistsRequest_,
             $0.SetIfNotExistsResponse_>(
         'SetIfNotExists',
@@ -637,6 +704,13 @@ abstract class ScsServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.SetFetchRequest_.fromBuffer(value),
         ($0.SetFetchResponse_ value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SetSampleRequest_, $0.SetSampleResponse_>(
+        'SetSample',
+        setSample_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.SetSampleRequest_.fromBuffer(value),
+        ($0.SetSampleResponse_ value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.SetUnionRequest_, $0.SetUnionResponse_>(
         'SetUnion',
         setUnion_Pre,
@@ -850,9 +924,24 @@ abstract class ScsServiceBase extends $grpc.Service {
     return get(call, await request);
   }
 
+  $async.Stream<$0.GetResponse_> getBatch_Pre($grpc.ServiceCall call,
+      $async.Future<$0.GetBatchRequest_> request) async* {
+    yield* getBatch(call, await request);
+  }
+
   $async.Future<$0.SetResponse_> set_Pre(
       $grpc.ServiceCall call, $async.Future<$0.SetRequest_> request) async {
     return set(call, await request);
+  }
+
+  $async.Stream<$0.SetResponse_> setBatch_Pre($grpc.ServiceCall call,
+      $async.Future<$0.SetBatchRequest_> request) async* {
+    yield* setBatch(call, await request);
+  }
+
+  $async.Future<$0.SetIfResponse_> setIf_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.SetIfRequest_> request) async {
+    return setIf(call, await request);
   }
 
   $async.Future<$0.SetIfNotExistsResponse_> setIfNotExists_Pre(
@@ -930,6 +1019,11 @@ abstract class ScsServiceBase extends $grpc.Service {
   $async.Future<$0.SetFetchResponse_> setFetch_Pre($grpc.ServiceCall call,
       $async.Future<$0.SetFetchRequest_> request) async {
     return setFetch(call, await request);
+  }
+
+  $async.Future<$0.SetSampleResponse_> setSample_Pre($grpc.ServiceCall call,
+      $async.Future<$0.SetSampleRequest_> request) async {
+    return setSample(call, await request);
   }
 
   $async.Future<$0.SetUnionResponse_> setUnion_Pre($grpc.ServiceCall call,
@@ -1068,8 +1162,14 @@ abstract class ScsServiceBase extends $grpc.Service {
 
   $async.Future<$0.GetResponse_> get(
       $grpc.ServiceCall call, $0.GetRequest_ request);
+  $async.Stream<$0.GetResponse_> getBatch(
+      $grpc.ServiceCall call, $0.GetBatchRequest_ request);
   $async.Future<$0.SetResponse_> set(
       $grpc.ServiceCall call, $0.SetRequest_ request);
+  $async.Stream<$0.SetResponse_> setBatch(
+      $grpc.ServiceCall call, $0.SetBatchRequest_ request);
+  $async.Future<$0.SetIfResponse_> setIf(
+      $grpc.ServiceCall call, $0.SetIfRequest_ request);
   $async.Future<$0.SetIfNotExistsResponse_> setIfNotExists(
       $grpc.ServiceCall call, $0.SetIfNotExistsRequest_ request);
   $async.Future<$0.DeleteResponse_> delete(
@@ -1098,6 +1198,8 @@ abstract class ScsServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.DictionaryLengthRequest_ request);
   $async.Future<$0.SetFetchResponse_> setFetch(
       $grpc.ServiceCall call, $0.SetFetchRequest_ request);
+  $async.Future<$0.SetSampleResponse_> setSample(
+      $grpc.ServiceCall call, $0.SetSampleRequest_ request);
   $async.Future<$0.SetUnionResponse_> setUnion(
       $grpc.ServiceCall call, $0.SetUnionRequest_ request);
   $async.Future<$0.SetDifferenceResponse_> setDifference(

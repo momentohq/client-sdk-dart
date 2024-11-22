@@ -31,28 +31,34 @@ const Element_$json = {
   '1': '_Element',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 13, '10': 'id'},
-    {'1': 'score', '3': 2, '4': 1, '5': 2, '10': 'score'},
+    {'1': 'score', '3': 3, '4': 1, '5': 1, '10': 'score'},
+  ],
+  '9': [
+    {'1': 2, '2': 3},
   ],
 };
 
 /// Descriptor for `_Element`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List element_Descriptor = $convert.base64Decode(
-    'CghfRWxlbWVudBIOCgJpZBgBIAEoDVICaWQSFAoFc2NvcmUYAiABKAJSBXNjb3Jl');
+    'CghfRWxlbWVudBIOCgJpZBgBIAEoDVICaWQSFAoFc2NvcmUYAyABKAFSBXNjb3JlSgQIAhAD');
 
 @$core.Deprecated('Use rankedElement_Descriptor instead')
 const RankedElement_$json = {
   '1': '_RankedElement',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 13, '10': 'id'},
-    {'1': 'score', '3': 2, '4': 1, '5': 2, '10': 'score'},
     {'1': 'rank', '3': 3, '4': 1, '5': 13, '10': 'rank'},
+    {'1': 'score', '3': 4, '4': 1, '5': 1, '10': 'score'},
+  ],
+  '9': [
+    {'1': 2, '2': 3},
   ],
 };
 
 /// Descriptor for `_RankedElement`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List rankedElement_Descriptor = $convert.base64Decode(
-    'Cg5fUmFua2VkRWxlbWVudBIOCgJpZBgBIAEoDVICaWQSFAoFc2NvcmUYAiABKAJSBXNjb3JlEh'
-    'IKBHJhbmsYAyABKA1SBHJhbms=');
+    'Cg5fUmFua2VkRWxlbWVudBIOCgJpZBgBIAEoDVICaWQSEgoEcmFuaxgDIAEoDVIEcmFuaxIUCg'
+    'VzY29yZRgEIAEoAVIFc2NvcmVKBAgCEAM=');
 
 @$core.Deprecated('Use rankRange_Descriptor instead')
 const RankRange_$json = {
@@ -68,15 +74,6 @@ final $typed_data.Uint8List rankRange_Descriptor = $convert.base64Decode(
     'CgpfUmFua1JhbmdlEicKD3N0YXJ0X2luY2x1c2l2ZRgBIAEoDVIOc3RhcnRJbmNsdXNpdmUSIw'
     'oNZW5kX2V4Y2x1c2l2ZRgCIAEoDVIMZW5kRXhjbHVzaXZl');
 
-@$core.Deprecated('Use unbounded_Descriptor instead')
-const Unbounded_$json = {
-  '1': '_Unbounded',
-};
-
-/// Descriptor for `_Unbounded`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List unbounded_Descriptor =
-    $convert.base64Decode('CgpfVW5ib3VuZGVk');
-
 @$core.Deprecated('Use scoreRange_Descriptor instead')
 const ScoreRange_$json = {
   '1': '_ScoreRange',
@@ -86,15 +83,15 @@ const ScoreRange_$json = {
       '3': 1,
       '4': 1,
       '5': 11,
-      '6': '.leaderboard._Unbounded',
+      '6': '.common._Unbounded',
       '9': 0,
       '10': 'unboundedMin'
     },
     {
       '1': 'min_inclusive',
-      '3': 2,
+      '3': 5,
       '4': 1,
-      '5': 2,
+      '5': 1,
       '9': 0,
       '10': 'minInclusive'
     },
@@ -103,15 +100,15 @@ const ScoreRange_$json = {
       '3': 3,
       '4': 1,
       '5': 11,
-      '6': '.leaderboard._Unbounded',
+      '6': '.common._Unbounded',
       '9': 1,
       '10': 'unboundedMax'
     },
     {
       '1': 'max_exclusive',
-      '3': 4,
+      '3': 6,
       '4': 1,
-      '5': 2,
+      '5': 1,
       '9': 1,
       '10': 'maxExclusive'
     },
@@ -120,24 +117,19 @@ const ScoreRange_$json = {
     {'1': 'min'},
     {'1': 'max'},
   ],
+  '9': [
+    {'1': 2, '2': 3},
+    {'1': 4, '2': 5},
+  ],
 };
 
 /// Descriptor for `_ScoreRange`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List scoreRange_Descriptor = $convert.base64Decode(
-    'CgtfU2NvcmVSYW5nZRI+Cg11bmJvdW5kZWRfbWluGAEgASgLMhcubGVhZGVyYm9hcmQuX1VuYm'
-    '91bmRlZEgAUgx1bmJvdW5kZWRNaW4SJQoNbWluX2luY2x1c2l2ZRgCIAEoAkgAUgxtaW5JbmNs'
-    'dXNpdmUSPgoNdW5ib3VuZGVkX21heBgDIAEoCzIXLmxlYWRlcmJvYXJkLl9VbmJvdW5kZWRIAV'
-    'IMdW5ib3VuZGVkTWF4EiUKDW1heF9leGNsdXNpdmUYBCABKAJIAVIMbWF4RXhjbHVzaXZlQgUK'
-    'A21pbkIFCgNtYXg=');
-
-@$core.Deprecated('Use empty_Descriptor instead')
-const Empty_$json = {
-  '1': '_Empty',
-};
-
-/// Descriptor for `_Empty`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List empty_Descriptor =
-    $convert.base64Decode('CgZfRW1wdHk=');
+    'CgtfU2NvcmVSYW5nZRI5Cg11bmJvdW5kZWRfbWluGAEgASgLMhIuY29tbW9uLl9VbmJvdW5kZW'
+    'RIAFIMdW5ib3VuZGVkTWluEiUKDW1pbl9pbmNsdXNpdmUYBSABKAFIAFIMbWluSW5jbHVzaXZl'
+    'EjkKDXVuYm91bmRlZF9tYXgYAyABKAsyEi5jb21tb24uX1VuYm91bmRlZEgBUgx1bmJvdW5kZW'
+    'RNYXgSJQoNbWF4X2V4Y2x1c2l2ZRgGIAEoAUgBUgxtYXhFeGNsdXNpdmVCBQoDbWluQgUKA21h'
+    'eEoECAIQA0oECAQQBQ==');
 
 @$core.Deprecated('Use deleteLeaderboardRequest_Descriptor instead')
 const DeleteLeaderboardRequest_$json = {
