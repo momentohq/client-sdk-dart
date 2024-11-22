@@ -2,7 +2,7 @@ import 'package:momento/momento.dart';
 import 'package:uuid/uuid.dart';
 import 'package:test/test.dart';
 
-final apiKeyEnvVarName = "TEST_API_KEY";
+final apiKeyEnvVarName = "MOMENTO_API_KEY";
 final uuidGenerator = Uuid();
 
 class TestSetup {

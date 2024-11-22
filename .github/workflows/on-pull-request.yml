@@ -34,7 +34,7 @@ jobs:
       - name: Run tests
         run: dart test
         env:
-          TEST_API_KEY: ${{ secrets.ALPHA_TEST_AUTH_TOKEN }}
+          MOMENTO_API_KEY: ${{ secrets.ALPHA_TEST_AUTH_TOKEN }}
 
       - name: Run examples
         env:
