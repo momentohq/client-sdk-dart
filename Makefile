@@ -14,6 +14,6 @@ format:
 	dart format .
 
 .PHONY: lint
-## Apply automated fixes to Dart source code.
+## Apply automated fixes to Dart source code and analyze the source code.
 lint: 
-	dart fix --apply
+	dart fix --apply && dart analyze
