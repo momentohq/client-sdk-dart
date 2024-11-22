@@ -35,7 +35,7 @@ You can build the SDK for a specific platform using the [`dart compile`](https:/
 You can use the this command from the root of the repository to run the tests:
 
 ```bash
-TEST_API_KEY=<your api key> dart test
+MOMENTO_API_KEY=<your api key> dart test
 ```
 
 ## Compiling protobufs
