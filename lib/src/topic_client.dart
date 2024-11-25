@@ -1,3 +1,4 @@
+import 'package:fixnum/fixnum.dart';
 import 'package:momento/src/auth/credential_provider.dart';
 import 'package:momento/src/config/logger.dart';
 import 'package:momento/src/errors/errors.dart';
@@ -15,7 +16,8 @@ abstract class ITopicClient {
   Future<TopicPublishResponse> publishBytes(
       String cacheName, String topicName, List<int> value);
 
-  Future<TopicSubscribeResponse> subscribe(String cacheName, String topicName);
+  Future<TopicSubscribeResponse> subscribe(String cacheName, String topicName,
+      {Int64? resumeAtTopicSequenceNumber, Int64? resumeAtTopicSequencePage});
 
   void close();
 }
@@ -118,8 +120,9 @@ class TopicClient implements ITopicClient {
   /// }
   /// ```
   @override
-  Future<TopicSubscribeResponse> subscribe(
-      String cacheName, String topicName) async {
+  Future<TopicSubscribeResponse> subscribe(String cacheName, String topicName,
+      {Int64? resumeAtTopicSequenceNumber,
+      Int64? resumeAtTopicSequencePage}) async {
     try {
       validateCacheName(cacheName);
       validateTopicName(topicName);
@@ -131,7 +134,9 @@ class TopicClient implements ITopicClient {
             UnknownException("Unexpected error: $e", null, null)));
       }
     }
-    return await _pubsubClient.subscribe(cacheName, topicName);
+    return await _pubsubClient.subscribe(cacheName, topicName,
+        resumeAtTopicSequenceNumber: resumeAtTopicSequenceNumber,
+        resumeAtTopicSequencePage: resumeAtTopicSequencePage);
   }
 
   /// Close the client and free up all associated resources.

@@ -78,7 +78,7 @@ class TopicSubscription extends ResponseBase implements TopicSubscribeResponse {
     await _stream.cancel();
     var result = await _client.subscribe(cacheName, topicName,
         resumeAtTopicSequenceNumber: lastSequenceNumber,
-        sequencePage: lastSequencePage);
+        resumeAtTopicSequencePage: lastSequencePage);
     if (result is TopicSubscription) {
       logger.fine(
           "Attempting to reconnect to topic $topicName on cache $cacheName with sequence number $lastSequenceNumber and sequence page $lastSequencePage");
