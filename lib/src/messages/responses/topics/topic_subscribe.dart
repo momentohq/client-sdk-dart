@@ -100,6 +100,7 @@ class TopicSubscription extends ResponseBase implements TopicSubscribeResponse {
     switch (item.whichKind()) {
       case SubscriptionItem__Kind.item:
         lastSequenceNumber = item.item.topicSequenceNumber;
+        lastSequencePage = item.item.sequencePage;
         return createTopicItemResponse(item.item);
       case SubscriptionItem__Kind.heartbeat:
         logger.fine("topic client received a heartbeat");
