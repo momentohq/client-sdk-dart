@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/momentohq/client-sdk-dart/compare/v0.2.1...v0.2.2) (2024-11-25)
+
+
+### Bug Fixes
+
+* update protos and add Makefile ([#111](https://github.com/momentohq/client-sdk-dart/issues/111)) ([40ddb24](https://github.com/momentohq/client-sdk-dart/commit/40ddb24df8030f7e892be736d0b10a4311719630))
+
 ## [0.2.1](https://github.com/momentohq/client-sdk-dart/compare/v0.2.0...v0.2.1) (2024-11-22)
 
 

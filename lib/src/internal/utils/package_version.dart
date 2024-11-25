@@ -1,1 +1,1 @@
-const packageVersion = '0.2.1'; // x-release-please-version
+const packageVersion = '0.2.2'; // x-release-please-version
