@@ -14,6 +14,400 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+class CreateStoreRequest_ extends $pb.GeneratedMessage {
+  factory CreateStoreRequest_({
+    $core.String? storeName,
+  }) {
+    final $result = create();
+    if (storeName != null) {
+      $result.storeName = storeName;
+    }
+    return $result;
+  }
+  CreateStoreRequest_._() : super();
+  factory CreateStoreRequest_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory CreateStoreRequest_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_CreateStoreRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'control_client'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'storeName')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  CreateStoreRequest_ clone() => CreateStoreRequest_()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  CreateStoreRequest_ copyWith(void Function(CreateStoreRequest_) updates) =>
+      super.copyWith((message) => updates(message as CreateStoreRequest_))
+          as CreateStoreRequest_;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CreateStoreRequest_ create() => CreateStoreRequest_._();
+  CreateStoreRequest_ createEmptyInstance() => create();
+  static $pb.PbList<CreateStoreRequest_> createRepeated() =>
+      $pb.PbList<CreateStoreRequest_>();
+  @$core.pragma('dart2js:noInline')
+  static CreateStoreRequest_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<CreateStoreRequest_>(create);
+  static CreateStoreRequest_? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get storeName => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set storeName($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasStoreName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStoreName() => clearField(1);
+}
+
+class CreateStoreResponse_ extends $pb.GeneratedMessage {
+  factory CreateStoreResponse_() => create();
+  CreateStoreResponse_._() : super();
+  factory CreateStoreResponse_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory CreateStoreResponse_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_CreateStoreResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'control_client'),
+      createEmptyInstance: create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  CreateStoreResponse_ clone() =>
+      CreateStoreResponse_()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  CreateStoreResponse_ copyWith(void Function(CreateStoreResponse_) updates) =>
+      super.copyWith((message) => updates(message as CreateStoreResponse_))
+          as CreateStoreResponse_;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CreateStoreResponse_ create() => CreateStoreResponse_._();
+  CreateStoreResponse_ createEmptyInstance() => create();
+  static $pb.PbList<CreateStoreResponse_> createRepeated() =>
+      $pb.PbList<CreateStoreResponse_>();
+  @$core.pragma('dart2js:noInline')
+  static CreateStoreResponse_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<CreateStoreResponse_>(create);
+  static CreateStoreResponse_? _defaultInstance;
+}
+
+class DeleteStoreRequest_ extends $pb.GeneratedMessage {
+  factory DeleteStoreRequest_({
+    $core.String? storeName,
+  }) {
+    final $result = create();
+    if (storeName != null) {
+      $result.storeName = storeName;
+    }
+    return $result;
+  }
+  DeleteStoreRequest_._() : super();
+  factory DeleteStoreRequest_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory DeleteStoreRequest_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_DeleteStoreRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'control_client'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'storeName')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  DeleteStoreRequest_ clone() => DeleteStoreRequest_()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  DeleteStoreRequest_ copyWith(void Function(DeleteStoreRequest_) updates) =>
+      super.copyWith((message) => updates(message as DeleteStoreRequest_))
+          as DeleteStoreRequest_;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteStoreRequest_ create() => DeleteStoreRequest_._();
+  DeleteStoreRequest_ createEmptyInstance() => create();
+  static $pb.PbList<DeleteStoreRequest_> createRepeated() =>
+      $pb.PbList<DeleteStoreRequest_>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteStoreRequest_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<DeleteStoreRequest_>(create);
+  static DeleteStoreRequest_? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get storeName => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set storeName($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasStoreName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStoreName() => clearField(1);
+}
+
+class DeleteStoreResponse_ extends $pb.GeneratedMessage {
+  factory DeleteStoreResponse_() => create();
+  DeleteStoreResponse_._() : super();
+  factory DeleteStoreResponse_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory DeleteStoreResponse_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_DeleteStoreResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'control_client'),
+      createEmptyInstance: create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  DeleteStoreResponse_ clone() =>
+      DeleteStoreResponse_()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  DeleteStoreResponse_ copyWith(void Function(DeleteStoreResponse_) updates) =>
+      super.copyWith((message) => updates(message as DeleteStoreResponse_))
+          as DeleteStoreResponse_;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteStoreResponse_ create() => DeleteStoreResponse_._();
+  DeleteStoreResponse_ createEmptyInstance() => create();
+  static $pb.PbList<DeleteStoreResponse_> createRepeated() =>
+      $pb.PbList<DeleteStoreResponse_>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteStoreResponse_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<DeleteStoreResponse_>(create);
+  static DeleteStoreResponse_? _defaultInstance;
+}
+
+class ListStoresRequest_ extends $pb.GeneratedMessage {
+  factory ListStoresRequest_({
+    $core.String? nextToken,
+  }) {
+    final $result = create();
+    if (nextToken != null) {
+      $result.nextToken = nextToken;
+    }
+    return $result;
+  }
+  ListStoresRequest_._() : super();
+  factory ListStoresRequest_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ListStoresRequest_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_ListStoresRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'control_client'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'nextToken')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  ListStoresRequest_ clone() => ListStoresRequest_()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  ListStoresRequest_ copyWith(void Function(ListStoresRequest_) updates) =>
+      super.copyWith((message) => updates(message as ListStoresRequest_))
+          as ListStoresRequest_;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListStoresRequest_ create() => ListStoresRequest_._();
+  ListStoresRequest_ createEmptyInstance() => create();
+  static $pb.PbList<ListStoresRequest_> createRepeated() =>
+      $pb.PbList<ListStoresRequest_>();
+  @$core.pragma('dart2js:noInline')
+  static ListStoresRequest_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListStoresRequest_>(create);
+  static ListStoresRequest_? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get nextToken => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set nextToken($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasNextToken() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearNextToken() => clearField(1);
+}
+
+class ListStoresResponse_ extends $pb.GeneratedMessage {
+  factory ListStoresResponse_({
+    $core.Iterable<Store_>? store,
+    $core.String? nextToken,
+  }) {
+    final $result = create();
+    if (store != null) {
+      $result.store.addAll(store);
+    }
+    if (nextToken != null) {
+      $result.nextToken = nextToken;
+    }
+    return $result;
+  }
+  ListStoresResponse_._() : super();
+  factory ListStoresResponse_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ListStoresResponse_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_ListStoresResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'control_client'),
+      createEmptyInstance: create)
+    ..pc<Store_>(1, _omitFieldNames ? '' : 'store', $pb.PbFieldType.PM,
+        subBuilder: Store_.create)
+    ..aOS(2, _omitFieldNames ? '' : 'nextToken')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  ListStoresResponse_ clone() => ListStoresResponse_()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  ListStoresResponse_ copyWith(void Function(ListStoresResponse_) updates) =>
+      super.copyWith((message) => updates(message as ListStoresResponse_))
+          as ListStoresResponse_;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListStoresResponse_ create() => ListStoresResponse_._();
+  ListStoresResponse_ createEmptyInstance() => create();
+  static $pb.PbList<ListStoresResponse_> createRepeated() =>
+      $pb.PbList<ListStoresResponse_>();
+  @$core.pragma('dart2js:noInline')
+  static ListStoresResponse_ getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListStoresResponse_>(create);
+  static ListStoresResponse_? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<Store_> get store => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.String get nextToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nextToken($core.String v) {
+    $_setString(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasNextToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextToken() => clearField(2);
+}
+
+class Store_ extends $pb.GeneratedMessage {
+  factory Store_({
+    $core.String? storeName,
+  }) {
+    final $result = create();
+    if (storeName != null) {
+      $result.storeName = storeName;
+    }
+    return $result;
+  }
+  Store_._() : super();
+  factory Store_.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory Store_.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : '_Store',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'control_client'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'storeName')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  Store_ clone() => Store_()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  Store_ copyWith(void Function(Store_) updates) =>
+      super.copyWith((message) => updates(message as Store_)) as Store_;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Store_ create() => Store_._();
+  Store_ createEmptyInstance() => create();
+  static $pb.PbList<Store_> createRepeated() => $pb.PbList<Store_>();
+  @$core.pragma('dart2js:noInline')
+  static Store_ getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Store_>(create);
+  static Store_? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get storeName => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set storeName($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasStoreName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStoreName() => clearField(1);
+}
+
 class SimilarityMetric___EuclideanSimilarity extends $pb.GeneratedMessage {
   factory SimilarityMetric___EuclideanSimilarity() => create();
   SimilarityMetric___EuclideanSimilarity._() : super();

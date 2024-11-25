@@ -16,15 +16,16 @@ import 'package:grpc/service_api.dart' as $grpc;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'cachepubsub.pb.dart' as $2;
+import 'common.pb.dart' as $3;
 
 export 'cachepubsub.pb.dart';
 
 @$pb.GrpcServiceName('cache_client.pubsub.Pubsub')
 class PubsubClient extends $grpc.Client {
-  static final _$publish = $grpc.ClientMethod<$2.PublishRequest_, $2.Empty_>(
+  static final _$publish = $grpc.ClientMethod<$2.PublishRequest_, $3.Empty_>(
       '/cache_client.pubsub.Pubsub/Publish',
       ($2.PublishRequest_ value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $2.Empty_.fromBuffer(value));
+      ($core.List<$core.int> value) => $3.Empty_.fromBuffer(value));
   static final _$subscribe =
       $grpc.ClientMethod<$2.SubscriptionRequest_, $2.SubscriptionItem_>(
           '/cache_client.pubsub.Pubsub/Subscribe',
@@ -37,7 +38,7 @@ class PubsubClient extends $grpc.Client {
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$2.Empty_> publish($2.PublishRequest_ request,
+  $grpc.ResponseFuture<$3.Empty_> publish($2.PublishRequest_ request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$publish, request, options: options);
   }
@@ -56,13 +57,13 @@ abstract class PubsubServiceBase extends $grpc.Service {
   $core.String get $name => 'cache_client.pubsub.Pubsub';
 
   PubsubServiceBase() {
-    $addMethod($grpc.ServiceMethod<$2.PublishRequest_, $2.Empty_>(
+    $addMethod($grpc.ServiceMethod<$2.PublishRequest_, $3.Empty_>(
         'Publish',
         publish_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $2.PublishRequest_.fromBuffer(value),
-        ($2.Empty_ value) => value.writeToBuffer()));
+        ($3.Empty_ value) => value.writeToBuffer()));
     $addMethod(
         $grpc.ServiceMethod<$2.SubscriptionRequest_, $2.SubscriptionItem_>(
             'Subscribe',
@@ -74,7 +75,7 @@ abstract class PubsubServiceBase extends $grpc.Service {
             ($2.SubscriptionItem_ value) => value.writeToBuffer()));
   }
 
-  $async.Future<$2.Empty_> publish_Pre(
+  $async.Future<$3.Empty_> publish_Pre(
       $grpc.ServiceCall call, $async.Future<$2.PublishRequest_> request) async {
     return publish(call, await request);
   }
@@ -84,7 +85,7 @@ abstract class PubsubServiceBase extends $grpc.Service {
     yield* subscribe(call, await request);
   }
 
-  $async.Future<$2.Empty_> publish(
+  $async.Future<$3.Empty_> publish(
       $grpc.ServiceCall call, $2.PublishRequest_ request);
   $async.Stream<$2.SubscriptionItem_> subscribe(
       $grpc.ServiceCall call, $2.SubscriptionRequest_ request);

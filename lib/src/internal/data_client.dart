@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:momento/generated/cacheclient.pbgrpc.dart';
+import 'package:momento/generated/common.pb.dart';
 import 'package:momento/momento.dart';
 import 'package:momento/src/config/cache_configuration.dart';
 import 'package:momento/src/errors/errors.dart';

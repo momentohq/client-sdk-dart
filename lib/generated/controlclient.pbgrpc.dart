@@ -81,6 +81,24 @@ class ScsControlClient extends $grpc.Client {
           ($1.ListIndexesRequest_ value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $1.ListIndexesResponse_.fromBuffer(value));
+  static final _$createStore =
+      $grpc.ClientMethod<$1.CreateStoreRequest_, $1.CreateStoreResponse_>(
+          '/control_client.ScsControl/CreateStore',
+          ($1.CreateStoreRequest_ value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $1.CreateStoreResponse_.fromBuffer(value));
+  static final _$deleteStore =
+      $grpc.ClientMethod<$1.DeleteStoreRequest_, $1.DeleteStoreResponse_>(
+          '/control_client.ScsControl/DeleteStore',
+          ($1.DeleteStoreRequest_ value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $1.DeleteStoreResponse_.fromBuffer(value));
+  static final _$listStores =
+      $grpc.ClientMethod<$1.ListStoresRequest_, $1.ListStoresResponse_>(
+          '/control_client.ScsControl/ListStores',
+          ($1.ListStoresRequest_ value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $1.ListStoresResponse_.fromBuffer(value));
 
   ScsControlClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -145,6 +163,24 @@ class ScsControlClient extends $grpc.Client {
       $1.ListIndexesRequest_ request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listIndexes, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.CreateStoreResponse_> createStore(
+      $1.CreateStoreRequest_ request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$createStore, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.DeleteStoreResponse_> deleteStore(
+      $1.DeleteStoreRequest_ request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$deleteStore, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.ListStoresResponse_> listStores(
+      $1.ListStoresRequest_ request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$listStores, request, options: options);
   }
 }
 
@@ -243,6 +279,33 @@ abstract class ScsControlServiceBase extends $grpc.Service {
             ($core.List<$core.int> value) =>
                 $1.ListIndexesRequest_.fromBuffer(value),
             ($1.ListIndexesResponse_ value) => value.writeToBuffer()));
+    $addMethod(
+        $grpc.ServiceMethod<$1.CreateStoreRequest_, $1.CreateStoreResponse_>(
+            'CreateStore',
+            createStore_Pre,
+            false,
+            false,
+            ($core.List<$core.int> value) =>
+                $1.CreateStoreRequest_.fromBuffer(value),
+            ($1.CreateStoreResponse_ value) => value.writeToBuffer()));
+    $addMethod(
+        $grpc.ServiceMethod<$1.DeleteStoreRequest_, $1.DeleteStoreResponse_>(
+            'DeleteStore',
+            deleteStore_Pre,
+            false,
+            false,
+            ($core.List<$core.int> value) =>
+                $1.DeleteStoreRequest_.fromBuffer(value),
+            ($1.DeleteStoreResponse_ value) => value.writeToBuffer()));
+    $addMethod(
+        $grpc.ServiceMethod<$1.ListStoresRequest_, $1.ListStoresResponse_>(
+            'ListStores',
+            listStores_Pre,
+            false,
+            false,
+            ($core.List<$core.int> value) =>
+                $1.ListStoresRequest_.fromBuffer(value),
+            ($1.ListStoresResponse_ value) => value.writeToBuffer()));
   }
 
   $async.Future<$1.CreateCacheResponse_> createCache_Pre($grpc.ServiceCall call,
@@ -298,6 +361,21 @@ abstract class ScsControlServiceBase extends $grpc.Service {
     return listIndexes(call, await request);
   }
 
+  $async.Future<$1.CreateStoreResponse_> createStore_Pre($grpc.ServiceCall call,
+      $async.Future<$1.CreateStoreRequest_> request) async {
+    return createStore(call, await request);
+  }
+
+  $async.Future<$1.DeleteStoreResponse_> deleteStore_Pre($grpc.ServiceCall call,
+      $async.Future<$1.DeleteStoreRequest_> request) async {
+    return deleteStore(call, await request);
+  }
+
+  $async.Future<$1.ListStoresResponse_> listStores_Pre($grpc.ServiceCall call,
+      $async.Future<$1.ListStoresRequest_> request) async {
+    return listStores(call, await request);
+  }
+
   $async.Future<$1.CreateCacheResponse_> createCache(
       $grpc.ServiceCall call, $1.CreateCacheRequest_ request);
   $async.Future<$1.DeleteCacheResponse_> deleteCache(
@@ -318,4 +396,10 @@ abstract class ScsControlServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $1.DeleteIndexRequest_ request);
   $async.Future<$1.ListIndexesResponse_> listIndexes(
       $grpc.ServiceCall call, $1.ListIndexesRequest_ request);
+  $async.Future<$1.CreateStoreResponse_> createStore(
+      $grpc.ServiceCall call, $1.CreateStoreRequest_ request);
+  $async.Future<$1.DeleteStoreResponse_> deleteStore(
+      $grpc.ServiceCall call, $1.DeleteStoreRequest_ request);
+  $async.Future<$1.ListStoresResponse_> listStores(
+      $grpc.ServiceCall call, $1.ListStoresRequest_ request);
 }

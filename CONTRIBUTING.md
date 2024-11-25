@@ -37,3 +37,11 @@ You can use the this command from the root of the repository to run the tests:
 ```bash
 TEST_API_KEY=<your api key> dart test
 ```
+
+## Compiling protobufs
+
+Follow [instructions](https://pub.dev/packages/protoc_plugin) for setting up the protoc plugin.
+
+Copy over the necessary files from the [client-protos](https://github.com/momentohq/client-protos/tree/main/proto) repo.
+
+Then run the [generate.sh script](./lib/generated/generate.sh) to generate Dart code for the proto files.
