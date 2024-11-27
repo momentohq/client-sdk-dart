@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/momentohq/client-sdk-dart/compare/v0.2.1...v0.3.0) (2024-11-27)
+
+
+### Features
+
+* support topics sequence page ([#112](https://github.com/momentohq/client-sdk-dart/issues/112)) ([7fff644](https://github.com/momentohq/client-sdk-dart/commit/7fff6441b19533e5009c6acd5ea3a7d42ce435f9))
+
+
+### Bug Fixes
+
+* update protos and add Makefile ([#111](https://github.com/momentohq/client-sdk-dart/issues/111)) ([40ddb24](https://github.com/momentohq/client-sdk-dart/commit/40ddb24df8030f7e892be736d0b10a4311719630))
+
 ## [0.2.1](https://github.com/momentohq/client-sdk-dart/compare/v0.2.0...v0.2.1) (2024-11-22)
 
 
