@@ -13,6 +13,7 @@ sealed class TopicSubscribeResponse {}
 class TopicSubscription extends ResponseBase implements TopicSubscribeResponse {
   ResponseStream<SubscriptionItem_> _stream;
   Int64 lastSequenceNumber;
+  Int64 lastSequencePage;
   final ClientPubsub _client;
   String cacheName;
   String topicName;
@@ -21,7 +22,7 @@ class TopicSubscription extends ResponseBase implements TopicSubscribeResponse {
   late Stream _broadcastStream;
 
   TopicSubscription(this._stream, this.lastSequenceNumber, this._client,
-      this.cacheName, this.topicName) {
+      this.cacheName, this.topicName, this.lastSequencePage) {
     _broadcastStream = _stream.asBroadcastStream();
   }
 
@@ -76,11 +77,15 @@ class TopicSubscription extends ResponseBase implements TopicSubscribeResponse {
   Future<bool> attemptReconnect() async {
     await _stream.cancel();
     var result = await _client.subscribe(cacheName, topicName,
-        resumeAtTopicSequenceNumber: lastSequenceNumber);
+        resumeAtTopicSequenceNumber: lastSequenceNumber,
+        resumeAtTopicSequencePage: lastSequencePage);
     if (result is TopicSubscription) {
+      logger.fine(
+          "Attempting to reconnect to topic $topicName on cache $cacheName with sequence number $lastSequenceNumber and sequence page $lastSequencePage");
       _stream = result._stream;
       _broadcastStream = result._broadcastStream;
       lastSequenceNumber = result.lastSequenceNumber;
+      lastSequencePage = result.lastSequencePage;
     } else if (result is TopicSubscribeError) {
       logger.fine("Error reconnecting: ${result.message}");
       if (result.errorCode == MomentoErrorCode.limitExceededError ||
@@ -95,11 +100,15 @@ class TopicSubscription extends ResponseBase implements TopicSubscribeResponse {
     switch (item.whichKind()) {
       case SubscriptionItem__Kind.item:
         lastSequenceNumber = item.item.topicSequenceNumber;
+        lastSequencePage = item.item.sequencePage;
         return createTopicItemResponse(item.item);
       case SubscriptionItem__Kind.heartbeat:
         logger.fine("topic client received a heartbeat");
       case SubscriptionItem__Kind.discontinuity:
-        logger.fine("topic client received a discontinuity");
+        lastSequencePage = item.discontinuity.newSequencePage;
+        lastSequenceNumber = item.discontinuity.newTopicSequence;
+        logger.fine(
+            "topic client received a discontinuity, setting new sequence page to $lastSequencePage and new topic sequence to $lastSequenceNumber");
       default:
         logger.shout(
             "topic client received unknown subscription item: ${item.whichKind()}");
