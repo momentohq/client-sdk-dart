@@ -1,3 +1,4 @@
+
 import 'package:momento/src/auth/credential_provider.dart';
 import 'package:momento/src/errors/errors.dart';
 import 'package:test/test.dart';
@@ -18,6 +19,10 @@ var fakeSessionToken =
 
 const testControlEndpoint = 'control-plane-endpoint.not.a.domain';
 const testCacheEndpoint = 'cache-endpoint.not.a.domain';
+
+const testGlobalApiKey = 'testToken';
+const testGlobalEndpoint = 'testEndpoint';
+const testEnvVarName = 'MOMENTO_TEST_GLOBAL_API_KEY';
 
 void main() {
   group('credential_provider', () {
@@ -88,6 +93,77 @@ void main() {
                 endpointOverrides: EndpointOverrides(
                     "this.is.a.cache.endpoint", "this.is.a.control.endpoint")),
             throwsA(TypeMatcher<IllegalArgumentError>()));
+      });
+    });
+
+    group('globalKeyFromString', () {
+      test('using static method', () {
+        var provider = CredentialProvider.globalKeyFromString(
+            testGlobalApiKey, testGlobalEndpoint);
+        expect(provider, isA<GlobalKeyStringMomentoTokenProvider>());
+        expect(provider.apiKey, equals(testGlobalApiKey));
+        expect(provider.controlEndpoint, equals("control.$testGlobalEndpoint"));
+        expect(provider.cacheEndpoint, equals("cache.$testGlobalEndpoint"));
+      });
+
+      test('using constructor', () {
+        var provider = GlobalKeyStringMomentoTokenProvider(
+            testGlobalApiKey, testGlobalEndpoint);
+        expect(provider, isA<GlobalKeyStringMomentoTokenProvider>());
+        expect(provider.apiKey, equals(testGlobalApiKey));
+        expect(provider.controlEndpoint, equals("control.$testGlobalEndpoint"));
+        expect(provider.cacheEndpoint, equals("cache.$testGlobalEndpoint"));
+      });
+
+      test('empty api key throws error', () {
+        expect(
+            () => GlobalKeyStringMomentoTokenProvider('', testGlobalEndpoint),
+            throwsA(CredentialProviderError.emptyApiKey()));
+      });
+
+      test('empty endpoint throws error', () {
+        expect(() => GlobalKeyStringMomentoTokenProvider(testGlobalApiKey, ''),
+            throwsA(CredentialProviderError.emptyEndpoint()));
+      });
+    });
+
+    group('globalKeyFromEnvironmentVariable', () {
+      // Dart does not appear to provide a way to dynamically set environment
+      // variables, cannot test the happy path
+
+      test('errors when env var not set using static method', () {
+        expect(
+            () => GlobalKeyEnvMomentoTokenProvider(
+                testEnvVarName, testGlobalEndpoint),
+            throwsA(CredentialProviderError.emptyEnvironmentVariable(
+                testEnvVarName)));
+      });
+
+      test('errors when env var not set using constructor', () {
+        expect(
+            () => GlobalKeyEnvMomentoTokenProvider(
+                testEnvVarName, testGlobalEndpoint),
+            throwsA(CredentialProviderError.emptyEnvironmentVariable(
+                testEnvVarName)));
+      });
+
+      test('empty endpoint throws error', () {
+        expect(() => GlobalKeyEnvMomentoTokenProvider(testEnvVarName, ''),
+            throwsA(CredentialProviderError.emptyEndpoint()));
+      });
+
+      test('empty env var name throws error', () {
+        expect(() => GlobalKeyEnvMomentoTokenProvider('', testGlobalEndpoint),
+            throwsA(CredentialProviderError.emptyEnvVarName()));
+      });
+
+      test('missing env var throws error', () {
+        const missingEnvVarName = 'MOMENTO_NONEXISTENT_ENV_VAR';
+        expect(
+            () => GlobalKeyEnvMomentoTokenProvider(
+                missingEnvVarName, testGlobalEndpoint),
+            throwsA(CredentialProviderError.emptyEnvironmentVariable(
+                missingEnvVarName)));
       });
     });
   });

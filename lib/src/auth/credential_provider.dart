@@ -19,6 +19,14 @@ class CredentialProviderError {
   static String emptyEnvironmentVariable(String envVarName) {
     return "Environment variable $envVarName is required and not set";
   }
+
+  static String emptyEndpoint() {
+    return "Endpoint is an empty string";
+  }
+
+  static String emptyEnvVarName() {
+    return "Environment variable name is an empty string";
+  }
 }
 
 class Base64DecodedV1Token {
@@ -134,6 +142,16 @@ abstract class CredentialProvider {
     return _ParsedApiKey(
         decoded.apiKey, endpoints.controlEndpoint, endpoints.cacheEndpoint);
   }
+
+  static CredentialProvider globalKeyFromString(
+      String apiKey, String endpoint) {
+    return GlobalKeyStringMomentoTokenProvider(apiKey, endpoint);
+  }
+
+  static CredentialProvider globalKeyFromEnvironmentVariable(
+      String envVarName, String endpoint) {
+    return GlobalKeyEnvMomentoTokenProvider(envVarName, endpoint);
+  }
 }
 
 class StringMomentoTokenProvider implements CredentialProvider {
@@ -223,6 +241,81 @@ class EnvMomentoTokenProvider implements CredentialProvider {
       _cacheEndpoint = parsedApiKey.cacheEndpoint!;
       _controlEndpoint = parsedApiKey.controlEndpoint!;
     }
+  }
+
+  @override
+  String get apiKey => _apiKey;
+
+  @override
+  String get cacheEndpoint => _cacheEndpoint;
+
+  @override
+  String get controlEndpoint => _controlEndpoint;
+}
+
+class GlobalKeyStringMomentoTokenProvider implements CredentialProvider {
+  @override
+  String _apiKey = "";
+
+  @override
+  String _cacheEndpoint = "";
+
+  @override
+  String _controlEndpoint = "";
+
+  /// Creates a CredentialProvider from the API token stored in the string [apiKey]
+  /// and the provided Momento endpoint.
+  GlobalKeyStringMomentoTokenProvider(String apiKey, String endpoint) {
+    if (apiKey.isEmpty) {
+      throw CredentialProviderError.emptyApiKey();
+    }
+    if (endpoint.isEmpty) {
+      throw CredentialProviderError.emptyEndpoint();
+    }
+    _apiKey = apiKey;
+    _cacheEndpoint = "cache.$endpoint";
+    _controlEndpoint = "control.$endpoint";
+  }
+
+  @override
+  String get apiKey => _apiKey;
+
+  @override
+  String get cacheEndpoint => _cacheEndpoint;
+
+  @override
+  String get controlEndpoint => _controlEndpoint;
+}
+
+class GlobalKeyEnvMomentoTokenProvider implements CredentialProvider {
+  @override
+  String _apiKey = "";
+
+  @override
+  String _cacheEndpoint = "";
+
+  @override
+  String _controlEndpoint = "";
+
+  /// Creates a CredentialProvider from the API token stored in the environment variable [envVarName]
+  /// and the provided Momento endpoint.
+  GlobalKeyEnvMomentoTokenProvider(String envVarName, String endpoint) {
+    if (endpoint.isEmpty) {
+      throw CredentialProviderError.emptyEndpoint();
+    }
+    if (envVarName.isEmpty) {
+      throw CredentialProviderError.emptyEnvVarName();
+    }
+    if (Platform.environment.containsKey(envVarName) == false) {
+      throw CredentialProviderError.emptyEnvironmentVariable(envVarName);
+    }
+    final apiKey = Platform.environment[envVarName] ?? '';
+    if (apiKey.isEmpty) {
+      throw CredentialProviderError.emptyApiKey();
+    }
+    _apiKey = apiKey;
+    _cacheEndpoint = "cache.$endpoint";
+    _controlEndpoint = "control.$endpoint";
   }
 
   @override
