@@ -124,6 +124,10 @@ abstract class CredentialProvider {
 
   static _ParsedApiKey _parseJwtToken(String jwt) {
     Map<String, dynamic> claims = JwtDecoder.decode(jwt);
+    if (claims["t"] == "g") {
+      throw IllegalArgumentError(
+          "Received a global API key. Are you using the correct key? Or did you mean to use `globalKeyFromString()` or `globalKeyFromEnvironmentVariable()` instead?");
+    }
     return _ParsedApiKey(jwt, claims["cp"], claims["c"]);
   }
 
@@ -141,6 +145,11 @@ abstract class CredentialProvider {
     final endpoints = _Endpoints(decoded.endpoint);
     return _ParsedApiKey(
         decoded.apiKey, endpoints.controlEndpoint, endpoints.cacheEndpoint);
+  }
+
+  static bool isGlobalApiKey(String apiKey) {
+    Map<String, dynamic> claims = JwtDecoder.decode(apiKey);
+    return claims["t"] == "g";
   }
 
   static CredentialProvider globalKeyFromString(
@@ -266,11 +275,19 @@ class GlobalKeyStringMomentoTokenProvider implements CredentialProvider {
   /// Creates a CredentialProvider from the API token stored in the string [apiKey]
   /// and the provided Momento endpoint.
   GlobalKeyStringMomentoTokenProvider(String apiKey, String endpoint) {
+    if (endpoint.isEmpty) {
+      throw CredentialProviderError.emptyEndpoint();
+    }
     if (apiKey.isEmpty) {
       throw CredentialProviderError.emptyApiKey();
     }
-    if (endpoint.isEmpty) {
-      throw CredentialProviderError.emptyEndpoint();
+    if (isBase64(apiKey)) {
+      throw IllegalArgumentError(
+          "Did not expect global API key to be base64 encoded. Are you using the correct key? Or did you mean to use `globalKeyFromString()` instead?");
+    }
+    if (!CredentialProvider.isGlobalApiKey(apiKey)) {
+      throw IllegalArgumentError(
+          "Provided API key is not a valid global API key. Are you using the correct key? Or did you mean to use `globalKeyFromString()` instead?");
     }
     _apiKey = apiKey;
     _cacheEndpoint = "cache.$endpoint";
@@ -312,6 +329,14 @@ class GlobalKeyEnvMomentoTokenProvider implements CredentialProvider {
     final apiKey = Platform.environment[envVarName] ?? '';
     if (apiKey.isEmpty) {
       throw CredentialProviderError.emptyApiKey();
+    }
+    if (isBase64(apiKey)) {
+      throw IllegalArgumentError(
+          "Did not expect global API key to be base64 encoded. Are you using the correct key? Or did you mean to use `globalKeyFromEnvironmentVariable()` instead?");
+    }
+    if (!CredentialProvider.isGlobalApiKey(apiKey)) {
+      throw IllegalArgumentError(
+          "Provided API key is not a valid global API key. Are you using the correct key? Or did you mean to use `globalKeyFromEnvironmentVariable()` instead?");
     }
     _apiKey = apiKey;
     _cacheEndpoint = "cache.$endpoint";

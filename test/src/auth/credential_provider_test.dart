@@ -19,7 +19,8 @@ var fakeSessionToken =
 const testControlEndpoint = 'control-plane-endpoint.not.a.domain';
 const testCacheEndpoint = 'cache-endpoint.not.a.domain';
 
-const testGlobalApiKey = 'testToken';
+const testGlobalApiKey =
+    'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ0IjoiZyIsImNwIjoiY29udHJvbC50ZXN0LmNvbSIsImMiOiJjYWNoZS50ZXN0LmNvbSJ9.T3ylW7iWLobcCsYQx92oImV2KgyBWmtFO-37uzw3qspSb18itIEH9zN49QFEm6joeIer_kXJ5R28ruF_JbUniA';
 const testGlobalEndpoint = 'testEndpoint';
 const testEnvVarName = 'MOMENTO_TEST_GLOBAL_API_KEY';
 
@@ -80,6 +81,11 @@ void main() {
                     "this.is.a.cache.endpoint", "this.is.a.control.endpoint")),
             throwsA(TypeMatcher<IllegalArgumentError>()));
       });
+
+      test('throws error when given global api key', () {
+        expect(() => CredentialProvider.fromString(testGlobalApiKey),
+            throwsA(TypeMatcher<IllegalArgumentError>()));
+      });
     });
     group('fromEnvironmentVariable', () {
       test(
@@ -123,6 +129,20 @@ void main() {
       test('empty endpoint throws error', () {
         expect(() => GlobalKeyStringMomentoTokenProvider(testGlobalApiKey, ''),
             throwsA(CredentialProviderError.emptyEndpoint()));
+      });
+
+      test('throws error when given v1 api key', () {
+        expect(
+            () => GlobalKeyStringMomentoTokenProvider(
+                fakeTestV1ApiKey, testGlobalEndpoint),
+            throwsA(TypeMatcher<IllegalArgumentError>()));
+      });
+
+      test('throws error when given pre-v1 legacy token', () {
+        expect(
+            () => GlobalKeyStringMomentoTokenProvider(
+                fakeTestLegacyToken, testGlobalEndpoint),
+            throwsA(TypeMatcher<IllegalArgumentError>()));
       });
     });
 
