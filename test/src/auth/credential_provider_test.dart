@@ -6,8 +6,10 @@ import 'dart:convert';
 // These tokens have valid syntax, but they don't actually have valid credentials.  Just used for unit testing.
 var fakeTestLegacyToken =
     'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmb29Abm90LmEuZG9tYWluIiwiY3AiOiJjb250cm9sLXBsYW5lLWVuZHBvaW50Lm5vdC5hLmRvbWFpbiIsImMiOiJjYWNoZS1lbmRwb2ludC5ub3QuYS5kb21haW4ifQo.rtxfu4miBHQ1uptWJ2x3UiAwwJYcMeYIkkpXxUno_wIavg4h6YJStcbxk32NDBbmJkJS7mUw6MsvJNWaxfdPOw';
+var fakeTestV1ApiKeyB64Encoded =
+    'eyJhcGlfa2V5IjogImV5SjBlWEFpT2lKS1YxUWlMQ0poYkdjaU9pSklVekkxTmlKOS5leUpwYzNNaU9pSlBibXhwYm1VZ1NsZFVJRUoxYVd4a1pYSWlMQ0pwWVhRaU9qRTJOemd6TURVNE1USXNJbVY0Y0NJNk5EZzJOVFV4TlRReE1pd2lZWFZrSWpvaUlpd2ljM1ZpSWpvaWFuSnZZMnRsZEVCbGVHRnRjR3hsTG1OdmJTSjkuOEl5OHE4NExzci1EM1lDb19IUDRkLXhqSGRUOFVDSXV2QVljeGhGTXl6OCIsICJlbmRwb2ludCI6ICJ0ZXN0Lm1vbWVudG9ocS5jb20ifQ==';
 var fakeTestV1ApiKey =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2NzgzMDU4MTIsImV4cCI6NDg2NTUxNTQxMiwiYXVkIjoiIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSJ9.8Iy8q84Lsr-D3YCo_HP4d-xjHdT8UCIuvAYcxhFMyz8';
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2NzgzMDU4MTIsImV4cCI6NDg2NTUxNTQxMiwiYXVkIjoiIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSJ9.8Iy8q84Lsr-D3YCo_HP4d-xjHdT8UCIuvAYcxhFMyz8";
 
 var decodedV1Token =
     Base64DecodedV1Token(fakeTestV1ApiKey, "test.momentohq.com");
@@ -19,10 +21,11 @@ var fakeSessionToken =
 const testControlEndpoint = 'control-plane-endpoint.not.a.domain';
 const testCacheEndpoint = 'cache-endpoint.not.a.domain';
 
-const testGlobalApiKey =
-    'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ0IjoiZyIsImNwIjoiY29udHJvbC50ZXN0LmNvbSIsImMiOiJjYWNoZS50ZXN0LmNvbSJ9.T3ylW7iWLobcCsYQx92oImV2KgyBWmtFO-37uzw3qspSb18itIEH9zN49QFEm6joeIer_kXJ5R28ruF_JbUniA';
-const testGlobalEndpoint = 'testEndpoint';
-const testEnvVarName = 'MOMENTO_TEST_GLOBAL_API_KEY';
+const fakeTestV2ApiKey =
+    'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ0IjoiZyIsImlkIjoic29tZS1pZCJ9.WRhKpdh7cFCXO7lAaVojtQAxK6mxMdBrvXTJL1xu94S0d6V1YSstOObRlAIMA7i_yIxO1mWEF3rlF5UNc77VXQ';
+const testEndpoint = 'testEndpoint';
+const apiKeyEnvVar = 'MOMENTO_TEST_V2_API_KEY';
+const endpointEnvVar = 'MOMENTO_TEST_ENDPOINT';
 
 void main() {
   group('credential_provider', () {
@@ -82,8 +85,8 @@ void main() {
             throwsA(TypeMatcher<IllegalArgumentError>()));
       });
 
-      test('throws error when given global api key', () {
-        expect(() => CredentialProvider.fromString(testGlobalApiKey),
+      test('throws error when given v2 api key', () {
+        expect(() => CredentialProvider.fromString(fakeTestV2ApiKey),
             throwsA(TypeMatcher<IllegalArgumentError>()));
       });
     });
@@ -101,88 +104,107 @@ void main() {
       });
     });
 
-    group('globalKeyFromString', () {
+    group('fromApiKeyV2', () {
       test('using static method', () {
-        var provider = CredentialProvider.globalKeyFromString(
-            testGlobalApiKey, testGlobalEndpoint);
-        expect(provider, isA<GlobalKeyStringMomentoTokenProvider>());
-        expect(provider.apiKey, equals(testGlobalApiKey));
-        expect(provider.controlEndpoint, equals("control.$testGlobalEndpoint"));
-        expect(provider.cacheEndpoint, equals("cache.$testGlobalEndpoint"));
+        var provider =
+            CredentialProvider.fromApiKeyV2(fakeTestV2ApiKey, testEndpoint);
+        expect(provider, isA<ApiKeyV2TokenProvider>());
+        expect(provider.apiKey, equals(fakeTestV2ApiKey));
+        expect(provider.controlEndpoint, equals("control.$testEndpoint"));
+        expect(provider.cacheEndpoint, equals("cache.$testEndpoint"));
       });
 
       test('using constructor', () {
-        var provider = GlobalKeyStringMomentoTokenProvider(
-            testGlobalApiKey, testGlobalEndpoint);
-        expect(provider, isA<GlobalKeyStringMomentoTokenProvider>());
-        expect(provider.apiKey, equals(testGlobalApiKey));
-        expect(provider.controlEndpoint, equals("control.$testGlobalEndpoint"));
-        expect(provider.cacheEndpoint, equals("cache.$testGlobalEndpoint"));
+        var provider = ApiKeyV2TokenProvider(fakeTestV2ApiKey, testEndpoint);
+        expect(provider, isA<ApiKeyV2TokenProvider>());
+        expect(provider.apiKey, equals(fakeTestV2ApiKey));
+        expect(provider.controlEndpoint, equals("control.$testEndpoint"));
+        expect(provider.cacheEndpoint, equals("cache.$testEndpoint"));
       });
 
       test('empty api key throws error', () {
-        expect(
-            () => GlobalKeyStringMomentoTokenProvider('', testGlobalEndpoint),
+        expect(() => ApiKeyV2TokenProvider('', testEndpoint),
             throwsA(CredentialProviderError.emptyApiKey()));
       });
 
       test('empty endpoint throws error', () {
-        expect(() => GlobalKeyStringMomentoTokenProvider(testGlobalApiKey, ''),
+        expect(() => ApiKeyV2TokenProvider(fakeTestV2ApiKey, ''),
             throwsA(CredentialProviderError.emptyEndpoint()));
       });
 
       test('throws error when given v1 api key', () {
-        expect(
-            () => GlobalKeyStringMomentoTokenProvider(
-                fakeTestV1ApiKey, testGlobalEndpoint),
+        expect(() => ApiKeyV2TokenProvider(fakeTestV1ApiKey, testEndpoint),
             throwsA(TypeMatcher<IllegalArgumentError>()));
       });
 
       test('throws error when given pre-v1 legacy token', () {
-        expect(
-            () => GlobalKeyStringMomentoTokenProvider(
-                fakeTestLegacyToken, testGlobalEndpoint),
+        expect(() => ApiKeyV2TokenProvider(fakeTestLegacyToken, testEndpoint),
             throwsA(TypeMatcher<IllegalArgumentError>()));
       });
     });
 
-    group('globalKeyFromEnvironmentVariable', () {
+    group('fromEnvVarV2', () {
       // Dart does not appear to provide a way to dynamically set environment
       // variables, cannot test the happy path
 
       test('errors when env var not set using static method', () {
         expect(
-            () => GlobalKeyEnvMomentoTokenProvider(
-                testEnvVarName, testGlobalEndpoint),
+            () => EnvVarV2TokenProvider(apiKeyEnvVar, endpointEnvVar),
             throwsA(CredentialProviderError.emptyEnvironmentVariable(
-                testEnvVarName)));
+                endpointEnvVar)));
       });
 
       test('errors when env var not set using constructor', () {
         expect(
-            () => GlobalKeyEnvMomentoTokenProvider(
-                testEnvVarName, testGlobalEndpoint),
+            () => EnvVarV2TokenProvider(apiKeyEnvVar, endpointEnvVar),
             throwsA(CredentialProviderError.emptyEnvironmentVariable(
-                testEnvVarName)));
+                endpointEnvVar)));
       });
 
-      test('empty endpoint throws error', () {
-        expect(() => GlobalKeyEnvMomentoTokenProvider(testEnvVarName, ''),
-            throwsA(CredentialProviderError.emptyEndpoint()));
+      // endpoint is checked first, but same errors would be thrown for missing api key env var
+
+      test('empty endpoint env var throws error', () {
+        expect(() => EnvVarV2TokenProvider(apiKeyEnvVar, ''),
+            throwsA(CredentialProviderError.emptyEnvVarName('endpoint')));
       });
 
-      test('empty env var name throws error', () {
-        expect(() => GlobalKeyEnvMomentoTokenProvider('', testGlobalEndpoint),
-            throwsA(CredentialProviderError.emptyEnvVarName()));
-      });
-
-      test('missing env var throws error', () {
+      test('missing endpoint env var throws error', () {
         const missingEnvVarName = 'MOMENTO_NONEXISTENT_ENV_VAR';
         expect(
-            () => GlobalKeyEnvMomentoTokenProvider(
-                missingEnvVarName, testGlobalEndpoint),
+            () => EnvVarV2TokenProvider(apiKeyEnvVar, missingEnvVarName),
             throwsA(CredentialProviderError.emptyEnvironmentVariable(
                 missingEnvVarName)));
+      });
+    });
+
+    group('fromDisposableToken', () {
+      test('v1 api key succeeds', () {
+        var provider =
+            CredentialProvider.fromDisposableToken(fakeTestV1ApiKeyB64Encoded);
+        expect(provider, isA<StringMomentoTokenProvider>());
+        expect(provider.apiKey, equals(fakeTestV1ApiKey));
+        expect(provider.controlEndpoint, equals("control.test.momentohq.com"));
+        expect(provider.cacheEndpoint, equals("cache.test.momentohq.com"));
+      });
+
+      test('pre-v1 api key succeeds', () {
+        var provider =
+            CredentialProvider.fromDisposableToken(fakeTestLegacyToken);
+        expect(provider, isA<StringMomentoTokenProvider>());
+        expect(provider.apiKey, equals(fakeTestLegacyToken));
+        expect(provider.controlEndpoint,
+            equals("control-plane-endpoint.not.a.domain"));
+        expect(provider.cacheEndpoint, equals("cache-endpoint.not.a.domain"));
+      });
+
+      test('empty token throws error', () {
+        expect(() => CredentialProvider.fromDisposableToken(''),
+            throwsA(CredentialProviderError.emptyApiKey()));
+      });
+
+      test('v2 api key throws error', () {
+        expect(() => CredentialProvider.fromDisposableToken(fakeTestV2ApiKey),
+            throwsA(TypeMatcher<IllegalArgumentError>()));
       });
     });
   });

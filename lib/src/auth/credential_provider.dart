@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:momento/src/errors/errors.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:string_validator/string_validator.dart';
+import 'dart:core';
 
 class EndpointOverrides {
   String controlEndpoint;
@@ -24,8 +25,8 @@ class CredentialProviderError {
     return "Endpoint is an empty string";
   }
 
-  static String emptyEnvVarName() {
-    return "Environment variable name is an empty string";
+  static String emptyEnvVarName(String arg) {
+    return "Environment variable name for $arg is an empty string";
   }
 }
 
@@ -86,6 +87,7 @@ abstract class CredentialProvider {
   /// ```dart
   /// final credentialProvider = CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY");
   /// ```
+  @Deprecated('Use fromEnvVarV2() instead')
   static CredentialProvider fromEnvironmentVariable(String envVarName,
       {String? baseEndpointOverride, EndpointOverrides? endpointOverrides}) {
     if (endpointOverrides != null && baseEndpointOverride != null) {
@@ -104,6 +106,7 @@ abstract class CredentialProvider {
   /// ```dart
   /// final credentialProvider = CredentialProvider.fromString("MOMENTO_API_KEY");
   /// ```
+  @Deprecated('Use fromApiKeyV2() or fromDisposableToken() instead')
   static CredentialProvider fromString(String apiKey,
       {String? baseEndpointOverride, EndpointOverrides? endpointOverrides}) {
     if (endpointOverrides != null && baseEndpointOverride != null) {
@@ -126,7 +129,7 @@ abstract class CredentialProvider {
     Map<String, dynamic> claims = JwtDecoder.decode(jwt);
     if (claims["t"] == "g") {
       throw IllegalArgumentError(
-          "Received a global API key. Are you using the correct key? Or did you mean to use `globalKeyFromString()` or `globalKeyFromEnvironmentVariable()` instead?");
+          "Received a v2 API key. Are you using the correct key? Or did you mean to use `fromApiKeyV2()` or `fromEnvVarV2()` instead?");
     }
     return _ParsedApiKey(jwt, claims["cp"], claims["c"]);
   }
@@ -147,19 +150,25 @@ abstract class CredentialProvider {
         decoded.apiKey, endpoints.controlEndpoint, endpoints.cacheEndpoint);
   }
 
-  static bool isGlobalApiKey(String apiKey) {
+  static bool isV2ApiKey(String apiKey) {
+    if (isBase64(apiKey)) {
+      return false;
+    }
     Map<String, dynamic> claims = JwtDecoder.decode(apiKey);
     return claims["t"] == "g";
   }
 
-  static CredentialProvider globalKeyFromString(
-      String apiKey, String endpoint) {
-    return GlobalKeyStringMomentoTokenProvider(apiKey, endpoint);
+  static CredentialProvider fromApiKeyV2(String apiKey, String endpoint) {
+    return ApiKeyV2TokenProvider(apiKey, endpoint);
   }
 
-  static CredentialProvider globalKeyFromEnvironmentVariable(
-      String envVarName, String endpoint) {
-    return GlobalKeyEnvMomentoTokenProvider(envVarName, endpoint);
+  static CredentialProvider fromEnvVarV2(
+      String apiKeyEnvVar, String endpointEnvVar) {
+    return EnvVarV2TokenProvider(apiKeyEnvVar, endpointEnvVar);
+  }
+
+  static CredentialProvider fromDisposableToken(String disposableToken) {
+    return StringMomentoTokenProvider(disposableToken);
   }
 }
 
@@ -262,7 +271,7 @@ class EnvMomentoTokenProvider implements CredentialProvider {
   String get controlEndpoint => _controlEndpoint;
 }
 
-class GlobalKeyStringMomentoTokenProvider implements CredentialProvider {
+class ApiKeyV2TokenProvider implements CredentialProvider {
   @override
   String _apiKey = "";
 
@@ -274,20 +283,16 @@ class GlobalKeyStringMomentoTokenProvider implements CredentialProvider {
 
   /// Creates a CredentialProvider from the API token stored in the string [apiKey]
   /// and the provided Momento endpoint.
-  GlobalKeyStringMomentoTokenProvider(String apiKey, String endpoint) {
+  ApiKeyV2TokenProvider(String apiKey, String endpoint) {
     if (endpoint.isEmpty) {
       throw CredentialProviderError.emptyEndpoint();
     }
     if (apiKey.isEmpty) {
       throw CredentialProviderError.emptyApiKey();
     }
-    if (isBase64(apiKey)) {
+    if (!CredentialProvider.isV2ApiKey(apiKey)) {
       throw IllegalArgumentError(
-          "Did not expect global API key to be base64 encoded. Are you using the correct key? Or did you mean to use `globalKeyFromString()` instead?");
-    }
-    if (!CredentialProvider.isGlobalApiKey(apiKey)) {
-      throw IllegalArgumentError(
-          "Provided API key is not a valid global API key. Are you using the correct key? Or did you mean to use `globalKeyFromString()` instead?");
+          "Received an invalid v2 API key. Are you using the correct key? Or did you mean to use `fromString()` with a legacy key instead?");
     }
     _apiKey = apiKey;
     _cacheEndpoint = "cache.$endpoint";
@@ -304,7 +309,7 @@ class GlobalKeyStringMomentoTokenProvider implements CredentialProvider {
   String get controlEndpoint => _controlEndpoint;
 }
 
-class GlobalKeyEnvMomentoTokenProvider implements CredentialProvider {
+class EnvVarV2TokenProvider implements CredentialProvider {
   @override
   String _apiKey = "";
 
@@ -316,27 +321,32 @@ class GlobalKeyEnvMomentoTokenProvider implements CredentialProvider {
 
   /// Creates a CredentialProvider from the API token stored in the environment variable [envVarName]
   /// and the provided Momento endpoint.
-  GlobalKeyEnvMomentoTokenProvider(String envVarName, String endpoint) {
+  EnvVarV2TokenProvider(String apiKeyEnvVar, String endpointEnvVar) {
+    if (endpointEnvVar.isEmpty) {
+      throw CredentialProviderError.emptyEnvVarName("endpoint");
+    }
+    if (Platform.environment.containsKey(endpointEnvVar) == false) {
+      throw CredentialProviderError.emptyEnvironmentVariable(endpointEnvVar);
+    }
+    final endpoint = Platform.environment[endpointEnvVar] ?? '';
     if (endpoint.isEmpty) {
       throw CredentialProviderError.emptyEndpoint();
     }
-    if (envVarName.isEmpty) {
-      throw CredentialProviderError.emptyEnvVarName();
+
+    if (apiKeyEnvVar.isEmpty) {
+      throw CredentialProviderError.emptyEnvVarName("api key");
     }
-    if (Platform.environment.containsKey(envVarName) == false) {
-      throw CredentialProviderError.emptyEnvironmentVariable(envVarName);
+    if (Platform.environment.containsKey(apiKeyEnvVar) == false) {
+      throw CredentialProviderError.emptyEnvironmentVariable(apiKeyEnvVar);
     }
-    final apiKey = Platform.environment[envVarName] ?? '';
+    final apiKey = Platform.environment[apiKeyEnvVar] ?? '';
     if (apiKey.isEmpty) {
       throw CredentialProviderError.emptyApiKey();
     }
-    if (isBase64(apiKey)) {
+
+    if (!CredentialProvider.isV2ApiKey(apiKey)) {
       throw IllegalArgumentError(
-          "Did not expect global API key to be base64 encoded. Are you using the correct key? Or did you mean to use `globalKeyFromEnvironmentVariable()` instead?");
-    }
-    if (!CredentialProvider.isGlobalApiKey(apiKey)) {
-      throw IllegalArgumentError(
-          "Provided API key is not a valid global API key. Are you using the correct key? Or did you mean to use `globalKeyFromEnvironmentVariable()` instead?");
+          "Received an invalid v2 API key. Are you using the correct key? Or did you mean to use `fromEnvironmentVariable()` with a legacy key instead?");
     }
     _apiKey = apiKey;
     _cacheEndpoint = "cache.$endpoint";
