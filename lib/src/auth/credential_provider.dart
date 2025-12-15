@@ -87,12 +87,14 @@ abstract class CredentialProvider {
   /// ```dart
   /// final credentialProvider = CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY");
   /// ```
-  @Deprecated('Use fromEnvVarV2() instead')
+  @Deprecated('Use fromEnvironmentVariablesV2() instead')
   static CredentialProvider fromEnvironmentVariable(String envVarName,
       {String? baseEndpointOverride, EndpointOverrides? endpointOverrides}) {
     if (endpointOverrides != null && baseEndpointOverride != null) {
-      throw IllegalArgumentError(
-          "either pass in 'baseEndpointOverride' or 'endpointOverrides', cannot pass in both");
+      throw InvalidArgumentException(
+          "either pass in 'baseEndpointOverride' or 'endpointOverrides', cannot pass in both",
+          null,
+          null);
     }
     return EnvMomentoTokenProvider(envVarName,
         baseEndpointOverride: baseEndpointOverride,
@@ -110,8 +112,10 @@ abstract class CredentialProvider {
   static CredentialProvider fromString(String apiKey,
       {String? baseEndpointOverride, EndpointOverrides? endpointOverrides}) {
     if (endpointOverrides != null && baseEndpointOverride != null) {
-      throw IllegalArgumentError(
-          "either pass in 'baseEndpointOverride' or 'endpointOverrides', cannot pass in both");
+      throw InvalidArgumentException(
+          "either pass in 'baseEndpointOverride' or 'endpointOverrides', cannot pass in both",
+          null,
+          null);
     }
     return StringMomentoTokenProvider(apiKey,
         baseEndpointOverride: baseEndpointOverride,
@@ -128,8 +132,10 @@ abstract class CredentialProvider {
   static _ParsedApiKey _parseJwtToken(String jwt) {
     Map<String, dynamic> claims = JwtDecoder.decode(jwt);
     if (claims["t"] == "g") {
-      throw IllegalArgumentError(
-          "Received a v2 API key. Are you using the correct key? Or did you mean to use `fromApiKeyV2()` or `fromEnvVarV2()` instead?");
+      throw InvalidArgumentException(
+          "Received a v2 API key. Are you using the correct key? Or did you mean to use `fromApiKeyV2()` or `fromEnvironmentVariablesV2()` instead?",
+          null,
+          null);
     }
     return _ParsedApiKey(jwt, claims["cp"], claims["c"]);
   }
@@ -138,12 +144,12 @@ abstract class CredentialProvider {
     final decodedJson = json.decode(utf8.decode(base64Decode(apiKey)));
     final decoded = Base64DecodedV1Token.fromJson(decodedJson);
     if (decoded.endpoint.isEmpty) {
-      throw IllegalArgumentError(
-          "invalid jwt missing required claim 'endpoint'");
+      throw InvalidArgumentException(
+          "invalid jwt missing required claim 'endpoint'", null, null);
     }
     if (decoded.apiKey.isEmpty) {
-      throw IllegalArgumentError(
-          "invalid jwt missing required claim 'api_key'");
+      throw InvalidArgumentException(
+          "invalid jwt missing required claim 'api_key'", null, null);
     }
     final endpoints = _Endpoints(decoded.endpoint);
     return _ParsedApiKey(
@@ -158,15 +164,38 @@ abstract class CredentialProvider {
     return claims["t"] == "g";
   }
 
+  /// Reads and parses a v2 API key and Momento service endpoint provided as strings.
+  ///
+  /// Returns a credential provider object which is used to instantiate Momento clients.
+  /// ```dart
+  /// final credentialProvider = CredentialProvider.fromApiKeyV2("<YOUR_MOMENTO_API_KEY>", "<YOUR_MOMENTO_ENDPOINT>");
+  /// ```
   static CredentialProvider fromApiKeyV2(String apiKey, String endpoint) {
     return ApiKeyV2TokenProvider(apiKey, endpoint);
   }
 
-  static CredentialProvider fromEnvVarV2(
-      String apiKeyEnvVar, String endpointEnvVar) {
-    return EnvVarV2TokenProvider(apiKeyEnvVar, endpointEnvVar);
+  /// Reads and parses a v2 API key and Momento service endpoint stored
+  /// as environment variables MOMENTO_API_KEY and MOMENTO_ENDPOINT.
+  /// Optionally provide alternate environment variable names.
+  ///
+  /// Returns a credential provider object which is used to instantiate Momento clients.
+  /// ```dart
+  /// final credentialProvider = CredentialProvider.fromEnvironmentVariablesV2();
+  /// final credentialProvider = CredentialProvider.fromEnvironmentVariablesV2(apiKeyEnvVar: "API_KEY_ENV_VAR", endpointEnvVar: "ENDPOINT_ENV_VAR");
+  /// ```
+  static CredentialProvider fromEnvironmentVariablesV2(
+      {String apiKeyEnvVar = "MOMENTO_API_KEY",
+      String endpointEnvVar = "MOMENTO_ENDPOINT"}) {
+    return EnvMomentoV2TokenProvider(
+        apiKeyEnvVar: apiKeyEnvVar, endpointEnvVar: endpointEnvVar);
   }
 
+  /// Reads and parses a Momento disposable token.
+  ///
+  /// Returns a credential provider object which is used to instantiate Momento clients.
+  /// ```dart
+  /// final credentialProvider = CredentialProvider.fromDisposableToken("<YOUR_MOMENTO_DISPOSABLE_TOKEN>");
+  /// ```
   static CredentialProvider fromDisposableToken(String disposableToken) {
     return StringMomentoTokenProvider(disposableToken);
   }
@@ -202,7 +231,7 @@ class StringMomentoTokenProvider implements CredentialProvider {
     } else {
       if (parsedApiKey.controlEndpoint == null ||
           parsedApiKey.cacheEndpoint == null) {
-        throw IllegalArgumentError("failed to parse jwt token");
+        throw InvalidArgumentException("failed to parse jwt token", null, null);
       }
       _cacheEndpoint = parsedApiKey.cacheEndpoint!;
       _controlEndpoint = parsedApiKey.controlEndpoint!;
@@ -254,7 +283,7 @@ class EnvMomentoTokenProvider implements CredentialProvider {
     } else {
       if (parsedApiKey.controlEndpoint == null ||
           parsedApiKey.cacheEndpoint == null) {
-        throw IllegalArgumentError("failed to parse jwt token");
+        throw InvalidArgumentException("failed to parse jwt token", null, null);
       }
       _cacheEndpoint = parsedApiKey.cacheEndpoint!;
       _controlEndpoint = parsedApiKey.controlEndpoint!;
@@ -271,6 +300,7 @@ class EnvMomentoTokenProvider implements CredentialProvider {
   String get controlEndpoint => _controlEndpoint;
 }
 
+/// Reads and parses a v2 API key and Momento service endpoint provided as strings.
 class ApiKeyV2TokenProvider implements CredentialProvider {
   @override
   String _apiKey = "";
@@ -281,8 +311,7 @@ class ApiKeyV2TokenProvider implements CredentialProvider {
   @override
   String _controlEndpoint = "";
 
-  /// Creates a CredentialProvider from the API token stored in the string [apiKey]
-  /// and the provided Momento endpoint.
+  /// Creates a CredentialProvider from the provided v2 API key and endpoint.
   ApiKeyV2TokenProvider(String apiKey, String endpoint) {
     if (endpoint.isEmpty) {
       throw CredentialProviderError.emptyEndpoint();
@@ -291,8 +320,10 @@ class ApiKeyV2TokenProvider implements CredentialProvider {
       throw CredentialProviderError.emptyApiKey();
     }
     if (!CredentialProvider.isV2ApiKey(apiKey)) {
-      throw IllegalArgumentError(
-          "Received an invalid v2 API key. Are you using the correct key? Or did you mean to use `fromString()` with a legacy key instead?");
+      throw InvalidArgumentException(
+          "Received an invalid v2 API key. Are you using the correct key? Or did you mean to use `fromString()` with a legacy key instead?",
+          null,
+          null);
     }
     _apiKey = apiKey;
     _cacheEndpoint = "cache.$endpoint";
@@ -309,7 +340,10 @@ class ApiKeyV2TokenProvider implements CredentialProvider {
   String get controlEndpoint => _controlEndpoint;
 }
 
-class EnvVarV2TokenProvider implements CredentialProvider {
+/// Reads and parses a v2 API key and Momento service endpoint stored
+/// as environment variables MOMENTO_API_KEY and MOMENTO_ENDPOINT.
+/// Optionally provide alternate environment variable names.
+class EnvMomentoV2TokenProvider implements CredentialProvider {
   @override
   String _apiKey = "";
 
@@ -319,9 +353,12 @@ class EnvVarV2TokenProvider implements CredentialProvider {
   @override
   String _controlEndpoint = "";
 
-  /// Creates a CredentialProvider from the API token stored in the environment variable [envVarName]
-  /// and the provided Momento endpoint.
-  EnvVarV2TokenProvider(String apiKeyEnvVar, String endpointEnvVar) {
+  /// Creates a CredentialProvider from the v2 API key and endpoint stored in
+  /// the environment variables MOMENTO_API_KEY and MOMENTO_ENDPOINT.
+  /// Optionally provide alternate environment variable names.
+  EnvMomentoV2TokenProvider(
+      {String apiKeyEnvVar = "MOMENTO_API_KEY",
+      String endpointEnvVar = "MOMENTO_ENDPOINT"}) {
     if (endpointEnvVar.isEmpty) {
       throw CredentialProviderError.emptyEnvVarName("endpoint");
     }
@@ -345,8 +382,10 @@ class EnvVarV2TokenProvider implements CredentialProvider {
     }
 
     if (!CredentialProvider.isV2ApiKey(apiKey)) {
-      throw IllegalArgumentError(
-          "Received an invalid v2 API key. Are you using the correct key? Or did you mean to use `fromEnvironmentVariable()` with a legacy key instead?");
+      throw InvalidArgumentException(
+          "Received an invalid v2 API key. Are you using the correct key? Or did you mean to use `fromEnvironmentVariable()` with a legacy key instead?",
+          null,
+          null);
     }
     _apiKey = apiKey;
     _cacheEndpoint = "cache.$endpoint";

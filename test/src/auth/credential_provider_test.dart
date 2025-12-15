@@ -22,10 +22,10 @@ const testControlEndpoint = 'control-plane-endpoint.not.a.domain';
 const testCacheEndpoint = 'cache-endpoint.not.a.domain';
 
 const fakeTestV2ApiKey =
-    'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ0IjoiZyIsImlkIjoic29tZS1pZCJ9.WRhKpdh7cFCXO7lAaVojtQAxK6mxMdBrvXTJL1xu94S0d6V1YSstOObRlAIMA7i_yIxO1mWEF3rlF5UNc77VXQ';
+    'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ0IjoiZyIsImp0aSI6InNvbWUtaWQifQ.GMr9nA6HE0ttB6llXct_2Sg5-fOKGFbJCdACZFgNbN1fhT6OPg_hVc8ThGzBrWC_RlsBpLA1nzqK3SOJDXYxAw';
 const testEndpoint = 'testEndpoint';
-const apiKeyEnvVar = 'MOMENTO_TEST_V2_API_KEY';
-const endpointEnvVar = 'MOMENTO_TEST_ENDPOINT';
+const apiKeyEnvVar = 'MOMENTO_API_KEY';
+const endpointEnvVar = 'MOMENTO_ENDPOINT';
 
 void main() {
   group('credential_provider', () {
@@ -82,12 +82,12 @@ void main() {
                 baseEndpointOverride: "baseendpoint.com",
                 endpointOverrides: EndpointOverrides(
                     "this.is.a.cache.endpoint", "this.is.a.control.endpoint")),
-            throwsA(TypeMatcher<IllegalArgumentError>()));
+            throwsA(TypeMatcher<InvalidArgumentException>()));
       });
 
       test('throws error when given v2 api key', () {
         expect(() => CredentialProvider.fromString(fakeTestV2ApiKey),
-            throwsA(TypeMatcher<IllegalArgumentError>()));
+            throwsA(TypeMatcher<InvalidArgumentException>()));
       });
     });
     group('fromEnvironmentVariable', () {
@@ -100,7 +100,7 @@ void main() {
                 baseEndpointOverride: "baseendpoint.com",
                 endpointOverrides: EndpointOverrides(
                     "this.is.a.cache.endpoint", "this.is.a.control.endpoint")),
-            throwsA(TypeMatcher<IllegalArgumentError>()));
+            throwsA(TypeMatcher<InvalidArgumentException>()));
       });
     });
 
@@ -134,46 +134,48 @@ void main() {
 
       test('throws error when given v1 api key', () {
         expect(() => ApiKeyV2TokenProvider(fakeTestV1ApiKey, testEndpoint),
-            throwsA(TypeMatcher<IllegalArgumentError>()));
+            throwsA(TypeMatcher<InvalidArgumentException>()));
       });
 
       test('throws error when given pre-v1 legacy token', () {
         expect(() => ApiKeyV2TokenProvider(fakeTestLegacyToken, testEndpoint),
-            throwsA(TypeMatcher<IllegalArgumentError>()));
+            throwsA(TypeMatcher<InvalidArgumentException>()));
       });
     });
 
-    group('fromEnvVarV2', () {
+    group('fromEnvironmentVariablesV2', () {
       // Dart does not appear to provide a way to dynamically set environment
       // variables, cannot test the happy path
 
-      test('errors when env var not set using static method', () {
+      test('static method errors when default env vars are not set', () {
         expect(
-            () => EnvVarV2TokenProvider(apiKeyEnvVar, endpointEnvVar),
+            () => EnvMomentoV2TokenProvider(),
             throwsA(CredentialProviderError.emptyEnvironmentVariable(
                 endpointEnvVar)));
       });
 
-      test('errors when env var not set using constructor', () {
+      test('constructor errors when default env vars are not set', () {
         expect(
-            () => EnvVarV2TokenProvider(apiKeyEnvVar, endpointEnvVar),
+            () => EnvMomentoV2TokenProvider(),
             throwsA(CredentialProviderError.emptyEnvironmentVariable(
                 endpointEnvVar)));
       });
 
-      // endpoint is checked first, but same errors would be thrown for missing api key env var
+      test('constructor errors when non-default env vars are not set', () {
+        var alternateApiKeyEnvVar = 'MOMENTO_ALTERNATE_API_KEY';
+        var alternateEndpointEnvVar = 'MOMENTO_ALTERNATE_ENDPOINT';
+        expect(
+            () => EnvMomentoV2TokenProvider(
+                apiKeyEnvVar: alternateApiKeyEnvVar,
+                endpointEnvVar: alternateEndpointEnvVar),
+            throwsA(CredentialProviderError.emptyEnvironmentVariable(
+                alternateEndpointEnvVar)));
+      });
 
+      // endpoint is checked first, but same error would be thrown for missing api key env var
       test('empty endpoint env var throws error', () {
-        expect(() => EnvVarV2TokenProvider(apiKeyEnvVar, ''),
+        expect(() => EnvMomentoV2TokenProvider(endpointEnvVar: ''),
             throwsA(CredentialProviderError.emptyEnvVarName('endpoint')));
-      });
-
-      test('missing endpoint env var throws error', () {
-        const missingEnvVarName = 'MOMENTO_NONEXISTENT_ENV_VAR';
-        expect(
-            () => EnvVarV2TokenProvider(apiKeyEnvVar, missingEnvVarName),
-            throwsA(CredentialProviderError.emptyEnvironmentVariable(
-                missingEnvVarName)));
       });
     });
 
@@ -204,7 +206,7 @@ void main() {
 
       test('v2 api key throws error', () {
         expect(() => CredentialProvider.fromDisposableToken(fakeTestV2ApiKey),
-            throwsA(TypeMatcher<IllegalArgumentError>()));
+            throwsA(TypeMatcher<InvalidArgumentException>()));
       });
     });
   });
