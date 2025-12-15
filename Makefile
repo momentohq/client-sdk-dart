@@ -6,6 +6,10 @@ install:
 .PHONY: test
 ## Run unit and integration tests from the root of the directory
 test: 
+	@if [ -z "$$MOMENTO_API_KEY" ]; then \
+		echo "ERROR: MOMENTO_API_KEY environment variable is missing"; \
+		exit 1; \
+	fi
 	dart test
 
 .PHONY: format
