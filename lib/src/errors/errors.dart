@@ -80,6 +80,9 @@ abstract class AbstractExceptionResponseBase {
   String get message => _message;
   MomentoErrorCode get errorCode => _errorCode;
   Exception? get innerException => _innerException;
+
+  @override
+  String toString() => '$_errorCode: $_message';
 }
 
 class SdkException extends AbstractExceptionResponseBase implements Exception {
@@ -269,11 +272,6 @@ class FailedPreconditionException extends SdkException {
             innerException,
             "System is not in a state required for the operation's execution; please contact Momento.",
             transportDetails);
-}
-
-class IllegalArgumentError extends Error {
-  String message;
-  IllegalArgumentError(this.message) : super();
 }
 
 SdkException grpcStatusToSdkException(GrpcError grpcError) {
