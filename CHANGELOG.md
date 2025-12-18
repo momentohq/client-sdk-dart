@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/momentohq/client-sdk-dart/compare/v0.3.0...v0.4.0) (2025-12-18)
+
+
+### Features
+
+* new credential provider methods for accepting v2 api keys ([#114](https://github.com/momentohq/client-sdk-dart/issues/114)) ([c4eeb30](https://github.com/momentohq/client-sdk-dart/commit/c4eeb30986c09180876b1a88c84f20cad2483a96))
+
 ## [0.3.0](https://github.com/momentohq/client-sdk-dart/compare/v0.2.1...v0.3.0) (2024-11-27)
 
 

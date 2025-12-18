@@ -1,6 +1,6 @@
 name: momento
 description: Dart client for interacting with Momento
-version: 0.3.0
+version: 0.4.0
 repository: https://github.com/momentohq/client-sdk-dart
 
 environment:
