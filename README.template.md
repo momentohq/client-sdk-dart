@@ -51,13 +51,13 @@ Check out full working code in the [example](./example/) directory of this repos
 
 There is a `LogLevel` enum that contains the following log levels:
 
-* `LogLevel.trace`
-* `LogLevel.debug`
-* `LogLevel.info`
-* `LogLevel.warn`
-* `LogLevel.error`
-* `LogLevel.fatal`
-* `LogLevel.off`
+- `LogLevel.trace`
+- `LogLevel.debug`
+- `LogLevel.info`
+- `LogLevel.warn`
+- `LogLevel.error`
+- `LogLevel.fatal`
+- `LogLevel.off`
 
 This enum can be used to configure the logging level of the Momento package. By default, the logging level is set to `LogLevel.info`. To change the logging level, pass the desired level to the `Configuration` constructor:
 
