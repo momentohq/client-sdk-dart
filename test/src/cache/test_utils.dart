@@ -2,7 +2,6 @@ import 'package:momento/momento.dart';
 import 'package:uuid/uuid.dart';
 import 'package:test/test.dart';
 
-final apiKeyEnvVarName = "MOMENTO_API_KEY";
 final uuidGenerator = Uuid();
 
 class TestSetup {
@@ -13,14 +12,17 @@ class TestSetup {
   TestSetup(this.cacheName, this.cacheClient, this.topicClient);
 }
 
-Future<TestSetup> setUpIntegrationTests() async {
+Future<TestSetup> setUpIntegrationTests({bool apiKeyV2 = false}) async {
+  final CredentialProvider creds;
+  if (apiKeyV2) {
+    creds = CredentialProvider.fromEnvironmentVariablesV2();
+  } else {
+    creds = CredentialProvider.fromEnvironmentVariable("V1_API_KEY");
+  }
+
   final cacheClient = CacheClient(
-      CredentialProvider.fromEnvironmentVariable(apiKeyEnvVarName),
-      CacheClientConfigurations.latest(),
-      Duration(seconds: 30));
-  final topicClient = TopicClient(
-      CredentialProvider.fromEnvironmentVariable(apiKeyEnvVarName),
-      TopicClientConfigurations.latest());
+      creds, CacheClientConfigurations.latest(), Duration(seconds: 30));
+  final topicClient = TopicClient(creds, TopicClientConfigurations.latest());
   final integrationTestCacheName =
       generateStringWithUuid("dart-sdk-cache-tests");
   await cacheClient.createCache(integrationTestCacheName);

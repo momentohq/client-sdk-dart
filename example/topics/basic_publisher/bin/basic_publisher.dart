@@ -2,8 +2,7 @@ import 'dart:io';
 import 'package:momento/momento.dart';
 
 void main() async {
-  var topicClient = TopicClient(
-      CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
+  var topicClient = TopicClient(CredentialProvider.fromEnvironmentVariablesV2(),
       TopicClientConfigurations.latest());
 
   // publish 10 messages spaced 1 second apart

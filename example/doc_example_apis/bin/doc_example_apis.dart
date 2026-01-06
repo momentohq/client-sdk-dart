@@ -3,10 +3,35 @@ import 'dart:io';
 import 'package:momento/momento.dart';
 import 'package:uuid/uuid.dart';
 
+String retrieveApiKeyFromYourSecretsManager() {
+  // this is not a valid API key but conforms to the syntax requirements.
+  return "eyJhcGlfa2V5IjogImV5SjBlWEFpT2lKS1YxUWlMQ0poYkdjaU9pSklVekkxTmlKOS5leUpwYzNNaU9pSlBibXhwYm1VZ1NsZFVJRUoxYVd4a1pYSWlMQ0pwWVhRaU9qRTJOemd6TURVNE1USXNJbVY0Y0NJNk5EZzJOVFV4TlRReE1pd2lZWFZrSWpvaUlpd2ljM1ZpSWpvaWFuSnZZMnRsZEVCbGVHRnRjR3hsTG1OdmJTSjkuOEl5OHE4NExzci1EM1lDb19IUDRkLXhqSGRUOFVDSXV2QVljeGhGTXl6OCIsICJlbmRwb2ludCI6ICJ0ZXN0Lm1vbWVudG9ocS5jb20ifQo=";
+}
+
+String retrieveApiKeyV2FromYourSecretsManager() {
+  // this is not a valid API key but conforms to the syntax requirements.
+  return "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ0IjoiZyIsImp0aSI6InNvbWUtaWQifQ.GMr9nA6HE0ttB6llXct_2Sg5-fOKGFbJCdACZFgNbN1fhT6OPg_hVc8ThGzBrWC_RlsBpLA1nzqK3SOJDXYxAw";
+}
+
+void example_API_CredentialProviderFromApiKeyV2() {
+  final apiKey = retrieveApiKeyV2FromYourSecretsManager();
+  final endpoint = "cell-4-us-west-2-1.prod.a.momentohq.com";
+  CredentialProvider.fromApiKeyV2(apiKey, endpoint);
+}
+
+void example_API_CredentialProviderFromDisposableToken() {
+  final authToken = retrieveApiKeyFromYourSecretsManager();
+  CredentialProvider.fromDisposableToken(authToken);
+}
+
+void example_API_CredentialProviderFromEnvVarV2() {
+  CredentialProvider.fromEnvironmentVariablesV2();
+}
+
 Future<void> example_API_InstantiateCacheClient() async {
   try {
     final cacheClient = CacheClient(
-        CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
+        CredentialProvider.fromEnvironmentVariablesV2(),
         CacheClientConfigurations.latest(),
         Duration(seconds: 30));
   } catch (e) {
@@ -85,7 +110,7 @@ Future<void> example_API_Delete(CacheClient cacheClient) async {
 Future<void> example_API_InstantiateTopicClient() async {
   try {
     final topicClient = TopicClient(
-        CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
+        CredentialProvider.fromEnvironmentVariablesV2(),
         TopicClientConfigurations.latest());
   } catch (e) {
     print("Unable to create topic client: $e");
@@ -133,13 +158,17 @@ Future<void> example_API_TopicPublish(TopicClient topicClient) async {
 }
 
 Future<void> main() async {
+  example_API_CredentialProviderFromApiKeyV2();
+  example_API_CredentialProviderFromDisposableToken();
+  example_API_CredentialProviderFromEnvVarV2();
+
   final cacheClient = CacheClient(
-      CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
+      CredentialProvider.fromEnvironmentVariablesV2(),
       CacheClientConfigurations.latest(),
       Duration(seconds: 30));
 
   final topicClient = TopicClient(
-      CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
+      CredentialProvider.fromEnvironmentVariablesV2(),
       TopicClientConfigurations.latest());
 
   final cacheName = "doc-example-apis-${Uuid().v4()}";

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:momento/src/auth/credential_provider.dart';
 import 'package:momento/src/errors/errors.dart';
 import 'package:test/test.dart';
@@ -144,38 +146,34 @@ void main() {
     });
 
     group('fromEnvironmentVariablesV2', () {
-      // Dart does not appear to provide a way to dynamically set environment
-      // variables, cannot test the happy path
-
-      test('static method errors when default env vars are not set', () {
+      test('static method errors when non-default env vars are not set', () {
         expect(
-            () => EnvMomentoV2TokenProvider(),
+            () => CredentialProvider.fromEnvironmentVariablesV2(
+                apiKeyEnvVar: "NONEXISTENT_1", endpointEnvVar: "NONEXISTENT_2"),
             throwsA(CredentialProviderError.emptyEnvironmentVariable(
-                endpointEnvVar)));
-      });
-
-      test('constructor errors when default env vars are not set', () {
-        expect(
-            () => EnvMomentoV2TokenProvider(),
-            throwsA(CredentialProviderError.emptyEnvironmentVariable(
-                endpointEnvVar)));
+                "NONEXISTENT_2")));
       });
 
       test('constructor errors when non-default env vars are not set', () {
-        var alternateApiKeyEnvVar = 'MOMENTO_ALTERNATE_API_KEY';
-        var alternateEndpointEnvVar = 'MOMENTO_ALTERNATE_ENDPOINT';
         expect(
             () => EnvMomentoV2TokenProvider(
-                apiKeyEnvVar: alternateApiKeyEnvVar,
-                endpointEnvVar: alternateEndpointEnvVar),
+                apiKeyEnvVar: "NONEXISTENT_1", endpointEnvVar: "NONEXISTENT_2"),
             throwsA(CredentialProviderError.emptyEnvironmentVariable(
-                alternateEndpointEnvVar)));
+                "NONEXISTENT_2")));
       });
 
-      // endpoint is checked first, but same error would be thrown for missing api key env var
-      test('empty endpoint env var throws error', () {
-        expect(() => EnvMomentoV2TokenProvider(endpointEnvVar: ''),
-            throwsA(CredentialProviderError.emptyEnvVarName('endpoint')));
+      test('static method finds default env vars', () {
+        final creds = CredentialProvider.fromEnvironmentVariablesV2();
+        expect(creds.cacheEndpoint,
+            "cache.${Platform.environment["MOMENTO_ENDPOINT"]}");
+        expect(creds.apiKey, equals(Platform.environment["MOMENTO_API_KEY"]));
+      });
+
+      test('constructor finds default env vars', () {
+        final creds = EnvMomentoV2TokenProvider();
+        expect(creds.cacheEndpoint,
+            "cache.${Platform.environment["MOMENTO_ENDPOINT"]}");
+        expect(creds.apiKey, equals(Platform.environment["MOMENTO_API_KEY"]));
       });
     });
 

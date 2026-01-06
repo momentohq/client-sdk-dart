@@ -2,8 +2,7 @@ import 'dart:async';
 import 'package:momento/momento.dart';
 
 void main() async {
-  var topicClient = TopicClient(
-      CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
+  var topicClient = TopicClient(CredentialProvider.fromEnvironmentVariablesV2(),
       TopicClientConfigurations.latest());
 
   var subscription = await topicClient.subscribe("cache", "topic");
