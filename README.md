@@ -21,12 +21,16 @@ To get started with Momento you will need a Momento Auth Token. You can get one 
 
 # Momento Dart SDK
 
-To get started with Momento you will need a Momento API key. You can get one from the [Momento Console](https://console.gomomento.com/api-keys).
+To get started with Momento you will need:
 
-* Website: [https://www.gomomento.com/](https://www.gomomento.com/)
-* Momento Documentation: [https://docs.momentohq.com/](https://docs.momentohq.com/)
-* Getting Started: [https://docs.momentohq.com/getting-started](https://docs.momentohq.com/getting-started)
-* Discuss: [Momento Discord](https://discord.gg/3HkAKjUZGq)
+- A Momento API key. You can get one from the [Momento Console](https://console.gomomento.com).
+- A Momento service endpoint is required. You can find a [list of them here](https://docs.momentohq.com/platform/regions)
+
+For more information, check out the following links:
+
+- Website: [https://www.gomomento.com/](https://www.gomomento.com/)
+- Momento Documentation: [https://docs.momentohq.com/](https://docs.momentohq.com/)
+- Getting Started: [https://docs.momentohq.com/getting-started](https://docs.momentohq.com/getting-started)
 
 ## Packages
 
@@ -55,7 +59,7 @@ import 'package:momento/momento.dart';
 
 Future<void> main() async {
   final cacheClient = CacheClient(
-      CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
+      CredentialProvider.fromEnvironmentVariablesV2(),
       CacheClientConfigurations.latest(),
       Duration(seconds: 30));
 
@@ -109,13 +113,13 @@ Check out full working code in the [example](./example/) directory of this repos
 
 There is a `LogLevel` enum that contains the following log levels:
 
-* `LogLevel.trace`
-* `LogLevel.debug`
-* `LogLevel.info`
-* `LogLevel.warn`
-* `LogLevel.error`
-* `LogLevel.fatal`
-* `LogLevel.off`
+- `LogLevel.trace`
+- `LogLevel.debug`
+- `LogLevel.info`
+- `LogLevel.warn`
+- `LogLevel.error`
+- `LogLevel.fatal`
+- `LogLevel.off`
 
 This enum can be used to configure the logging level of the Momento package. By default, the logging level is set to `LogLevel.info`. To change the logging level, pass the desired level to the `Configuration` constructor:
 
