@@ -3,6 +3,7 @@
 ## Prerequisites
 
 - For each example, you will need to provide a Momento API key, which you can generate from the [Momento Web Console](https://console.gomomento.com/api-keys).
+- You will also need a Momento service endpoint. You can find a [list of them here](https://docs.momentohq.com/platform/regions)
 
 
 ## Running the examples

@@ -6,7 +6,7 @@ environment:
   sdk: ^3.2.3
 
 dependencies:
-  momento: ^0.1.0
+  momento: ^0.4.0
   logging: ^1.2.0
 
 dev_dependencies:

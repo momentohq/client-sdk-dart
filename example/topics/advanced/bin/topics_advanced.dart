@@ -10,8 +10,7 @@ void main() async {
     print('${record.level.name}: ${record.time}: ${record.message}');
   });
 
-  var topicClient = TopicClient(
-      CredentialProvider.fromEnvironmentVariable("MOMENTO_API_KEY"),
+  var topicClient = TopicClient(CredentialProvider.fromEnvironmentVariablesV2(),
       TopicClientConfigurations.latest());
 
   // start publishing messages in 2 seconds

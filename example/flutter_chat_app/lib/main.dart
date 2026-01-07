@@ -34,8 +34,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   TopicClient _topicClient = TopicClient(
-      CredentialProvider.fromString(
-          const String.fromEnvironment('MOMENTO_API_KEY')),
+      CredentialProvider.fromEnvironmentVariablesV2(),
       TopicClientConfigurations.latest());
 
   List<String> _messages = ["Welcome to Momento Topics!"];
