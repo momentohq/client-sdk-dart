@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.1](https://github.com/momentohq/client-sdk-dart/compare/v0.4.0...v0.4.1) (2026-01-08)
+
+
+### Miscellaneous
+
+* more api keys v2 updates ([#118](https://github.com/momentohq/client-sdk-dart/issues/118)) ([ad82407](https://github.com/momentohq/client-sdk-dart/commit/ad82407635e38e2db015d8baf0656cc6d68c4891))
+* update examples, tests, CI for api keys v2 ([#116](https://github.com/momentohq/client-sdk-dart/issues/116)) ([c7d9fcd](https://github.com/momentohq/client-sdk-dart/commit/c7d9fcd5dce69e76a0f61c3cddeed20b9c01b463))
+
 ## [0.4.0](https://github.com/momentohq/client-sdk-dart/compare/v0.3.0...v0.4.0) (2025-12-18)
 
 
