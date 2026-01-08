@@ -25,6 +25,11 @@ void example_API_CredentialProviderFromDisposableToken() {
 }
 
 void example_API_CredentialProviderFromEnvVarV2() {
+  CredentialProvider.fromEnvironmentVariablesV2(
+      apiKeyEnvVar: "MOMENTO_API_KEY", endpointEnvVar: "MOMENTO_ENDPOINT");
+}
+
+void example_API_CredentialProviderFromEnvVarV2Default() {
   CredentialProvider.fromEnvironmentVariablesV2();
 }
 
@@ -161,6 +166,7 @@ Future<void> main() async {
   example_API_CredentialProviderFromApiKeyV2();
   example_API_CredentialProviderFromDisposableToken();
   example_API_CredentialProviderFromEnvVarV2();
+  example_API_CredentialProviderFromEnvVarV2Default();
 
   final cacheClient = CacheClient(
       CredentialProvider.fromEnvironmentVariablesV2(),

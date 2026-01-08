@@ -11,6 +11,7 @@ Happy coding :dancer:
 
 - Dart version [3 or higher](https://dart.dev/get-dart) is required.
 - A Momento API key is required, you can generate one using the [Momento Console](https://console.gomomento.com/api-keys)
+- A Momento service endpoint is required. You can find a [list of them here](https://docs.momentohq.com/platform/regions)
 
 <br/>
 
@@ -35,7 +36,10 @@ You can build the SDK for a specific platform using the [`dart compile`](https:/
 You can use the this command from the root of the repository to run the tests:
 
 ```bash
-MOMENTO_API_KEY=<your api key> dart test
+export MOMENTO_API_KEY=<your api key>
+export MOMENTO_ENDPOINT=<endpoint>
+export V1_API_KEY=<v1 api key>
+dart test
 ```
 
 ## Compiling protobufs
