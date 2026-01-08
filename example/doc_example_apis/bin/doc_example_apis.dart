@@ -25,7 +25,7 @@ void example_API_CredentialProviderFromDisposableToken() {
 }
 
 void example_API_CredentialProviderFromEnvVarV2() {
-  // Looks for MOMENTO_API_KEY_V2 and MOMENTO_ENDPOINT environment variables by default
+  // Looks for MOMENTO_API_KEY and MOMENTO_ENDPOINT environment variables by default
   CredentialProvider.fromEnvironmentVariablesV2();
 
   // To specify custom environment variable names:
