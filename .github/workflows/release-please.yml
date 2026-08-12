@@ -16,10 +16,17 @@ jobs:
       release_created: ${{ steps.release.outputs.release_created }}
     name: Release Please
     steps:
+      - name: Generate release bot token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.MOMENTO_RELEASE_APP_ID }}
+          private-key: ${{ secrets.MOMENTO_RELEASE_APP_PRIVATE_KEY }}
+
       - uses: google-github-actions/release-please-action@v3
         id: release
         with:
-          token: ${{ secrets.MOMENTO_MACHINE_USER_GITHUB_TOKEN }}
+          token: ${{ steps.app-token.outputs.token }}
           release-type: dart
           package-name: momento
           default-branch: main
