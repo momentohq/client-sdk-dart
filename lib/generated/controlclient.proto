@@ -19,36 +19,6 @@ service ScsControl {
   rpc CreateIndex (_CreateIndexRequest) returns (_CreateIndexResponse) {}
   rpc DeleteIndex(_DeleteIndexRequest) returns (_DeleteIndexResponse) {}
   rpc ListIndexes(_ListIndexesRequest) returns (_ListIndexesResponse) {}
-  rpc CreateStore (_CreateStoreRequest) returns (_CreateStoreResponse) {}
-  rpc DeleteStore (_DeleteStoreRequest) returns (_DeleteStoreResponse) {}
-  rpc ListStores (_ListStoresRequest) returns (_ListStoresResponse) {}
-}
-
-message _CreateStoreRequest {
-  string store_name = 1;
-}
-
-message _CreateStoreResponse {
-}
-
-message _DeleteStoreRequest {
-  string store_name = 1;
-}
-
-message _DeleteStoreResponse {
-}
-
-message _ListStoresRequest {
-  string next_token = 1;
-}
-
-message _ListStoresResponse {
-  repeated _Store store = 1;
-  string next_token = 2;
-}
-
-message _Store {
-  string store_name = 1;
 }
 
 message _SimilarityMetric {
@@ -116,7 +86,7 @@ message _ListCachesRequest {
 
 message _CacheLimits {
   // The amount of transactions per second that can be exercised
-  uint32 max_traffic_rate = 1; 
+  uint32 max_traffic_rate = 1;
   // The amount of traffic per second that can be exercised in KiB
   uint32 max_throughput_kbps = 2;
   // The maximum size of a single item in KiB
@@ -138,6 +108,7 @@ message _Cache {
   string cache_name = 1;
   _CacheLimits cache_limits = 2;
   _TopicLimits topic_limits = 3;
+  string cache_id = 4;
 }
 
 message _ListCachesResponse {

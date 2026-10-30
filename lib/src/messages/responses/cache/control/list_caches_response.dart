@@ -6,8 +6,9 @@ import 'package:momento/src/messages/responses/responses_base.dart';
 /// May include additional information in the future.
 class CacheInfo {
   final String name;
+  final String id;
 
-  CacheInfo(this.name);
+  CacheInfo(this.name, [this.id = '']);
 }
 
 /// Sealed class for a list caches response.
@@ -28,7 +29,9 @@ class ListCachesSuccess extends ResponseBase implements ListCachesResponse {
   late final List<CacheInfo> caches;
 
   ListCachesSuccess(List<Cache_> grpcCaches) {
-    caches = grpcCaches.map((cache) => CacheInfo(cache.cacheName)).toList();
+    caches = grpcCaches
+        .map((cache) => CacheInfo(cache.cacheName, cache.cacheId))
+        .toList();
   }
 
   String description() {
